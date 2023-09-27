@@ -5,15 +5,15 @@ import { IoIosArrowBack } from "react-icons/io";
 
 export default function Login() {
   return (
-    <div className="h-screen flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 transition-all duration-[0.3s] ease-[ease-in-out]">
-      <div className="relative rounded-3xl overflow-hidden w-[80rem] bg-white dark:bg-zinc-500 h-[37rem] shadow-lg shadow-gray-400 dark:border-solid dark:border dark:border-gray-600 dark:shadow-none">
+    <div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 transition-all duration-[0.3s] ease-[ease-in-out]">
+      <div className="rounded-3xl overflow-hidden w-full bg-white dark:bg-zinc-500 h-[37rem] shadow-lg shadow-gray-400 dark:border-solid dark:border dark:border-gray-600 dark:shadow-none">
 
         <div className="absolute top-0 h-full left-0 w-6/12">
 
           <div className="absolute top-8">
             <Link
               href="/"
-              className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-indigo-800">
+              className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primaryDarker">
               <IoIosArrowBack /> Página Inicial
             </Link>
           </div>
@@ -59,7 +59,7 @@ export default function Login() {
             </div>
             
             
-            <button className="text-base rounded-lg font-semibold uppercase mt-4 cursor-pointer border-spacing-px bg-indigo-500 hover:bg-indigo-800 border-opacity-0 tracking-wide py-3 px-11 text-white transition-all duration-[0.5s] ease-[ease-in-out]">
+            <button className="text-base rounded-lg font-semibold uppercase mt-4 cursor-pointer border-spacing-px bg-primary hover:bg-primaryDarker border-opacity-0 tracking-wide py-3 px-11 text-white transition-all duration-[0.5s] ease-[ease-in-out]">
               Entrar
             </button>
             
@@ -67,7 +67,7 @@ export default function Login() {
         </div>
 
         <div className="absolute top-0 w-6/12 h-full overflow-hidden left-2/4">
-          <div className="h-full flex justify-center items-center flex-col bg-indigo-500 bg-gradient-to-br from-indigo-500 to-indigo-900">
+          <div className="h-full flex justify-center items-center flex-col bg-primary bg-gradient-to-br from-primary to-primaryDarker">
             <h1 className="text-4xl font-semibold text-white">
               Seja Bem-vindo de volta!
             </h1>
@@ -76,8 +76,8 @@ export default function Login() {
             </p>
             <Image
               src="/Logo 3.0 (branco).png"
-              width={350}
-              height={350}
+              width={400}
+              height={400}
               alt="Logo"
               className="absolute opacity-10" />
           </div>

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <Providers>
-          <body className="bg-white dark:bg-black">
+          <body className="bg-neutral-200 dark:bg-zinc-800">
             <NextAuthProvider>
               <Header />
               {children}
