@@ -36,33 +36,19 @@ const Login = () => {
           <div className="absolute top-8">
             <Link
               href="/"
-<<<<<<< Updated upstream
               className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primary">
-=======
-              className="text-base flex items-center justify-center ml-8 gap-3 text-zinc-700 font-bold hover:text-purple-600">
->>>>>>> Stashed changes
               <IoIosArrowBack /> Página Inicial
             </Link>
           </div>
 
-<<<<<<< Updated upstream
           <form className="h-full flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-zinc-800/40">
             <h1 className="text-4xl pb-2 font-semibold">Entre com</h1>
 
             <div className="pb-5 my-5 mx-0">
-              <a
-                href="#"
-                className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
-=======
-          <form className="h-full flex items-center justify-center text-primaryDarker flex-col py-0 px-10 bg-white dark:bg-[#000000aa]">
-            <h1 className="text-4xl pb-2 font-semibold">Entre com</h1>
-
-            <div className="pb-5 my-5 mx-0">
               <button
-                className="inline-flex justify-center text-primaryDarker items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4"
+                className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]"
                 onClick={handleLoginClick}
                 >
->>>>>>> Stashed changes
                 <FcGoogle className="text-xl" /> Entre com sua conta google
               </button>
             </div>

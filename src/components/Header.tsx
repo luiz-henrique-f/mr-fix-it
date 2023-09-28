@@ -61,11 +61,7 @@ const Header = () => {
 
             {/* {theme == 'light' ? <div className="bg-white">gfdsgdf</div> : <div className="bg-amber-300">fsgfdgsd</div>} */}
 
-<<<<<<< Updated upstream
-            <div className="flex items-center justify-end gap-5">
-=======
-            {/* <div className="flex items-center justify-end gap-5 w-full">
->>>>>>> Stashed changes
+            {/* <div className="flex items-center justify-end gap-5">
                 {status === "unauthenticated" && (
                     <button
                         className="flex items-center justify-center py-1 px-3 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-md hover:text-white hover:border-transparent hover:bg-gray-400/40 transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]"
@@ -82,7 +78,7 @@ const Header = () => {
                         Cadastre-se
                     </Link>
                 )}
-            </div> */}
+            </div>  */}
 
             {/* onClick={handleLoginClick} */}
 
