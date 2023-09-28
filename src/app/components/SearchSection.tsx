@@ -4,7 +4,7 @@ import React from 'react'
 
 const SearchSection = () => {
     return (
-        <div className="container flex justify-center flex-col mx-auto p-5 bg-search-background bg-contain bg-no-repeat dark:bg-zinc-800 dark:mt-12 h-[43.75rem] dark:h-[40.75rem]"> {/* LEMBRAR DE TIRAR O HEIGHT FIXO */}
+        <div className="container flex justify-center flex-col mx-auto p-5 bg-search-background bg-contain bg-no-repeat dark:bg-zinc-800 dark:mt-12 md:h-[37.5rem] h-[43.75rem] dark:h-[40.75rem]"> {/* LEMBRAR DE TIRAR O HEIGHT FIXO */}
             <div className='dark:-mt-12'>
                 <h1 className='font-semibold text-4xl text-gray-800 dark:text-gray-300 text-center p-3'>A maneira mais fácil de encontrar um profissional <span className='text-primary'>capacitado</span>!</h1>
                 <p className='text-gray-600 dark:text-gray-400 text-xl text-center p-3 mb-6'>Conheça de forma gratuita os profissionais melhor avaliados!</p>

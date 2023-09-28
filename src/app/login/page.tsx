@@ -28,7 +28,7 @@ const Login = () => {
     if(status == 'unauthenticated'){
 
   return (
-    <div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 transition-all duration-[0.3s] ease-[ease-in-out]">
+    <div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 transition-all duration-[0.3s] ease-[ease-in-out] overflow-hidden">
       <div className="rounded-3xl overflow-hidden w-full bg-white dark:bg-zinc-500 h-[37rem] shadow-lg shadow-gray-400 dark:border-solid dark:border dark:border-gray-600 dark:shadow-none">
 
         <div className="absolute top-0 h-full left-0 w-6/12">
