@@ -36,15 +36,15 @@ const Login = () => {
           <div className="absolute top-8">
             <Link
               href="/"
-              className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primary">
+              className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primary text-primaryDarker">
               <IoIosArrowBack /> Página Inicial
             </Link>
           </div>
 
           <form className="h-full flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-zinc-800/40">
-            <h1 className="text-4xl pb-2 font-semibold">Entre com</h1>
+            <h1 className="text-4xl pb-2 font-semibold text-primaryDarker">Entre com</h1>
 
-            <div className="pb-5 my-5 mx-0">
+            <div className="pb-5 my-5 mx-0 text-primaryDarker">
               <button
                 className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]"
                 onClick={handleLoginClick}
@@ -71,13 +71,13 @@ const Login = () => {
             />
 
             <div className="flex gap-5 text-xs no-underline text-gray-400 mx-0 my-1">
-              <Link href="#" className="hover:text-blue-700">
+              <Link href="#" className="hover:text-primary">
                 Esqueci minha senha
               </Link>
               
               <span>|</span>
               
-              <Link href="#" className="hover:text-blue-700">
+              <Link href="#" className="hover:text-primary">
                 Não tem conta? <span className="underline">Cadastre-se</span>
               </Link>
             </div>
