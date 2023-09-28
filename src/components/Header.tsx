@@ -75,10 +75,10 @@ const Header = () => {
 
             {/* {theme == 'light' ? <div className="bg-white">gfdsgdf</div> : <div className="bg-amber-300">fsgfdgsd</div>} */}
 
-            <div className="flex items-center justify-end gap-5 w-full">
+            <div className="flex items-center justify-end gap-5">
                 {status === "unauthenticated" && (
                     <button
-                        className="flex items-center justify-center py-2 px-4 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-xl hover:text-white hover:border-transparent hover:bg-primary transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]"
+                        className="flex items-center justify-center py-1 px-3 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-md hover:text-white hover:border-transparent hover:bg-gray-400/40 transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]"
                         onClick={handleLoginClick}>
                         <FiLogIn />
                         Entre
@@ -88,7 +88,7 @@ const Header = () => {
                 {status === "unauthenticated" && (
                     <Link
                         href="/login"
-                        className="py-2 px-4 gap-2 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-xl text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+                        className="flex items-center justify-center py-1 px-3 gap-2 w-32 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
                         Cadastre-se
                     </Link>
                 )}

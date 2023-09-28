@@ -13,23 +13,23 @@ export default function Login() {
           <div className="absolute top-8">
             <Link
               href="/"
-              className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primaryDarker">
+              className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primary">
               <IoIosArrowBack /> Página Inicial
             </Link>
           </div>
 
-          <form className="h-full flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-[#000000aa]">
+          <form className="h-full flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-zinc-800/40">
             <h1 className="text-4xl pb-2 font-semibold">Entre com</h1>
 
             <div className="pb-5 my-5 mx-0">
               <a
                 href="#"
-                className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4">
+                className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
                 <FcGoogle className="text-xl" /> Entre com sua conta google
               </a>
             </div>
 
-            <span className="text-xs text-gray-500 dark:text-white">
+            <span className="text-xs p-2 text-gray-500 dark:text-white">
               A opção de logar por e-mail está em manutenção no momento.
             </span>
             
@@ -37,13 +37,13 @@ export default function Login() {
               type="text"
               placeholder="E-mail ou Usuário"
               disabled
-              className="text-xs rounded-lg w-4/5 file:border-none outline-none py-4 px-4 my-3 mx-0 bg-gray-200"
+              className="text-xs rounded-lg w-4/5 file:border-none outline-none py-4 px-4 my-4 mx-0 bg-gray-200"
             />
             <input
               type="password"
               placeholder="Senha"
               disabled
-              className="text-xs rounded-lg w-4/5 file:border-none outline-none py-4 px-4 my-3 mx-0 bg-gray-200"
+              className="text-xs rounded-lg w-4/5 file:border-none outline-none py-4 px-4 my-4 mx-0 bg-gray-200"
             />
 
             <div className="flex gap-5 text-xs no-underline text-gray-400 mx-0 my-1">
