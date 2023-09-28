@@ -13,20 +13,6 @@ import Link from "next/link";
 import Login from "@/app/login/page";
 
 
-// const Button = () => {
-//     const { systemTheme, theme, setTheme } = useTheme();
-//     const currentTheme = theme === 'system' ? systemTheme : theme;
-
-//     return (
-//         <button
-//             onClick={() => theme == "dark"? setTheme('light'): setTheme("dark")}
-//             className='bg-gray-800 dark:bg-gray-50 hover:bg-gray-600 dark:hover:bg-gray-300 transition-all duration-100 text-white dark:text-gray-800 px-8 py-2 text-2xl md:text-4xl rounded-lg absolute bottom-32'>
-//             Toggle Mode
-//         </button>
-//     )
-// }
-
-
 
 const Header = () => {
     const { systemTheme, theme, setTheme } = useTheme();
@@ -57,7 +43,7 @@ const Header = () => {
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
 
     return (
-        <div className='p-5 py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl dark:bg-zinc-800'>
+        <div className='p-5 py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl dark:bg-zinc-900'>
             <div className="flex items-center justify-start h-full w-full">
                 <Link href="/" className="inline-flex items-center justify-between">
                     <Image
@@ -75,7 +61,11 @@ const Header = () => {
 
             {/* {theme == 'light' ? <div className="bg-white">gfdsgdf</div> : <div className="bg-amber-300">fsgfdgsd</div>} */}
 
+<<<<<<< Updated upstream
             <div className="flex items-center justify-end gap-5">
+=======
+            {/* <div className="flex items-center justify-end gap-5 w-full">
+>>>>>>> Stashed changes
                 {status === "unauthenticated" && (
                     <button
                         className="flex items-center justify-center py-1 px-3 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-md hover:text-white hover:border-transparent hover:bg-gray-400/40 transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]"
@@ -92,21 +82,27 @@ const Header = () => {
                         Cadastre-se
                     </Link>
                 )}
-            </div>
+            </div> */}
+
+            {/* onClick={handleLoginClick} */}
+
+        {status === "unauthenticated" && (
+                <Link
+                    href={'/login'}>
+                    <button className="flex text-gray-400 items-center justify-center py-2 px-4 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-xl hover:text-white hover:border-transparent hover:bg-primary transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+                        <FiLogIn />
+                        Login
+                    </button>
+                </Link>
+            )}
 
             {status === "authenticated" && data.user &&(
                 <div className="flex items-center gap-3 border-grayLighter border border-solid p-2 px-3 rounded-full relative">
                     <AiOutlineMenu size={16} onClick={handleMenuClick} className="cursor-pointer"/>
 
-                    {/* {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark"? document.documentElement.classList.remove('dark'): document.documentElement.classList.add('dark')} className="cursor-pointer "/> : <BsSunFill size={16} onClick={() => currentTheme == "dark"? document.documentElement.classList.remove('dark'): document.documentElement.classList.add('dark')} className="cursor-pointer "/>} */}
-                    {/* {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark"? setTheme('light'): setTheme("dark")} className="cursor-pointer "/> : <BsSunFill size={16} onClick={() => currentTheme == "dark"? setTheme('light'): setTheme("dark")} className="cursor-pointer "/>} */}
                     {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer "/> : <BsSunFill size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer "/>}
-                    {/* {localStorage.theme == 'light' ? <BiSolidMoon size={16} onClick={() => dark()} className="cursor-pointer text-black dark:text-white"/> : <BsSunFill size={16} onClick={() => light()} className="cursor-pointer text-black dark:text-white"/>} */}
-                    {/* {theme == 'dark' ? <BsSunFill size={16} onClick={() => theme == 'dark' ? <BsSunFill size={16} onClick={() => light()} className="cursor-pointer text-black dark:text-white"/> : <BsSunFill size={16} onClick={() => light()} className="cursor-pointer text-black dark:text-white light"/> } className="cursor-pointer text-black dark:text-white light"/> : <BiSolidMoon size={16} onClick={() => theme == 'light' ? <BiSolidMoon size={16} onClick={() => dark()} className="cursor-pointer text-black dark:text-white"/> : <BiSolidMoon size={16} onClick={() => light()} className="cursor-pointer text-black dark:text-white"/>} className="cursor-pointer text-black dark:text-white"/>} */}
-                    {/* {document.documentElement.classList.contains("dark") ? light() : dark()} */}
                     
-
-                    <Image height={35} width={35} src={data.user.image!} alt={data.user.name!} className="rounded-full shadow-md"/>
+                    <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md"/>
 
                     {menuIsOpen && (
                         <div className="z-50 absolute top-14 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
@@ -117,7 +113,7 @@ const Header = () => {
                     )}
                 </div>
 
-            )}
+            )} 
         </div>
     )
 }

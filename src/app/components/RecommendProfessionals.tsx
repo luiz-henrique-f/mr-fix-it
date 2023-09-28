@@ -1,17 +1,16 @@
 import ProfessionalItem from '@/components/ProfessionalItem'
 import { prisma } from '@/lib/prisma';
 import { Prestador } from "@prisma/client"
-import { data } from 'autoprefixer';
 import React from 'react'
 
-async function getProfessional() {
-    const professionals = await prisma.prestador.findMany({});
+// async function getProfessional() {
+//     const professionals = await prisma.prestador.findMany({});
     
-    return professionals;
-  }
+//     return professionals;
+//   }
 
 const RecommendProfessionals = async () => {
-    const data = await getProfessional();
+    // const data = await getProfessional();
 
     return (
         <div className='container mx-auto p-5 dark:bg-zinc-800'>
@@ -21,9 +20,9 @@ const RecommendProfessionals = async () => {
                 <div className='w-full h-[1px] bg-grayLighter'></div>
             </div>
         <div className="flex flex-col items-center mt-5 gap-5">
-            {data.map((professional: Prestador) => (
+            {/* {data.map((professional: Prestador) => (
                 <ProfessionalItem key={professional.id} professional={professional}/>    
-                ))}
+                ))} */}
         </div>
 
         </div>

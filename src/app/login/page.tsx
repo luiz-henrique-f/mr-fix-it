@@ -1,9 +1,32 @@
+"use client"
+
 import Link from "next/link";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Image from 'next/image'
 import { FcGoogle } from "react-icons/fc";
 import { IoIosArrowBack } from "react-icons/io";
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router';
+import { redirect } from 'next/navigation'
 
-export default function Login() {
+const Login = () => {
+  // function handleLoginClick()  {
+  //   return <Link href="/"></Link>
+  // }
+
+  const handleLoginClick = () => signIn();
+
+  const { status, data } = useSession();
+  // const router = useRouter();
+
+  // {status == 'authenticated' && <Link href={'/'}></Link>}
+
+    if(status == 'authenticated'){
+      return redirect('/')
+    }
+
+    if(status == 'unauthenticated'){
+
   return (
     <div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 transition-all duration-[0.3s] ease-[ease-in-out]">
       <div className="rounded-3xl overflow-hidden w-full bg-white dark:bg-zinc-500 h-[37rem] shadow-lg shadow-gray-400 dark:border-solid dark:border dark:border-gray-600 dark:shadow-none">
@@ -13,11 +36,16 @@ export default function Login() {
           <div className="absolute top-8">
             <Link
               href="/"
+<<<<<<< Updated upstream
               className="text-base flex items-center justify-center ml-8 gap-3 font-bold hover:text-primary">
+=======
+              className="text-base flex items-center justify-center ml-8 gap-3 text-zinc-700 font-bold hover:text-purple-600">
+>>>>>>> Stashed changes
               <IoIosArrowBack /> Página Inicial
             </Link>
           </div>
 
+<<<<<<< Updated upstream
           <form className="h-full flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-zinc-800/40">
             <h1 className="text-4xl pb-2 font-semibold">Entre com</h1>
 
@@ -25,8 +53,18 @@ export default function Login() {
               <a
                 href="#"
                 className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
+=======
+          <form className="h-full flex items-center justify-center text-primaryDarker flex-col py-0 px-10 bg-white dark:bg-[#000000aa]">
+            <h1 className="text-4xl pb-2 font-semibold">Entre com</h1>
+
+            <div className="pb-5 my-5 mx-0">
+              <button
+                className="inline-flex justify-center text-primaryDarker items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4"
+                onClick={handleLoginClick}
+                >
+>>>>>>> Stashed changes
                 <FcGoogle className="text-xl" /> Entre com sua conta google
-              </a>
+              </button>
             </div>
 
             <span className="text-xs p-2 text-gray-500 dark:text-white">
@@ -87,3 +125,5 @@ export default function Login() {
     </div>
   );
 }
+}
+export default Login;
