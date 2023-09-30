@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div>
       <SearchSection />
-      <QuickSearch />
-      <RecommendProfessionals />
+      {/* <QuickSearch /> */}
+      {/* <RecommendProfessionals /> */}
     </div>
   )
 }

@@ -1,25 +1,44 @@
 "use client"
 
+import { useTheme } from '@mui/material/styles'
+import { useMediaQuery } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import * as React from 'react';
 import Link from "next/link";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Image from 'next/image'
 import { FcGoogle } from "react-icons/fc";
 import { IoIosArrowBack } from "react-icons/io";
-import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router';
-import { redirect } from 'next/navigation'
+import { LiaTimesSolid } from "react-icons/lia";
+import { redirect } from 'next/navigation';
+import { BsCheck2Square } from 'react-icons/bs';
+import { AiOutlineUser } from 'react-icons/ai';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import axios from 'axios';
+import CreateProfessional from '../components/CreateProfessional';
+
+type IBGEUFResponse = {
+  id: number;
+  sigla: string;
+  nome: string;
+};
+
+type IBGECITYResponse = {
+  id: number;
+  nome: string;
+};
 
 const Login = () => {
-  // function handleLoginClick()  {
-  //   return <Link href="/"></Link>
-  // }
 
   const handleLoginClick = () => signIn();
 
   const { status, data } = useSession();
-  // const router = useRouter();
-
-  // {status == 'authenticated' && <Link href={'/'}></Link>}
 
     if(status == 'authenticated'){
       return redirect('/')
@@ -70,16 +89,14 @@ const Login = () => {
               className="text-xs rounded-lg w-4/5 file:border-none outline-none py-4 px-4 my-4 mx-0 bg-gray-200"
             />
 
-            <div className="flex gap-5 text-xs no-underline text-gray-400 mx-0 my-1">
+            <div className="flex gap-2 text-xs no-underline text-gray-400 mx-0 my-1">
               <Link href="#" className="hover:text-primary">
                 Esqueci minha senha
               </Link>
               
               <span>|</span>
-              
-              <Link href="#" className="hover:text-primary">
-                Não tem conta? <span className="underline">Cadastre-se</span>
-              </Link>
+
+           Não tem uma conta? <CreateProfessional />
             </div>
             
             
