@@ -4,7 +4,7 @@ import React from 'react'
 
 const SearchSection = () => {
     return (
-        <div className="container flex justify-center flex-col mx-auto p-5 bg-search-background dark:bg-search-background bg-contain bg-no-repeat dark:bg-zinc-800 md:h-[450px] h-[43.75rem]"> {/* LEMBRAR DE TIRAR O HEIGHT FIXO */}
+        <div className="container flex justify-center flex-col mx-auto p-5 bg-search-background dark:bg-search-background-dark bg-contain bg-no-repeat dark:bg-zinc-800 md:h-[28.125rem] 2xl:h-[43.75rem]"> {/* LEMBRAR DE TIRAR O HEIGHT FIXO */}
             <div>
                 <h1 className='font-semibold text-4xl text-gray-800 dark:text-gray-300 text-center p-3'>A maneira mais fácil de encontrar um profissional <span className='text-primary'>capacitado</span>!</h1>
                 <p className='text-gray-600 dark:text-gray-400 text-xl text-center p-3 mb-6'>Conheça de forma gratuita os profissionais melhor avaliados!</p>
@@ -12,7 +12,7 @@ const SearchSection = () => {
                 <div className="flex gap-5">
                     <Input placeholder='Qual serviço você precisa?' className='py-3 border-none px-4'/>
 
-                    <select name="regiao" className='w-2/3 border-none rounded-lg px-4 dark:bg-white dark:text-black' >
+                    <select name="regiao" className='w-2/3 border-none rounded-lg px-4 dark:bg-white dark:text-primaryDarker text-primaryDarker' >
                         <option value="">Todos os estados</option>
                         <option value="RJ">Rio de Janeiro</option>
                         <option value="SP">São Paulo</option>
@@ -20,7 +20,7 @@ const SearchSection = () => {
                         <option value="SC">Santa Catarina</option>
                     </select>
 
-                    <select name="categoria" className='w-2/6 border-none rounded-lg px-4 dark:bg-white dark:text-black'>
+                    <select name="categoria" className='w-2/6 border-none rounded-lg px-4 dark:bg-white dark:text-primaryDarker text-primaryDarker'>
                         <option value="">Categorias</option>
 
                         <optgroup label="Reparos">

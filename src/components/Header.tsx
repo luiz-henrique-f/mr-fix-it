@@ -43,7 +43,7 @@ const Header = () => {
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
 
     return (
-        <div className='p-5 py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl dark:bg-zinc-900'>
+        <div className='p-5 py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-none dark:bg-zinc-900'>
             <div className="flex items-center justify-start h-full w-full">
                 <Link href="/" className="inline-flex items-center justify-between">
                     <Image
