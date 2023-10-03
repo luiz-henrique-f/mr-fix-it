@@ -15,6 +15,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as React from 'react';
+import InputUfCity from './InputUfCity';
+import { prisma } from '@/lib/prisma';
 
 type IBGEUFResponse = {
   id: number;
@@ -26,6 +28,12 @@ type IBGECITYResponse = {
   id: number;
   nome: string;
 };
+
+// async function getcategories() {
+//     const categories = await prisma.tipo_Categoria.findMany({});
+    
+//     return categories;
+//   }
 
 const CreateProfessional = () => {
     const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
@@ -110,7 +118,8 @@ return (
             label="UF"
             name='uf'
             fullWidth
-            value={selectedUf}
+            // value={selectedUf}
+            // defaultValue=""
             onChange={handleSelectedUf}>
           {ufs.map(uf => (
             <MenuItem key={uf.id} value={uf.sigla}>
@@ -122,7 +131,8 @@ return (
             id="city"
             select
             label="Cidade"
-            value={selectedCity}
+            // value={selectedCity}
+            // defaultValue=""
             fullWidth
             onChange={handleSelectedCity}>
           {cities.map(city => (
@@ -133,7 +143,8 @@ return (
           </TextField>
           <TextField
             id="outlined-select-currency"
-            label="Email Address"
+            select
+            label="Categoria"
             fullWidth
           />
           </div>

@@ -1,26 +1,13 @@
 "use client"
 
-import { useTheme } from '@mui/material/styles'
-import { useMediaQuery } from '@mui/material';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import * as React from 'react';
 import Link from "next/link";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Image from 'next/image'
 import { FcGoogle } from "react-icons/fc";
 import { IoIosArrowBack } from "react-icons/io";
-import { LiaTimesSolid } from "react-icons/lia";
 import { redirect } from 'next/navigation';
-import { BsCheck2Square } from 'react-icons/bs';
-import { AiOutlineUser } from 'react-icons/ai';
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
-import axios from 'axios';
+import { useRouter } from "next/navigation";
 import CreateProfessional from '../components/CreateProfessional';
 
 type IBGEUFResponse = {
@@ -35,16 +22,19 @@ type IBGECITYResponse = {
 };
 
 const Login = () => {
+  const router = useRouter();
 
-  const handleLoginClick = () => signIn();
+  // const handleLoginClick = () => signIn("google", {
+  //   redirect: true,
+  //   callbackUrl: "/",
+  // });
 
-  const { status, data } = useSession();
-
-  if(status == 'authenticated'){
-    return redirect('/')
+  const onSubmit = async () => {
+    const result = await signIn("google", {
+      redirect: true,
+      callbackUrl: "/",
+    })
   }
-
-  if(status == 'unauthenticated'){
 
     return (
       <div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 overflow-hidden">
@@ -66,7 +56,7 @@ const Login = () => {
               <div className="pb-5 my-5 mx-0 text-primaryDarker">
                 <button
                   className="inline-flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]"
-                  onClick={handleLoginClick}
+                  onClick={onSubmit}
                   >
                   <FcGoogle className="text-xl" /> Entre com sua conta google
                 </button>
@@ -129,5 +119,6 @@ const Login = () => {
       </div>
     );
   };
-};
+// };
 export default Login;
+
