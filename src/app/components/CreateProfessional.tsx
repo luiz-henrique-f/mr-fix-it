@@ -14,6 +14,7 @@ import Dialog, { DialogProps } from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Autocomplete from '@mui/material/Autocomplete';
 import * as React from 'react';
 import InputUfCity from './InputUfCity';
 import { prisma } from '@/lib/prisma';
@@ -29,6 +30,11 @@ type IBGECITYResponse = {
   nome: string;
 };
 
+type categorieResponse = {
+  id: string;
+  descricao_categoria: string;
+};
+
 // async function getcategories() {
 //     const categories = await prisma.tipo_Categoria.findMany({});
     
@@ -37,9 +43,11 @@ type IBGECITYResponse = {
 
 const CreateProfessional = () => {
     const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
+    const [categories, setCategories] = React.useState<categorieResponse[]>([]);
     const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
     const [selectedUf, setSelectedUf] = React.useState("0");
     const [selectedCity, setSelectedCity] = React.useState("0");
+    const [selectedCategorie, setSelectedCategorie] = React.useState("0");
 
     React.useEffect(() => {
       axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
@@ -55,6 +63,13 @@ const CreateProfessional = () => {
       })
     }, [selectedUf]);
   
+    React.useEffect(() => {
+      axios.get('/categoria')
+      .then((response) => {
+        setCategories(response.data)
+      })
+    }, []);
+  
     const handleSelectedUf = (
       e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
@@ -68,6 +83,13 @@ const CreateProfessional = () => {
       const city = e.target.value;
       setSelectedCity(city);
     };
+  
+    const handleSelectedCategorie = (
+      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
+      const categorie = e.target.value;
+      setSelectedCategorie(categorie);
+    };
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -80,6 +102,14 @@ const CreateProfessional = () => {
     const handleClose = () => {
       setOpen(false);
     };
+
+    // const fetchCategories = async () => {
+    //   const categories = await fetch('/categoria');
+  
+    //   const json = await categories.json();
+
+    //   setCategories(json);
+    // };
 
 return (
     <div>
@@ -142,11 +172,19 @@ return (
           ))}
           </TextField>
           <TextField
-            id="outlined-select-currency"
+            id="categorie"
             select
             label="Categoria"
+            value={selectedCategorie}
+            // defaultValue=""
             fullWidth
-          />
+            onChange={handleSelectedCategorie}>
+          {categories.map(categorie => (
+            <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+              {categorie.descricao_categoria}
+            </MenuItem>
+          ))}
+          </TextField>
           </div>
           <div className='flex justify-between gap-2'>
           <TextField

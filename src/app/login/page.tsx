@@ -36,6 +36,14 @@ const Login = () => {
     })
   }
 
+  // const fetchCategories = async () => {
+  //   const categories = await fetch('/categoria');
+
+  //   const json = await categories.json();
+  //   console.log(json);
+
+  // };
+
     return (
       <div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-zinc-800 overflow-hidden">
         <div className="rounded-3xl overflow-hidden w-full bg-white dark:bg-zinc-500 h-[37rem] shadow-lg shadow-gray-400 dark:border-solid dark:border dark:border-gray-600 dark:shadow-none">
