@@ -43,19 +43,22 @@ const Header = () => {
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
 
     return (
-        <div className='p-5 py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-none dark:bg-zinc-900'>
+        <div className='px-[5%] py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl bg-whiteBG dark:bg-darkBG'>
             <div className="flex items-center justify-start h-full w-full">
                 <Link href="/" className="inline-flex items-center justify-between">
+                    
                     <Image
                         src="/Logo_3.0_roxo.png"
                         width={50}
                         height={50}
                         alt="Mr. Fix It" />
+
                     <div className="relative left-5 text-black dark:text-white">
                         <h1 className="font-semibold text-3xl tracking-[0.4375rem]">Mr. Fix</h1>
                         <span className=" text-base tracking-[0.1875rem]">it</span>
                         <span className="text-xl tracking-[-0.025rem] pl-1">——————</span>
                     </div>
+
                 </Link>
             </div>
 
@@ -83,13 +86,17 @@ const Header = () => {
             {/* onClick={handleLoginClick} */}
 
         {status === "unauthenticated" && (
-                <Link
-                    href={'/login'}>
-                    <button className="flex text-gray-400 items-center justify-center py-2 px-4 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-xl hover:text-white hover:border-transparent hover:bg-primary transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                        <FiLogIn />
-                        Login
-                    </button>
-                </Link>
+                <div className="flex items-center gap-3 relative">
+
+                    {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer text-black "/> : <BsSunFill size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer text-white "/>}
+
+                    <Link href={'/login'}>
+                        <button className="flex text-white items-center justify-center py-2 px-4 gap-2 text-lg bg-primary border-transparent font-semibold border-[0.125rem] border-solid rounded-xl hover:bg-primaryDarker transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
+                            <FiLogIn />
+                            Login
+                        </button>
+                    </Link>
+                </div>
             )}
 
             {status === "authenticated" && data.user &&(

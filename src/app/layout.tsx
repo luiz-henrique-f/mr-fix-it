@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <Providers>
-          <body className="bg-neutral-200 dark:bg-zinc-800">
+          <body className="bg-whiteBG dark:bg-darkBG">
             <NextAuthProvider>
               <Header />
               {children}

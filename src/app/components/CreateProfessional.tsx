@@ -114,117 +114,144 @@ const CreateProfessional = () => {
 return (
     <div>
         <Button 
-        disableElevation
-        disableRipple
-        style={{ all: "initial" }} onClick={handleClickOpen}><span className="underline text-xs text-gray-400 mx-0 my-1 cursor-pointer hover:text-primary">Cadastre-se</span>
+            disableElevation
+            disableRipple
+            style={{ all: "initial" }}
+            onClick={handleClickOpen}>
+
+            <span className="underline text-sm text-gray-400 mx-0 my-1 cursor-pointer hover:text-primary">
+                Cadastre-se
+            </span>
+
         </Button>
 
-        <Dialog open={open} onClose={handleClose}
-      fullScreen={fullScreen}
-      >
-<div className='dark:bg-zinc-700'>
-        <div className='flex justify-between'>
-          <DialogTitle className='text-primaryDarker flex gap-1'>
-          <AiOutlineUser className='mt-[2%]'/>
-            Cadastro de Informações</DialogTitle>
-          <Button style={{ background: '#fff' }} title='Fechar' onClick={handleClose}><button
-                        className="flex items-center justify-center py-1 px-3 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                        <LiaTimesSolid className='text-white'/>
-                    </button></Button>
-        </div>
-        <DialogContent>
-          <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1},
-      }}
-      noValidate
-      autoComplete="off"
-    >
-          <div className='flex justify-between gap-2'>
-          <TextField
-            id="uf"
-            select
-            label="UF"
-            name='uf'
-            fullWidth
-            // value={selectedUf}
-            // defaultValue=""
-            onChange={handleSelectedUf}>
-          {ufs.map(uf => (
-            <MenuItem key={uf.id} value={uf.sigla}>
-              {uf.nome}
-            </MenuItem>
-          ))}
-          </TextField>
-          <TextField
-            id="city"
-            select
-            label="Cidade"
-            // value={selectedCity}
-            // defaultValue=""
-            fullWidth
-            onChange={handleSelectedCity}>
-          {cities.map(city => (
-            <MenuItem key={city.id} value={city.nome}>
-              {city.nome}
-            </MenuItem>
-          ))}
-          </TextField>
-          <TextField
-            id="categorie"
-            select
-            label="Categoria"
-            value={selectedCategorie}
-            // defaultValue=""
-            fullWidth
-            onChange={handleSelectedCategorie}>
-          {categories.map(categorie => (
-            <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-              {categorie.descricao_categoria}
-            </MenuItem>
-          ))}
-          </TextField>
-          </div>
-          <div className='flex justify-between gap-2'>
-          <TextField
-            id="outlined-select-currency"
-            label="Email Address"
-            fullWidth
-          />
-          <TextField
-            id="outlined-select-currency"
-            label="Email Address"
-            fullWidth
-          />
-          <TextField
-            id="outlined-select-currency"
-            label="Email Address"
-            fullWidth
-          />
-          </div>
-          </Box>
-        </DialogContent>
-        <DialogActions className='!flex !justify-between'>
-          <Button onClick={handleClose}
-          style={{ background: '#fff' }}
-          >
-                <button
-                  className="flex items-center justify-center gap-1 py-1 px-3 text-sm hover:bg-primary font-semibold border-[0.125rem] border-solid border-gray-500 rounded-md text-gray-500 hover:border-transparent transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out] hover:text-white">
-                  <LiaTimesSolid/>
-                  Cancelar
-                </button>
-          </Button>
-          <Button onClick={handleClose}>
-                <button
-                  className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                  <BsCheck2Square className='text-white'/>
-                  Finalizar Cadastro
-                </button>
-          </Button>
-        </DialogActions>
-    </div>
-      </Dialog>
+        <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
+
+            <div className='dark:bg-darkBGLighter'>
+                <div className='flex justify-between'>
+
+                    <DialogTitle className='text-primaryDarker flex gap-1'>
+                        <AiOutlineUser className='mt-[2%]'/>
+                        Cadastro de Informações
+                    </DialogTitle>
+
+                    <Button style={{ background: '#fff' }} title='Fechar' onClick={handleClose}>
+                        <button
+                            className="flex items-center justify-center py-1 px-3 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+                            <LiaTimesSolid className='text-white'/>
+                        </button>
+                    </Button>
+
+                </div>
+
+                <DialogContent>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1},
+                        }}
+                        noValidate
+                        autoComplete="off">
+
+                        <div className='flex justify-between gap-2'>
+                            <TextField
+                                id="uf"
+                                select
+                                label="UF"
+                                name='uf'
+                                fullWidth
+                                // value={selectedUf}
+                                // defaultValue=""
+                                onChange={handleSelectedUf}>
+
+                                {ufs.map(uf => (
+                                    <MenuItem key={uf.id} value={uf.sigla}>
+                                    {uf.nome}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+
+                            <TextField
+                                id="city"
+                                select
+                                label="Cidade"
+                                // value={selectedCity}
+                                // defaultValue=""
+                                fullWidth
+                                onChange={handleSelectedCity}>
+
+                                {cities.map(city => (
+                                    <MenuItem key={city.id} value={city.nome}>
+                                    {city.nome}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+
+                            <TextField
+                                id="categorie"
+                                select
+                                label="Categoria"
+                                value={selectedCategorie}
+                                // defaultValue=""
+                                fullWidth
+                                onChange={handleSelectedCategorie}>
+
+                                {categories.map(categorie => (
+                                    <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                                    {categorie.descricao_categoria}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </div>
+
+                        <div className='flex justify-between gap-2'>
+                            <TextField
+                                id="outlined-select-currency"
+                                label="Email Address"
+                                fullWidth
+                            />
+
+                            <TextField
+                                id="outlined-select-currency"
+                                label="Email Address"
+                                fullWidth
+                            />
+
+                            <TextField
+                                id="outlined-select-currency"
+                                label="Email Address"
+                                fullWidth
+                            />
+                        </div>
+                    </Box>
+                </DialogContent>
+
+                <DialogActions className='!flex !justify-between'>
+                    <Button 
+                        onClick={handleClose}
+                        style={{ background: '#fff' }}>
+
+                        <button
+                            className="flex items-center justify-center gap-1 py-1 px-3 text-sm hover:bg-primary font-semibold border-[0.125rem] border-solid border-gray-500 rounded-md text-gray-500 hover:border-transparent transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out] hover:text-white">
+                            <LiaTimesSolid/>
+                            Cancelar
+                        </button>
+                    </Button>
+
+                    <Button onClick={handleClose}>
+                        <button
+                            className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+                            <BsCheck2Square className='text-white'/>
+                            Finalizar Cadastro
+                        </button>
+                    </Button>
+
+                </DialogActions>
+
+            </div>
+
+        </Dialog>
+        
     </div>
 )
 
