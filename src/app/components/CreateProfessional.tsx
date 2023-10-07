@@ -14,6 +14,11 @@ import Dialog, { DialogProps } from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import Autocomplete from '@mui/material/Autocomplete';
 import * as React from 'react';
 import InputUfCity from './InputUfCity';
@@ -112,147 +117,191 @@ const CreateProfessional = () => {
     // };
 
 return (
-    <div>
-        <Button 
-            disableElevation
-            disableRipple
-            style={{ all: "initial" }}
-            onClick={handleClickOpen}>
+  <div>
+    <Button 
+      disableElevation
+      disableRipple
+      style={{ all: "initial" }}
+      onClick={handleClickOpen}>
 
-            <span className="underline text-sm text-gray-400 mx-0 my-1 cursor-pointer hover:text-primary">
-                Cadastre-se
-            </span>
+      <span className="underline text-sm text-gray-400 mx-0 my-1 cursor-pointer hover:text-primary">
+        Cadastre-se
+      </span>
 
-        </Button>
+    </Button>
 
-        <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
+    <Dialog 
+      open={open} 
+      onClose={handleClose} 
+      fullScreen={fullScreen} 
+      className='backdrop-blur-sm'>
 
-            <div className='dark:bg-darkBGLighter'>
-                <div className='flex justify-between'>
+      <div className='dark:bg-darkBGLighter border border-solid border-gray-500'>
+        <div className='flex justify-between'>
 
-                    <DialogTitle className='text-primaryDarker flex gap-1'>
-                        <AiOutlineUser className='mt-[2%]'/>
-                        Cadastro de Informações
-                    </DialogTitle>
+          <DialogTitle className='text-primaryDarker flex gap-1 dark:text-white'>
+            <AiOutlineUser className='mt-[2%]'/>
+            Cadastro de Informações
+          </DialogTitle>
 
-                    <Button style={{ background: '#fff' }} title='Fechar' onClick={handleClose}>
-                        <button
-                            className="flex items-center justify-center py-1 px-3 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                            <LiaTimesSolid className='text-white'/>
-                        </button>
-                    </Button>
+          <Button 
+            className='bg-white dark:bg-darkBGLighter'
+            title='Fechar' 
+            onClick={handleClose}>
 
-                </div>
+            <button
+              className="flex items-center justify-center py-1 px-1 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-lg text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+              <LiaTimesSolid className='text-white'/>
+            </button>
+          </Button>
 
-                <DialogContent>
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1},
-                        }}
-                        noValidate
-                        autoComplete="off">
+        </div>
 
-                        <div className='flex justify-between gap-2'>
-                            <TextField
-                                id="uf"
-                                select
-                                label="UF"
-                                name='uf'
-                                fullWidth
-                                // value={selectedUf}
-                                // defaultValue=""
-                                onChange={handleSelectedUf}>
+        <DialogContent>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1},
+            }}
+            noValidate
+            autoComplete="off">
 
-                                {ufs.map(uf => (
-                                    <MenuItem key={uf.id} value={uf.sigla}>
-                                    {uf.nome}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
 
-                            <TextField
-                                id="city"
-                                select
-                                label="Cidade"
-                                // value={selectedCity}
-                                // defaultValue=""
-                                fullWidth
-                                onChange={handleSelectedCity}>
-
-                                {cities.map(city => (
-                                    <MenuItem key={city.id} value={city.nome}>
-                                    {city.nome}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-
-                            <TextField
-                                id="categorie"
-                                select
-                                label="Categoria"
-                                value={selectedCategorie}
-                                // defaultValue=""
-                                fullWidth
-                                onChange={handleSelectedCategorie}>
-
-                                {categories.map(categorie => (
-                                    <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                                    {categorie.descricao_categoria}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </div>
-
-                        <div className='flex justify-between gap-2'>
-                            <TextField
-                                id="outlined-select-currency"
-                                label="Email Address"
-                                fullWidth
-                            />
-
-                            <TextField
-                                id="outlined-select-currency"
-                                label="Email Address"
-                                fullWidth
-                            />
-
-                            <TextField
-                                id="outlined-select-currency"
-                                label="Email Address"
-                                fullWidth
-                            />
-                        </div>
-                    </Box>
-                </DialogContent>
-
-                <DialogActions className='!flex !justify-between'>
-                    <Button 
-                        onClick={handleClose}
-                        style={{ background: '#fff' }}>
-
-                        <button
-                            className="flex items-center justify-center gap-1 py-1 px-3 text-sm hover:bg-primary font-semibold border-[0.125rem] border-solid border-gray-500 rounded-md text-gray-500 hover:border-transparent transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out] hover:text-white">
-                            <LiaTimesSolid/>
-                            Cancelar
-                        </button>
-                    </Button>
-
-                    <Button onClick={handleClose}>
-                        <button
-                            className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                            <BsCheck2Square className='text-white'/>
-                            Finalizar Cadastro
-                        </button>
-                    </Button>
-
-                </DialogActions>
+            <div className='flex justify-between gap-2'>
+              <TextField
+                id="name"
+                label="Nome completo"
+                fullWidth>
+              </TextField>
 
             </div>
 
-        </Dialog>
-        
-    </div>
+            <div className='flex justify-between gap-2'>
+              <TextField
+                id="cpf"
+                label="CPF/CNPJ"
+                fullWidth>
+              </TextField>
+
+              <TextField
+                id="cep"
+                label="CEP"
+                fullWidth>
+              </TextField>
+            </div>
+
+            <div className='flex justify-between gap-2'>
+              <TextField
+                id="tel"
+                type="tel"
+                label="Telefone"
+                fullWidth>
+              </TextField>
+              
+              <TextField
+                id="outlined-select-currency"
+                label="E-mail"
+                fullWidth>
+              </TextField>
+            </div>
+            
+            <div className='border border-solid border-gray-400/80 text-gray-500 rounded-md p-2 m-2'>
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">Sexo</FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group">
+                    
+                  <FormControlLabel value="male" control={<Radio />} label="Masculino" />
+                  <FormControlLabel value="female" control={<Radio />} label="Feminino" />
+                  <FormControlLabel value="other" control={<Radio />} label="Não especificar" />
+
+                </RadioGroup>
+              </FormControl>
+            </div>
+              
+              
+            <div className='flex justify-between gap-2'>
+              <TextField
+                id="uf"
+                select
+                label="UF"
+                name='uf'
+                fullWidth
+                // value={selectedUf}
+                // defaultValue=""
+                onChange={handleSelectedUf}>
+
+                {ufs.map(uf => (
+                  <MenuItem key={uf.id} value={uf.sigla}>
+                  {uf.nome}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                id="city"
+                select
+                label="Cidade"
+                // value={selectedCity}
+                // defaultValue=""
+                fullWidth
+                onChange={handleSelectedCity}>
+
+                {cities.map(city => (
+                  <MenuItem key={city.id} value={city.nome}>
+                  {city.nome}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                id="categorie"
+                select
+                label="Categoria"
+                value={selectedCategorie}
+                // defaultValue=""
+                fullWidth
+                onChange={handleSelectedCategorie}>
+
+                {categories.map(categorie => (
+                  <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                  {categorie.descricao_categoria}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+          </Box>
+        </DialogContent>
+
+        <DialogActions className='!flex !justify-between'>
+          <Button 
+            onClick={handleClose}
+            className='bg-white dark:bg-darkBGLighter'>
+
+            <button
+              className="flex items-center justify-center gap-1 py-1 px-3 text-sm hover:bg-primary font-semibold border-[0.125rem] border-solid border-gray-500 rounded-md text-gray-500 hover:border-transparent transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out] hover:text-white">
+              <LiaTimesSolid/>
+              Cancelar
+            </button>
+          </Button>
+
+          <Button onClick={handleClose}>
+            <button
+              className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+              <BsCheck2Square className='text-white'/>
+              Finalizar Cadastro
+            </button>
+          </Button>
+
+        </DialogActions>
+
+      </div>
+
+    </Dialog>
+      
+  </div>
 )
 
 };
