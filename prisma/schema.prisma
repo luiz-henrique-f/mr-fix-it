@@ -11,46 +11,38 @@ datasource db {
 }
 
 model Prestador {
-  id           String                @id @default(uuid())
-  nome         String
-  cpf_cnpj     String
-  celular      String
-  cidade       String
-  uf           String
-  observacao   String
-  created_at   DateTime              @default(now())
-  conta_ativa  Prestador_Ativo[]
-  pontuacoes   Pontuacao_Prestador[]
-  id_categoria String
-  categoria    Tipo_Categoria        @relation(fields: [id_categoria], references: [id])
-  id_user      String
-  user         User                  @relation(fields: [id_user], references: [id])
-}
-
-model Tipo_Categoria {
-  id                  String      @id @default(uuid())
-  descricao_categoria String
-  categoria           Prestador[]
+  id         String   @id @default(uuid())
+  nome       String
+  cpf_cnpj   String
+  celular    String
+  cidade     String
+  uf         String
+  observacao String
+  created_at DateTime @default(now())
+  // conta_ativa Prestador_Ativo[]
+  // pontuacoes  Pontuacao_Prestador[]
+  id_user    String
+  user       User     @relation(fields: [id_user], references: [id])
 }
 
 model Prestador_Ativo {
-  id                         String    @id @default(uuid())
+  id                         String   @id @default(uuid())
   id_prestador               String
-  conta_ativa                Prestador @relation(fields: [id_prestador], references: [id])
-  data_hora_ultima_alteracao DateTime  @default(now())
+  // conta_ativa                Prestador @relation(fields: [id_prestador], references: [id])
+  data_hora_ultima_alteracao DateTime @default(now())
 }
 
 model Pontuacao_Prestador {
-  id           String    @id @default(uuid())
+  id           String @id @default(uuid())
   id_prestador String
-  prestador    Prestador @relation(fields: [id_prestador], references: [id])
+  // prestador    Prestador @relation(fields: [id_prestador], references: [id])
   id_cliente   String
-  cliente      Cliente   @relation(fields: [id_cliente], references: [id])
+  // cliente      Cliente   @relation(fields: [id_cliente], references: [id])
   pontuacao    String
 }
 
 model Cliente {
-  id              String                @id @default(uuid())
+  id              String   @id @default(uuid())
   nome            String
   cpf_cnpj        String
   idade           Int
@@ -62,8 +54,8 @@ model Cliente {
   endereco        String
   cidade          String
   uf              String
-  created_at      DateTime              @default(now())
-  clientes        Pontuacao_Prestador[]
+  created_at      DateTime @default(now())
+  // clientes        Pontuacao_Prestador[]
 }
 
 model Account {

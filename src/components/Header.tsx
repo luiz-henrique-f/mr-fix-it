@@ -11,10 +11,14 @@ import { FiLogIn } from "react-icons/fi";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import Login from "@/app/login/page";
+import { Prestador } from "@prisma/client";
+
+interface ProfessionalProps {
+    professional: Prestador;
+  }
 
 
-
-const Header = () => {
+const Header = ({ professional }: ProfessionalProps) => {
     const { systemTheme, theme, setTheme } = useTheme();
     const currentTheme = theme === 'system' ? systemTheme : theme;
     // const theme = document.documentElement.classList.contains("dark") ? 'dark' : 'light';
@@ -109,9 +113,14 @@ const Header = () => {
 
                     {menuIsOpen && (
                         <div className="z-50 absolute top-14 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
-                            <button className="text-primary text-sm font-semibold" onClick={() => handleLogoutClick()}>
+                            <button className="text-primary text-sm font-semibold border-b-4" onClick={() => handleLogoutClick()}>
                                 Logout
                             </button>
+                            <Link href={`/professionals/90fd330c-51c6-4285-8082-71c4075539c4`}>
+                                <button className="text-primary text-sm font-semibold">
+                                    Meu Perfil
+                                </button>
+                            </Link>
                         </div>
                     )}
                 </div>
