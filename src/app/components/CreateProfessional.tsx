@@ -6,6 +6,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 import Button from '@mui/material/Button';
 import { BsCheck2Square } from 'react-icons/bs';
 import { AiOutlineUser } from 'react-icons/ai';
+import { FcGoogle } from "react-icons/fc";
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
@@ -182,12 +183,6 @@ return (
                 label="CPF/CNPJ"
                 fullWidth>
               </TextField>
-
-              <TextField
-                id="cep"
-                label="CEP"
-                fullWidth>
-              </TextField>
             </div>
 
             <div className='flex justify-between gap-2'>
@@ -199,9 +194,19 @@ return (
               </TextField>
               
               <TextField
-                id="outlined-select-currency"
-                label="E-mail"
-                fullWidth>
+                id="categorie"
+                select
+                label="Categoria"
+                value={selectedCategorie}
+                // defaultValue=""
+                fullWidth
+                onChange={handleSelectedCategorie}>
+
+                {categories.map(categorie => (
+                  <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                  {categorie.descricao_categoria}
+                  </MenuItem>
+                ))}
               </TextField>
             </div>
             
@@ -255,23 +260,44 @@ return (
                   </MenuItem>
                 ))}
               </TextField>
+            </div>
+
+            <div className='w-full relative'>
+              <div className='text-gray-400 text-center mt-4 block'>
+                  <span>
+                    <span className='inline-block w-full h-[1px] bg-gray-400 align-middle'></span>
+                  </span>
+                  
+                  <span className='absolute left-0 top-0 w-full'>
+                    <span className='px-4 py-0 bg-white'>ou</span>
+                  </span>
+              </div>
+              
+              <div className="flex justify-center items-center my-5 mx-0 text-primaryDarker dark:text-walterWhite">
+                <button
+                  className="flex justify-center items-center rounded-2xl my-0 mx-3 gap-2 border border-gray-200 bg-gray-200/70 p-4 hover:bg-gray-300 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
+                  {/* onClick={onSubmit}> */}
+                  <FcGoogle className="text-2xl" /> Cadastre-se usando sua conta google
+                </button>
+              </div>
+            </div>
+
+
+            {/* <div className='flex flex-col mr-4 gap-1'>
+              <TextField
+                id="outlined-select-currency"
+                label="E-mail"
+                fullWidth>
+              </TextField>
 
               <TextField
-                id="categorie"
-                select
-                label="Categoria"
-                value={selectedCategorie}
-                // defaultValue=""
-                fullWidth
-                onChange={handleSelectedCategorie}>
-
-                {categories.map(categorie => (
-                  <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                  {categorie.descricao_categoria}
-                  </MenuItem>
-                ))}
+                id="outlined-select-currency"
+                label="Senha"
+                type='password'
+                fullWidth>
               </TextField>
-            </div>
+            </div> */}
+            
           </Box>
         </DialogContent>
 

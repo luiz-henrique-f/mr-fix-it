@@ -8,9 +8,9 @@ interface ProfessionalDescriptionProps {
 const ProfessionalDescription = ({description}: ProfessionalDescriptionProps) => {
     
     return (
-        <div className="flex flex-col p-5 pb-10 border-b border-b-grayLighter w-full">
-            <h2 className='font-semibold text-primaryDarker'>Sobre o Professional</h2>
-            <p className='text-xs leading-5 text-primaryDarker mt-1'>{description}</p>
+        <div className="flex flex-col p-5 pb-10 w-full">
+            <h2 className='text-2xl mb-3 font-semibold text-primaryDarker dark:text-white'>Sobre o Professional</h2>
+            <p className='text-xs leading-5 text-primaryDarker dark:text-white mt-1 indent-3'>{description}</p>
         </div>
     )
 }
