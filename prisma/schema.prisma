@@ -15,6 +15,7 @@ model Prestador {
   nome           String
   cpf_cnpj       String
   celular        String
+  sexo           String   @default("M")
   cidade         String
   uf             String
   observacao     String

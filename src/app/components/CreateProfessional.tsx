@@ -3,6 +3,7 @@
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material';
 import { LiaTimesSolid } from "react-icons/lia";
+// import Button from "@/components/Button";
 import Button from '@mui/material/Button';
 import { BsCheck2Square } from 'react-icons/bs';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -23,6 +24,8 @@ import FormLabel from '@mui/material/FormLabel';
 import { IMaskInput } from 'react-imask';
 import * as React from 'react';
 import { mask, unMask } from 'remask'
+import { Controller, useForm } from "react-hook-form";
+import Input from '@/components/Input';
 
 type IBGEUFResponse = {
   id: number;
@@ -45,6 +48,16 @@ interface CustomProps {
   name: string;
 }
 
+interface CreateProfessionalForm {
+  nome: String;
+  cpf_cnpj: String;
+  celular: String;
+  categoria: String;
+  sexo: String;
+  uf: String;
+  cidade: String;
+}
+
 const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
   function TextMaskCustom(props, ref) {
     const { onChange, ...other } = props;
@@ -64,12 +77,47 @@ const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
 );
 
 const CreateProfessional = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    watch,
+    setError,
+  } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log({ data })
+    // const response = await fetch("/api/trips/check", {
+    //   method: "POST",
+    //   body: Buffer.from(
+    //     JSON.stringify({
+    //       startDate: data.startDate,
+    //       endDate: data.endDate,
+    //       tripId,
+    //     })
+    //   ),
+    // });
+  }
+
     const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
     const [categories, setCategories] = React.useState<categorieResponse[]>([]);
     const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
     const [selectedUf, setSelectedUf] = React.useState("0");
     const [selectedCity, setSelectedCity] = React.useState("0");
     const [selectedCategorie, setSelectedCategorie] = React.useState("0");
+    const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("F");
+
+    // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //   setSelectedValueCheckbox(event.target.value);
+    // };
+  
+    const changeCheckbox = (
+      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
+      const sexo = e.target.value;
+      setSelectedValueCheckbox(sexo);
+    };
 
     React.useEffect(() => {
       axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
@@ -125,22 +173,24 @@ const CreateProfessional = () => {
       setOpen(false);
     };
 
-    const [values, setValues] = React.useState({
-      textmask: '(10) 00000-0000',
-      numberformat: '1320',
-    });
+    const [valueCelular, setValueCelular] = React.useState("");
+    const mudarMascaraCelular = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
+    }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({
-        ...values,
-        [event.target.name]: event.target.value,
-      });
-    };
+    // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //   setValues({
+    //     ...values,
+    //     [event.target.name]: event.target.value,
+    //   });
+    // };
 
     const [value, setValue] = React.useState("");
     const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
     }
+
+    const nome = watch("teste");
 
 return (
   <div>
@@ -193,16 +243,15 @@ return (
             autoComplete="off">
 
             <div className='flex justify-between gap-2'>
-              <TextField
-                id="name"
-                label="Nome completo"
-                fullWidth>
-              </TextField>
+                <TextField
+                  {...register("nome")}
+                  id="name"
+                  label="Nome completo"
+                  fullWidth>
+                </TextField>
 
-            </div>
-
-            <div className='flex justify-between gap-2'>
               <TextField
+                  {...register("cpf")}
                 id="cpf"
                 label="CPF/CNPJ"
                 onChange={mudarMascara}
@@ -213,16 +262,16 @@ return (
 
             <div className='flex justify-between gap-2'>
               <TextField
+                {...register("celular")}
+                id="celular"
                 label="Celular"
-                name="textmask"
-                onChange={handleChange}
-                id="formatted-text-mask-input"
-                InputProps={{
-                  inputComponent: TextMaskCustom as any,
-                }}
+                onChange={mudarMascaraCelular}
+                value={valueCelular}
+                fullWidth
               />
               
               <TextField
+                {...register("categoria")}
                 id="categorie"
                 select
                 label="Categoria"
@@ -236,34 +285,37 @@ return (
                   </MenuItem>
                 ))}
               </TextField>
-            </div>
-            
-            <div className='border border-solid border-gray-400/80 text-gray-500 rounded-md p-2 m-2'>
-              <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">Sexo</FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group">
-                    
-                  <FormControlLabel value="M" control={<Radio />} label="Masculino" />
-                  <FormControlLabel value="F" control={<Radio />} label="Feminino" />
-                  <FormControlLabel value="NE" control={<Radio />} label="Não especificar" />
-
-                </RadioGroup>
-              </FormControl>
+              
+              <TextField
+                {...register("sexo")}
+                id="sexo"
+                select
+                label="Sexo"
+                value={selectedValueCheckbox}
+                // defaultValue=""
+                fullWidth
+                onChange={changeCheckbox}>
+                  <MenuItem key="M" value="M">
+                   Masculino
+                  </MenuItem>
+                  <MenuItem key="F" value="F">
+                   Feminino
+                  </MenuItem>
+                  <MenuItem key="NE" value="NE">
+                   Não Especificar
+                  </MenuItem>
+              </TextField>
             </div>
               
               
             <div className='flex justify-between gap-2'>
               <TextField
+                {...register("uf")}
                 id="uf"
                 select
                 label="UF"
                 name='uf'
                 fullWidth
-                // value={selectedUf}
-                // defaultValue=""
                 onChange={handleSelectedUf}>
 
                 {ufs.map(uf => (
@@ -274,11 +326,10 @@ return (
               </TextField>
 
               <TextField
+                {...register("cidade")}
                 id="city"
                 select
                 label="Cidade"
-                // value={selectedCity}
-                // defaultValue=""
                 fullWidth
                 onChange={handleSelectedCity}>
 
@@ -325,7 +376,6 @@ return (
                 fullWidth>
               </TextField>
             </div> */}
-            
           </Box>
         </DialogContent>
 
@@ -341,7 +391,7 @@ return (
             </button>
           </Button>
 
-          <Button onClick={handleClose}>
+          <Button onClick={() => handleSubmit(onSubmit)()}>
             <button
               className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
               <BsCheck2Square className='text-white'/>
