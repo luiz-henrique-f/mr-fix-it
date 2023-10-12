@@ -22,6 +22,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { IMaskInput } from 'react-imask';
 import * as React from 'react';
+import { mask, unMask } from 'remask'
 
 type IBGEUFResponse = {
   id: number;
@@ -136,6 +137,11 @@ const CreateProfessional = () => {
       });
     };
 
+    const [value, setValue] = React.useState("");
+    const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
+    }
+
 return (
   <div>
     <Button 
@@ -199,6 +205,8 @@ return (
               <TextField
                 id="cpf"
                 label="CPF/CNPJ"
+                onChange={mudarMascara}
+                value={value}
                 fullWidth>
               </TextField>
             </div>
@@ -238,9 +246,9 @@ return (
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group">
                     
-                  <FormControlLabel value="male" control={<Radio />} label="Masculino" />
-                  <FormControlLabel value="female" control={<Radio />} label="Feminino" />
-                  <FormControlLabel value="other" control={<Radio />} label="Não especificar" />
+                  <FormControlLabel value="M" control={<Radio />} label="Masculino" />
+                  <FormControlLabel value="F" control={<Radio />} label="Feminino" />
+                  <FormControlLabel value="NE" control={<Radio />} label="Não especificar" />
 
                 </RadioGroup>
               </FormControl>
