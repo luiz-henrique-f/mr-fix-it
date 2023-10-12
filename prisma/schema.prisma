@@ -11,18 +11,19 @@ datasource db {
 }
 
 model Prestador {
-  id         String   @id @default(uuid())
-  nome       String
-  cpf_cnpj   String
-  celular    String
-  cidade     String
-  uf         String
-  observacao String
-  created_at DateTime @default(now())
+  id             String   @id @default(uuid())
+  nome           String
+  cpf_cnpj       String
+  celular        String
+  cidade         String
+  uf             String
+  observacao     String
+  created_at     DateTime @default(now())
+  tipo_categoria String
   // conta_ativa Prestador_Ativo[]
   // pontuacoes  Pontuacao_Prestador[]
-  id_user    String
-  user       User     @relation(fields: [id_user], references: [id])
+  id_user        String
+  user           User     @relation(fields: [id_user], references: [id])
 }
 
 model Prestador_Ativo {
@@ -54,8 +55,14 @@ model Cliente {
   endereco        String
   cidade          String
   uf              String
+  tipo_categoria  String
   created_at      DateTime @default(now())
   // clientes        Pontuacao_Prestador[]
+}
+
+model Tipo_Categoria {
+  id                  String @id @default(uuid())
+  descricao_categoria String
 }
 
 model Account {

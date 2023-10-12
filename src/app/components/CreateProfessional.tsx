@@ -20,10 +20,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import Autocomplete from '@mui/material/Autocomplete';
+import { IMaskInput } from 'react-imask';
 import * as React from 'react';
-import InputUfCity from './InputUfCity';
-import { prisma } from '@/lib/prisma';
 
 type IBGEUFResponse = {
   id: number;
@@ -41,11 +39,28 @@ type categorieResponse = {
   descricao_categoria: string;
 };
 
-// async function getcategories() {
-//     const categories = await prisma.tipo_Categoria.findMany({});
-    
-//     return categories;
-//   }
+interface CustomProps {
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  name: string;
+}
+
+const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
+  function TextMaskCustom(props, ref) {
+    const { onChange, ...other } = props;
+    return (
+      <IMaskInput
+        {...other}
+        mask="(#0) 00000-0000"
+        definitions={{
+          '#': /[1-9]/,
+        }}
+        inputRef={ref}
+        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+        overwrite
+      />
+    );
+  },
+);
 
 const CreateProfessional = () => {
     const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
@@ -109,13 +124,17 @@ const CreateProfessional = () => {
       setOpen(false);
     };
 
-    // const fetchCategories = async () => {
-    //   const categories = await fetch('/categoria');
-  
-    //   const json = await categories.json();
+    const [values, setValues] = React.useState({
+      textmask: '(10) 00000-0000',
+      numberformat: '1320',
+    });
 
-    //   setCategories(json);
-    // };
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({
+        ...values,
+        [event.target.name]: event.target.value,
+      });
+    };
 
 return (
   <div>
@@ -167,7 +186,6 @@ return (
             noValidate
             autoComplete="off">
 
-
             <div className='flex justify-between gap-2'>
               <TextField
                 id="name"
@@ -187,11 +205,14 @@ return (
 
             <div className='flex justify-between gap-2'>
               <TextField
-                id="tel"
-                type="tel"
-                label="Telefone"
-                fullWidth>
-              </TextField>
+                label="Celular"
+                name="textmask"
+                onChange={handleChange}
+                id="formatted-text-mask-input"
+                InputProps={{
+                  inputComponent: TextMaskCustom as any,
+                }}
+              />
               
               <TextField
                 id="categorie"
@@ -201,7 +222,6 @@ return (
                 // defaultValue=""
                 fullWidth
                 onChange={handleSelectedCategorie}>
-
                 {categories.map(categorie => (
                   <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
                   {categorie.descricao_categoria}
