@@ -84,7 +84,7 @@ const CreateProfessional = () => {
     control,
     watch,
     setError,
-  } = useForm();
+  } = useForm<CreateProfessionalForm>();
 
   const onSubmit = (data: any) => {
     console.log({ data })
@@ -111,13 +111,6 @@ const CreateProfessional = () => {
     // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     //   setSelectedValueCheckbox(event.target.value);
     // };
-  
-    const changeCheckbox = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-      const sexo = e.target.value;
-      setSelectedValueCheckbox(sexo);
-    };
 
     React.useEffect(() => {
       axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
@@ -160,6 +153,13 @@ const CreateProfessional = () => {
       const categorie = e.target.value;
       setSelectedCategorie(categorie);
     };
+  
+    const changeCheckbox = (
+      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
+      const sexo = e.target.value;
+      setSelectedValueCheckbox(sexo);
+    };
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -178,19 +178,10 @@ const CreateProfessional = () => {
       setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
     }
 
-    // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //   setValues({
-    //     ...values,
-    //     [event.target.name]: event.target.value,
-    //   });
-    // };
-
     const [value, setValue] = React.useState("");
     const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
     }
-
-    const nome = watch("teste");
 
 return (
   <div>
@@ -244,40 +235,68 @@ return (
 
             <div className='flex justify-between gap-2'>
                 <TextField
-                  {...register("nome")}
+                  {...register("nome", {
+                    required: {
+                      value: true,
+                      message: 'Nome é obrigatório',
+                    }
+                  })}
                   id="name"
                   label="Nome completo"
-                  fullWidth>
+                  fullWidth
+                  error={!!errors?.nome}
+                  helperText={errors?.nome?.message}>
                 </TextField>
 
               <TextField
-                  {...register("cpf")}
+                  {...register("cpf_cnpj", {
+                    required: {
+                      value: true,
+                      message: 'Campo CPF/CNPJ é obrigatório',
+                    }
+                  })}
                 id="cpf"
                 label="CPF/CNPJ"
                 onChange={mudarMascara}
                 value={value}
-                fullWidth>
+                fullWidth
+                error={!!errors?.cpf_cnpj}
+                helperText={errors?.cpf_cnpj?.message}>
               </TextField>
             </div>
 
             <div className='flex justify-between gap-2'>
               <TextField
-                {...register("celular")}
+                  {...register("celular", {
+                    required: {
+                      value: true,
+                      message: 'Campo celular é obrigatório',
+                    }
+                  })}
                 id="celular"
                 label="Celular"
                 onChange={mudarMascaraCelular}
                 value={valueCelular}
                 fullWidth
+                error={!!errors?.celular}
+                helperText={errors?.celular?.message}
               />
               
               <TextField
-                {...register("categoria")}
+                  {...register("categoria", {
+                    required: {
+                      value: true,
+                      message: 'Campo categoria é obrigatório',
+                    }
+                  })}
                 id="categorie"
                 select
                 label="Categoria"
                 value={selectedCategorie}
                 // defaultValue=""
                 fullWidth
+                error={!!errors?.categoria}
+                helperText={errors?.categoria?.message}
                 onChange={handleSelectedCategorie}>
                 {categories.map(categorie => (
                   <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
@@ -287,7 +306,12 @@ return (
               </TextField>
               
               <TextField
-                {...register("sexo")}
+                  {...register("sexo", {
+                    required: {
+                      value: true,
+                      message: 'Campo sexo é obrigatório',
+                    }
+                  })}
                 id="sexo"
                 select
                 label="Sexo"

@@ -7,6 +7,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import { BsSunFill } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -44,7 +45,22 @@ const Header = ({ professional }: ProfessionalProps) => {
         setMenuIsOpen(false)
         signOut()
     };
+
+    const hidennMenu = () => {
+        setMenuIsOpen(false)
+    }
+
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
+
+    // const onSubmit = async () => {
+    //     setMenuIsOpen(false)
+    //     const result = await signOut("google", {
+    //       redirect: false,
+    //       callbackUrl: "/",
+    //     })
+    //   }
+
+    const router = useRouter()
 
     return (
         <div className='px-[5%] py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl bg-whiteBG dark:bg-darkBG'>
@@ -113,11 +129,14 @@ const Header = ({ professional }: ProfessionalProps) => {
 
                     {menuIsOpen && (
                         <div className="z-50 absolute top-14 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
-                            <button className="text-primary text-sm font-semibold border-b-4" onClick={() => handleLogoutClick()}>
+                            <button className="text-primary text-sm font-semibold border-b-4" onClick={() => {signOut({ redirect: false }).then(() => {
+                                                                                                                    router.push("/"); // Redirect to the dashboard page after signing out
+                                                                                                                });
+                                                                                                            }}>
                                 Logout
                             </button>
                             <Link href={`/professionals/90fd330c-51c6-4285-8082-71c4075539c4`}>
-                                <button className="text-primary text-sm font-semibold">
+                                <button className="text-primary text-sm font-semibold" onClick={hidennMenu}>
                                     Meu Perfil
                                 </button>
                             </Link>
