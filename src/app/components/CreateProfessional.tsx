@@ -26,6 +26,7 @@ import * as React from 'react';
 import { mask, unMask } from 'remask'
 import { Controller, useForm } from "react-hook-form";
 import Input from '@/components/Input';
+import { toast } from 'react-toastify';
 
 type IBGEUFResponse = {
   id: number;
@@ -108,7 +109,15 @@ const CreateProfessional = () => {
         type: "manual",
         message: "Já existe um cadastro para esse CPF/CNPJ.",
       });
+    }else if(res?.error?.code === "USER_ALREADY_EXISTS") {
+      setError("nome", {
+        type: "manual",
+        message: "Já existe um cadastro para o usuário conectado.",
+      })
+    }else {
+      toast.success("Cadastro realizado com sucesso.", {position: "top-right"});
     }
+
   }
 
     const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);

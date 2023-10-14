@@ -9,6 +9,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import CreateProfessional from '../components/CreateProfessional';
+import { toast } from 'react-toastify';
 
 type IBGEUFResponse = {
   id: number;

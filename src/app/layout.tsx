@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import ToastProvider from '@/providers/toast';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,10 +30,13 @@ export default function RootLayout({
       <Providers>
           <body className="bg-whiteBG dark:bg-darkBG">
             <NextAuthProvider>
+              <ToastProvider>
+
               <Header />
               {children}
 
               <Footer />
+              </ToastProvider>
             </NextAuthProvider>
             </body>
             </Providers>

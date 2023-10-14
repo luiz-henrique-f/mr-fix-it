@@ -15,11 +15,30 @@ export async function POST(request: Request) {
         }
     })
 
+    const professionalUser = await prisma.prestador.findMany({
+        where: {
+            id_user: "clnp8dpmc0000w8gglzx14a7h"
+        },
+        select:{
+            id: true
+        }
+    })
+
     if (professionals.length > 0) {
         return new NextResponse(
             JSON.stringify({
                 error: {
                     code: "CPF_CNPJ_ALREADY_EXISTS"
+                }
+            })
+        )
+    }
+
+    if (professionalUser.length > 0) {
+        return new NextResponse(
+            JSON.stringify({
+                error: {
+                    code: "USER_ALREADY_EXISTS"
                 }
             })
         )

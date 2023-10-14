@@ -19,7 +19,7 @@ interface ProfessionalProps {
   }
 
 
-const Header = ({ professional }: ProfessionalProps) => {
+const Header = () => {
     const { systemTheme, theme, setTheme } = useTheme();
     const currentTheme = theme === 'system' ? systemTheme : theme;
     // const theme = document.documentElement.classList.contains("dark") ? 'dark' : 'light';
