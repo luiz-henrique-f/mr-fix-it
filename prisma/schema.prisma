@@ -15,31 +15,25 @@ model Prestador {
   nome           String
   cpf_cnpj       String
   celular        String
-  sexo           String   @default("M")
+  sexo           String
   cidade         String
   uf             String
   observacao     String
   created_at     DateTime @default(now())
   tipo_categoria String
-  // conta_ativa Prestador_Ativo[]
-  // pontuacoes  Pontuacao_Prestador[]
   id_user        String
-  user           User     @relation(fields: [id_user], references: [id])
 }
 
 model Prestador_Ativo {
   id                         String   @id @default(uuid())
   id_prestador               String
-  // conta_ativa                Prestador @relation(fields: [id_prestador], references: [id])
   data_hora_ultima_alteracao DateTime @default(now())
 }
 
 model Pontuacao_Prestador {
   id           String @id @default(uuid())
   id_prestador String
-  // prestador    Prestador @relation(fields: [id_prestador], references: [id])
   id_cliente   String
-  // cliente      Cliente   @relation(fields: [id_cliente], references: [id])
   pontuacao    String
 }
 
@@ -97,14 +91,13 @@ model Session {
 }
 
 model User {
-  id            String      @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?     @unique
-  emailVerified DateTime?   @map("email_verified")
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
   sessions      Session[]
-  prestadores   Prestador[]
 
   @@map("users")
 }

@@ -86,18 +86,29 @@ const CreateProfessional = () => {
     setError,
   } = useForm<CreateProfessionalForm>();
 
-  const onSubmit = (data: any) => {
-    console.log({ data })
-    // const response = await fetch("/api/trips/check", {
-    //   method: "POST",
-    //   body: Buffer.from(
-    //     JSON.stringify({
-    //       startDate: data.startDate,
-    //       endDate: data.endDate,
-    //       tripId,
-    //     })
-    //   ),
-    // });
+  const onSubmit = async (data: CreateProfessionalForm) => {
+    const response = await fetch("http://localhost:3000/api/insertProfessional", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          nome: data.nome,
+          cpf_cnpj: data.cpf_cnpj,
+          celular: data.celular,
+          categoria: data.categoria,
+          sexo: data.sexo,
+          uf: data.uf,
+          cidade: data.cidade,
+        })
+      ),
+    });
+
+    const res = await response.json();
+    if(res?.error?.code === "CPF_CNPJ_ALREADY_EXISTS"){
+      setError("cpf_cnpj", {
+        type: "manual",
+        message: "Já existe um cadastro para esse CPF/CNPJ.",
+      });
+    }
   }
 
     const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
