@@ -17,7 +17,10 @@ function Button({ className, variant = "primary", ...props }: ButtonProps) {
 
   return (
     <button className={_className} {...props} title="Buscar profissionais">
-      <AiOutlineSearch size={16} className="cursor-pointer"/>
+      <div className="flex flex-row gap-3 justify-center items-center">
+        <p className="uppercase text-base 2md:hidden">Pesquisar</p>
+        <AiOutlineSearch size={16} className="cursor-pointer"/>
+      </div>
     </button>
   );
 }

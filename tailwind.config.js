@@ -27,6 +27,14 @@ module.exports = {
       textColor: {
         dark: "#717171",
       },
+      screens: {
+        sm: "425px",
+        "2sm": "640px",
+        "2md": "960px",
+        "2xl": "1440px",
+        "3xl": "1536px",
+        "4xl": "1980px",
+      },
     },
   },
   plugins: [],

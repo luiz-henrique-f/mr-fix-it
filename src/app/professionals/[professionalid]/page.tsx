@@ -20,9 +20,9 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
     // if(!professional) return null;
 
     return (
-        <div className='container flex flex-col mx-auto my-4 gap-3'>
+        <div className='container flex flex-col mx-auto my-4 px-3 gap-3'>
             <div className='border border-solid border-gray-600/20 dark:border-zinc-900/40 rounded-xl bg-white dark:bg-darkBGLighter overflow-hidden'>
-                <div className="relative h-[200px] w-full">
+                <div className="relative flex justify-center 2sm:justify-normal h-[200px] w-full">
                     <Image
                         src="/capa-tecnology.png"
                         fill
@@ -32,7 +32,7 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
                         alt='Imagem Capa' 
                     />
 
-                    <div className='absolute top-24 left-5 p-2 rounded-[100%] bg-white dark:bg-darkBGLighter'>
+                    <div className='absolute top-24 2sm:left-5 p-2 rounded-[100%] bg-white dark:bg-darkBGLighter'>
                         <Image
                             src="/perfil.png"
                             width={140}
@@ -49,7 +49,7 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
                 </div>
 
 
-                <div className='flex flex-col mt-[3%] p-6 w-full'>
+                <div className='flex flex-col mt-[15%] p-6 sm:mt-[5%] w-full'>
                     <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>Luiz H.</h1>
 
                     <div className='flex items-center gap-1 my-1'>

@@ -74,9 +74,9 @@ const Header = () => {
                         alt="Mr. Fix It" />
 
                     <div className="relative left-5 text-black dark:text-white">
-                        <h1 className="font-semibold text-3xl tracking-[0.4375rem]">Mr. Fix</h1>
-                        <span className=" text-base tracking-[0.1875rem]">it</span>
-                        <span className="text-xl tracking-[-0.025rem] pl-1">——————</span>
+                        <h1 className="font-semibold text-3xl tracking-[0.4375rem] invisible sm:visible">Mr. Fix</h1>
+                        <span className="text-base tracking-[0.1875rem] invisible sm:visible">it</span>
+                        <span className="text-xl tracking-[-0.025rem] pl-1 invisible sm:visible">——————</span>
                     </div>
 
                 </Link>
@@ -121,20 +121,33 @@ const Header = () => {
 
             {status === "authenticated" && data.user &&(
                 <div className="flex items-center gap-3 border-grayLighter border border-solid p-2 px-3 rounded-full relative">
-                    <AiOutlineMenu size={16} onClick={handleMenuClick} className="cursor-pointer"/>
+                    <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-4xl 2sm:text-3xl md:text-2xl"/>
 
-                    {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer "/> : <BsSunFill size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer "/>}
+                    {theme == 'light' ? 
+                        <BiSolidMoon 
+                            onClick={() => currentTheme == "dark"? light(): dark()} 
+                            className="cursor-pointer text-4xl 2sm:text-3xl md:text-2xl"
+                        />
+                        : 
+                        <BsSunFill 
+                            onClick={() => currentTheme == "dark"? light(): dark()} 
+                            className="cursor-pointer text-4xl 2sm:text-3xl md:text-2xl"
+                        />
+                    }
                     
                     <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md"/>
 
                     {menuIsOpen && (
                         <div className="z-50 absolute top-14 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
-                            <button className="text-primary text-sm font-semibold border-b-4" onClick={() => {signOut({ redirect: false }).then(() => {
-                                                                                                                    router.push("/"); // Redirect to the dashboard page after signing out
-                                                                                                                });
-                                                                                                            }}>
+                            <button 
+                                className="text-primary text-sm font-semibold border-b-4"
+                                onClick={() => {signOut({ redirect: false }).then(() => {
+                                        router.push("/"); // Redirect to the dashboard page after signing out
+                                    });
+                                }}>
                                 Logout
                             </button>
+                            
                             <Link href={`/professionals/90fd330c-51c6-4285-8082-71c4075539c4`}>
                                 <button className="text-primary text-sm font-semibold" onClick={hidennMenu}>
                                     Meu Perfil
