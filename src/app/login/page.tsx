@@ -78,14 +78,14 @@ const Login = () => {
 							type="text"
 							placeholder="E-mail ou Usuário"
 							disabled
-							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none py-4 px-4 my-4 mx-0 bg-gray-200"
+							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200"
 						/>
 
 						<input
 							type="password"
 							placeholder="Senha"
 							disabled
-							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none py-4 px-4 my-4 mx-0 bg-gray-200"
+							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200"
 						/>
 
 						<div className="flex flex-col items-center sm:flex-row gap-2 text-sm no-underline text-gray-400 dark:text-primaryLighter mx-0 my-1">

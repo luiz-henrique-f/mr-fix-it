@@ -121,17 +121,17 @@ const Header = () => {
 
             {status === "authenticated" && data.user &&(
                 <div className="flex items-center gap-3 border-grayLighter border border-solid p-2 px-3 rounded-full relative">
-                    <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-4xl 2sm:text-3xl md:text-2xl"/>
+                    <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"/>
 
                     {theme == 'light' ? 
                         <BiSolidMoon 
                             onClick={() => currentTheme == "dark"? light(): dark()} 
-                            className="cursor-pointer text-4xl 2sm:text-3xl md:text-2xl"
+                            className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
                         />
                         : 
                         <BsSunFill 
                             onClick={() => currentTheme == "dark"? light(): dark()} 
-                            className="cursor-pointer text-4xl 2sm:text-3xl md:text-2xl"
+                            className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
                         />
                     }
                     
