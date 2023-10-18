@@ -30,10 +30,14 @@ const Login = () => {
   //   callbackUrl: "/",
   // });
 
+  const redirecionar = () => {
+	return "/"
+  }
+
   const onSubmit = async () => {
     const result = await signIn("google", {
       redirect: true,
-      callbackUrl: "/",
+      callbackUrl: redirecionar(),
     })
   }
 
