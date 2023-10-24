@@ -63,7 +63,7 @@ const Header = () => {
     const router = useRouter()
 
     return (
-        <div className='px-[5%] py-0 h-[93px] mx-auto flex justify-between items-center shadow-2xl bg-whiteBG dark:bg-darkBG'>
+        <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl bg-whiteBG dark:bg-darkBG'>
             <div className="flex items-center justify-start h-full w-full">
                 <Link href="/" className="inline-flex items-center justify-between">
                     
@@ -105,15 +105,15 @@ const Header = () => {
 
             {/* onClick={handleLoginClick} */}
 
-        {status === "unauthenticated" && (
+            {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
 
                     {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer text-black "/> : <BsSunFill size={16} onClick={() => currentTheme == "dark"? light(): dark()} className="cursor-pointer text-white "/>}
 
                     <Link href={'/login'}>
-                        <button className="flex text-white items-center justify-center py-2 px-4 gap-2 text-lg bg-primary border-transparent font-semibold border-[0.125rem] border-solid rounded-xl hover:bg-primaryDarker transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
+                        <button className="flex text-black dark:text-white items-center justify-center py-2 px-4 gap-2 text-sm uppercase bg-transparent font-semibold border-2 border-solid border-black/50 dark:border-white/70 rounded-md hover:bg-primary hover:border-primary dark:hover:border-primary hover:text-white transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
                             <FiLogIn />
-                            Login
+                            Entrar
                         </button>
                     </Link>
                 </div>
@@ -155,6 +155,7 @@ const Header = () => {
                             </Link>
                         </div>
                     )}
+                    
                 </div>
 
             )} 

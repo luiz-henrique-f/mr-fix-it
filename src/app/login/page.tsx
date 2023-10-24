@@ -51,7 +51,7 @@ const Login = () => {
 
     return (
 		<div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-darkBG overflow-hidden">
-			<div className="rounded-3xl overflow-hidden w-full bg-white h-[37rem] shadow-lg shadow-gray-400">
+			<div className="rounded-3xl overflow-hidden w-full bg-white h-full shadow-lg shadow-gray-400">
 
 				<div className="absolute top-0 h-full left-0 w-full 2md:w-3/5 xl:w-6/12">
 
