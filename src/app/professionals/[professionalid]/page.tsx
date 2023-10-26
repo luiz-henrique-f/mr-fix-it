@@ -25,7 +25,7 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
     // if(!professional) return null;
 
     return (
-        <div className='h-[calc(100vh-85px)] overflow-x-hidden'>
+        <div className='h-full'>
             <div className="relative h-[200px] w-full mb-10">
                 <Image
                     src="/capa-tecnology.png"
