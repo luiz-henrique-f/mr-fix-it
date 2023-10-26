@@ -2,11 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import { BsWhatsapp } from 'react-icons/bs'
 import { FaMapPin } from 'react-icons/fa'
-import ChangeButton from '../../../../components/ChangeButton'
+import ChangeButton from '@/components/ChangeButton'
 
 const ProfessionalInfo = () => {
     return (
-        <div className="relative flex flex-col justify-center items-center bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-10">
+        <div className="relative flex flex-col justify-center items-center bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-8">
             <ChangeButton className='absolute top-3 right-3' />
 
             <div className='rounded-full p-[6px] border-4 border-solid border-darkBGLighter dark:border-whiteBG'>

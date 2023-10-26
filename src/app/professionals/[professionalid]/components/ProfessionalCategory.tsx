@@ -1,10 +1,10 @@
 import React from 'react';
-import ChangeButton from '../../../../components/ChangeButton'
+import ChangeButton from '@/components/ChangeButton'
 import CategoryItems from './CategoryItems'
 
 const ProfessionalCategory = () => {
     return (
-        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-10">
+        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-8">
             <ChangeButton className='absolute top-3 right-3' />
 
             <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>Categorias</h1>

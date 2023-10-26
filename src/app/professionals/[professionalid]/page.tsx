@@ -1,11 +1,13 @@
+import React from 'react';
 import { prisma } from '@/lib/prisma';
 import Image from 'next/image';
-import { BsWhatsapp } from 'react-icons/bs'
-import ChangeButton from '../../../components/ChangeButton'
-import React from 'react';
+import ChangeButton from '@/components/ChangeButton';
 import ProfessionalDescription from './components/ProfessionalDescription';
 import ProfessionalInfo from './components/ProfessionalInfo';
 import ProfessionalCategory from './components/ProfessionalCategory';
+import ProfessionalRaiting from './components/ProfessionalRaiting';
+import { BsWhatsapp } from 'react-icons/bs'
+import { AiFillStar } from 'react-icons/ai'
 
 // const getProfessionalDetails = async (professionalid: string) => {
 //     const professional = await prisma.prestador.findUnique({
@@ -23,60 +25,6 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
     // if(!professional) return null;
 
     return (
-        // <div className='container flex flex-col mx-auto my-4 px-3 gap-3'>
-        //     <div className='border border-solid border-gray-600/20 dark:border-zinc-900/40 rounded-xl bg-white dark:bg-darkBGLighter overflow-hidden'>
-        //         <div className="relative flex justify-center 2sm:justify-normal h-[200px] w-full">
-        //             <Image
-        //                 src="/capa-tecnology.png"
-        //                 fill
-        //                 style={{
-        //                     objectFit: "cover",
-        //                 }} 
-        //                 alt='Imagem Capa' 
-        //             />
-
-        //             <div className='absolute top-24 2sm:left-5 p-2 rounded-[100%] bg-white dark:bg-darkBGLighter'>
-        //                 <Image
-        //                     src="/perfil.png"
-        //                     width={140}
-        //                     height={140}
-        //                     className='overflow-hidden rounded-[100%]'
-        //                     style={{
-        //                         objectFit: "cover",
-        //                     }} 
-        //                     alt='Imagem Usuário' 
-        //                 />
-        //             </div>
-        //             {/* <h1>{professional.nome}</h1> */}
-        //             {/* <Image src={professional?.nome} fill alt={professional.nome}/> */}
-        //         </div>
-
-
-        //         <div className='flex flex-col mt-[15%] p-6 sm:mt-[5%] w-full'>
-        //             <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>Luiz H.</h1>
-
-        //             <div className='flex items-center gap-1 my-1'>
-        //                 <p className='text-sm font-semibold text-grayPrimary dark:text-grayLighter'>Urânia,</p>
-        //                 <p className='text-sm font-semibold text-grayPrimary dark:text-grayLighter'>São Paulo</p>
-        //             </div>
-
-        //             <div className='gap-1 my-1'>
-        //                 <p className='flex items-center gap-2 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
-        //                     <BsWhatsapp className='text-center text-sm' />
-        //                     +55 17 9966-3223
-        //                 </p>
-        //             </div>
-        //         </div>
-        //     </div>
-            
-        //     <div className='border border-solid border-gray-600/20 dark:border-zinc-900/40 rounded-xl bg-white dark:bg-darkBGLighter overflow-hidden'>
-        //         <ProfessionalDescription description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."/>
-        //     </div>
-
-        //     {/* <ProfessionalHighlisht /> */}
-        //     {/* <ProfessionalComments /> */}
-        // </div>
-
         <div className='h-[calc(100vh-85px)] overflow-x-hidden'>
             <div className="relative h-[200px] w-full mb-10">
                 <Image
@@ -92,7 +40,7 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
             </div>
 
             <div className='container relative p-4 mx-auto 2md:flex 2md:gap-10'>
-                    <div className='w-full 2md:w-[30%] 2md:ml-[10%] 2md:-mt-[7%] pb-3 2md:pb-0 h-full flex flex-col gap-3'>
+                    <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[40%] 2sm:-mt-[20%] 2md:-mt-[10%] xl:-mt-[7%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
                         <ProfessionalInfo />
                         <ProfessionalCategory />
                     </div>
@@ -101,6 +49,17 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
                         <ProfessionalDescription
                             description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
                         />
+
+                        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
+                            <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
+                                <AiFillStar className='text-orange-400' />
+                                Avaliações dos Usuários
+                            </h1>
+                            
+                            <ProfessionalRaiting name='Madrid' title='Não recomendo!' message='Ruim, péssimo profissional!' />
+                            <ProfessionalRaiting name='Natan Alonso' title='FAAAAZ O L!!!!' message='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur consequatur ab vero nemo, error deserunt cumque. A aliquam atque sunt, corporis quisquam aut dolore, distinctio delectus alias magni ratione itaque.' />
+                        </div>
+                        
                     </div>
             </div>
         </div>
