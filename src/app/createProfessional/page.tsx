@@ -1,5 +1,6 @@
 "use client"
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material';
 import { LiaTimesSolid } from "react-icons/lia";
@@ -79,6 +80,9 @@ const CreateProfessional = () => {
 
   const router = useRouter();
 
+  const { data } = useSession();
+  const dados = data;
+
 const onSubmit = async (data: CreateProfessionalForm) => {
   const response = await fetch("http://localhost:3000/insertProfessional", {
     method: "POST",
@@ -91,6 +95,7 @@ const onSubmit = async (data: CreateProfessionalForm) => {
         sexo: data.sexo,
         uf: data.uf,
         cidade: data.cidade,
+        id_user: (dados?.user as any)?.id
       })
     ),
   });

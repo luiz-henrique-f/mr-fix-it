@@ -1,10 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { useSession } from "next-auth/react";
 
 export async function POST(request: Request) {
     const req = await request.json();
-
-    const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade } = req;
+    
+    const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade, id_user} = req;
 
     const professionals = await prisma.prestador.findMany({
         where: {
@@ -49,12 +50,12 @@ export async function POST(request: Request) {
         nome: nome,
         cpf_cnpj: cpf_cnpj,
         celular: celular,
-        tipo_categoria: "Tecnologia",
+        tipo_categoria: categoria,
         sexo: sexo,
         uf: uf,
         cidade: cidade,
         observacao: "olá",
-        id_user: "clnp8dpmc0000w8gglzx14a7h",
+        id_user: id_user,
       },
     });
 

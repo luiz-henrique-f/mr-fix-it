@@ -14,4 +14,12 @@ export default NextAuth({
     }),
   ],
   secret: 'IamVeryHandsome',
+  callbacks: {
+    session: async ({ session, user }) => {
+      return {
+        ...session,
+        user: user,
+      };
+    },
+  },
 });
