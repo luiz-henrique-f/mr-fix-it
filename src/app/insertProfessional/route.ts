@@ -24,25 +24,25 @@ export async function POST(request: Request) {
         }
     })
 
-    if (professionals.length > 0) {
-        return new NextResponse(
-            JSON.stringify({
-                error: {
-                    code: "CPF_CNPJ_ALREADY_EXISTS"
-                }
-            })
-        )
-    }
+    // if (professionals.length > 0) {
+    //     return new NextResponse(
+    //         JSON.stringify({
+    //             error: {
+    //                 code: "CPF_CNPJ_ALREADY_EXISTS"
+    //             }
+    //         })
+    //     )
+    // }
 
-    if (professionalUser.length > 0) {
-        return new NextResponse(
-            JSON.stringify({
-                error: {
-                    code: "USER_ALREADY_EXISTS"
-                }
-            })
-        )
-    }
+    // if (professionalUser.length > 0) {
+    //     return new NextResponse(
+    //         JSON.stringify({
+    //             error: {
+    //                 code: "USER_ALREADY_EXISTS"
+    //             }
+    //         })
+    //     )
+    // }
 
     await prisma.prestador.create({
       data: {

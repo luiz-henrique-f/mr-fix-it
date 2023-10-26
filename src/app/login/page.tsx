@@ -31,7 +31,7 @@ const Login = () => {
   // });
 
   const redirecionar = () => {
-	return "/"
+	return "/createProfessional"
   }
 
   const onSubmit = async () => {
