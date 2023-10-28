@@ -99,11 +99,11 @@ const Login = () => {
 							
 							<span className='invisible sm:visible'>|</span>
 
-							<div className='flex items-center flex-col bg-primaryLighter/25 border border-solid border-gray-300/70 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
+							{/* <div className='flex items-center flex-col bg-primaryLighter/25 border border-solid border-gray-300/70 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
 								<p>Não tem uma conta?</p>
 								
 								<CreateProfessional />
-							</div>
+							</div> */}
 						</div>
 						
 						
