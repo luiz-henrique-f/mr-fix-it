@@ -20,25 +20,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  }: {
-    children: React.ReactNode
-  }) {
+}: {
+  children: React.ReactNode
+}) {
 
   return (
     <html lang="en" >
       <Providers>
-          <body className="bg-whiteBG dark:bg-darkBG">
-            <NextAuthProvider>
-              <ToastProvider>
+        <body className="bg-whiteBG dark:bg-darkBG">
+          <NextAuthProvider>
+            <ToastProvider>
+              <div className="flex flex-col h-screen">
+                <div className='h-[94px]'>
+                  <Header />
+                </div>
 
-              <Header />
-              {children}
-
-              <Footer />
-              </ToastProvider>
-            </NextAuthProvider>
-            </body>
-            </Providers>
+                <div className='flex-1'>{children}</div>
+                <Footer />
+              </div>
+            </ToastProvider>
+          </NextAuthProvider>
+        </body>
+      </Providers>
     </html>
     // </SessionProvider>
   )

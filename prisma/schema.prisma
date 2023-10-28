@@ -24,10 +24,18 @@ model Prestador {
   id_user        String
 }
 
+model Planos {
+  id    String @id @default(uuid())
+  valor String
+  tipo  String
+}
+
 model Prestador_Ativo {
-  id                         String   @id @default(uuid())
-  id_prestador               String
-  data_hora_ultima_alteracao DateTime @default(now())
+  id          String @id @default(uuid())
+  id_user     String
+  data_inicio String
+  data_fim    String
+  tipo_plano  String
 }
 
 model Pontuacao_Prestador {

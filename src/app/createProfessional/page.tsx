@@ -357,12 +357,12 @@ return (
               Cancelar
             </button>
           </Button> */}
-          <div>
+          <div className="flex flex-row-reverse">
             <Button onClick={() => handleSubmit(onSubmit)()}>
               <button
                 className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
                 <BsCheck2Square className='text-white'/>
-                Finalizar Cadastro
+                Ir para pagamento
               </button>
             </Button>
           </div>
