@@ -34,12 +34,22 @@ const Login = () => {
 	return "/createProfessional"
   }
 
-  const onSubmit = async () => {
+  const handleLoginClick = async () => {
     const result = await signIn("google", {
       redirect: true,
       callbackUrl: redirecionar(),
     })
   }
+
+//   const handleLoginClick = () => {
+// 	signIn();
+// 	router.push('/')
+//   }
+
+//   const handleLogoutClick = () => {
+//     setMenuIsOpen(false);
+//     signOut();
+//   };
 
   // const fetchCategories = async () => {
   //   const categories = await fetch('/categoria');
@@ -69,7 +79,7 @@ const Login = () => {
 						<div className="pb-5 my-5 mx-0 text-primaryDarker dark:text-walterWhite">
 							<button
 								className="inline-flex justify-center items-center rounded-2xl text-xs sm:text-sm 2sm:text-base my-0 mx-3 gap-2 border border-gray-200 p-4 hover:bg-gray-200/60 transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]"
-								onClick={onSubmit}>
+								onClick={handleLoginClick}>
 								<FcGoogle className="text-xl 2sm:text-xl" /> Entre com sua conta google
 							</button>
 						</div>
