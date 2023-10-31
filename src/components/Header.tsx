@@ -138,7 +138,13 @@ const Header = () => {
                     <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md"/>
 
                     {menuIsOpen && (
-                        <div className="z-50 absolute top-14 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
+                        <div className="z-50 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
+                            <Link href='/dashboard'>
+                                <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
+                                    Dashboard
+                                </button>
+                            </Link>
+
                             <button 
                                 className="text-primary text-sm font-semibold border-b-4"
                                 onClick={() => {signOut({ redirect: false }).then(() => {
