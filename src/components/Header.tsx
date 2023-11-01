@@ -145,7 +145,7 @@ const Header = () => {
                                 </button>
                             </Link>
 
-                            <Link href={`/professionals/90fd330c-51c6-4285-8082-71c4075539c4`}>
+                            <Link href={`/professionals/${(data?.user as any)?.id}`}>
                                 <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                     Meu Perfil
                                 </button>

@@ -9,18 +9,18 @@ import ProfessionalRaiting from './components/ProfessionalRaiting';
 import { BsWhatsapp } from 'react-icons/bs'
 import { AiFillStar } from 'react-icons/ai'
 
-// const getProfessionalDetails = async (professionalid: string) => {
-//     const professional = await prisma.prestador.findUnique({
-//         where: {
-//             id: professionalid,
-//         },
-//     });
+const getProfessionalDetails = async (professionalid: string) => {
+    const professional = await prisma.prestador.findFirst({
+        where: {
+            id_user: professionalid,
+        },
+    });
 
-//     return professional;
-// }
+    return professional;
+}
 
 const ProfessionalDetail = async ({params}: { params : { professionalid: string} }) => {
-    // const professional = await getProfessionalDetails(params.professionalid);
+    const professional = await getProfessionalDetails(params.professionalid);
 
     // if(!professional) return null;
 
