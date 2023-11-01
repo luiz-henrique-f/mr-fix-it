@@ -10,6 +10,7 @@ import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import CreateProfessional from '../components/CreateProfessional';
 import { toast } from 'react-toastify';
+import Button from '@/components/Button';
 
 type IBGEUFResponse = {
   id: number;
@@ -24,6 +25,7 @@ type IBGECITYResponse = {
 
 const Login = () => {
   const router = useRouter();
+  const { status, data } = useSession();
 
   // const handleLoginClick = () => signIn("google", {
   //   redirect: true,
@@ -34,17 +36,16 @@ const Login = () => {
 	return "/createProfessional"
   }
 
-  const handleLoginClick = async () => {
-    const result = await signIn("google", {
-      redirect: true,
-      callbackUrl: redirecionar(),
-    })
-  }
-
-//   const handleLoginClick = () => {
-// 	signIn();
-// 	router.push('/')
+//   const handleLoginClick = async () => {
+//     const result = await signIn("google", {
+//       redirect: true,
+//       callbackUrl: "/createProfessional",
+//     })
 //   }
+
+  const handleLoginClick = () => {
+	signIn()
+  }
 
 //   const handleLogoutClick = () => {
 //     setMenuIsOpen(false);
@@ -58,6 +59,12 @@ const Login = () => {
   //   console.log(json);
 
   // };
+
+  React.useEffect(() => {
+	if(status === "authenticated"){
+		return router.push("/createProfessional")
+	}
+  })
 
     return (
 		<div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-darkBG overflow-hidden">

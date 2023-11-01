@@ -18,6 +18,7 @@ import { mask, unMask } from 'remask'
 import { Controller, useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
+import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 
 type IBGEUFResponse = {
   id: number;
@@ -48,6 +49,7 @@ interface CreateProfessionalForm {
   sexo: String;
   uf: String;
   cidade: String;
+  observacao: String;
 }
 
 const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
@@ -83,270 +85,296 @@ const CreateProfessional = () => {
   const { data } = useSession();
   const dados = data;
 
-const onSubmit = async (data: CreateProfessionalForm) => {
-  const response = await fetch("http://localhost:3000/insertProfessional", {
-    method: "POST",
-    body: Buffer.from(
-      JSON.stringify({
-        nome: data.nome,
-        cpf_cnpj: data.cpf_cnpj,
-        celular: data.celular,
-        categoria: data.categoria,
-        sexo: data.sexo,
-        uf: data.uf,
-        cidade: data.cidade,
-        id_user: (dados?.user as any)?.id
-      })
-    ),
-  });
-
-  const res = await response.json();
-  if(res?.error?.code === "CPF_CNPJ_ALREADY_EXISTS"){
-    setError("cpf_cnpj", {
-      type: "manual",
-      message: "Já existe um cadastro para esse CPF/CNPJ.",
+  const onSubmit = async (data: CreateProfessionalForm) => {
+    const response = await fetch("http://localhost:3000/insertProfessional", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          nome: data.nome,
+          cpf_cnpj: data.cpf_cnpj,
+          celular: data.celular,
+          categoria: data.categoria,
+          sexo: data.sexo,
+          uf: data.uf,
+          cidade: data.cidade,
+          observacao: data.observacao,
+          id_user: (dados?.user as any)?.id
+        })
+      ),
     });
-  }else if(res?.error?.code === "USER_ALREADY_EXISTS") {
-    setError("nome", {
-      type: "manual",
-      message: "Já existe um cadastro para o usuário conectado.",
-    })
-  }else {
-    return router.push("/pagamentoPlano");
+
+    const res = await response.json();
+    if (res?.error?.code === "CPF_CNPJ_ALREADY_EXISTS") {
+      setError("cpf_cnpj", {
+        type: "manual",
+        message: "Já existe um cadastro para esse CPF/CNPJ.",
+      });
+    } else if (res?.error?.code === "USER_ALREADY_EXISTS") {
+      setError("nome", {
+        type: "manual",
+        message: "Já existe um cadastro para o usuário conectado.",
+      })
+    } else {
+      return router.push("/pagamentoPlano");
+    }
+
   }
 
-}
+  const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
+  const [categories, setCategories] = React.useState<categorieResponse[]>([]);
+  const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
+  const [selectedUf, setSelectedUf] = React.useState("0");
+  const [selectedCity, setSelectedCity] = React.useState("0");
+  const [selectedCategorie, setSelectedCategorie] = React.useState("0");
+  const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("F");
 
-    const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
-    const [categories, setCategories] = React.useState<categorieResponse[]>([]);
-    const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
-    const [selectedUf, setSelectedUf] = React.useState("0");
-    const [selectedCity, setSelectedCity] = React.useState("0");
-    const [selectedCategorie, setSelectedCategorie] = React.useState("0");
-    const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("F");
+  // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSelectedValueCheckbox(event.target.value);
+  // };
 
-    // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //   setSelectedValueCheckbox(event.target.value);
-    // };
-
-    React.useEffect(() => {
-      axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
+  React.useEffect(() => {
+    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
       .then((response) => {
         setUfs(response.data)
       })
-    }, []);
-  
-    React.useEffect(() => {
-      axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
+  }, []);
+
+  React.useEffect(() => {
+    axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
       .then((response) => {
         setCities(response.data)
       })
-    }, [selectedUf]);
-  
-    React.useEffect(() => {
-      axios.get('/categoria')
+  }, [selectedUf]);
+
+  React.useEffect(() => {
+    axios.get('/categoria')
       .then((response) => {
         setCategories(response.data)
       })
-    }, []);
-  
-    const handleSelectedUf = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-      const uf = e.target.value;
-      setSelectedUf(uf);
-    };
-  
-    const handleSelectedCity = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-      const city = e.target.value;
-      setSelectedCity(city);
-    };
-  
-    const handleSelectedCategorie = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-      const categorie = e.target.value;
-      setSelectedCategorie(categorie);
-    };
-  
-    const changeCheckbox = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-    ) => {
-      const sexo = e.target.value;
-      setSelectedValueCheckbox(sexo);
-    };
+  }, []);
 
-    const [open, setOpen] = React.useState(false);
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
+  const handleSelectedUf = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const uf = e.target.value;
+    setSelectedUf(uf);
+  };
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  const handleSelectedCity = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const city = e.target.value;
+    setSelectedCity(city);
+  };
 
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleSelectedCategorie = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const categorie = e.target.value;
+    setSelectedCategorie(categorie);
+  };
 
-    const [valueCelular, setValueCelular] = React.useState("");
-    const mudarMascaraCelular = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
-    }
+  const changeCheckbox = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const sexo = e.target.value;
+    setSelectedValueCheckbox(sexo);
+  };
 
-    const [value, setValue] = React.useState("");
-    const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
-    }
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
 
-return (
-  <div>
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1},
-            }}
-            noValidate
-            autoComplete="off">
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-            <div className='flex justify-between gap-2'>
-                <TextField
-                  {...register("nome", {
-                    required: {
-                      value: true,
-                      message: 'Nome é obrigatório',
-                    }
-                  })}
-                  id="name"
-                  label="Nome completo"
-                  fullWidth
-                  error={!!errors?.nome}
-                  helperText={errors?.nome?.message}>
-                </TextField>
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-              <TextField
-                  {...register("cpf_cnpj", {
-                    required: {
-                      value: true,
-                      message: 'Campo CPF/CNPJ é obrigatório',
-                    }
-                  })}
-                id="cpf"
-                label="CPF/CNPJ"
-                onChange={mudarMascara}
-                value={value}
-                fullWidth
-                error={!!errors?.cpf_cnpj}
-                helperText={errors?.cpf_cnpj?.message}>
-              </TextField>
-            </div>
+  const [valueCelular, setValueCelular] = React.useState("");
+  const mudarMascaraCelular = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
+  }
 
-            <div className='flex justify-between gap-2'>
-              <TextField
-                  {...register("celular", {
-                    required: {
-                      value: true,
-                      message: 'Campo celular é obrigatório',
-                    }
-                  })}
-                id="celular"
-                label="Celular"
-                onChange={mudarMascaraCelular}
-                value={valueCelular}
-                fullWidth
-                error={!!errors?.celular}
-                helperText={errors?.celular?.message}
-              />
-              
-              <TextField
-                  {...register("categoria", {
-                    required: {
-                      value: true,
-                      message: 'Campo categoria é obrigatório',
-                    }
-                  })}
-                id="categorie"
-                select
-                label="Categoria"
-                value={selectedCategorie}
-                // defaultValue=""
-                fullWidth
-                error={!!errors?.categoria}
-                helperText={errors?.categoria?.message}
-                onChange={handleSelectedCategorie}>
-                {categories.map(categorie => (
-                  <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                  {categorie.descricao_categoria}
-                  </MenuItem>
-                ))}
-              </TextField>
-              
-              <TextField
-                  {...register("sexo", {
-                    required: {
-                      value: true,
-                      message: 'Campo sexo é obrigatório',
-                    }
-                  })}
-                id="sexo"
-                select
-                label="Sexo"
-                value={selectedValueCheckbox}
-                // defaultValue=""
-                fullWidth
-                onChange={changeCheckbox}>
-                  <MenuItem key="M" value="M">
-                   Masculino
-                  </MenuItem>
-                  <MenuItem key="F" value="F">
-                   Feminino
-                  </MenuItem>
-                  <MenuItem key="NE" value="NE">
-                   Não Especificar
-                  </MenuItem>
-              </TextField>
-            </div>
-              
-              
-            <div className='flex justify-between gap-2'>
-              <TextField
-                {...register("uf")}
-                id="uf"
-                select
-                label="UF"
-                name='uf'
-                fullWidth
-                onChange={handleSelectedUf}>
+  const [value, setValue] = React.useState("");
+  const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
+  }
 
-                {ufs.map(uf => (
-                  <MenuItem key={uf.id} value={uf.sigla}>
-                  {uf.nome}
-                  </MenuItem>
-                ))}
-              </TextField>
+  return (
+    <div>
 
-              <TextField
-                {...register("cidade")}
-                id="city"
-                select
-                label="Cidade"
-                fullWidth
-                onChange={handleSelectedCity}>
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1 },
+        }}
+        noValidate
+        autoComplete="off">
 
-                {cities.map(city => (
-                  <MenuItem key={city.id} value={city.nome}>
-                  {city.nome}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </div>
-          </Box>
+        <div className='flex justify-between gap-2'>
+          <TextField
+            {...register("nome", {
+              required: {
+                value: true,
+                message: 'Nome é obrigatório',
+              }
+            })}
+            id="name"
+            label="Nome completo"
+            fullWidth
+            error={!!errors?.nome}
+            helperText={errors?.nome?.message}>
+          </TextField>
 
-          {/* <Button onClick={() => handleSubmit(onSubmit)()}>
+          <TextField
+            {...register("cpf_cnpj", {
+              required: {
+                value: true,
+                message: 'Campo CPF/CNPJ é obrigatório',
+              }
+            })}
+            id="cpf"
+            label="CPF/CNPJ"
+            onChange={mudarMascara}
+            value={value}
+            fullWidth
+            error={!!errors?.cpf_cnpj}
+            helperText={errors?.cpf_cnpj?.message}>
+          </TextField>
+        </div>
+
+        <div className='flex justify-between gap-2'>
+          <TextField
+            {...register("celular", {
+              required: {
+                value: true,
+                message: 'Campo celular é obrigatório',
+              }
+            })}
+            id="celular"
+            label="Celular"
+            onChange={mudarMascaraCelular}
+            value={valueCelular}
+            fullWidth
+            error={!!errors?.celular}
+            helperText={errors?.celular?.message}
+          />
+
+          <TextField
+            {...register("categoria", {
+              required: {
+                value: true,
+                message: 'Campo categoria é obrigatório',
+              }
+            })}
+            id="categorie"
+            select
+            label="Categoria"
+            value={selectedCategorie}
+            // defaultValue=""
+            fullWidth
+            error={!!errors?.categoria}
+            helperText={errors?.categoria?.message}
+            onChange={handleSelectedCategorie}>
+            {categories.map(categorie => (
+              <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                {categorie.descricao_categoria}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            {...register("sexo", {
+              required: {
+                value: true,
+                message: 'Campo sexo é obrigatório',
+              }
+            })}
+            id="sexo"
+            select
+            label="Sexo"
+            value={selectedValueCheckbox}
+            // defaultValue=""
+            fullWidth
+            onChange={changeCheckbox}>
+            <MenuItem key="M" value="M">
+              Masculino
+            </MenuItem>
+            <MenuItem key="F" value="F">
+              Feminino
+            </MenuItem>
+            <MenuItem key="NE" value="NE">
+              Não Especificar
+            </MenuItem>
+          </TextField>
+        </div>
+
+
+        <div className='flex justify-between gap-2'>
+          <TextField
+            {...register("uf")}
+            id="uf"
+            select
+            label="UF"
+            name='uf'
+            fullWidth
+            onChange={handleSelectedUf}>
+
+            {ufs.map(uf => (
+              <MenuItem key={uf.id} value={uf.sigla}>
+                {uf.nome}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            {...register("cidade")}
+            id="city"
+            select
+            label="Cidade"
+            fullWidth
+            onChange={handleSelectedCity}>
+
+            {cities.map(city => (
+              <MenuItem key={city.id} value={city.nome}>
+                {city.nome}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '98.8%' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div>
+            <TextField
+            {...register("observacao", {
+              required: {
+                value: true,
+                message: 'Campo sobre você é obrigatório',
+              }
+            })}
+              id="outlined-multiline-flexible"
+              label="Sobre você"
+              fullWidth
+              multiline
+              maxRows={8}
+            />
+          </div>
+        </Box>
+      </Box>
+
+      {/* <Button onClick={() => handleSubmit(onSubmit)()}>
               Finalizar Cadastro
           </Button> */}
-        {/* <DialogActions className='!flex !justify-between'>
+      {/* <DialogActions className='!flex !justify-between'>
           <Button 
             onClick={handleClose}
             className='bg-white dark:bg-darkBGLighter'>
@@ -357,20 +385,20 @@ return (
               Cancelar
             </button>
           </Button> */}
-          <div className="flex flex-row-reverse">
-            <Button onClick={() => handleSubmit(onSubmit)()}>
-              <button
-                className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                <BsCheck2Square className='text-white'/>
-                Ir para pagamento
-              </button>
-            </Button>
-          </div>
-
-        {/* </DialogActions> */}
-
+      <div className="flex flex-row-reverse">
+        <Button onClick={() => handleSubmit(onSubmit)()}>
+          <button
+            className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+            <BsCheck2Square className='text-white' />
+            Ir para pagamento
+          </button>
+        </Button>
       </div>
-)
+
+      {/* </DialogActions> */}
+
+    </div>
+  )
 
 };
 
