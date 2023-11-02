@@ -71,6 +71,27 @@ const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
 );
 
 const CreateProfessional = () => {
+
+  const { data } = useSession();
+  const dados = data;
+  
+  const router = useRouter();
+
+  const fetchProfessional = async () => {
+    const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
+
+    const json = await response.json();
+
+    if(json.length > 0){
+      router.push(`/professionals/${(dados?.user as any)?.id}`)
+    }
+
+  };
+
+  React.useEffect(() => {
+    fetchProfessional();
+  })
+
   const {
     register,
     handleSubmit,
@@ -79,11 +100,6 @@ const CreateProfessional = () => {
     watch,
     setError,
   } = useForm<CreateProfessionalForm>();
-
-  const router = useRouter();
-
-  const { data } = useSession();
-  const dados = data;
 
   const onSubmit = async (data: CreateProfessionalForm) => {
     const response = await fetch("http://localhost:3000/insertProfessional", {
@@ -355,12 +371,12 @@ const CreateProfessional = () => {
         >
           <div>
             <TextField
-            {...register("observacao", {
-              required: {
-                value: true,
-                message: 'Campo sobre você é obrigatório',
-              }
-            })}
+              {...register("observacao", {
+                required: {
+                  value: true,
+                  message: 'Campo sobre você é obrigatório',
+                }
+              })}
               id="outlined-multiline-flexible"
               label="Sobre você"
               fullWidth
