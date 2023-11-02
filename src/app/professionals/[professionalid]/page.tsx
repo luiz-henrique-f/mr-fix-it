@@ -41,13 +41,20 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
 
             <div className='container relative p-4 mx-auto 2md:flex 2md:gap-10'>
                     <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[40%] 2sm:-mt-[20%] 2md:-mt-[10%] xl:-mt-[7%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
-                        <ProfessionalInfo />
-                        <ProfessionalCategory />
+                        <ProfessionalInfo
+                         name={professional?.nome as any}
+                         city={professional?.cidade as any}
+                         uf={professional?.uf as any}
+                         telefone={professional?.celular as any}
+                        />
+                        <ProfessionalCategory
+                         categoria={professional?.tipo_categoria as any}
+                         />
                     </div>
 
                     <div className='w-full 2md:w-3/5 2md:mr-[10%] h-full flex flex-col gap-3'>
                         <ProfessionalDescription
-                            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                            description={professional?.observacao as any}
                         />
 
                         <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
