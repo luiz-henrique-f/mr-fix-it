@@ -15,6 +15,9 @@ export default NextAuth({
   ],
   secret: 'IamVeryHandsome',
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return '/createProfessional'
+    },
     session: async ({ session, user }) => {
       return {
         ...session,

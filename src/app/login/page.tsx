@@ -60,11 +60,11 @@ const Login = () => {
 
   // };
 
-  React.useEffect(() => {
-	if(status === "authenticated"){
-		return router.push("/createProfessional")
-	}
-  })
+//   React.useEffect(() => {
+// 	if(status === "authenticated"){
+// 		return router.push("/createProfessional")
+// 	}
+//   })
 
     return (
 		<div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-darkBG overflow-hidden">
