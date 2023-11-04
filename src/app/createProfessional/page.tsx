@@ -1,24 +1,29 @@
 "use client"
 
+import * as React from 'react';
+import Image from 'next/image'
+import { toast } from 'react-toastify';
+import { IMaskInput } from 'react-imask';
+import { Controller, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useTheme } from '@mui/material/styles'
-import { useMediaQuery } from '@mui/material';
-import { LiaTimesSolid } from "react-icons/lia";
-import Button from '@mui/material/Button';
-// import Button from '@/components/Button';
-import { BsCheck2Square } from 'react-icons/bs';
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
+import { mask, unMask } from 'remask'
+
+import { useTheme, styled } from '@mui/material/styles'
+import { colors, useMediaQuery } from '@mui/material';
+import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
-import { IMaskInput } from 'react-imask';
-import * as React from 'react';
-import { mask, unMask } from 'remask'
-import { Controller, useForm } from "react-hook-form";
-import { toast } from 'react-toastify';
-import { useRouter } from "next/navigation";
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
+import { StyledEngineProvider } from '@mui/material/styles';
+import Button from '@/components/Button';
+
+import { LiaTimesSolid } from "react-icons/lia";
+import { BsCheck2Square } from 'react-icons/bs';
+import { colorProp } from '@radix-ui/themes';
 
 type IBGEUFResponse = {
   id: number;
@@ -219,19 +224,38 @@ const CreateProfessional = () => {
     setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
   }
 
+  const PersonalizadoTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: theme.palette.mode === 'light' ? '#111111' : '#e5e7eb',
+    },
+    '& label': {
+      color: theme.palette.mode === 'light' ? '#555555' : '#e5e7eb',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.mode === 'light' ? '#555555' : '#e5e7eb',
+      },
+      '&:hover fieldset': {
+        backgroundColor: theme.palette.mode === 'light' ? '#B2BAC233' : '#B2BAC222',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.mode === 'light' ? '#111111' : '#e5e7eb',
+      },
+    },
+  });
+  
   return (
-    <div>
+    <div className='flex justify-center items-center gap-[10%] h-full'>
+      <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40'>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '96.8%' },
+          }}
+          noValidate
+          autoComplete="off">
 
-      <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1 },
-        }}
-        noValidate
-        autoComplete="off">
-
-        <div className='flex justify-between gap-2'>
-          <TextField
+          <PersonalizadoTextField
             {...register("nome", {
               required: {
                 value: true,
@@ -242,10 +266,11 @@ const CreateProfessional = () => {
             label="Nome completo"
             fullWidth
             error={!!errors?.nome}
-            helperText={errors?.nome?.message}>
-          </TextField>
+            helperText={errors?.nome?.message}
+            >
+          </PersonalizadoTextField>
 
-          <TextField
+          <PersonalizadoTextField
             {...register("cpf_cnpj", {
               required: {
                 value: true,
@@ -259,160 +284,169 @@ const CreateProfessional = () => {
             fullWidth
             error={!!errors?.cpf_cnpj}
             helperText={errors?.cpf_cnpj?.message}>
-          </TextField>
-        </div>
+          </PersonalizadoTextField>
 
-        <div className='flex justify-between gap-2'>
-          <TextField
-            {...register("celular", {
-              required: {
-                value: true,
-                message: 'Campo celular é obrigatório',
-              }
-            })}
-            id="celular"
-            label="Celular"
-            onChange={mudarMascaraCelular}
-            value={valueCelular}
-            fullWidth
-            error={!!errors?.celular}
-            helperText={errors?.celular?.message}
-          />
-
-          <TextField
-            {...register("categoria", {
-              required: {
-                value: true,
-                message: 'Campo categoria é obrigatório',
-              }
-            })}
-            id="categorie"
-            select
-            label="Categoria"
-            value={selectedCategorie}
-            // defaultValue=""
-            fullWidth
-            error={!!errors?.categoria}
-            helperText={errors?.categoria?.message}
-            onChange={handleSelectedCategorie}>
-            {categories.map(categorie => (
-              <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                {categorie.descricao_categoria}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            {...register("sexo", {
-              required: {
-                value: true,
-                message: 'Campo sexo é obrigatório',
-              }
-            })}
-            id="sexo"
-            select
-            label="Sexo"
-            value={selectedValueCheckbox}
-            // defaultValue=""
-            fullWidth
-            onChange={changeCheckbox}>
-            <MenuItem key="M" value="M">
-              Masculino
-            </MenuItem>
-            <MenuItem key="F" value="F">
-              Feminino
-            </MenuItem>
-            <MenuItem key="NE" value="NE">
-              Não Especificar
-            </MenuItem>
-          </TextField>
-        </div>
-
-
-        <div className='flex justify-between gap-2'>
-          <TextField
-            {...register("uf")}
-            id="uf"
-            select
-            label="UF"
-            name='uf'
-            fullWidth
-            onChange={handleSelectedUf}>
-
-            {ufs.map(uf => (
-              <MenuItem key={uf.id} value={uf.sigla}>
-                {uf.nome}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            {...register("cidade")}
-            id="city"
-            select
-            label="Cidade"
-            fullWidth
-            onChange={handleSelectedCity}>
-
-            {cities.map(city => (
-              <MenuItem key={city.id} value={city.nome}>
-                {city.nome}
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '98.8%' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <div>
-            <TextField
-              {...register("observacao", {
+          <div className='flex justify-evenly gap-2'>
+            <PersonalizadoTextField
+              {...register("celular", {
                 required: {
                   value: true,
-                  message: 'Campo sobre você é obrigatório',
+                  message: 'Campo celular é obrigatório',
                 }
               })}
-              id="outlined-multiline-flexible"
-              label="Sobre você"
+              id="celular"
+              label="Celular"
+              onChange={mudarMascaraCelular}
+              value={valueCelular}
               fullWidth
-              multiline
-              maxRows={8}
-            />
+              error={!!errors?.celular}
+              helperText={errors?.celular?.message}>
+            </PersonalizadoTextField>
+
+            <PersonalizadoTextField
+              {...register("sexo", {
+                required: {
+                  value: true,
+                  message: 'Campo sexo é obrigatório',
+                }
+              })}
+              id="sexo"
+              select
+              label="Sexo"
+              value={selectedValueCheckbox}
+              // defaultValue=""
+              fullWidth
+              onChange={changeCheckbox}>
+              <MenuItem key="M" value="M">
+                Masculino
+              </MenuItem>
+              <MenuItem key="F" value="F">
+                Feminino
+              </MenuItem>
+              <MenuItem key="NE" value="NE">
+                Não Especificar
+              </MenuItem>
+            </PersonalizadoTextField>
           </div>
+
+          <div className='flex justify-between gap-2'>
+            <PersonalizadoTextField
+              {...register("uf")}
+              id="uf"
+              select
+              label="UF"
+              name='uf'
+              fullWidth
+              onChange={handleSelectedUf}>
+
+              {ufs.map(uf => (
+                <MenuItem key={uf.id} value={uf.sigla}>
+                  {uf.nome}
+                </MenuItem>
+              ))}
+            </PersonalizadoTextField>
+
+            <PersonalizadoTextField
+              {...register("cidade")}
+              id="city"
+              select
+              label="Cidade"
+              fullWidth
+              onChange={handleSelectedCity}>
+
+              {cities.map(city => (
+                <MenuItem key={city.id} value={city.nome}>
+                  {city.nome}
+                </MenuItem>
+              ))}
+            </PersonalizadoTextField>
+          </div>
+
+          <PersonalizadoTextField
+              {...register("categoria", {
+                required: {
+                  value: true,
+                  message: 'Campo categoria é obrigatório',
+                }
+              })}
+              id="categorie"
+              select
+              label="Categoria"
+              value={selectedCategorie}
+              // defaultValue=""
+              fullWidth
+              error={!!errors?.categoria}
+              helperText={errors?.categoria?.message}
+              onChange={handleSelectedCategorie}>
+              {categories.map(categorie => (
+                <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                  {categorie.descricao_categoria}
+                </MenuItem>
+              ))}
+            </PersonalizadoTextField>
+
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1 },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <PersonalizadoTextField
+                {...register("observacao", {
+                  required: {
+                    value: true,
+                    message: 'Campo sobre você é obrigatório',
+                  }
+                })}
+                id="outlined-multiline-flexible"
+                label="Sobre você"
+                fullWidth
+                
+                multiline
+                rows={4}
+                maxRows={8}>
+              </PersonalizadoTextField>
+            </div>
+          </Box>
         </Box>
-      </Box>
 
-      {/* <Button onClick={() => handleSubmit(onSubmit)()}>
-              Finalizar Cadastro
-          </Button> */}
-      {/* <DialogActions className='!flex !justify-between'>
-          <Button 
-            onClick={handleClose}
-            className='bg-white dark:bg-darkBGLighter'>
+        {/* <Button onClick={() => handleSubmit(onSubmit)()}>
+                Finalizar Cadastro
+            </Button> */}
+        {/* <DialogActions className='!flex !justify-between'>
+            <Button 
+              onClick={handleClose}
+              className='bg-white dark:bg-darkBGLighter'>
 
-            <button
-              className="flex items-center justify-center gap-1 py-1 px-3 text-sm hover:bg-primary font-semibold border-[0.125rem] border-solid border-gray-500 rounded-md text-gray-500 hover:border-transparent transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out] hover:text-white">
-              <LiaTimesSolid/>
-              Cancelar
-            </button>
-          </Button> */}
-      <div className="flex flex-row-reverse">
-        <Button onClick={() => handleSubmit(onSubmit)()}>
-          <button
-            className="flex items-center justify-center gap-1 py-1 px-3 text-sm bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
+              <button
+                className="flex items-center justify-center gap-1 py-1 px-3 text-sm hover:bg-primary font-semibold border-[0.125rem] border-solid border-gray-500 rounded-md text-gray-500 hover:border-transparent transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out] hover:text-white">
+                <LiaTimesSolid/>
+                Cancelar
+              </button>
+            </Button> */}
+        <div className="flex flex-row-reverse">
+          <Button onClick={() => handleSubmit(onSubmit)()}>
             <BsCheck2Square className='text-white' />
             Ir para pagamento
-          </button>
-        </Button>
+          </Button>
+        </div>
+
+        {/* </DialogActions> */}
+            
       </div>
 
-      {/* </DialogActions> */}
-
+      <div>
+        <Image
+          src="/Queue.png"
+          width={500}
+          height={500}
+          alt="Aside Image"
+          className="relative"
+        />
+      </div>
     </div>
   )
 

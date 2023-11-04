@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import CreateProfessional from '../components/CreateProfessional';
 import { toast } from 'react-toastify';
-import Button from '@/components/Button';
+import SearchButton from '@/components/SearchButton';
 
 type IBGEUFResponse = {
   id: number;
@@ -114,7 +114,7 @@ const Login = () => {
 								Esqueci minha senha
 							</Link>
 							
-							<span className='invisible sm:visible'>|</span>
+							{/* <span className='invisible sm:visible'>|</span> */}
 
 							{/* <div className='flex items-center flex-col bg-primaryLighter/25 border border-solid border-gray-300/70 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
 								<p>Não tem uma conta?</p>

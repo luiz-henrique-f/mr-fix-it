@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+import SearchButton from '@/components/SearchButton'
 import Input from '@/components/Input'
 import React from 'react'
 
@@ -30,7 +30,7 @@ const SearchSection = () => {
                         </optgroup>
                     </select>
 
-                    <Button className='p-3' />
+                    <SearchButton className='p-3' />
                 </div>
             </div>
         </div>

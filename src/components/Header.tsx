@@ -1,18 +1,21 @@
 "use client"
 
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
+import { Prestador } from "@prisma/client";
+import Link from "next/link";
 import React from "react";
+
+import Login from "@/app/login/page";
+import Button from "./Button";
+
 import { AiOutlineMenu } from 'react-icons/ai'
 import { BsSunFill } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 
-import { useTheme } from "next-themes";
-import Link from "next/link";
-import Login from "@/app/login/page";
-import { Prestador } from "@prisma/client";
 
 interface ProfessionalProps {
     professional: Prestador;
@@ -111,10 +114,10 @@ const Header = () => {
                     {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark" ? light() : dark()} className="cursor-pointer text-black " /> : <BsSunFill size={16} onClick={() => currentTheme == "dark" ? light() : dark()} className="cursor-pointer text-white " />}
 
                     <Link href={'/login'}>
-                        <button className="flex text-black dark:text-white items-center justify-center py-2 px-4 gap-2 text-sm uppercase bg-transparent font-semibold border-2 border-solid border-black/50 dark:border-white/70 rounded-md hover:bg-primary hover:border-primary dark:hover:border-primary hover:text-white transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
+                        <Button variant="outlined">
                             <FiLogIn />
                             Entrar
-                        </button>
+                        </Button>
                     </Link>
                 </div>
             )}

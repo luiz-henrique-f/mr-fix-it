@@ -1,8 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+
+import ChangeButton from '@/components/ChangeButton'
+
 import { BsWhatsapp } from 'react-icons/bs'
 import { FaMapPin } from 'react-icons/fa'
-import ChangeButton from '@/components/ChangeButton'
 
 interface ProfessionalInfoProps {
     name: string;

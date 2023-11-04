@@ -1,6 +1,5 @@
 import React from 'react';
 import BasicRating from './Raiting';
-import { AiFillStar } from 'react-icons/ai'
 
 interface ProfessionalRaitingUsersProps {
   name: string

@@ -1,10 +1,11 @@
 "use client"
 
-import Button from '@/components/Button';
 import * as React from 'react';
-import { loadStripe } from "@stripe/stripe-js";
 import { signIn, signOut, useSession } from "next-auth/react";
+// import { loadStripe } from "@stripe/stripe-js";
 
+import Button from '@/components/Button';
+import PricingItems from './components/PricingItems';
 
 const PagamentoPlano = () => {
 
@@ -54,17 +55,59 @@ const PagamentoPlano = () => {
   };
 
   return (
-    <div className='flex gap-3 justify-center items-center align-middle h-96'>
-      <button 
-      onClick={() =>  handleBuyClick(5, 'Plano Anual', 12, 'A')} 
-      className="flex text-black dark:text-white items-center justify-center py-2 px-4 gap-2 text-sm uppercase bg-transparent font-semibold border-2 border-solid border-black/50 dark:border-white/70 rounded-md hover:bg-primary hover:border-primary dark:hover:border-primary hover:text-white transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
-        Plano Anual
-      </button>
-      <button 
-      onClick={() =>  handleBuyClick(5, 'Plano Mensal', 1, 'M')} 
-      className="flex text-black dark:text-white items-center justify-center py-2 px-4 gap-2 text-sm uppercase bg-transparent font-semibold border-2 border-solid border-black/50 dark:border-white/70 rounded-md hover:bg-primary hover:border-primary dark:hover:border-primary hover:text-white transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]">
-        Plano mensal
-      </button>
+    <div className='flex flex-row gap-12 justify-center items-center h-full'>
+      <div className='flex flex-col bg-gradient-to-b from-whiteBGDarker to-grayPrimary p-10 rounded-md h-3/4 w-1/5 gap-2'>
+        <p className='text-left text-white uppercase font-medium text-lg py-2'>Platina</p>
+
+        <div className='text-left flex flex-row items-baseline gap-2'>
+          <h1 className='font-bold text-white text-5xl -mt-2'>R$200</h1>
+          <span className='text-gray-200 text-lg font-medium -tracking-wider'>Anualmente</span>  
+        </div>
+
+        <p className='text-sm text-gray-300 font-medium -tracking-wider pb-8 border-b-2 border-solid border-gray-300/30'>Melhor opção para profissionais requisitados!</p>
+
+        <div className='relative flex flex-col h-full'>
+          <div className='flex flex-col pt-5 text-gray-300 -tracking-wide font-semibold gap-4'>
+            <PricingItems name='Boost nas buscas.' />
+            <PricingItems name='Acesso ao Dashboard.' />
+            <PricingItems name='Personalização completa do perfil.' />
+          </div>
+          
+          <Button
+            variant='primary'
+            className='absolute bottom-0 w-full py-3 normal-case text-base'
+            onClick={() => handleBuyClick(5, 'Plano Anual', 12, 'A')}>
+            Escolher Plano
+          </Button>
+        </div>
+      </div>
+
+
+      <div className='flex flex-col bg-gradient-to-b from-primary to-primaryDarker p-10 rounded-md h-3/4 w-1/5 gap-2'>
+        <p className='text-left text-white uppercase font-medium text-lg py-2'>Ametista</p>
+
+        <div className='text-left flex flex-row items-baseline gap-2'>
+          <h1 className='font-bold text-white text-5xl -mt-2'>R$25</h1>
+          <span className='text-gray-200 text-lg font-medium -tracking-wider'>Mensalmente</span>  
+        </div>
+
+        <p className='text-sm text-gray-300 font-medium -tracking-wider pb-8 border-b-2 border-solid border-gray-300/30'>Bom para os que estão começando!</p>
+
+        <div className='relative flex flex-col h-full'>
+          <div className='flex flex-col pt-5 text-gray-300 -tracking-wide font-semibold gap-4'>
+            <PricingItems name='Boost nas buscas.' />
+            <PricingItems name='Acesso ao Dashboard.' />
+          </div>
+          
+          <Button
+            variant='primary'
+            className='absolute bottom-0 w-full py-3 normal-case text-base bg-primaryLighter hover:bg-primary'
+            onClick={() => handleBuyClick(5, 'Plano Mensal', 1, 'M')}>
+            Escolher Plano
+          </Button>
+        </div>
+      </div>
+
     </div>
   );
 };

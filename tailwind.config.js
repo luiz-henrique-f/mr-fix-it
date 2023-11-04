@@ -14,14 +14,20 @@ module.exports = {
       },
       colors: {
         primary: "#590BD8",
-        primaryLighter: "#DDD5EA",
+        primaryLighter: "#9055dd",
         primaryDarker: "#312A4F",
+        secondary: "#ff426f",
+        secondaryLighter: "#f79eb3",
+        secondaryDarker: "#9c1535",
+
         grayPrimary: "#717171",
         grayLighter: "#BBBEBF",
+
         walterWhite: "#F5F5F5",
+
         darkBG: "#0f0f0f",
-        darkBGLighter: "#202020",
         whiteBG: "#e5e5e5",
+        darkBGLighter: "#202020",
         whiteBGDarker: "#c3c3c3",
       },
       textColor: {
