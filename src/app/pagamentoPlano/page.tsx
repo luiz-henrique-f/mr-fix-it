@@ -6,6 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import Button from '@/components/Button';
 import PricingItems from './components/PricingItems';
+import CardContainer from './components/PricingCardContainer';
 
 const PagamentoPlano = () => {
 
@@ -55,8 +56,8 @@ const PagamentoPlano = () => {
   };
 
   return (
-    <div className='flex flex-row gap-12 justify-center items-center h-full'>
-      <div className='flex flex-col bg-gradient-to-b from-whiteBGDarker to-grayPrimary p-10 rounded-md h-3/4 w-1/5 gap-2'>
+    <div className='flex flex-col 2sm:flex-row gap-12 justify-center items-center h-full p-8'>
+      <div className='flex flex-col bg-gradient-to-b from-whiteBGDarker to-grayPrimary p-10 rounded-md h-[580px] scale-[0.9] 2sm:scale-100 w-[320px] 3xl:w-1/5 gap-2 2sm:hover:drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)] 2sm:hover:scale-[1.03] transition-all duration-[0.4s] ease-[ease-in-out] hover:transition-all hover:duration-[0.4s] hover:ease-[ease-in-out]'>
         <p className='text-left text-white uppercase font-medium text-lg py-2'>Platina</p>
 
         <div className='text-left flex flex-row items-baseline gap-2'>
@@ -83,7 +84,7 @@ const PagamentoPlano = () => {
       </div>
 
 
-      <div className='flex flex-col bg-gradient-to-b from-primary to-primaryDarker p-10 rounded-md h-3/4 w-1/5 gap-2'>
+      <div className='flex flex-col bg-gradient-to-b from-primary to-primaryDarker p-10 rounded-md h-[580px] scale-[0.9] 2sm:scale-100 w-[320px] 3xl:w-1/5 gap-2 2sm:hover:drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)] 2sm:hover:scale-[1.03] transition-all duration-[0.4s] ease-[ease-in-out] hover:transition-all hover:duration-[0.4s] hover:ease-[ease-in-out]]'>
         <p className='text-left text-white uppercase font-medium text-lg py-2'>Ametista</p>
 
         <div className='text-left flex flex-row items-baseline gap-2'>

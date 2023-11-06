@@ -245,8 +245,8 @@ const CreateProfessional = () => {
   });
   
   return (
-    <div className='flex justify-center items-center gap-[10%] h-full'>
-      <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40'>
+    <div className='flex justify-center items-center xl:gap-[10%] h-full'>
+      <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
         <Box
           component="form"
           sx={{
@@ -286,7 +286,7 @@ const CreateProfessional = () => {
             helperText={errors?.cpf_cnpj?.message}>
           </PersonalizadoTextField>
 
-          <div className='flex justify-evenly gap-2'>
+          <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
             <PersonalizadoTextField
               {...register("celular", {
                 required: {
@@ -329,7 +329,7 @@ const CreateProfessional = () => {
             </PersonalizadoTextField>
           </div>
 
-          <div className='flex justify-between gap-2'>
+          <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
             <PersonalizadoTextField
               {...register("uf")}
               id="uf"
@@ -444,7 +444,7 @@ const CreateProfessional = () => {
           width={500}
           height={500}
           alt="Aside Image"
-          className="relative"
+          className="relative hidden xl:block"
         />
       </div>
     </div>
