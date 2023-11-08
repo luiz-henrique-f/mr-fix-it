@@ -7,6 +7,7 @@ import ProfessionalDescription from './components/ProfessionalDescription';
 import ProfessionalInfo from './components/ProfessionalInfo';
 import ProfessionalCategory from './components/ProfessionalCategory';
 import ProfessionalRaiting from './components/ProfessionalRaiting';
+import axios from 'axios';
 
 import { AiFillStar } from 'react-icons/ai'
 
@@ -20,8 +21,41 @@ const getProfessionalDetails = async (professionalid: string) => {
     return professional;
 }
 
-const ProfessionalDetail = async ({params}: { params : { professionalid: string} }) => {
+    // const fetchReservations = async (professionalid: string) => {
+    //     const response = await fetch(`http://localhost:3000/existProfessional/${professionalid}/list`);
+
+    //     const json = await response.json();
+
+    //     return JSON.parse(json);
+    // };
+
+
+
+const ProfessionalDetail = async({ params }: { params: { professionalid: string } }) => {
     const professional = await getProfessionalDetails(params.professionalid);
+
+    // React.useEffect(() => {
+    //     axios.get(`http://localhost:3000/existProfessional/${params.professionalid}/list`)
+    //       .then((response) => {
+    //         console.log(response.data)
+    //       })
+    //   });
+
+    // const professional = await fetchReservations(params.professionalid);
+    // const fetchReservations = async (professionalid: string) => {
+    //     const response = await fetch(`/existProfessional/${professionalid}/list`);
+
+    //     const json = await response.json();
+
+    //     return json;
+    // };
+
+
+
+
+    // React.useEffect(() => {
+    //     fetchReservations(params.professionalid);
+    // });
 
     // if(!professional) return null;
 
@@ -33,8 +67,8 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
                     fill
                     style={{
                         objectFit: "cover",
-                    }} 
-                    alt='Imagem Capa' 
+                    }}
+                    alt='Imagem Capa'
                 />
 
                 <ChangeButton variant='secondary' className='absolute top-3 right-3' />
@@ -64,7 +98,7 @@ const ProfessionalDetail = async ({params}: { params : { professionalid: string}
                             <AiFillStar className='text-orange-400' />
                             Avaliações dos Usuários
                         </h1>
-                        
+
                         <ProfessionalRaiting name='Madrid' title='Não recomendo!' message='Ruim, péssimo profissional!' />
                         <ProfessionalRaiting name='Natan Alonso' title='FAAAAZ O L!!!!' message='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur consequatur ab vero nemo, error deserunt cumque. A aliquam atque sunt, corporis quisquam aut dolore, distinctio delectus alias magni ratione itaque.' />
                     </div>
