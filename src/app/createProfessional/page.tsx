@@ -82,20 +82,20 @@ const CreateProfessional = () => {
 
   const router = useRouter();
 
-  // const fetchProfessional = async () => {
-  //   const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
+  const fetchProfessional = async () => {
+    const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
 
-  //   const json = await response.json();
+    const json = await response.json();
 
-  //   if(json.length > 0){
-  //     router.push(`/professionals/${(dados?.user as any)?.id}`)
-  //   }
+    if(json.length > 0){
+      router.push(`/professionals/${(dados?.user as any)?.id}`)
+    }
 
-  // };
+  };
 
-  // React.useEffect(() => {
-  //   fetchProfessional();
-  // })
+  React.useEffect(() => {
+    fetchProfessional();
+  })
 
   const {
     register,

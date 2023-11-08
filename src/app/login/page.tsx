@@ -6,11 +6,7 @@ import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Image from 'next/image'
 import { FcGoogle } from "react-icons/fc";
 import { IoIosArrowBack } from "react-icons/io";
-import { redirect } from 'next/navigation';
 import { useRouter } from "next/navigation";
-import CreateProfessional from '../components/CreateProfessional';
-import { toast } from 'react-toastify';
-import SearchButton from '@/components/SearchButton';
 
 type IBGEUFResponse = {
   id: number;
