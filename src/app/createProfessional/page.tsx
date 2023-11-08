@@ -79,23 +79,23 @@ const CreateProfessional = () => {
 
   const { data } = useSession();
   const dados = data;
-  
+
   const router = useRouter();
 
-  const fetchProfessional = async () => {
-    const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
+  // const fetchProfessional = async () => {
+  //   const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
 
-    const json = await response.json();
+  //   const json = await response.json();
 
-    if(json.length > 0){
-      router.push(`/professionals/${(dados?.user as any)?.id}`)
-    }
+  //   if(json.length > 0){
+  //     router.push(`/professionals/${(dados?.user as any)?.id}`)
+  //   }
 
-  };
+  // };
 
-  React.useEffect(() => {
-    fetchProfessional();
-  })
+  // React.useEffect(() => {
+  //   fetchProfessional();
+  // })
 
   const {
     register,
@@ -243,7 +243,7 @@ const CreateProfessional = () => {
       },
     },
   });
-  
+
   return (
     <div className='flex justify-center items-center xl:gap-[10%] h-full'>
       <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
@@ -255,7 +255,7 @@ const CreateProfessional = () => {
           noValidate
           autoComplete="off">
 
-          <PersonalizadoTextField
+          <TextField
             {...register("nome", {
               required: {
                 value: true,
@@ -267,10 +267,10 @@ const CreateProfessional = () => {
             fullWidth
             error={!!errors?.nome}
             helperText={errors?.nome?.message}
-            >
-          </PersonalizadoTextField>
+          >
+          </TextField>
 
-          <PersonalizadoTextField
+          <TextField
             {...register("cpf_cnpj", {
               required: {
                 value: true,
@@ -284,10 +284,10 @@ const CreateProfessional = () => {
             fullWidth
             error={!!errors?.cpf_cnpj}
             helperText={errors?.cpf_cnpj?.message}>
-          </PersonalizadoTextField>
+          </TextField>
 
           <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
-            <PersonalizadoTextField
+            <TextField
               {...register("celular", {
                 required: {
                   value: true,
@@ -301,9 +301,9 @@ const CreateProfessional = () => {
               fullWidth
               error={!!errors?.celular}
               helperText={errors?.celular?.message}>
-            </PersonalizadoTextField>
+            </TextField>
 
-            <PersonalizadoTextField
+            <TextField
               {...register("sexo", {
                 required: {
                   value: true,
@@ -326,11 +326,11 @@ const CreateProfessional = () => {
               <MenuItem key="NE" value="NE">
                 Não Especificar
               </MenuItem>
-            </PersonalizadoTextField>
+            </TextField>
           </div>
 
           <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
-            <PersonalizadoTextField
+            <TextField
               {...register("uf")}
               id="uf"
               select
@@ -344,9 +344,9 @@ const CreateProfessional = () => {
                   {uf.nome}
                 </MenuItem>
               ))}
-            </PersonalizadoTextField>
+            </TextField>
 
-            <PersonalizadoTextField
+            <TextField
               {...register("cidade")}
               id="city"
               select
@@ -359,31 +359,31 @@ const CreateProfessional = () => {
                   {city.nome}
                 </MenuItem>
               ))}
-            </PersonalizadoTextField>
+            </TextField>
           </div>
 
-          <PersonalizadoTextField
-              {...register("categoria", {
-                required: {
-                  value: true,
-                  message: 'Campo categoria é obrigatório',
-                }
-              })}
-              id="categorie"
-              select
-              label="Categoria"
-              value={selectedCategorie}
-              // defaultValue=""
-              fullWidth
-              error={!!errors?.categoria}
-              helperText={errors?.categoria?.message}
-              onChange={handleSelectedCategorie}>
-              {categories.map(categorie => (
-                <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                  {categorie.descricao_categoria}
-                </MenuItem>
-              ))}
-            </PersonalizadoTextField>
+          <TextField
+            {...register("categoria", {
+              required: {
+                value: true,
+                message: 'Campo categoria é obrigatório',
+              }
+            })}
+            id="categorie"
+            select
+            label="Categoria"
+            value={selectedCategorie}
+            // defaultValue=""
+            fullWidth
+            error={!!errors?.categoria}
+            helperText={errors?.categoria?.message}
+            onChange={handleSelectedCategorie}>
+            {categories.map(categorie => (
+              <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                {categorie.descricao_categoria}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <Box
             component="form"
@@ -394,7 +394,7 @@ const CreateProfessional = () => {
             autoComplete="off"
           >
             <div>
-              <PersonalizadoTextField
+              <TextField
                 {...register("observacao", {
                   required: {
                     value: true,
@@ -404,11 +404,11 @@ const CreateProfessional = () => {
                 id="outlined-multiline-flexible"
                 label="Sobre você"
                 fullWidth
-                
+
                 multiline
                 rows={4}
                 maxRows={8}>
-              </PersonalizadoTextField>
+              </TextField>
             </div>
           </Box>
         </Box>
@@ -435,7 +435,7 @@ const CreateProfessional = () => {
         </div>
 
         {/* </DialogActions> */}
-            
+
       </div>
 
       <div>

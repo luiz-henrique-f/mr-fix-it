@@ -1,10 +1,11 @@
 import { getServerSession } from "next-auth";
-// import Stripe from "stripe";
+import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2023-10-16'
 })
+
 
 export async function POST(request: Request) {
     const req = await request.json();

@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import Button from '@/components/Button';
 import PricingItems from './components/PricingItems';
-import CardContainer from './components/PricingCardContainer';
+// import CardContainer from './components/PricingCardContainer';
 
 const PagamentoPlano = () => {
 
