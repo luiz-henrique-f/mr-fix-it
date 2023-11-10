@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import Image from 'next/image';
 
@@ -5,29 +7,241 @@ import ChangeButton from '@/components/ChangeButton'
 
 import { BsWhatsapp } from 'react-icons/bs'
 import { FaMapPin } from 'react-icons/fa'
+import Button from '@/components/Button';
+import TextField from '@mui/material/TextField';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { IMaskInput } from 'react-imask';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Controller, useForm } from "react-hook-form";
+import { useSession } from 'next-auth/react';
+import { Box } from '@mui/material';
+import { FiLogIn } from 'react-icons/fi';
+import axios from 'axios';
+import MenuItem from '@mui/material/MenuItem';
+import { mask, unMask } from 'remask'
 
+
+type IBGEUFResponse = {
+    id: number;
+    sigla: string;
+    nome: string;
+};
+
+type IBGECITYResponse = {
+    id: number;
+    nome: string;
+};
 interface ProfessionalInfoProps {
     name: string;
     city: string;
     uf: string;
     telefone: string;
-  }
+}
 
-const ProfessionalInfo = ({ name, city, uf, telefone  }: ProfessionalInfoProps) => {
+interface CreateProfessionalForm {
+    nome: String;
+    cpf_cnpj: String;
+    celular: String;
+    categoria: String;
+    sexo: String;
+    uf: String;
+    cidade: String;
+    observacao: String;
+}
+
+const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) => {
+
+    const { data } = useSession();
+    const dados = data;
+
+    // const router = useRouter();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        control,
+        watch,
+        setError,
+    } = useForm<CreateProfessionalForm>();
+
+    const onSubmit = async (data: CreateProfessionalForm) => {
+        const response = await fetch("http://localhost:3000/updateInfoProfessional", {
+            method: "PUT",
+            body: Buffer.from(
+                JSON.stringify({
+                    celular: data.celular != '' && data.celular,
+                    uf: data.uf != '' && data.uf,
+                    cidade: data.cidade != '' && data.cidade,
+                    id_user: (dados?.user as any)?.id
+                })
+            ),
+        });
+
+        handleClose()
+        // router.push(`/professionals/${(dados?.user as any)?.id}`);
+
+    }
+
+    const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
+    const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
+    const [selectedUf, setSelectedUf] = React.useState("0");
+    const [selectedCity, setSelectedCity] = React.useState("0");
+    const [open, setOpen] = React.useState(false);
+    const [fullWidth, setFullWidth] = React.useState(true);
+    const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
+
+    React.useEffect(() => {
+        axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
+            .then((response) => {
+                setUfs(response.data)
+            })
+    }, []);
+
+    React.useEffect(() => {
+        axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
+            .then((response) => {
+                setCities(response.data)
+            })
+    }, [selectedUf]);
+
+    const handleSelectedUf = (
+      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
+      const uf = e.target.value;
+      setSelectedUf(uf);
+    };
+  
+    const handleSelectedCity = (
+      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
+      const city = e.target.value;
+      setSelectedCity(city);
+    };
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
+        setMaxWidth(
+            // @ts-expect-error autofill of arbitrary value is not handled.
+            event.target.value,
+        );
+    };
+
+    const handleFullWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFullWidth(event.target.checked);
+    };
+
+    const [valueCelular, setValueCelular] = React.useState("");
+    const mudarMascaraCelular = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
+    }
+  
+    const [value, setValue] = React.useState("");
+    const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
+    }
+
     return (
         <div className="relative flex flex-col justify-center items-center bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-8">
-            <ChangeButton className='absolute top-3 right-3' />
+            <Dialog open={open} onClose={handleClose}
+                fullWidth={fullWidth}
+                maxWidth={maxWidth}>
+                <DialogTitle>Atualizar Informações</DialogTitle>
+                <DialogContent>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { marginTop: 1 },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+
+
+                        <TextField
+                            {...register("celular", {
+                                required: {
+                                    value: true,
+                                    message: 'Campo celular é obrigatório',
+                                }
+                            })}
+                            id="celular"
+                            label="Celular"
+                            onChange={mudarMascaraCelular}
+                            value={valueCelular}
+                            fullWidth
+                            error={!!errors?.celular}
+                            helperText={errors?.celular?.message}>
+                        </TextField>
+                        <TextField
+                            {...register("uf")}
+                            id="uf"
+                            select
+                            label="UF"
+                            name='uf'
+                            fullWidth
+                            onChange={handleSelectedUf}>
+
+                            {ufs.map(uf => (
+                                <MenuItem key={uf.id} value={uf.sigla}>
+                                    {uf.nome}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+
+                        <TextField
+                            {...register("cidade")}
+                            id="city"
+                            select
+                            label="Cidade"
+                            fullWidth
+                            onChange={handleSelectedCity}>
+
+                            {cities.map(city => (
+                                <MenuItem key={city.id} value={city.nome}>
+                                    {city.nome}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </Box>
+                </DialogContent>
+                <DialogActions className='!flex !justify-between'>
+
+                    <Button variant="outlined"
+                        onClick={handleClose}>
+                        <FiLogIn />
+                        Cancelar
+                    </Button>
+
+                    <Button variant="outlined"
+                        onClick={() => handleSubmit(onSubmit)()}>
+                        <FiLogIn />
+                        Atualizar
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen}/>
 
             <div className='rounded-full p-[6px] border-4 border-solid border-darkBGLighter dark:border-whiteBG'>
                 <Image
-                src="/perfil.png"
-                width={140}
-                height={140}
-                className='overflow-hidden rounded-[100%]'
-                style={{
-                    objectFit: "cover",
-                }} 
-                alt='Imagem Usuário' 
+                    src="/perfil.png"
+                    width={140}
+                    height={140}
+                    className='overflow-hidden rounded-[100%]'
+                    style={{
+                        objectFit: "cover",
+                    }}
+                    alt='Imagem Usuário'
                 />
             </div>
 
