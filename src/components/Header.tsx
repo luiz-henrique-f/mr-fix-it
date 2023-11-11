@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Prestador } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
+import axios from 'axios';
 
 import Login from "@/app/login/page";
 import Button from "./Button";
@@ -20,6 +21,10 @@ import { useRouter } from "next/navigation";
 interface ProfessionalProps {
     professional: Prestador;
 }
+
+type IdPrestadorResponse = {
+    id: string;
+};
 
 
 const Header = () => {
@@ -64,6 +69,15 @@ const Header = () => {
     //   }
 
     const router = useRouter()
+
+    const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+
+    React.useEffect(() => {
+        axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
+            .then((response) => {
+                setIdPrestador(response.data[0].id)
+            })
+    });
 
     return (
         <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl bg-whiteBG dark:bg-darkBG'>
@@ -148,7 +162,7 @@ const Header = () => {
                                 </button>
                             </Link>
 
-                            <Link href={`/professionals/${(data?.user as any)?.id}`}>
+                            <Link href={`/professionals/${id_prestador}`}>
                                 <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                     Meu Perfil
                                 </button>

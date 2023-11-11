@@ -50,9 +50,6 @@ const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
 
 const ProfessionalComment = ({ params }: { params: { professionalid: string } }) => {
 
-  const { data } = useSession();
-  const dados = data;
-
   const router = useRouter();
 
   const {
@@ -75,7 +72,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
           celular: data.celular,
           comentario: data.comentario,
           nota: valueStar,
-          id_user: params.professionalid
+          id_prestador: params.professionalid
         })
       ),
     });

@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react';
 import { prisma } from '@/lib/prisma';
 import Image from 'next/image';
@@ -9,80 +7,39 @@ import ProfessionalDescription from './components/ProfessionalDescription';
 import ProfessionalInfo from './components/ProfessionalInfo';
 import ProfessionalCategory from './components/ProfessionalCategory';
 import ProfessionalRaiting from './components/ProfessionalRaiting';
-import axios from 'axios';
 
 import { AiFillStar } from 'react-icons/ai'
 import Button from '@/components/Button';
 import { FiLogIn } from 'react-icons/fi';
 import Link from 'next/link';
+import { Comentarios_Prestador } from '@prisma/client';
 
-type NomeResponse = {
-    nome: string;
-};
-
-type CategoriaResponse = {
-    tipo_categoria: string;
-};
-
-type CidadeResponse = {
-    cidade: string;
-};
-
-type UfResponse = {
-    uf: string;
-};
-
-type CelularResponse = {
-    celular: string;
-};
-
-type ObservacaoResponse = {
-    observacao: string;
-};
-
-// const getProfessionalDetails = async (professionalid: string) => {
-//     const professional = await prisma.prestador.findFirst({
-//         where: {
-//             id_user: professionalid,
-//         },
-//     });
-
-//     return professional;
-// }
-
-// const fetchProfessional = async (professionalid: string) => {
-//     const response = await fetch(`/professionalUser/${professionalid}/list`);
-
-//     const json = await response.json();
-
-//     return json;
-
-//   };
-
-
-const ProfessionalDetail = ({ params }: { params: { professionalid: string } }) => {
-    const [nome, setNome] = React.useState<NomeResponse[]>([]);
-    const [cidade, setCidade] = React.useState<CidadeResponse[]>([]);
-    const [uf, setUf] = React.useState<UfResponse[]>([]);
-    const [celular, setCelular] = React.useState<CelularResponse[]>([]);
-    const [categoria, setCategoria] = React.useState<CategoriaResponse[]>([]);
-    const [observacao, setObservacao] = React.useState<ObservacaoResponse[]>([]);
-
-    React.useEffect(() => {
-        axios.get(`http://localhost:3000/professionalUser/${params.professionalid}`)
-            .then((response) => {
-                setNome(response.data[0].nome)
-                setCidade(response.data[0].cidade)
-                setUf(response.data[0].uf)
-                setCelular(response.data[0].celular)
-                setCategoria(response.data[0].tipo_categoria)
-                setObservacao(response.data[0].observacao)
-            })
+const getProfessionalDetails = async (professionalid: string) => {
+    const professional = await prisma.prestador.findFirst({
+        where: {
+            id: professionalid,
+        },
     });
 
-    // const professional = fetchProfessional(params.professionalid);
+    return professional;
+}
 
-    // if(!professional) return null;
+const getCommentsDetails = async (professionalid: string) => {
+    const professional = await prisma.comentarios_Prestador.findMany({
+        where: {
+            id_prestador: professionalid,
+        },
+    });
+
+    return professional;
+}
+
+
+const ProfessionalDetail = async ({ params }: { params: { professionalid: string } }) => {
+    const professional = await getProfessionalDetails(params.professionalid);
+    const data = await getCommentsDetails(params.professionalid);
+
+    if (!professional) return null;
 
     return (
         <div className='h-full'>
@@ -102,20 +59,20 @@ const ProfessionalDetail = ({ params }: { params: { professionalid: string } }) 
             <div className='container relative p-4 mx-auto 2md:flex 2md:gap-10'>
                 <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[40%] 2sm:-mt-[20%] 2md:-mt-[10%] xl:-mt-[7%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
                     <ProfessionalInfo
-                        name={nome as any}
-                        city={cidade as any}
-                        uf={uf as any}
-                        telefone={celular as any}
+                        name={professional?.nome as any}
+                        city={professional?.cidade as any}
+                        uf={professional?.uf as any}
+                        telefone={professional?.celular as any}
                     />
 
                     <ProfessionalCategory
-                        categoria={categoria as any}
+                        categoria={professional?.tipo_categoria as any}
                     />
                 </div>
 
                 <div className='w-full 2md:w-3/5 2md:mr-[10%] h-full flex flex-col gap-3'>
                     <ProfessionalDescription
-                        description={observacao as any}
+                        description={professional?.observacao as any}
                     />
 
                     <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
@@ -126,17 +83,20 @@ const ProfessionalDetail = ({ params }: { params: { professionalid: string } }) 
                             </h1>
 
                             <Link href={`/professionalComment/${params.professionalid}`}>
-                            <Button variant="outlined">
-                                <FiLogIn />
-                                Adicionar comentário
-                            </Button>
+                                <Button variant="outlined">
+                                    <FiLogIn />
+                                    Adicionar comentário
+                                </Button>
                             </Link>
                         </div>
 
+                        {data.map((comments: Comentarios_Prestador) => (
+                            <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota}/>
+                        ))}
 
 
-                        <ProfessionalRaiting name='Madrid' title='Não recomendo!' message='Ruim, péssimo profissional!' />
-                        <ProfessionalRaiting name='Natan Alonso' title='FAAAAZ O L!!!!' message='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur consequatur ab vero nemo, error deserunt cumque. A aliquam atque sunt, corporis quisquam aut dolore, distinctio delectus alias magni ratione itaque.' />
+                        {/* <ProfessionalRaiting name='Madrid' title='Não recomendo!' message='Ruim, péssimo profissional!' />
+                        <ProfessionalRaiting name='Natan Alonso' title='FAAAAZ O L!!!!' message='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur consequatur ab vero nemo, error deserunt cumque. A aliquam atque sunt, corporis quisquam aut dolore, distinctio delectus alias magni ratione itaque.' /> */}
                     </div>
                 </div>
             </div>

@@ -6,17 +6,17 @@ import { StyledEngineProvider } from '@mui/material/styles';
 
 import { AiFillStar } from 'react-icons/ai'
 
-const BasicRating = () => {
-  const [value, setValue] = React.useState<number | null>(0);
+interface ProfessionalCommentProps {
+  valueComment: number;
+}
+
+const BasicRating = ({ valueComment }: ProfessionalCommentProps) => {
 
   return (
     <StyledEngineProvider injectFirst>
       <Rating
         name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
+        value={valueComment}
 
         icon={
           <AiFillStar 

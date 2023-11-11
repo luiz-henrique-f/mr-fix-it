@@ -4,22 +4,13 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     const req = await request.json();
     
-    const { nome, celular, titulo_comentario, comentario, nota, id_user } = req;
+    const { nome, celular, titulo_comentario, comentario, nota, id_prestador } = req;
 
-    const professional = await prisma.prestador.findFirst({
-        where:{
-            id_user: id_user
-        },
-        select: {
-            id: true
-        }
-    })
-
-    console.log(professional?.id)
+    console.log(id_prestador)
 
     await prisma.comentarios_Prestador.create({
       data: {
-        id_prestador: professional?.id as any,
+        id_prestador: id_prestador,
         nome: nome,
         celular: celular,
         titulo_comentario: titulo_comentario,
