@@ -38,29 +38,15 @@ model Prestador_Ativo {
   tipo_plano  String
 }
 
-model Pontuacao_Prestador {
-  id           String @id @default(uuid())
-  id_prestador String
-  id_cliente   String
-  pontuacao    String
-}
-
-model Cliente {
-  id              String   @id @default(uuid())
-  nome            String
-  cpf_cnpj        String
-  idade           Int
-  sexo            String
-  data_nascimento DateTime
-  email           String
-  senha           String
-  celular         String
-  endereco        String
-  cidade          String
-  uf              String
-  tipo_categoria  String
-  created_at      DateTime @default(now())
-  // clientes        Pontuacao_Prestador[]
+model Comentarios_Prestador {
+  id                String   @id @default(uuid())
+  id_prestador      String
+  nome              String
+  celular           String
+  titulo_comentario String
+  comentario        String
+  nota              Int
+  data              DateTime @default(now())
 }
 
 model Tipo_Categoria {
