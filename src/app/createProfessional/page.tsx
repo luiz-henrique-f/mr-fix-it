@@ -46,6 +46,10 @@ interface CustomProps {
   name: string;
 }
 
+type IdPrestadorResponse = {
+  id: string;
+};
+
 interface CreateProfessionalForm {
   nome: String;
   cpf_cnpj: String;
@@ -82,13 +86,24 @@ const CreateProfessional = () => {
 
   const router = useRouter();
 
+  const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+
+  React.useEffect(() => {
+      axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
+          .then((response) => {
+              setIdPrestador((response.data[0] as any)?.id)
+          })
+  });
+
   const fetchProfessional = async () => {
     const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
 
     const json = await response.json();
 
+    console.log(json)
+
     if(json.length > 0){
-      router.push(`/professionals/${(dados?.user as any)?.id}`)
+      router.push(`/professionals/${id_prestador}`)
     }
 
   };
@@ -243,6 +258,8 @@ const CreateProfessional = () => {
       },
     },
   });
+
+  if (id_prestador) return null;
 
   return (
     <div className='flex justify-center items-center xl:gap-[10%] h-full'>

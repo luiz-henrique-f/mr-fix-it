@@ -1,5 +1,6 @@
 "use client"
 
+import { getServerSession } from "next-auth";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -75,7 +76,7 @@ const Header = () => {
     React.useEffect(() => {
         axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
             .then((response) => {
-                setIdPrestador(response.data[0].id)
+                setIdPrestador((response.data[0] as any)?.id)
             })
     });
 

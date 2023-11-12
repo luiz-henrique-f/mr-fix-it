@@ -26,13 +26,13 @@ interface ProfessionalHighlightsProps {
 //   }
 
 const ProfessionalHighlights = async ({ id }: ProfessionalHighlightsProps) => {
-    const getProfessional = async () => {
-        await prisma.prestador.findMany({
-                    where: {
-                        id: id
-                    }
-                });
-    }
+    // const getProfessional = async () => {
+    //     await prisma.prestador.findMany({
+    //                 where: {
+    //                     id: id
+    //                 }
+    //             });
+    // }
     // const data = await getProfessional(id);
 
     return (

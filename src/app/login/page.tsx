@@ -7,62 +7,112 @@ import Image from 'next/image'
 import { FcGoogle } from "react-icons/fc";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { useForm } from 'react-hook-form';
+import Button from '@/components/Button';
+import { FiLogIn } from 'react-icons/fi';
 
 type IBGEUFResponse = {
-  id: number;
-  sigla: string;
-  nome: string;
+	id: number;
+	sigla: string;
+	nome: string;
 };
 
 type IBGECITYResponse = {
-  id: number;
-  nome: string;
+	id: number;
+	nome: string;
 };
 
+// interface CreateProfessionalForm {
+// 	email: String;
+// 	senha: String;
+// }
+
 const Login = () => {
-  const router = useRouter();
-  const { status, data } = useSession();
+	// código que pode ser usado futuramente para o credentials
 
-  // const handleLoginClick = () => signIn("google", {
-  //   redirect: true,
-  //   callbackUrl: "/",
-  // });
+	// const {
+	// 	register,
+	// 	handleSubmit,
+	// 	formState: { errors },
+	// 	control,
+	// 	watch,
+	// 	setError,
+	// } = useForm<CreateProfessionalForm>();
 
-  const redirecionar = () => {
-	return "/createProfessional"
-  }
+	// const onSubmit = async (data: CreateProfessionalForm) => {
+	// 	console.log(data)
 
-//   const handleLoginClick = async () => {
-//     const result = await signIn("google", {
-//       redirect: true,
-//       callbackUrl: "/createProfessional",
-//     })
-//   }
+	// 	const sigInData = await signIn('credentials', {
+	// 		email: 'luizhfernandes100@gmail.com',
+	// 		password: '123456',
+	// 		redirect: false
+	// 	});
 
-  const handleLoginClick = () => {
-	signIn()
-  }
+	// 	console.log(sigInData)
 
-//   const handleLogoutClick = () => {
-//     setMenuIsOpen(false);
-//     signOut();
-//   };
+	// 	// router.push('/createProfessional')
 
-  // const fetchCategories = async () => {
-  //   const categories = await fetch('/categoria');
+	// 	// const response = await fetch("http://localhost:3000/credentialUser", {
+	// 	// 	method: "POST",
+	// 	// 	body: Buffer.from(
+	// 	// 		JSON.stringify({
+	// 	// 			username: data.nome,
+	// 	// 			email: data.email,
+	// 	// 			password: data.senha,
+	// 	// 		})
+	// 	// 	),
+	// 	// });
 
-  //   const json = await categories.json();
-  //   console.log(json);
+	// }
 
-  // };
+	// const handleLoginClick = () => signIn("google", {
+	//   redirect: true,
+	//   callbackUrl: "/",
+	// });
 
-//   React.useEffect(() => {
-// 	if(status === "authenticated"){
-// 		return router.push("/createProfessional")
-// 	}
-//   })
+	const redirecionar = () => {
+		return "/createProfessional"
+	}
 
-    return (
+	//   const handleLoginClick = async () => {
+	//     const result = await signIn("google", {
+	//       redirect: true,
+	//       callbackUrl: "/createProfessional",
+	//     })
+	//   }
+
+	const handleLoginClick = () => {
+		signIn()
+	}
+
+	// const handleLoginCredentialsClick = () => {
+	// 	signIn('credentials', {
+	// 		email: 'luizhfernandes100@gmail.com',
+	// 		password: '123456',
+	// 		redirect: false
+	// 	})
+	// }
+
+	//   const handleLogoutClick = () => {
+	//     setMenuIsOpen(false);
+	//     signOut();
+	//   };
+
+	// const fetchCategories = async () => {
+	//   const categories = await fetch('/categoria');
+
+	//   const json = await categories.json();
+	//   console.log(json);
+
+	// };
+
+	//   React.useEffect(() => {
+	// 	if(status === "authenticated"){
+	// 		return router.push("/createProfessional")
+	// 	}
+	//   })
+
+	return (
 		<div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-darkBG overflow-hidden">
 			<div className="rounded-3xl overflow-hidden w-full bg-white h-full shadow-lg shadow-gray-400">
 
@@ -90,18 +140,16 @@ const Login = () => {
 						<span className="text-xs text-center 2sm:text-sm cursor-default p-2 text-gray-500 dark:text-primaryLighter">
 							A opção de logar por e-mail está em manutenção no momento.
 						</span>
-						
+
 						<input
 							type="text"
 							placeholder="E-mail ou Usuário"
-							disabled
 							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200"
 						/>
 
 						<input
 							type="password"
 							placeholder="Senha"
-							disabled
 							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200"
 						/>
 
@@ -109,7 +157,7 @@ const Login = () => {
 							<Link href="#" className="hover:text-primary">
 								Esqueci minha senha
 							</Link>
-							
+
 							{/* <span className='invisible sm:visible'>|</span> */}
 
 							{/* <div className='flex items-center flex-col bg-primaryLighter/25 border border-solid border-gray-300/70 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
@@ -118,13 +166,15 @@ const Login = () => {
 								<CreateProfessional />
 							</div> */}
 						</div>
-						
-						
-						<button 
-							className="text-base rounded-lg font-semibold uppercase w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 mt-4 cursor-pointer border-spacing-px bg-primary hover:bg-primaryDarker border-opacity-0 tracking-wide py-3 px-11 text-white transition-all duration-[0.5s] ease-[ease-in-out]">
-							Entrar
-						</button>
-						
+
+
+						<Button 
+						variant="outlined"
+						>
+							<FiLogIn />
+							Cadastrar
+						</Button>
+
 					</form>
 				</div>
 
@@ -148,12 +198,12 @@ const Login = () => {
 						/>
 					</div>
 				</div>
-			
+
 			</div>
-			
+
 		</div>
-    );
-  };
+	);
+};
 // };
 export default Login;
 

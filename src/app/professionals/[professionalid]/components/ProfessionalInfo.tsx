@@ -22,7 +22,9 @@ import { FiLogIn } from 'react-icons/fi';
 import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import { mask, unMask } from 'remask'
-
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
+import Link from 'next/link';
 
 type IBGEUFResponse = {
     id: number;
@@ -51,6 +53,10 @@ interface CreateProfessionalForm {
     cidade: String;
     observacao: String;
 }
+
+type IdPrestadorResponse = {
+    id: string;
+};
 
 const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) => {
 
@@ -109,17 +115,17 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
     }, [selectedUf]);
 
     const handleSelectedUf = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
-      const uf = e.target.value;
-      setSelectedUf(uf);
+        const uf = e.target.value;
+        setSelectedUf(uf);
     };
-  
+
     const handleSelectedCity = (
-      e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
-      const city = e.target.value;
-      setSelectedCity(city);
+        const city = e.target.value;
+        setSelectedCity(city);
     };
 
     const handleClickOpen = () => {
@@ -143,12 +149,26 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
 
     const [valueCelular, setValueCelular] = React.useState("");
     const mudarMascaraCelular = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
+        setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
     }
-  
+
     const [value, setValue] = React.useState("");
     const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
+        setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
+    }
+
+    const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+
+    React.useEffect(() => {
+        axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
+            .then((response) => {
+                setIdPrestador((response.data[0] as any)?.id)
+            })
+    });
+
+    const linkAvaliacao = () => {
+        navigator.clipboard.writeText(`http://localhost:3000/professionalComment/${id_prestador}`)
+        toast.success("Link copiado com sucesso!", { position: "top-right" });
     }
 
     return (
@@ -230,7 +250,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
                     </Button>
                 </DialogActions>
             </Dialog>
-            <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen}/>
+            <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />
 
             <div className='rounded-full p-[6px] border-4 border-solid border-darkBGLighter dark:border-whiteBG'>
                 <Image
@@ -245,7 +265,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
                 />
             </div>
 
-            <div className='flex flex-col items-center mb-8'>
+            <div className='flex flex-col items-center mb-2'>
                 <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>{name}</h1>
 
                 <div className='flex items-center gap-1 my-1 mt-8 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
@@ -255,15 +275,25 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
                 </div>
 
                 <div className='gap-1 my-1'>
-                    <p className='flex items-center gap-2 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
-                        <BsWhatsapp className='text-center text-sm' />
+                    <Link href={`https://wa.me/55${telefone.replace(/[^\w\s]/gi, '').replace(' ', '')}`}><p className='flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-600'>
+                        <BsWhatsapp className='text-center text-sm text-green-600' />
                         +55 {telefone}
                     </p>
+                    </Link>
                 </div>
             </div>
 
             <div className='absolute flex justify-center pt-2 bottom-3 border-t-2 border-solid border-whiteBG dark:border-darkBG w-full'>
                 <p className='uppercase font-semibold text-sm text-grayPrimary dark:text-grayLighter'>Membro desde: Outubro, 2023</p>
+            </div>
+
+            <div className='flex flex-col items-center mb-4'>
+                <Button variant="outlined"
+                    onClick={() => linkAvaliacao()}
+                >
+                    <FiLogIn />
+                    Link para Avaliação
+                </Button>
             </div>
         </div>
     )
