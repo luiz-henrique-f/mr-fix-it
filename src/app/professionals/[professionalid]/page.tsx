@@ -19,7 +19,9 @@ const getProfessionalDetails = async (professionalid: string) => {
         where: {
             id: professionalid,
         },
-    });
+    }).finally(() => {
+        prisma.$disconnect();
+      });
 
     return professional;
 }
@@ -29,7 +31,9 @@ const getCommentsDetails = async (professionalid: string) => {
         where: {
             id_prestador: professionalid,
         },
-    });
+    }).finally(() => {
+        prisma.$disconnect();
+      });
 
     return professional;
 }
