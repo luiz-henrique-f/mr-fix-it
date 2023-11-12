@@ -275,7 +275,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
                 </div>
 
                 <div className='gap-1 my-1'>
-                    <Link href={`https://wa.me/55${telefone.replace(/[^\w\s]/gi, '').replace(' ', '')}`}><p className='flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-600'>
+                    <Link href={`https://wa.me/55${telefone.replace(/[^\w\s]/gi, '').replace(' ', '')}`} target='_blank'><p className='flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-600'>
                         <BsWhatsapp className='text-center text-sm text-green-600' />
                         +55 {telefone}
                     </p>
