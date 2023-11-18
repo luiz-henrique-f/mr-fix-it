@@ -165,7 +165,7 @@ const ProfessionalCategory = ({ categoria }: ProfessionalCategoryProps) => {
             </Dialog>
             <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />
 
-            <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>Categoria que atende</h1>
+            <h1 className='flex justify-center font-bold text-2xl text-primaryDarker dark:text-white items-center'>Categoria</h1>
 
             <div className='items-center'>
                 <CategoryItems items={categoria} />
