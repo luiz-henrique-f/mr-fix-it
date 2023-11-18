@@ -12,7 +12,7 @@ import { AiFillStar } from 'react-icons/ai'
 import Button from '@/components/Button';
 import { FiLogIn } from 'react-icons/fi';
 import Link from 'next/link';
-import { Comentarios_Prestador } from '@prisma/client';
+// import { Comentarios_Prestador } from '@prisma/client';
 
 const getProfessionalDetails = async (professionalid: string) => {
     const professional = await prisma.prestador.findFirst({
@@ -26,22 +26,22 @@ const getProfessionalDetails = async (professionalid: string) => {
     return professional;
 }
 
-const getCommentsDetails = async (professionalid: string) => {
-    const professional = await prisma.comentarios_Prestador.findMany({
-        where: {
-            id_prestador: professionalid,
-        },
-    }).finally(() => {
-        prisma.$disconnect();
-      });
+// const getCommentsDetails = async (professionalid: string) => {
+//     const professional = await prisma.comentarios_Prestador.findMany({
+//         where: {
+//             id_prestador: professionalid,
+//         },
+//     }).finally(() => {
+//         prisma.$disconnect();
+//       });
 
-    return professional;
-}
+//     return professional;
+// }
 
 
 const ProfessionalDetail = async ({ params }: { params: { professionalid: string } }) => {
     const professional = await getProfessionalDetails(params.professionalid);
-    const data = await getCommentsDetails(params.professionalid);
+    // const data = await getCommentsDetails(params.professionalid);
 
     if (!professional) return null;
 
@@ -94,18 +94,15 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                             </Link>
                         </div>
 
-                        {data.map((comments: Comentarios_Prestador) => (
+                        {/* {data.map((comments: Comentarios_Prestador) => (
                             <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota}/>
-                        ))}
+                        ))} */}
 
-
-                        {/* <ProfessionalRaiting name='Madrid' title='Não recomendo!' message='Ruim, péssimo profissional!' />
-                        <ProfessionalRaiting name='Natan Alonso' title='FAAAAZ O L!!!!' message='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur consequatur ab vero nemo, error deserunt cumque. A aliquam atque sunt, corporis quisquam aut dolore, distinctio delectus alias magni ratione itaque.' /> */}
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProfessionalDetail
+export default ProfessionalDetail;

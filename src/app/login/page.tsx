@@ -136,10 +136,9 @@ const Login = () => {
 
 
 						<Button
-							variant="outlined"
+							variant="login"
 							onClick={() => handleSubmit(onSubmit)()}
 						>
-							<FiLogIn />
 							Entrar
 						</Button>
 

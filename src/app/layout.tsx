@@ -1,15 +1,16 @@
 import { NextAuthProvider } from '@/providers/auth'
 import type { Metadata } from 'next'
+import Link from 'next/link';
 import { Inter } from 'next/font/google'
-import Header from '../components/Header'
-import "./globals.css";
+import ToastProvider from '@/providers/toast';
 import Providers from './data/context/ThemeProvider';
-import Footer from '@/components/Footer';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import ToastProvider from '@/providers/toast';
+import "./globals.css";
+
+import Header from '@/components/Header'
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,7 +35,6 @@ export default function RootLayout({
                 <div>
                   <Header />
                 </div>
-
                 <div className='flex-1'>{children}</div>
                 <Footer />
               </div>

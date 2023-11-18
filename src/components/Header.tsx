@@ -81,7 +81,7 @@ const Header = () => {
     });
 
     return (
-        <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl bg-whiteBG dark:bg-darkBG'>
+        <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-whiteBG/10 bg-whiteBG dark:bg-darkBG'>
             <div className="flex items-center justify-start h-full w-full">
                 <Link href="/" className="inline-flex items-center justify-between">
 

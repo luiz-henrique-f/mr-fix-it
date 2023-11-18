@@ -89,7 +89,7 @@ const UpdatePassword = () => {
     };
 
     return (
-        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-8">
+        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg">
             <Dialog open={open} onClose={handleClose}
                 fullWidth={fullWidth}
                 maxWidth={maxWidth}>
@@ -139,7 +139,7 @@ const UpdatePassword = () => {
                 </DialogActions>
             </Dialog>
 
-            <span onClick={handleClickOpen} className="hover:text-primary cursor-pointer">
+            <span onClick={handleClickOpen} className="hover:text-primary cursor-pointer p-0">
                 Esqueci minha senha
             </span>
 
