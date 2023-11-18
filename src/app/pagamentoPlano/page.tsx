@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { signIn, signOut, useSession } from "next-auth/react";
-// import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 import Button from '@/components/Button';
 import PricingItems from './components/PricingItems';

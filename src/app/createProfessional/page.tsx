@@ -95,22 +95,22 @@ const CreateProfessional = () => {
           })
   });
 
-  const fetchProfessional = async () => {
-    const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
+  // const fetchProfessional = async () => {
+  //   const response = await fetch(`/existProfessional/${(dados?.user as any)?.id}/list`);
 
-    const json = await response.json();
+  //   const json = await response.json();
 
-    console.log(json)
+  //   console.log(json)
 
-    if(json.length > 0){
-      router.push(`/professionals/${id_prestador}`)
-    }
+  //   if(json.length > 0){
+  //     router.push(`/professionals/${id_prestador}`)
+  //   }
 
-  };
+  // };
 
-  React.useEffect(() => {
-    fetchProfessional();
-  })
+  // React.useEffect(() => {
+  //   fetchProfessional();
+  // })
 
   const {
     register,
@@ -258,8 +258,6 @@ const CreateProfessional = () => {
       },
     },
   });
-
-  if (id_prestador) return null;
 
   return (
     <div className='flex justify-center items-center xl:gap-[10%] h-full'>

@@ -189,12 +189,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
 
 
                         <TextField
-                            {...register("celular", {
-                                required: {
-                                    value: true,
-                                    message: 'Campo celular é obrigatório',
-                                }
-                            })}
+                            {...register("celular")}
                             id="celular"
                             label="Celular"
                             onChange={mudarMascaraCelular}

@@ -13,7 +13,7 @@ import Login from "@/app/login/page";
 import Button from "./Button";
 
 import { AiOutlineMenu } from 'react-icons/ai'
-import { BsSunFill } from "react-icons/bs";
+import { BsCheck2Square, BsSunFill } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 import { useRouter } from "next/navigation";
@@ -137,52 +137,75 @@ const Header = () => {
                 </div>
             )}
 
+
+
             {status === "authenticated" && data.user && (
-                <div className="flex items-center gap-3 border-grayLighter border border-solid p-2 px-3 rounded-full relative">
-                    <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl" />
+                <div className="flex gap-5">
 
-                    {theme == 'light' ?
-                        <BiSolidMoon
-                            onClick={() => currentTheme == "dark" ? light() : dark()}
-                            className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
-                        />
-                        :
-                        <BsSunFill
-                            onClick={() => currentTheme == "dark" ? light() : dark()}
-                            className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
-                        />
-                    }
-
-                    <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" />
-
-                    {menuIsOpen && (
-                        <div className="z-50 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
-                            <Link href='/dashboard'>
-                                <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
-                                    Dashboard
-                                </button>
+                    {id_prestador == undefined && (
+                        <div>
+                            <Link href='/createProfessional'>
+                                <Button>
+                                    <BsCheck2Square className='text-white' />
+                                    Completar cadastro
+                                </Button>
                             </Link>
-
-                            <Link href={`/professionals/${id_prestador}`}>
-                                <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
-                                    Meu Perfil
-                                </button>
-                            </Link>
-
-                            <button
-                                className="text-primary text-sm font-semibold"
-                                onClick={() => {
-                                    signOut({ redirect: false }).then(() => {
-                                        router.push("/"); // Redirect to the dashboard page after signing out
-                                    });
-                                }}>
-                                Logout
-                            </button>
                         </div>
                     )}
+                    <div className="flex items-center gap-3 border-grayLighter border border-solid p-2 px-3 rounded-full relative">
+                        <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl" />
+
+                        {theme == 'light' ?
+                            <BiSolidMoon
+                                onClick={() => currentTheme == "dark" ? light() : dark()}
+                                className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
+                            />
+                            :
+                            <BsSunFill
+                                onClick={() => currentTheme == "dark" ? light() : dark()}
+                                className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
+                            />
+                        }
+
+                        {/* <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" /> */}
+
+
+
+                        {menuIsOpen && (
+                            <div className="z-50 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
+
+                                {id_prestador != undefined && (
+                                    <div>
+                                        <Link href='/dashboard'>
+                                            <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
+                                                Dashboard
+                                            </button>
+                                        </Link>
+
+                                        <Link href={`/professionals/${id_prestador}`}>
+                                            <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
+                                                Meu Perfil
+                                            </button>
+                                        </Link>
+                                    </div>
+                                )}
+
+
+                                <button
+                                    className="text-primary text-sm font-semibold"
+                                    onClick={() => {
+                                        signOut({ redirect: false }).then(() => {
+                                            router.push("/"); // Redirect to the dashboard page after signing out
+                                        });
+                                    }}>
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+
+                    </div>
 
                 </div>
-
             )}
         </div>
     )
