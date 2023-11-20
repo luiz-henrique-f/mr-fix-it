@@ -42,6 +42,7 @@ interface ProfessionalInfoProps {
     uf: string;
     telefone: string;
     status: string;
+    urlFoto: string;
 }
 
 interface CreateProfessionalForm {
@@ -59,7 +60,7 @@ type IdPrestadorResponse = {
     id: string;
 };
 
-const ProfessionalInfo = ({ name, city, uf, telefone, status }: ProfessionalInfoProps) => {
+const ProfessionalInfo = ({ name, city, uf, telefone, status, urlFoto }: ProfessionalInfoProps) => {
 
     const { data } = useSession();
     const dados = data;
@@ -251,7 +252,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, status }: ProfessionalInfo
 
             <div className='rounded-full p-[6px] border-4 border-solid border-darkBGLighter dark:border-whiteBG'>
                 <Image
-                    src="/perfil.png"
+                    src={urlFoto}
                     width={140}
                     height={140}
                     className='overflow-hidden rounded-[100%]'
@@ -284,14 +285,17 @@ const ProfessionalInfo = ({ name, city, uf, telefone, status }: ProfessionalInfo
                 <p className='uppercase font-semibold text-sm text-grayPrimary dark:text-grayLighter'>Membro desde: Outubro, 2023</p>
             </div>
 
-            <div className='flex flex-col items-center mb-4'>
-                <Button variant="outlined"
-                    onClick={() => linkAvaliacao()}
-                >
-                    <FiLogIn />
-                    Link para Avaliação
-                </Button>
-            </div>
+            {status == 'authenticated' &&
+                (<div className='flex flex-col items-center mb-4'>
+                    <Button variant="outlined"
+                        onClick={() => linkAvaliacao()}
+                    >
+                        <FiLogIn />
+                        Link para Avaliação
+                    </Button>
+                </div>
+                )}
+
         </div>
     )
 }

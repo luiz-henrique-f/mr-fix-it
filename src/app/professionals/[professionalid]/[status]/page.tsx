@@ -38,10 +38,23 @@ const getCommentsDetails = async (professionalid: string) => {
     return professional;
 }
 
+const getPhotoProfessional = async (professionalid: string) => {
+    const photo = await prisma.foto_Prestador.findFirst({
+        where: {
+            id_prestador: professionalid,
+        },
+    }).finally(() => {
+        prisma.$disconnect();
+      });
+  
+    return photo;
+  }
+
 
 const ProfessionalDetail = async ({ params }: { params: { professionalid: string, status: string } }) => {
     const professional = await getProfessionalDetails(params.professionalid);
     const data = await getCommentsDetails(params.professionalid);
+    const photo = await getPhotoProfessional(params.professionalid);
 
     if (!professional) return null;
 
@@ -68,6 +81,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                         uf={professional?.uf as any}
                         telefone={professional?.celular as any}
                         status={params.status}
+                        urlFoto={photo?.url_foto as any}
                     />
 
                     <ProfessionalCategory

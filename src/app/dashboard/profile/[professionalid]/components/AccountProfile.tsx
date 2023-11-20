@@ -123,15 +123,32 @@ const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: Pr
             if (file) {
               const res = await edgestore.myPublicImages.upload({ file })
 
-              const response = await fetch("http://localhost:3000/uploadFile", {
-                method: "POST",
-                body: Buffer.from(
-                  JSON.stringify({
-                    id_prestador: id_prestador,
-                    url: res.thumbnailUrl,
-                  })
-                ),
-              });
+                const responseFetch = await fetch(`/existeFoto/${id_prestador}`);
+
+                const json = await responseFetch.json();
+
+                if (json.length > 0) {
+                  const responsePut = await fetch("http://localhost:3000/updateFile", {
+                    method: "PUT",
+                    body: Buffer.from(
+                      JSON.stringify({
+                        id_prestador: id_prestador,
+                        url_foto: res.thumbnailUrl,
+                      })
+                    ),
+                  });
+
+                } else {
+                  const responsePost = await fetch("http://localhost:3000/uploadFile", {
+                    method: "POST",
+                    body: Buffer.from(
+                      JSON.stringify({
+                        id_prestador: id_prestador,
+                        url: res.thumbnailUrl,
+                      })
+                    ),
+                  });
+                }
 
               setUrls({
                 url: res.url,
