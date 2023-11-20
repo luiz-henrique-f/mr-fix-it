@@ -8,7 +8,12 @@ import { AiFillSetting } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 
-const SideMenu = () => {
+interface ProfessionalInfoProps {
+  id_prestador: string;
+};
+
+
+const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
   return (
     <>
       <div className='h-[calc(100vh-225px)] flex justify-start items-center'>
@@ -16,7 +21,7 @@ const SideMenu = () => {
           
           <li>
             <Link 
-              href='/dashboard'>
+              href={`/dashboard/${id_prestador}`}>
               <Button variant='icon'>
                 <BsGraphUp />
               </Button>
@@ -26,7 +31,7 @@ const SideMenu = () => {
           <MenuSpacer />
           
           <li>
-            <Link href="/dashboard/profile">
+            <Link href={`/dashboard/profile/${id_prestador}`}>
               <Button variant='icon'>
                 <CgProfile />
               </Button>
@@ -36,7 +41,7 @@ const SideMenu = () => {
           <MenuSpacer />
           
           <li>
-            <Link href="/dashboard/settings">
+            <Link href={`/dashboard/settings/${id_prestador}`}>
               <Button variant='icon'>
                 <AiFillSetting />
               </Button>

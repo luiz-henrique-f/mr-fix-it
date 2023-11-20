@@ -16,7 +16,7 @@ import { HiCurrencyDollar } from 'react-icons/hi2';
 import { FaHammer, FaThumbsUp } from 'react-icons/fa6';
 import { MdSupervisorAccount } from 'react-icons/md';
  
-const Dashboard = () => {
+const Dashboard = ({ params }: { params: { professionalid: string } }) => {
     return (
         <>
             
@@ -38,7 +38,7 @@ const Dashboard = () => {
 
             <h1 className='text-6xl uppercase tracking-[10px] text-gray-500/40 dark:text-gray-400/80 font-bold'>Dashboard</h1>
             <div className='flex gap-12'>
-                <SideMenu />
+                <SideMenu id_prestador={params.professionalid}/>
 
                 <div className='flex justify-between w-full mr-[5%] gap-8'>
 

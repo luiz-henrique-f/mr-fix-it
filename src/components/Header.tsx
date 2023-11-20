@@ -176,13 +176,13 @@ const Header = () => {
 
                                 {id_prestador != undefined && (
                                     <div>
-                                        <Link href='/dashboard'>
+                                        <Link href={`/dashboard/${id_prestador}`}>
                                             <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                                 Dashboard
                                             </button>
                                         </Link>
 
-                                        <Link href={`/professionals/${id_prestador}`}>
+                                        <Link href={`/professionals/${id_prestador}/${status}`}>
                                             <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                                 Meu Perfil
                                             </button>

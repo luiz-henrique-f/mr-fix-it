@@ -2,11 +2,39 @@ import * as React from 'react';
 import { Box, Container, Stack, Unstable_Grid2 as Grid } from '@mui/material';
 import Script from "next/script";
 
-import SideMenu from '../components/SideMenu';
+import SideMenu from '../../[professionalid]/components/SideMenu';
 import AccountProfile from './components/AccountProfile';
 import AccountProfileDetails from './components/AccountProfileDetails';
+import { prisma } from '@/lib/prisma';
 
-const Profile = () => {
+const getProfessionalDetails = async (professionalid: string) => {
+  const professional = await prisma.prestador.findFirst({
+      where: {
+          id: professionalid,
+      },
+  }).finally(() => {
+      prisma.$disconnect();
+    });
+
+  return professional;
+}
+
+const getPhotoProfessional = async (professionalid: string) => {
+  const photo = await prisma.foto_Prestador.findFirst({
+      where: {
+          id_prestador: professionalid,
+      },
+  }).finally(() => {
+      prisma.$disconnect();
+    });
+
+  return photo;
+}
+
+const Profile = async ({ params }: { params: { professionalid: string } }) => {
+  const professional = await getProfessionalDetails(params.professionalid);
+  const photo = await getPhotoProfessional(params.professionalid);
+
   return (
     <>
         
@@ -28,7 +56,7 @@ const Profile = () => {
 
       <h1 className='text-6xl uppercase tracking-[10px] text-gray-500/40 dark:text-gray-400/80 font-bold'>Dashboard</h1>
         <div className='flex flex-row gap-12'>
-          <SideMenu />
+          <SideMenu id_prestador={professional?.id as any}/>
 
           <div className='flex flex-col gap-8 m-4 w-full mr-[5%]'>
             <Box
@@ -50,7 +78,13 @@ const Profile = () => {
                         md={6}
                         lg={4}
                       >
-                        <AccountProfile name='Luiz Madrid' city='Araçatuba' telefone='(18) 98173-9656' uf='SP' />
+                        <AccountProfile 
+                        name={professional?.nome as any} 
+                        city={professional?.cidade as any}
+                        telefone={professional?.celular as any} 
+                        uf={professional?.uf as any}
+                        id_prestador={professional?.id as any}
+                        url_foto={photo?.url_foto as any} />
                       </Grid>
 
                       <Grid
@@ -58,7 +92,16 @@ const Profile = () => {
                         md={6}
                         lg={8}
                       >
-                        <AccountProfileDetails name='Luiz Madrid' city='Araçatuba' uf='SP' telefone='(18) 98173-9656' email='luizmadrid.dev@gmail.com' />
+                        <AccountProfileDetails 
+                        name={professional?.nome as any} 
+                        city={professional?.cidade as any} 
+                        uf={professional?.uf as any}
+                        telefone={professional?.celular as any}
+                        cpf_cnpj={professional?.cpf_cnpj as any} 
+                        observacao={professional?.observacao as any} 
+                        sexo={professional?.sexo as any}
+                        categoria={professional?.tipo_categoria as any}
+                        />
                       </Grid>
 
                     </Grid>

@@ -41,6 +41,7 @@ interface ProfessionalInfoProps {
     city: string;
     uf: string;
     telefone: string;
+    status: string;
 }
 
 interface CreateProfessionalForm {
@@ -58,7 +59,7 @@ type IdPrestadorResponse = {
     id: string;
 };
 
-const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) => {
+const ProfessionalInfo = ({ name, city, uf, telefone, status }: ProfessionalInfoProps) => {
 
     const { data } = useSession();
     const dados = data;
@@ -245,7 +246,8 @@ const ProfessionalInfo = ({ name, city, uf, telefone }: ProfessionalInfoProps) =
                     </Button>
                 </DialogActions>
             </Dialog>
-            <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />
+
+            {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />}
 
             <div className='rounded-full p-[6px] border-4 border-solid border-darkBGLighter dark:border-whiteBG'>
                 <Image

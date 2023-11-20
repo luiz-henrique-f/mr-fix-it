@@ -20,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 interface ProfessionalCategoryProps {
     categoria: string;
+    status: string;
 }
 
 type categorieResponse = {
@@ -39,7 +40,7 @@ interface CreateProfessionalForm {
     observacao: String;
 }
 
-const ProfessionalCategory = ({ categoria }: ProfessionalCategoryProps) => {
+const ProfessionalCategory = ({ categoria, status }: ProfessionalCategoryProps) => {
 
     const { data } = useSession();
     const dados = data;
@@ -163,7 +164,8 @@ const ProfessionalCategory = ({ categoria }: ProfessionalCategoryProps) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />
+
+            {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />}
 
             <h1 className='flex justify-center font-bold text-2xl text-primaryDarker dark:text-white items-center'>Categoria</h1>
 

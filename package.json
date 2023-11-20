@@ -13,6 +13,8 @@
     "@analytics/google-analytics": "^1.0.7",
     "@auth/prisma-adapter": "^1.0.1",
     "@bradgarropy/next-google-analytics": "^1.0.2",
+    "@edgestore/react": "^0.1.4",
+    "@edgestore/server": "^0.1.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.11",
@@ -23,13 +25,16 @@
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@vercel/blob": "^0.15.1",
     "autoprefixer": "10.4.15",
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.0",
+    "cloudinary": "^1.41.0",
     "encoding": "^0.1.13",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "formidable": "^3.5.1",
     "googleapis": "^128.0.0",
     "mdb-easydata": "^1.0.0-alpha5",
     "next": "13.4.19",
@@ -52,6 +57,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/formidable": "^3.4.5",
     "prisma": "^5.1.1"
   }
 }

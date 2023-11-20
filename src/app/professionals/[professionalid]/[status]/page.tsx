@@ -21,7 +21,7 @@ const getProfessionalDetails = async (professionalid: string) => {
         },
     }).finally(() => {
         prisma.$disconnect();
-      });
+    });
 
     return professional;
 }
@@ -33,13 +33,13 @@ const getCommentsDetails = async (professionalid: string) => {
         },
     }).finally(() => {
         prisma.$disconnect();
-      });
+    });
 
     return professional;
 }
 
 
-const ProfessionalDetail = async ({ params }: { params: { professionalid: string } }) => {
+const ProfessionalDetail = async ({ params }: { params: { professionalid: string, status: string } }) => {
     const professional = await getProfessionalDetails(params.professionalid);
     const data = await getCommentsDetails(params.professionalid);
 
@@ -67,38 +67,43 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                         city={professional?.cidade as any}
                         uf={professional?.uf as any}
                         telefone={professional?.celular as any}
+                        status={params.status}
                     />
 
                     <ProfessionalCategory
                         categoria={professional?.tipo_categoria as any}
+                        status={params.status}
                     />
                 </div>
 
                 <div className='w-full 2md:w-3/5 2md:mr-[10%] h-full flex flex-col gap-3'>
                     <ProfessionalDescription
                         description={professional?.observacao as any}
+                        status={params.status}
                     />
 
-                    <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
-                        <div className='flex justify-between'>
-                            <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
-                                <AiFillStar className='text-orange-400' />
-                                Avaliações dos Usuários
-                            </h1>
+                    {params.status == 'unauthenticated' && (
 
-                            <Link href={`/professionalComment/${params.professionalid}`}>
-                                <Button variant="outlined">
-                                    <FiLogIn />
-                                    Adicionar comentário
-                                </Button>
-                            </Link>
+                        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
+                            <div className='flex justify-between'>
+                                <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
+                                    <AiFillStar className='text-orange-400' />
+                                    Avaliações dos Usuários
+                                </h1>
+
+                                <Link href={`/professionalComment/${params.professionalid}`}>
+                                    <Button variant="outlined">
+                                        <FiLogIn />
+                                        Adicionar comentário
+                                    </Button>
+                                </Link>
+                            </div>
+
+                            {data.map((comments: Comentarios_Prestador) => (
+                                <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota} />
+                            ))}
                         </div>
-
-                        {data.map((comments: Comentarios_Prestador) => (
-                            <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota}/>
-                        ))}
-
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

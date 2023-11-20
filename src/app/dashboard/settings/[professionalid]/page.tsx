@@ -1,9 +1,10 @@
 import * as React from 'react';
 import Script from "next/script";
 
-import SideMenu from '../components/SideMenu';
+import SideMenu from '../../[professionalid]/components/SideMenu';
 
-const Settings = () => {
+
+const Settings = ({ params }: { params: { professionalid: string } }) => {
   return (
     <>
         
@@ -25,7 +26,7 @@ const Settings = () => {
 
       <h1 className='text-6xl uppercase tracking-[10px] text-gray-500/40 dark:text-gray-400 font-bold'>Dashboard</h1>
 
-      <SideMenu />
+      <SideMenu id_prestador={params.professionalid}/>
 
     </>
   );

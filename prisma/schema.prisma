@@ -54,6 +54,12 @@ model Tipo_Categoria {
   descricao_categoria String
 }
 
+model Foto_Prestador {
+  id           String @id @default(uuid())
+  id_prestador String
+  url_foto     String
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
