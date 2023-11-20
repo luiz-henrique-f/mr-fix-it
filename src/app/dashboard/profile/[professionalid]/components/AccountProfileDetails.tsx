@@ -6,6 +6,10 @@ import Button from '@/components/Button';
 import { mask, unMask } from 'remask'
 import { IMaskInput } from 'react-imask';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useSession } from 'next-auth/react';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 type IBGEUFResponse = {
   id: number;
@@ -83,6 +87,43 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   //   setSelectedValueCheckbox(event.target.value);
   // };
 
+  const { data } = useSession();
+  const dados = data;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    watch,
+    setError,
+  } = useForm<CreateProfessionalForm>();
+
+  const onSubmit = async (data: CreateProfessionalForm) => {
+    console.log(data)
+    const response = await fetch("http://localhost:3000/updateProfessionalAll", {
+      method: "PUT",
+      body: Buffer.from(
+        JSON.stringify({
+          nome: data.nome,
+          cpf_cnpj: data.cpf_cnpj,
+          celular: data.celular,
+          categoria: data.categoria,
+          sexo: data.sexo,
+          uf: data.uf,
+          cidade: data.cidade,
+          observacao: data.observacao,
+          id_user: (dados?.user as any)?.id
+        })
+      ),
+    });
+
+    const res = await response.json();
+
+    toast.success("Dados alterados com sucesso!", { position: "top-right" });
+
+  }
+
   React.useEffect(() => {
     axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
       .then((response) => {
@@ -132,6 +173,11 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
     setSelectedValueCheckbox(sexo);
   };
 
+  const [valueCelular, setValueCelular] = React.useState(telefone);
+  const mudarMascaraCelular = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
+  }
+
   const [value, setValue] = React.useState(cpf_cnpj);
   const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
@@ -158,14 +204,20 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
               <Grid
                 xs={12}
               >
-                <TextField
-                  fullWidth
-                  label="Nome completo"
-                  name="name"
-                  required
-                  // onChange={handleChange}
-                  value={name}
-                />
+
+              <TextField
+                {...register("nome", {
+                  required: {
+                    value: true,
+                    message: 'Nome é obrigatório',
+                  }
+                })}
+                id="name"
+                label="Nome completo"
+                fullWidth
+                defaultValue={name}
+              >
+              </TextField>
 
               </Grid>
 
@@ -185,10 +237,11 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
 
 
                 <TextField
+                  {...register("cpf_cnpj")}
                   id="cpf"
                   label="CPF/CNPJ"
                   onChange={mudarMascara}
-                  value={value}
+                  defaultValue={cpf_cnpj}
                   fullWidth>
                 </TextField>
 
@@ -201,35 +254,43 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                 xs={12}
                 md={4}
               >
-                
 
-          <TextField
-            id="categorie"
-            select
-            label="Categoria"
-            value={selectedCategorie}
-            // defaultValue=""
-            fullWidth
-            onChange={handleSelectedCategorie}>
-            {categories.map(categorie => (
-              <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                {categorie.descricao_categoria}
-              </MenuItem>
-            ))}
-          </TextField>
+
+                <TextField
+                  {...register("categoria")}
+                  id="categorie"
+                  select
+                  label="Categoria"
+                  value={selectedCategorie}
+                  // defaultValue=""
+                  fullWidth
+                  onChange={handleSelectedCategorie}>
+                  {categories.map(categorie => (
+                    <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                      {categorie.descricao_categoria}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
 
               <Grid
                 xs={12}
                 md={4}
               >
-                <TextField
-                  fullWidth
-                  label="Número de telefone"
-                  name="phone"
-                  // onChange={handleChange}
-                  value={telefone}
-                />
+              <TextField
+                {...register("celular", {
+                  required: {
+                    value: true,
+                    message: 'Campo celular é obrigatório',
+                  }
+                })}
+                id="celular"
+                label="Celular"
+                onChange={mudarMascaraCelular}
+                value={valueCelular}
+                fullWidth>
+
+              </TextField>
               </Grid>
 
               <Grid
@@ -237,6 +298,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                 md={3}
               >
                 <TextField
+                  {...register("uf")}
                   id="uf"
                   select
                   label="UF"
@@ -258,6 +320,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
               >
 
                 <TextField
+                  {...register("cidade")}
                   id="city"
                   select
                   label="Cidade"
@@ -278,6 +341,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                 md={3}
               >
                 <TextField
+                  {...register("sexo")}
                   id="sexo"
                   select
                   label="Sexo"
@@ -302,12 +366,13 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                 md={12}
               >
                 <TextField
+                  {...register("observacao")}
                   label="Sobre você"
                   fullWidth
                   multiline
                   rows={4}
                   maxRows={8}
-                  value={observacao}>
+                  defaultValue={observacao}>
                 </TextField>
               </Grid>
 
@@ -317,7 +382,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
       </Card>
 
       <div className='flex justify-end mt-2'>
-        <Button variant="primary">
+        <Button variant="primary" onClick={() => handleSubmit(onSubmit)()}>
           Salvar
         </Button>
       </div>
