@@ -13,11 +13,24 @@ import Login from "@/app/login/page";
 import Button from "./Button";
 
 import { AiOutlineMenu } from 'react-icons/ai'
+import ChangeButton from '@/components/ChangeButton'
 import { BsCheck2Square, BsSunFill } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
 
+interface CreateProfessionalForm {
+    nome: String;
+    cpf_cnpj: String;
+    celular: String;
+    categoria: String;
+    sexo: String;
+    uf: String;
+    cidade: String;
+    observacao: String;
+  }
 
 interface ProfessionalProps {
     professional: Prestador;
@@ -28,7 +41,37 @@ type IdPrestadorResponse = {
 };
 
 
+
 const Header = () => {
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+      };
+
+    const handleClickOpen = () => {
+        setOpen(true);
+     };
+
+      const {
+        register,
+        handleSubmit,
+      } = useForm<CreateProfessionalForm>();
+
+      const onSubmit = async (data: CreateProfessionalForm) => {
+        // const response = await fetch("http://localhost:3000/updateSobreVoce", {S
+        //   method: "PUT",
+        //   body: Buffer.from(
+        //     JSON.stringify({
+        //       observacao: data.observacao != '' && data.observacao,
+        //       id_user: (dados?.user as any)?.id
+        //     })
+        //   ),
+        // });
+    
+        handleClose()
+    
+      }
+
     const { systemTheme, theme, setTheme } = useTheme();
     const currentTheme = theme === 'system' ? systemTheme : theme;
     // const theme = document.documentElement.classList.contains("dark") ? 'dark' : 'light';
@@ -49,6 +92,8 @@ const Header = () => {
 
     const [menuIsOpen, setMenuIsOpen] = React.useState(false)
     const { status, data } = useSession();
+    const dados = data;
+
     const handleLoginClick = () => signIn();
     const handleLogoutClick = () => {
         setMenuIsOpen(false)
@@ -122,6 +167,39 @@ const Header = () => {
             </div>  */}
 
             {/* onClick={handleLoginClick} */}
+                <Dialog open={open} onClose={handleClose}
+                fullWidth
+                >
+                <DialogTitle>Avalie nosso site!</DialogTitle>
+                <DialogContent>
+                  <Box
+                    component="form"
+                    sx={{
+                      '& .MuiTextField-root': { marginTop: 1 },
+                    }}
+                  >
+                    <TextField
+                      {...register("observacao")}
+                      label="Escreva sua avaliação aqui..."
+                      fullWidth
+                      multiline
+                      rows={4}
+                      maxRows={8}>
+                    </TextField>
+                  </Box>
+                </DialogContent>
+                <DialogActions className='!flex !justify-between'>
+                  <Button variant="outlined"
+                    onClick={handleClose}>
+                    Cancelar
+                  </Button>
+        
+                  <Button variant="outlined"
+                    onClick={() => handleSubmit(onSubmit)()}>
+                    Atualizar
+                  </Button>
+                </DialogActions>
+              </Dialog>
 
             {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
@@ -136,6 +214,7 @@ const Header = () => {
                     </Link>
                 </div>
             )}
+
 
 
 
@@ -175,7 +254,7 @@ const Header = () => {
                             <div className="z-50 p-2 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
 
                                 {id_prestador != undefined && (
-                                    <div className="">
+                                    <div className="flex flex-col items-center justify-center">
                                         <Link href={`/dashboard/${id_prestador}`}>
                                             <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                                 Dashboard
@@ -185,6 +264,12 @@ const Header = () => {
                                         <Link href={`/professionals/${id_prestador}/${status}`}>
                                             <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                                 Meu Perfil
+                                            </button>
+                                        </Link>
+                                        
+                                        <Link onClick={handleClickOpen} href={""}>
+                                            <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
+                                                Avaliar
                                             </button>
                                         </Link>
                                     </div>
