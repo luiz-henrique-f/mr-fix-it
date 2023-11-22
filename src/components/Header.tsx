@@ -20,15 +20,10 @@ import { FiLogIn } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface CreateProfessionalForm {
-    nome: String;
-    cpf_cnpj: String;
-    celular: String;
-    categoria: String;
-    sexo: String;
-    uf: String;
-    cidade: String;
     observacao: String;
   }
 
@@ -38,6 +33,10 @@ interface ProfessionalProps {
 
 type IdPrestadorResponse = {
     id: string;
+};
+
+type NomePrestadorResponse = {
+    nome: string;
 };
 
 
@@ -58,17 +57,19 @@ const Header = () => {
       } = useForm<CreateProfessionalForm>();
 
       const onSubmit = async (data: CreateProfessionalForm) => {
-        // const response = await fetch("http://localhost:3000/updateSobreVoce", {S
-        //   method: "PUT",
-        //   body: Buffer.from(
-        //     JSON.stringify({
-        //       observacao: data.observacao != '' && data.observacao,
-        //       id_user: (dados?.user as any)?.id
-        //     })
-        //   ),
-        // });
+        const response = await fetch("http://localhost:3000/insertFeedback", {
+          method: "POST",
+          body: Buffer.from(
+            JSON.stringify({
+                nome: nome,
+              comentario: data.observacao
+            })
+          ),
+        });
     
         handleClose()
+        toast.success("Avaliação enviada com sucesso. Muito obrigado <3", { position: "top-right" });
+      // router.push(`/professionals/${(dados?.user as any)?.id}`);
     
       }
 
@@ -117,11 +118,13 @@ const Header = () => {
     const router = useRouter()
 
     const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+    const [nome, setNome] = React.useState<NomePrestadorResponse[]>([]);
 
     React.useEffect(() => {
         axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
             .then((response) => {
                 setIdPrestador((response.data[0] as any)?.id)
+                setNome((response.data[0] as any)?.nome)
             })
     });
 
