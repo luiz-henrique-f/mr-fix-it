@@ -172,10 +172,10 @@ const Header = () => {
 
 
                         {menuIsOpen && (
-                            <div className="z-50 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
+                            <div className="z-50 p-2 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
 
                                 {id_prestador != undefined && (
-                                    <div>
+                                    <div className="">
                                         <Link href={`/dashboard/${id_prestador}`}>
                                             <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
                                                 Dashboard
