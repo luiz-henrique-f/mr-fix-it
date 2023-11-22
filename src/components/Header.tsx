@@ -1,27 +1,30 @@
 "use client"
 
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
 import { Prestador } from "@prisma/client";
-import Link from "next/link";
-import React from "react";
 import axios from 'axios';
+import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
+
 
 import Login from "@/app/login/page";
 import Button from "./Button";
 
-import { AiOutlineMenu } from 'react-icons/ai'
-import ChangeButton from '@/components/ChangeButton'
-import { BsCheck2Square, BsSunFill } from "react-icons/bs";
-import { BiSolidMoon } from "react-icons/bi";
-import { FiLogIn } from "react-icons/fi";
-import { useRouter } from "next/navigation";
 import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.min.css';
+
+import { FiLogIn } from "react-icons/fi";
+import { CgProfile } from 'react-icons/cg'
+import { BiSolidMoon } from "react-icons/bi";
+import { AiOutlineMenu, AiFillStar } from 'react-icons/ai'
+import { ImCancelCircle } from "react-icons/im";
+import { BsCheck2Square, BsSunFill, BsGraphUp } from "react-icons/bs";
 
 interface CreateProfessionalForm {
     observacao: String;
@@ -45,16 +48,16 @@ const Header = () => {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
         setOpen(false);
-      };
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
-     };
+    };
 
-      const {
-        register,
-        handleSubmit,
-      } = useForm<CreateProfessionalForm>();
+    const {
+    register,
+    handleSubmit,
+    } = useForm<CreateProfessionalForm>();
 
       const onSubmit = async (data: CreateProfessionalForm) => {
         const response = await fetch("http://localhost:3000/insertFeedback", {
@@ -70,8 +73,8 @@ const Header = () => {
         handleClose()
         toast.success("Avaliação enviada com sucesso. Muito obrigado <3", { position: "top-right" });
       // router.push(`/professionals/${(dados?.user as any)?.id}`);
-    
-      }
+
+    };
 
     const { systemTheme, theme, setTheme } = useTheme();
     const currentTheme = theme === 'system' ? systemTheme : theme;
@@ -224,70 +227,92 @@ const Header = () => {
             {status === "authenticated" && data.user && (
                 <div className="flex gap-5">
 
-                    {id_prestador == undefined && (
-                        <div>
-                            <Link href='/createProfessional'>
-                                <Button>
-                                    <BsCheck2Square className='text-white' />
-                                    Completar cadastro
-                                </Button>
-                            </Link>
-                        </div>
-                    )}
-                    <div className="flex items-center gap-3 border-grayLighter border border-solid p-2 px-3 rounded-full relative">
+                    <div className="absolute right-6 top-28">
+                        {id_prestador == undefined && (
+                            <div className="relative flex justify-center items-center h-full w-full">
+                                <Link href='/createProfessional'>
+                                    <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span>
+                                    <Button variant="custom1">
+                                        <BsCheck2Square className='text-white text-xl' />
+                                        <span className="text-base">Completar cadastro</span>
+                                    </Button>
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex items-center gap-3 border-grayLighter border border-solid py-3 px-6 rounded-lg relative">
                         <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl" />
 
                         {theme == 'light' ?
-                            <BiSolidMoon
+                            <div
                                 onClick={() => currentTheme == "dark" ? light() : dark()}
-                                className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
-                            />
+                                className="cursor-pointer text-black rounded-md bg-grayLighter/25 hover:bg-grayPrimary/30 p-2">
+
+                                <BiSolidMoon className="text-3xl 2sm:text-2xl md:text-base" />
+                            </div>
                             :
-                            <BsSunFill
+                            <div
                                 onClick={() => currentTheme == "dark" ? light() : dark()}
-                                className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl"
-                            />
+                                className="cursor-pointer text-white rounded-md bg-grayLighter/20 hover:bg-grayPrimary/50 p-2">
+
+                                <BsSunFill className="text-3xl 2sm:text-2xl md:text-base" />
+                            </div>
                         }
 
                         {/* <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" /> */}
 
 
-
                         {menuIsOpen && (
-                            <div className="z-50 p-2 absolute top-14 left-0 w-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center dark:bg-zinc-800">
+                            <div className="z-50 p-4 pr-10 absolute top-[68px] left-0 bg-white rounded-lg shadow-md flex flex-col justify-center items-start gap-4 dark:bg-darkBGLighter after:border-l-[20px] after:border-r-[20px] after:border-t-[20px] after:border-transparent after:border-t-white after:absolute after:rotate-180 after:-top-5">
 
                                 {id_prestador != undefined && (
-                                    <div className="flex flex-col items-center justify-center">
+                                    <div className="flex flex-col items-start justify-center gap-4">
                                         <Link href={`/dashboard/${id_prestador}`}>
-                                            <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
-                                                Dashboard
-                                            </button>
+                                            <Button 
+                                                onClick={hidennMenu}
+                                                variant="dropbar">
+                                                
+                                                <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                <span className="text-lg">Dashboard</span>
+                                            </Button>
                                         </Link>
 
                                         <Link href={`/professionals/${id_prestador}/${status}`}>
-                                            <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
-                                                Meu Perfil
-                                            </button>
+                                            <Button 
+                                                onClick={hidennMenu}
+                                                variant="dropbar">
+                                                 
+                                                <CgProfile className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                <span className="text-lg">Meu Perfil</span>
+                                            </Button>
                                         </Link>
                                         
                                         <Link onClick={handleClickOpen} href={""}>
-                                            <button className="text-primary text-sm font-semibold border-b-4" onClick={hidennMenu}>
-                                                Avaliar
-                                            </button>
+                                            <Button 
+                                                onClick={hidennMenu}
+                                                variant="dropbar">
+                                                
+                                                <AiFillStar className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                <span className="text-lg">Avaliar</span>
+                                            </Button>
                                         </Link>
                                     </div>
                                 )}
 
 
-                                <button
-                                    className="text-primary text-sm font-semibold"
+                                <Button
+                                    variant="dropbar"
                                     onClick={() => {
                                         signOut({ redirect: false }).then(() => {
                                             router.push("/"); // Redirect to the dashboard page after signing out
                                         });
                                     }}>
-                                    Logout
-                                </button>
+
+                                    <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                    <span className="text-lg">Logout</span>
+                                </Button>
+                                
                             </div>
                         )}
 

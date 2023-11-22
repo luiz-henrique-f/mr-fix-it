@@ -1,18 +1,18 @@
 import React from 'react';
-import { prisma } from '@/lib/prisma';
+import Link from 'next/link';
 import Image from 'next/image';
+import { prisma } from '@/lib/prisma';
+import { Comentarios_Prestador } from '@prisma/client';
 
+import Button from '@/components/Button';
 import ChangeButton from '@/components/ChangeButton';
-import ProfessionalDescription from './components/ProfessionalDescription';
 import ProfessionalInfo from './components/ProfessionalInfo';
-import ProfessionalCategory from './components/ProfessionalCategory';
 import ProfessionalRaiting from './components/ProfessionalRaiting';
+import ProfessionalCategory from './components/ProfessionalCategory';
+import ProfessionalDescription from './components/ProfessionalDescription';
 
 import { AiFillStar } from 'react-icons/ai'
-import Button from '@/components/Button';
 import { FiLogIn } from 'react-icons/fi';
-import Link from 'next/link';
-import { Comentarios_Prestador } from '@prisma/client';
 
 const getProfessionalDetails = async (professionalid: string) => {
     const professional = await prisma.prestador.findFirst({
@@ -48,7 +48,7 @@ const getPhotoProfessional = async (professionalid: string) => {
       });
   
     return photo;
-  }
+};
 
 
 const ProfessionalDetail = async ({ params }: { params: { professionalid: string, status: string } }) => {

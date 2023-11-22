@@ -1,18 +1,20 @@
 "use client"
 
 import * as React from 'react';
-import Link from "next/link";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Image from 'next/image'
-import { FcGoogle } from "react-icons/fc";
-import { IoIosArrowBack } from "react-icons/io";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from 'react-hook-form';
-import Button from '@/components/Button';
-import { FiLogIn } from 'react-icons/fi';
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import { toast, ToastContainer } from "react-toastify";
+import { useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.min.css';
+
+import Button from '@/components/Button';
 import RegisterCredentialsUser from '@/components/RegisterCredentialsUser';
+
+import { FcGoogle } from "react-icons/fc";
+import { FiLogIn } from 'react-icons/fi';
+import { IoIosArrowBack } from "react-icons/io";
 
 type IBGEUFResponse = {
 	id: number;
@@ -117,19 +119,22 @@ const Login = () => {
 							</button>
 						</div> */}
 
-
+						<span className="text-sm cursor-default p-2 text-gray-400 dark:text-primaryLighter">
+							Conecte-se com seu e-mail e senha!
+						</span>
+						
 						<input
 							{...register("email")}
 							type="text"
-							placeholder="E-mail ou Usuário"
-							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200"
+							placeholder="E-mail"
+							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200/60"
 						/>
 
 						<input
 							{...register("senha")}
 							type="password"
 							placeholder="Senha"
-							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200"
+							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200/60"
 						/>
 
 						<RegisterCredentialsUser />

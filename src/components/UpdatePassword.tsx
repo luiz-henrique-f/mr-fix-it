@@ -1,22 +1,26 @@
 "use client"
 
 import React from 'react';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { Controller, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import Button from '@/components/Button';
+
 import TextField from '@mui/material/TextField';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Controller, useForm } from "react-hook-form";
-import { useSession } from 'next-auth/react';
 import { Box } from '@mui/material';
-import { FiLogIn } from 'react-icons/fi';
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.min.css';
-import Link from 'next/link';
-import { AiOutlineUser } from 'react-icons/ai';
+
+import { ImCancelCircle } from "react-icons/im";
+import { FaRegCheckCircle } from "react-icons/fa";
+
+
 
 interface ProfessionalCategoryProps {
     categoria: string;
@@ -127,13 +131,13 @@ const UpdatePassword = () => {
 
                     <Button variant="outlined"
                         onClick={handleClose}>
-                        <FiLogIn />
+                        <ImCancelCircle />
                         Cancelar
                     </Button>
 
                     <Button variant="outlined"
                         onClick={() => handleSubmit(onSubmit)()}>
-                        <FiLogIn />
+                        <FaRegCheckCircle />
                         Alterar
                     </Button>
                 </DialogActions>

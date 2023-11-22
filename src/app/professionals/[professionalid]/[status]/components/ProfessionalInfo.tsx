@@ -1,30 +1,32 @@
 "use client"
 
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { IMaskInput } from 'react-imask';
+import { Controller, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
+import { mask, unMask } from 'remask'
+import axios from 'axios';
 
 import ChangeButton from '@/components/ChangeButton'
 
-import { BsWhatsapp } from 'react-icons/bs'
-import { FaMapPin } from 'react-icons/fa'
-import Button from '@/components/Button';
+import { Box } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { IMaskInput } from 'react-imask';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Controller, useForm } from "react-hook-form";
-import { useSession } from 'next-auth/react';
-import { Box } from '@mui/material';
+
+import Button from '@/components/Button';
+
+import { BsWhatsapp } from 'react-icons/bs'
+import { FaMapPin } from 'react-icons/fa'
 import { FiLogIn } from 'react-icons/fi';
-import axios from 'axios';
-import MenuItem from '@mui/material/MenuItem';
-import { mask, unMask } from 'remask'
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.min.css';
-import Link from 'next/link';
 
 type IBGEUFResponse = {
     id: number;
@@ -250,12 +252,12 @@ const ProfessionalInfo = ({ name, city, uf, telefone, status, urlFoto }: Profess
 
             {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />}
 
-            <div className='rounded-full p-[6px] border-4 border-solid border-darkBGLighter dark:border-whiteBG'>
+            <div className='rounded-full p-[6px] border-2 border-primary dark:border-primaryLighter'>
                 <Image
                     src={urlFoto}
                     width={140}
                     height={140}
-                    className='overflow-hidden rounded-[100%]'
+                    className='rounded-[100%] h-36 w-36'
                     style={{
                         objectFit: "cover",
                     }}

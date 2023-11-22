@@ -1,23 +1,25 @@
 "use client"
 
 import React from 'react';
-
-import Button from '@/components/Button';
-import TextField from '@mui/material/TextField';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Controller, useForm } from "react-hook-form";
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { Box } from '@mui/material';
-import { FiLogIn } from 'react-icons/fi';
+import { Controller, useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
-import Link from 'next/link';
-import { AiOutlineUser } from 'react-icons/ai';
+
+import Button from '@/components/Button';
 import UpdatePassword from './UpdatePassword';
+
+import { Box } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import Dialog, { DialogProps } from '@mui/material/Dialog';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import { ImCancelCircle } from "react-icons/im";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 interface ProfessionalCategoryProps {
     categoria: string;
@@ -92,7 +94,7 @@ const RegisterCredentialsUser = () => {
     };
 
     return (
-        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-8">
+        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-3">
             <Dialog open={open} onClose={handleClose}
                 fullWidth={fullWidth}
                 maxWidth={maxWidth}>
@@ -138,13 +140,13 @@ const RegisterCredentialsUser = () => {
 
                     <Button variant="outlined"
                         onClick={handleClose}>
-                        <FiLogIn />
+                        <ImCancelCircle />
                         Cancelar
                     </Button>
 
                     <Button variant="outlined"
                         onClick={() => handleSubmit(onSubmit)()}>
-                        <FiLogIn />
+                        <FaRegCheckCircle />
                         Criar
                     </Button>
                 </DialogActions>
@@ -154,7 +156,7 @@ const RegisterCredentialsUser = () => {
                 <UpdatePassword />
 
                 <span className='invisible sm:visible'>|</span>
-                <div className='flex items-center flex-col bg-primaryLighter/25 border border-solid border-gray-300/70 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
+                <div className='flex items-center flex-col bg-gray-200 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
                     <p className='flex-nowrap'>Não tem uma conta?</p>
                     <span onClick={handleClickOpen}><p className='hover:text-primary cursor-pointer'>Cadastre-se</p></span>
                 </div>
