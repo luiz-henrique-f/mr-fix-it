@@ -70,7 +70,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                     alt='Imagem Capa'
                 />
 
-                <ChangeButton variant='secondary' className='absolute top-3 right-3' />
+                {/* <ChangeButton variant='secondary' className='absolute top-3 right-3' /> */}
             </div>
 
             <div className='container relative p-4 mx-auto 2md:flex 2md:gap-10'>
