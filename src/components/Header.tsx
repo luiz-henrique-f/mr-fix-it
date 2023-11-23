@@ -210,7 +210,21 @@ const Header = () => {
             {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
 
-                    {theme == 'light' ? <BiSolidMoon size={16} onClick={() => currentTheme == "dark" ? light() : dark()} className="cursor-pointer text-black " /> : <BsSunFill size={16} onClick={() => currentTheme == "dark" ? light() : dark()} className="cursor-pointer text-white " />}
+                    {theme == 'light' ?
+                        <div
+                            onClick={() => currentTheme == "dark" ? light() : dark()}
+                            className="cursor-pointer text-black rounded-md bg-grayLighter/25 hover:bg-grayPrimary/30 p-2">
+
+                            <BiSolidMoon className="text-base" />
+                        </div>
+                        :
+                        <div
+                            onClick={() => currentTheme == "dark" ? light() : dark()}
+                            className="cursor-pointer text-white rounded-md bg-grayLighter/20 hover:bg-grayPrimary/50 p-2">
+
+                            <BsSunFill className="text-base" />
+                        </div>
+                    };
 
                     <Link href={'/login'}>
                         <Button variant="outlined">
@@ -242,21 +256,21 @@ const Header = () => {
                     </div>
 
                     <div className="flex items-center gap-3 border-grayLighter border border-solid py-3 px-6 rounded-lg relative">
-                        <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-3xl 2sm:text-2xl md:text-xl" />
+                        <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
 
                         {theme == 'light' ?
                             <div
                                 onClick={() => currentTheme == "dark" ? light() : dark()}
                                 className="cursor-pointer text-black rounded-md bg-grayLighter/25 hover:bg-grayPrimary/30 p-2">
 
-                                <BiSolidMoon className="text-3xl 2sm:text-2xl md:text-base" />
+                                <BiSolidMoon className="text-base" />
                             </div>
                             :
                             <div
                                 onClick={() => currentTheme == "dark" ? light() : dark()}
                                 className="cursor-pointer text-white rounded-md bg-grayLighter/20 hover:bg-grayPrimary/50 p-2">
 
-                                <BsSunFill className="text-3xl 2sm:text-2xl md:text-base" />
+                                <BsSunFill className="text-base" />
                             </div>
                         }
 
@@ -264,7 +278,7 @@ const Header = () => {
 
 
                         {menuIsOpen && (
-                            <div className="z-50 p-4 pr-10 absolute top-[68px] left-0 bg-white rounded-lg shadow-md flex flex-col justify-center items-start gap-4 dark:bg-darkBGLighter after:border-l-[20px] after:border-r-[20px] after:border-t-[20px] after:border-transparent after:border-t-white after:absolute after:rotate-180 after:-top-5">
+                            <div className="z-50 p-4 2xl:pr-10 absolute top-[56px] -left-[88px] 2xl:left-2 bg-white rounded-lg shadow-md flex flex-col justify-center items-end 2xl:items-start gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white after:absolute after:rotate-180 after:-top-2">
 
                                 {id_prestador != undefined && (
                                     <div className="flex flex-col items-start justify-center gap-4">
@@ -307,7 +321,8 @@ const Header = () => {
                                         signOut({ redirect: false }).then(() => {
                                             router.push("/"); // Redirect to the dashboard page after signing out
                                         });
-                                    }}>
+                                    }}
+                                    className="relative -left-7 2xl:left-0">
 
                                     <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
                                     <span className="text-lg">Logout</span>

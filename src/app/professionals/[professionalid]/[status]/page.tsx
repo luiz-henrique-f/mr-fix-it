@@ -60,21 +60,20 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
 
     return (
         <div className='h-full'>
-            <div className="relative h-[200px] w-full mb-10">
+            <div className="relative h-1/3 w-full mb-10 bg-gradient-to-br from-primary to-primaryDarker">
                 <Image
-                    src="/capa-tecnology.png"
+                    src="/capa-mrfixit.png"
                     fill
                     style={{
                         objectFit: "cover",
                     }}
-                    alt='Imagem Capa'
+                    alt='Imagem Logo'
                 />
 
-                {/* <ChangeButton variant='secondary' className='absolute top-3 right-3' /> */}
             </div>
 
             <div className='container relative p-4 mx-auto 2md:flex 2md:gap-10'>
-                <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[40%] 2sm:-mt-[20%] 2md:-mt-[10%] xl:-mt-[7%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
+                <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[70%] 2sm:-mt-[25%] 2md:-mt-[20%] xl:-mt-[15%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
                     <ProfessionalInfo
                         name={professional?.nome as any}
                         city={professional?.cidade as any}
