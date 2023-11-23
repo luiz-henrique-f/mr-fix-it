@@ -6,6 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 import Button from '@/components/Button';
 import PricingItems from './components/PricingItems';
+import PlanCard from './components/PlanCard';
 // import CardContainer from './components/PricingCardContainer';
 
 const PagamentoPlano = () => {
@@ -56,60 +57,43 @@ const PagamentoPlano = () => {
   };
 
   return (
-    <div className='flex flex-col 2sm:flex-row gap-12 justify-center items-center h-full p-8'>
-      <div className='flex flex-col bg-gradient-to-b from-whiteBGDarker to-grayPrimary p-10 rounded-md h-[580px] scale-[0.9] 2sm:scale-100 w-[320px] 3xl:w-1/5 gap-2 2sm:hover:drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)] 2sm:hover:scale-[1.03] transition-all duration-[0.4s] ease-[ease-in-out] hover:transition-all hover:duration-[0.4s] hover:ease-[ease-in-out]'>
-        <p className='text-left text-white uppercase font-medium text-lg py-2'>Platina</p>
-
-        <div className='text-left flex flex-row items-baseline gap-2'>
-          <h1 className='font-bold text-white text-5xl -mt-2'>R$200</h1>
-          <span className='text-gray-200 text-lg font-medium -tracking-wider'>Anualmente</span>  
-        </div>
-
-        <p className='text-sm text-gray-300 font-medium -tracking-wider pb-8 border-b-2 border-solid border-gray-300/30'>Melhor opção para profissionais requisitados!</p>
-
-        <div className='relative flex flex-col h-full'>
-          <div className='flex flex-col pt-5 text-gray-300 -tracking-wide font-semibold gap-4'>
-            <PricingItems name='Boost nas buscas.' />
-            <PricingItems name='Acesso ao Dashboard.' />
-            <PricingItems name='Personalização completa do perfil.' />
-          </div>
+    <>
+      <div className='flex flex-col 2sm:flex-row gap-12 justify-center items-center h-full p-8'>
+        <PlanCard 
+          plano='Platina'
+          tipo_plano='Anualmente'
+          valor='R$200'
+          texto='Melhor opção para profissionais requisitados!'
           
-          <Button
-            variant='primary'
-            className='absolute bottom-0 w-full py-3 normal-case text-base'
-            onClick={() => handleBuyClick(5, 'Plano Anual', 12, 'A')}>
-            Escolher Plano
-          </Button>
-        </div>
-      </div>
+          corFundo1='from-whiteBGDarker'
+          corFundo2='to-grayPrimary'
 
-
-      <div className='flex flex-col bg-gradient-to-b from-primary to-primaryDarker p-10 rounded-md h-[580px] scale-[0.9] 2sm:scale-100 w-[320px] 3xl:w-1/5 gap-2 2sm:hover:drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)] 2sm:hover:scale-[1.03] transition-all duration-[0.4s] ease-[ease-in-out] hover:transition-all hover:duration-[0.4s] hover:ease-[ease-in-out]]'>
-        <p className='text-left text-white uppercase font-medium text-lg py-2'>Ametista</p>
-
-        <div className='text-left flex flex-row items-baseline gap-2'>
-          <h1 className='font-bold text-white text-5xl -mt-2'>R$25</h1>
-          <span className='text-gray-200 text-lg font-medium -tracking-wider'>Mensalmente</span>  
-        </div>
-
-        <p className='text-sm text-gray-300 font-medium -tracking-wider pb-8 border-b-2 border-solid border-gray-300/30'>Bom para os que estão começando!</p>
-
-        <div className='relative flex flex-col h-full'>
-          <div className='flex flex-col pt-5 text-gray-300 -tracking-wide font-semibold gap-4'>
-            <PricingItems name='Boost nas buscas.' />
-            <PricingItems name='Acesso ao Dashboard.' />
-          </div>
+          corTexto='text-white'
+          corSubTexto='text-gray-200'
           
-          <Button
-            variant='primary'
-            className='absolute bottom-0 w-full py-3 normal-case text-base bg-primaryLighter hover:bg-primary'
-            onClick={() => handleBuyClick(5, 'Plano Mensal', 1, 'M')}>
-            Escolher Plano
-          </Button>
-        </div>
-      </div>
+          item1={<PricingItems name='Boost nas buscas.' />}
+          item2={<PricingItems name='Acesso ao Dashboard.' />}
+          item3={<PricingItems name='Personalização completa do perfil.' />}
+        />
 
-    </div>
+        <PlanCard 
+          plano='Ametista'
+          tipo_plano='Mensalmente'
+          valor='R$25'
+          texto='Bom para os que estão começando!'
+
+          corFundo1='from-primary'
+          corFundo2='to-primaryDarker'
+
+          corTexto='text-white'
+          corSubTexto='text-gray-200'
+
+          item1={<PricingItems name='Boost nas buscas.' />}
+          item2={<PricingItems name='Acesso ao Dashboard.' />}
+          item3={''}
+        />
+      </div>
+    </>
   );
 };
 // };
