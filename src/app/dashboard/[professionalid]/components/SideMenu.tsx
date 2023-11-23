@@ -1,12 +1,14 @@
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import MenuSpacer from './MenuSpacer';
 import Button from '@/components/Button';
 
-import { AiFillSetting } from 'react-icons/ai'
+import { AiFillSetting, AiFillHome } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
-import { CgProfile } from 'react-icons/cg'
+import { FaUser } from "react-icons/fa";
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 interface ProfessionalInfoProps {
   id_prestador: string;
@@ -16,34 +18,70 @@ interface ProfessionalInfoProps {
 const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
   return (
     <>
-      <div className='h-[calc(100vh-225px)] flex justify-start items-center'>
-        <ul className='text-gray-500/70 dark:text-gray-400/80 font-bold flex flex-col gap-4 text-3xl p-3 rounded-xl ml-4 shadow-xl dark:shadow-whiteBG/10 bg-white dark:bg-darkBGLighter'>
+      <div className='h-[calc(100vh-225px)] flex justify-start items-start'>
+        <ul className='text-gray-500 dark:text-gray-300 font-bold flex flex-col gap-4 text-lg p-2 rounded-2xl bg-white dark:bg-darkBGLighter'>
           
-          <li>
+          <Link
+            href={'/'}
+            className='flex justify-center items-center pt-2'>
+            <Image 
+              src="/Logo_3.0_roxo.png" 
+              height={45} 
+              width={45} 
+              alt='Website Logo'
+            />
+
+          </Link>
+          
+          <MenuSpacer />
+
+          <li className='group'>
+            <Link 
+              href={'/'}>
+              <Button variant='icon'>
+                <AiFillHome className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                <span>Página Inicial</span>
+              </Button>
+            </Link>
+          </li>
+          
+          <MenuSpacer />
+          
+          <li className='group'>
             <Link 
               href={`/dashboard/${id_prestador}`}>
               <Button variant='icon'>
-                <BsGraphUp />
+                <BsGraphUp className='text-xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                <span>Dashboard</span>
               </Button>
             </Link>
           </li>
-
-          <MenuSpacer />
           
-          <li>
+          <li className='group'>
             <Link href={`/dashboard/profile/${id_prestador}`}>
               <Button variant='icon'>
-                <CgProfile />
+                <IoInformationCircleOutline className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                <span>Informações</span>
+              </Button>
+            </Link>
+          </li>
+
+          <li className='group'>
+            <Link href={`/`}>
+              <Button variant='icon'>
+                <FaUser className='text-xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                <span>Perfil</span>
               </Button>
             </Link>
           </li>
 
           <MenuSpacer />
           
-          <li>
+          <li className='group'>
             <Link href={`/dashboard/settings/${id_prestador}`}>
               <Button variant='icon'>
-                <AiFillSetting />
+                <AiFillSetting className='text-xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                <span>Configurações</span>
               </Button>
             </Link>
           </li>

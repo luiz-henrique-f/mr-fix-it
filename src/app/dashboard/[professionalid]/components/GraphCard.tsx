@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, Colors } from 'chart.js';
 
 ChartJS.register(
   CategoryScale,
@@ -8,12 +8,14 @@ ChartJS.register(
   BarElement, 
   Title, 
   Tooltip, 
-  Legend
+  Legend,
+  Colors
 );
 
-const GraphCard = (props: { itemName: string; title: string; valorSeg: number; valorTer: number; valorQua: number; valorQui: number; valorSex: number; valorSab: number; valorDom: number; }) => {
+const GraphCard = (props: { itemName: string; itemName2: string; title: string; }) => {
 
-  const { itemName, title, valorSeg, valorTer, valorQua, valorQui, valorSex, valorSab, valorDom } = props;
+  const { itemName, itemName2, title } = props;
+  
   
   const [chartData, setChartData] = useState({
     datasets: [],
@@ -23,12 +25,19 @@ const GraphCard = (props: { itemName: string; title: string; valorSeg: number; v
 
   useEffect(() => {
     setChartData({
-      labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
       datasets: [
         {
+          label: [itemName2],
+          data: [3, 8, 12, 5, 2, 9, 4, 13, 6, 3, 1, 7],
+          backgroundColor: '#888833bb',
+          borderRadius: 8,
+        }, 
+        {
           label: [itemName],
-          data: [19, [valorTer], [valorQua], [valorQui], [valorSex], [valorSab], [valorDom]],
+          data: [19, 5, 8, 12, 9, 2, 16, 23, 13, 4, 5, 10],
           backgroundColor: '#590BD8bb',
+          borderRadius: 8,
         }, 
       ],
     });
@@ -36,11 +45,17 @@ const GraphCard = (props: { itemName: string; title: string; valorSeg: number; v
     setChartOptions({
       plugins: {
           legend: {
-              position: 'top',
+            position: 'top',
+            labels: {
+              color: '#aaa',
+              usePointStyle: true,
+              pointStyle: 'circle',
+            },
           },
           title: {
-              display: true,
-              text: [title]
+            display: true,
+            text: [title],
+            color: '#aaa',
           },
       },
       maintainAspectRatio: false,
@@ -50,7 +65,7 @@ const GraphCard = (props: { itemName: string; title: string; valorSeg: number; v
   
   return (
     <>
-      <div className='h-[50vh] p-4 border rounded-lg bg-white'>
+      <div className='h-[60vh] p-4 rounded-2xl bg-white dark:bg-darkBGLighter text-black dark:text-white'>
         <Bar data={chartData} options={chartOptions} />
       </div> 
     </>

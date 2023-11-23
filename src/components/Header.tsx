@@ -16,15 +16,15 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import Login from "@/app/login/page";
 import Button from "./Button";
+import ThemeSwitch from "./ThemeSwitch";
 
 import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 
 import { FiLogIn } from "react-icons/fi";
 import { CgProfile } from 'react-icons/cg'
-import { BiSolidMoon } from "react-icons/bi";
 import { AiOutlineMenu, AiFillStar } from 'react-icons/ai'
 import { ImCancelCircle } from "react-icons/im";
-import { BsCheck2Square, BsSunFill, BsGraphUp } from "react-icons/bs";
+import { BsCheck2Square, BsGraphUp } from "react-icons/bs";
 
 interface CreateProfessionalForm {
     observacao: String;
@@ -210,21 +210,7 @@ const Header = () => {
             {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
 
-                    {theme == 'light' ?
-                        <div
-                            onClick={() => currentTheme == "dark" ? light() : dark()}
-                            className="cursor-pointer text-black rounded-md bg-grayLighter/25 hover:bg-grayPrimary/30 p-2">
-
-                            <BiSolidMoon className="text-base" />
-                        </div>
-                        :
-                        <div
-                            onClick={() => currentTheme == "dark" ? light() : dark()}
-                            className="cursor-pointer text-white rounded-md bg-grayLighter/20 hover:bg-grayPrimary/50 p-2">
-
-                            <BsSunFill className="text-base" />
-                        </div>
-                    };
+                    <ThemeSwitch />
 
                     <Link href={'/login'}>
                         <Button variant="outlined">
@@ -258,21 +244,7 @@ const Header = () => {
                     <div className="flex items-center gap-3 border-grayLighter border border-solid py-3 px-6 rounded-lg relative">
                         <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
 
-                        {theme == 'light' ?
-                            <div
-                                onClick={() => currentTheme == "dark" ? light() : dark()}
-                                className="cursor-pointer text-black rounded-md bg-grayLighter/25 hover:bg-grayPrimary/30 p-2">
-
-                                <BiSolidMoon className="text-base" />
-                            </div>
-                            :
-                            <div
-                                onClick={() => currentTheme == "dark" ? light() : dark()}
-                                className="cursor-pointer text-white rounded-md bg-grayLighter/20 hover:bg-grayPrimary/50 p-2">
-
-                                <BsSunFill className="text-base" />
-                            </div>
-                        }
+                        <ThemeSwitch />
 
                         {/* <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" /> */}
 

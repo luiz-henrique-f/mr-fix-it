@@ -5,7 +5,7 @@ const TopCards = (props: { name: string; difference: number; positive?: false | 
   const { name, difference, positive = false, value, icon, color } = props;
 
   return (
-    <Card className='shadow-2xl dark:shadow-whiteBG/10 bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg w-2/4'>
+    <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-2xl w-2/4'>
       <CardContent>
         <Stack
           alignItems="flex-start"
@@ -16,7 +16,6 @@ const TopCards = (props: { name: string; difference: number; positive?: false | 
           
           <Stack spacing={1}>
             <Typography
-              color="text.secondary"
               variant="overline"
               className='-tracking-wide'
             >
@@ -66,7 +65,6 @@ const TopCards = (props: { name: string; difference: number; positive?: false | 
               </Typography>
             </Stack>
             <Typography
-              color="text.secondary"
               variant="caption"
             >
               Desde o último mês

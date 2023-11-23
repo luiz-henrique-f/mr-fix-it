@@ -41,6 +41,10 @@ module.exports = {
         "3xl": "1536px",
         "4xl": "1980px",
       },
+      boxShadow: {
+        "custom-fade":
+          "rgba(24, 18, 62, 0.4) 0rem -0.3125rem, rgba(24, 18, 62, 0.3) 0rem -0.625rem, rgba(24, 18, 62, 0.2) 0rem -0.9375rem, rgba(24, 18, 62, 0.1) 0rem -1.25rem, rgba(24, 18, 62, 0.05) 0rem -1.5625rem;",
+      },
     },
   },
   plugins: [],

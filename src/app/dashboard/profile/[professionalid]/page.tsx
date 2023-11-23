@@ -38,7 +38,7 @@ const Profile = async ({ params }: { params: { professionalid: string } }) => {
   return (
     <>
         
-      <Script
+      {/* <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=G-FWQ879X8DX`}
       />
@@ -52,7 +52,7 @@ const Profile = async ({ params }: { params: { professionalid: string } }) => {
           page_path: window.location.pathname,
           });
         `}
-      </Script>
+      </Script> */}
 
       <h1 className='text-6xl uppercase tracking-[10px] text-gray-500/40 dark:text-gray-400/80 font-bold'>Dashboard</h1>
         <div className='flex flex-row gap-12'>
@@ -79,12 +79,13 @@ const Profile = async ({ params }: { params: { professionalid: string } }) => {
                         lg={4}
                       >
                         <AccountProfile 
-                        name={professional?.nome as any} 
-                        city={professional?.cidade as any}
-                        telefone={professional?.celular as any} 
-                        uf={professional?.uf as any}
-                        id_prestador={professional?.id as any}
-                        url_foto={photo?.url_foto as any} />
+                          name={professional?.nome as any} 
+                          city={professional?.cidade as any}
+                          telefone={professional?.celular as any} 
+                          uf={professional?.uf as any}
+                          id_prestador={professional?.id as any}
+                          url_foto={photo?.url_foto as any} 
+                        />
                       </Grid>
 
                       <Grid
@@ -93,14 +94,14 @@ const Profile = async ({ params }: { params: { professionalid: string } }) => {
                         lg={8}
                       >
                         <AccountProfileDetails 
-                        name={professional?.nome as any} 
-                        city={professional?.cidade as any} 
-                        uf={professional?.uf as any}
-                        telefone={professional?.celular as any}
-                        cpf_cnpj={professional?.cpf_cnpj as any} 
-                        observacao={professional?.observacao as any} 
-                        sexo={professional?.sexo as any}
-                        categoria={professional?.tipo_categoria as any}
+                          name={professional?.nome as any} 
+                          city={professional?.cidade as any} 
+                          uf={professional?.uf as any}
+                          telefone={professional?.celular as any}
+                          cpf_cnpj={professional?.cpf_cnpj as any} 
+                          observacao={professional?.observacao as any} 
+                          sexo={professional?.sexo as any}
+                          categoria={professional?.tipo_categoria as any}
                         />
                       </Grid>
 
