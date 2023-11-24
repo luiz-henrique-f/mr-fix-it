@@ -5,8 +5,9 @@ interface ProfessionalInfoProps {
     categoria: string;
     cidade: string;
     uf: string;
+    nome: string;
 }
-const ProfilesParams = async ({ categoria, cidade, uf }: ProfessionalInfoProps) => {
+const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoProps) => {
     // const prestadores = await prisma.prestador.findMany({
     //     where: {
     //       tipo_categoria: categoria,
@@ -25,6 +26,9 @@ const ProfilesParams = async ({ categoria, cidade, uf }: ProfessionalInfoProps) 
                                                END = 1
                                         AND    CASE WHEN ${categoria} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."tipo_categoria" = ${categoria} THEN 1
+                                               END = 1
+                                        AND    CASE WHEN ${nome} = 'undefined' THEN 1
+                                                    WHEN UPPER("public"."Prestador"."nome") like UPPER('%'||${nome}||'%') THEN 1
                                                END = 1`.finally(() => {
     prisma.$disconnect();
   })

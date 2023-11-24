@@ -17,6 +17,10 @@ type IBGECITYResponse = {
   nome: string;
 };
 
+type NomeResponse = {
+  nome: string;
+};
+
 type categorieResponse = {
   id: string;
   descricao_categoria: string;
@@ -29,6 +33,8 @@ const InputSearch = () => {
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
   const [categories, setCategories] = useState<categorieResponse[]>([]);
   const [cities, setCities] = useState<IBGECITYResponse[]>([]);
+  const [nome, setNomes] = useState<NomeResponse[]>([]);
+  const [selectedNome, setSelectedNome] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedUf, setSelectedUf] = useState("");
   const [selectedCategorie, setSelectedCategorie] = useState("");
@@ -75,6 +81,13 @@ const InputSearch = () => {
     setSelectedCategorie(categorie);
   };
 
+  const handleSelectedNome = (
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const nome = e.target.value;
+    setSelectedNome(nome);
+  };
+
   return (
     <div className="flex justify-evenly items-center mt-4 gap-4">
       <TextField
@@ -86,10 +99,10 @@ const InputSearch = () => {
         onChange={handleSelectedCategorie}
       >
         {categories.map(categorie => (
-                <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                    {categorie.descricao_categoria}
-                </MenuItem>
-            ))}
+          <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+            {categorie.descricao_categoria}
+          </MenuItem>
+        ))}
       </TextField>
 
       <TextField
@@ -101,10 +114,10 @@ const InputSearch = () => {
         onChange={handleSelectedUf}
       >
         {ufs.map(uf => (
-                <MenuItem key={uf.id} value={uf.sigla}>
-                    {uf.nome}
-                </MenuItem>
-            ))}
+          <MenuItem key={uf.id} value={uf.sigla}>
+            {uf.nome}
+          </MenuItem>
+        ))}
 
       </TextField>
 
@@ -113,18 +126,25 @@ const InputSearch = () => {
         select
         label="Cidade"
         fullWidth
-      onChange={handleSelectedCity}
+        onChange={handleSelectedCity}
       >
-        
-            {cities.map(city => (
-                <MenuItem key={city.id} value={city.nome}>
-                    {city.nome}
-                </MenuItem>
-            ))}
+
+        {cities.map(city => (
+          <MenuItem key={city.id} value={city.nome}>
+            {city.nome}
+          </MenuItem>
+        ))}
       </TextField>
-      
-      <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}`}>
-      <SearchButton className='p-3' />
+
+      <TextField
+        id="name"
+        label="Pesquisar por nome"
+        value={selectedNome}
+        fullWidth
+        onChange={handleSelectedNome} />
+
+      <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}`}>
+        <SearchButton className='p-3' />
       </Link>
     </div>
   );
