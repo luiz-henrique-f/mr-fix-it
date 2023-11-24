@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     //     }
     // })
 
-    await prisma.feedback_Prestador.create({
+    await prisma.feedback.create({
       data: {
         nome: nome,
         comentario: comentario,

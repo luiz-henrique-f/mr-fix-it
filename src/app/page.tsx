@@ -5,6 +5,7 @@ import PricesPage from "./components/Prices";
 import QuickSearch from "./components/QuickSearch";
 import SearchSection from "./components/SearchSection";
 import RecommendProfessionals from "./components/RecommendProfessionals";
+import Feedbacks from "./components/Feedbacks";
 
 export default function Home() {
 
@@ -13,10 +14,9 @@ export default function Home() {
       <div>
         <SearchSection />
         <PricesPage />
+        <Feedbacks />
 
 
-        {/* <QuickSearch /> */}
-        {/* <RecommendProfessionals /> */}
       </div>
     </>
   )

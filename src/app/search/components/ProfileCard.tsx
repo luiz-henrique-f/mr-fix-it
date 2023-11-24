@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Button from '@/components/Button';
 
 import { FaMapPin } from 'react-icons/fa'
-import { Foto_Prestador, Prestador } from '@prisma/client';
+import { Prestador } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
