@@ -6,29 +6,9 @@ import Image from 'next/image';
 
 import ThemeSwitch from '@/components/ThemeSwitch';
 
-// const getProfessionalDetails = async (professionalid: string) => {
-//   const professional = await prisma.prestador.findFirst({
-//       where: {
-//           id: professionalid,
-//       },
-//   }).finally(() => {
-//       prisma.$disconnect();
-//     });
-
-//   return professional;
-// }
-
-// const getPhotoProfessional = async (professionalid: string) => {
-//   const photo = await prisma.foto_Prestador.findFirst({
-//       where: {
-//           id_prestador: professionalid,
-//       },
-//   }).finally(() => {
-//       prisma.$disconnect();
-//     });
-
-//   return photo;
-// }
+interface ProfileInfoProps {
+  url_foto: string;
+}
 
 const TopDetails = () => {
 
