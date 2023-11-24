@@ -3,6 +3,7 @@
 import SearchButton from "@/components/SearchButton";
 import { MenuItem, TextField } from "@mui/material";
 import axios from "axios";
+import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 
 type IBGEUFResponse = {
@@ -121,8 +122,10 @@ const InputSearch = () => {
                 </MenuItem>
             ))}
       </TextField>
-
+      
+      <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}`}>
       <SearchButton className='p-3' />
+      </Link>
     </div>
   );
 }

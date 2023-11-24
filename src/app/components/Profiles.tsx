@@ -9,7 +9,7 @@ const Profiles = async () => {
   return (
     <div className='mx-auto grid grid-cols-4 my-8 gap-8'>
       {prestadores.map((prestador) => (
-        <ProfileCard prestador={prestador} url_foto={prestador.url_foto} key={prestador.id} />
+        <ProfileCard prestador={prestador} key={prestador.id} />
       ))}
     </div>
   );

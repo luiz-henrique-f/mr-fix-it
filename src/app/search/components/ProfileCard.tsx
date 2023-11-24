@@ -9,11 +9,10 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
 interface ProfileInfoProps {
-  url_foto: string
   prestador: Prestador 
 };
 
-const ProfileCard = ({ prestador, url_foto }: ProfileInfoProps) => {
+const ProfileCard = ({ prestador }: ProfileInfoProps) => {
 
   return (
     <>
@@ -26,7 +25,7 @@ const ProfileCard = ({ prestador, url_foto }: ProfileInfoProps) => {
           </span>
 
           <Image
-            src={url_foto}
+            src={prestador.url_foto}
             width={140}
             height={140}
             className='rounded-full h-36 w-36 mx-auto my-10 p-0'
