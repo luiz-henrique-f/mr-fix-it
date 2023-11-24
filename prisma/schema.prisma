@@ -19,6 +19,7 @@ model Prestador {
   cidade         String
   uf             String
   observacao     String
+  url_foto       String   @default("")
   created_at     DateTime @default(now())
   tipo_categoria String
   id_user        String

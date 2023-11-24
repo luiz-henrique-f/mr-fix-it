@@ -6,27 +6,15 @@ import Button from '@/components/Button';
 import { FaMapPin } from 'react-icons/fa'
 import { Foto_Prestador, Prestador } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
+import Link from 'next/link';
 
 interface ProfileInfoProps {
-  id_prestador: string
+  url_foto: string
   prestador: Prestador 
 };
 
-const ProfileCard = ({ prestador, id_prestador }: ProfileInfoProps) => {
-  const getFoto = async (professionalid: string) => {
-    const foto = await prisma.foto_Prestador.findMany({
-      where: {
-        id_prestador: professionalid,
-      },
-      select: {
-        url_foto: true
-      },
-    }).finally(() => {
-      prisma.$disconnect();
-    });
+const ProfileCard = ({ prestador, url_foto }: ProfileInfoProps) => {
 
-    return foto;
-  }
   return (
     <>
       <div>
@@ -38,7 +26,7 @@ const ProfileCard = ({ prestador, id_prestador }: ProfileInfoProps) => {
           </span>
 
           <Image
-            src={getFoto(id_prestador) as any}
+            src={url_foto}
             width={140}
             height={140}
             className='rounded-full h-36 w-36 mx-auto my-10 p-0'
@@ -59,9 +47,11 @@ const ProfileCard = ({ prestador, id_prestador }: ProfileInfoProps) => {
           </div>
 
           <div className="flex items-center justify-center gap-2 w-[80%] mx-auto mt-5 mb-10">
+          <Link href={`/professionals/${prestador.id}/unauthenticated`}>
             <Button variant='login'>
               Visitar
             </Button>
+            </Link>
           </div>
 
           <div className="border-t-2 border-whiteBG text-black p-4 text-xs 3xl:text-base font-semibold flex justify-around items-center gap-2">

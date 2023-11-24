@@ -28,9 +28,9 @@ const InputSearch = () => {
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
   const [categories, setCategories] = useState<categorieResponse[]>([]);
   const [cities, setCities] = useState<IBGECITYResponse[]>([]);
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedUf, setSelectedUf] = useState('');
-  const [selectedCategorie, setSelectedCategorie] = useState("Construção");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedUf, setSelectedUf] = useState("");
+  const [selectedCategorie, setSelectedCategorie] = useState("");
 
   useEffect(() => {
     axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
@@ -47,7 +47,7 @@ const InputSearch = () => {
   }, [selectedUf]);
 
   useEffect(() => {
-    axios.get('/categoria')
+    axios.get('/api/categoria')
       .then((response) => {
         setCategories(response.data)
       });
@@ -76,13 +76,6 @@ const InputSearch = () => {
 
   return (
     <div className="flex justify-evenly items-center mt-4 gap-4">
-      {/* <TextField
-            id="categorie"
-            label="Categoria"
-            defaultValue={cityNow}
-            fullWidth>
-          </TextField> */}
-
       <TextField
         id="categorie"
         select
