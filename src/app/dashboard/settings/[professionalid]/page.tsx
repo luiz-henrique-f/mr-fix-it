@@ -1,32 +1,29 @@
 import * as React from 'react';
-import Script from "next/script";
 
 import SideMenu from '../../[professionalid]/components/SideMenu';
+import TopDetails from '../../[professionalid]/components/TopDetails';
 
 
 const Settings = ({ params }: { params: { professionalid: string } }) => {
   return (
     <>
-        
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-FWQ879X8DX`}
-      />
+      <div className='absolute top-0 left-0 h-screen w-screen bg-gradient-to-b from-primaryDarker from-35% to-35% to-whiteBG dark:to-darkBG overflow-hidden'>
+        <div className='flex gap-4 m-6'>
+          <SideMenu id_prestador={params.professionalid}/>
 
-      <Script id="gtm-script" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-FWQ879X8DX', {
-          page_path: window.location.pathname,
-          });
-        `}
-      </Script>
+          <div className='flex flex-col w-full gap-4'>
+            <div className='flex justify-end items-center mb-4'>
+              <TopDetails />
+            </div>
 
-      <h1 className='text-6xl uppercase tracking-[10px] text-gray-500/40 dark:text-gray-400 font-bold'>Dashboard</h1>
+            <div>
+              {/* conteudo da pagina aqui! */}
+            </div>
+            
+          </div>
 
-      <SideMenu id_prestador={params.professionalid}/>
+        </div>
+      </div>
 
     </>
   );

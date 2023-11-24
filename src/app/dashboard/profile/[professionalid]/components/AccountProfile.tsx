@@ -39,7 +39,7 @@ const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: Pr
   };
 
   return (
-    <Card className='shadow-2xl dark:shadow-whiteBG/10 bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'>
+    <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'>
       <CardContent>
 
         <div>

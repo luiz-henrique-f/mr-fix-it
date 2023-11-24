@@ -11,9 +11,10 @@ const PricesPage = () => {
         <h1 className='font-bold m-6 text-xl uppercase'>Nossos Planos</h1>
         <p>Escolha o melhor plano para você!!</p>
 
-        <div className='flex'>
+        <div className='flex mt-12 drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)]'>
           <PlanCard 
-            plano='Gratuito'
+            className="2sm:hover:drop-shadow-none"
+          
             tipo_plano=''
             valor='R$0'
             texto='Para clientes que somente querem pesquisar profissionais!'
@@ -30,7 +31,8 @@ const PricesPage = () => {
           />
 
           <PlanCard 
-            plano='Ametista'
+            className="scale-110 my-1 z-50"
+          
             tipo_plano='Mensalmente'
             valor='R$25'
             texto='Bom para os que estão começando!'
@@ -47,7 +49,8 @@ const PricesPage = () => {
           />
 
           <PlanCard 
-            plano='Platina'
+            className="2sm:hover:drop-shadow-none"
+
             tipo_plano='Anualmente'
             valor='R$200'
             texto='Melhor opção para profissionais requisitados!'

@@ -60,7 +60,8 @@ const PagamentoPlano = () => {
     <>
       <div className='flex flex-col 2sm:flex-row gap-12 justify-center items-center h-full p-8'>
         <PlanCard 
-          plano='Platina'
+          className='2sm:hover:drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)] 2sm:hover:scale-[1.03] transition-all duration-[0.4s] ease-[ease-in-out] hover:transition-all hover:duration-[0.4s] hover:ease-[ease-in-out]'
+        
           tipo_plano='Anualmente'
           valor='R$200'
           texto='Melhor opção para profissionais requisitados!'
@@ -76,8 +77,9 @@ const PagamentoPlano = () => {
           item3={<PricingItems name='Personalização completa do perfil.' />}
         />
 
-        <PlanCard 
-          plano='Ametista'
+        <PlanCard
+          className='2sm:hover:drop-shadow-[25px_25px_5px_rgba(102,102,102,0.3)] 2sm:hover:scale-[1.03] transition-all duration-[0.4s] ease-[ease-in-out] hover:transition-all hover:duration-[0.4s] hover:ease-[ease-in-out]'
+        
           tipo_plano='Mensalmente'
           valor='R$25'
           texto='Bom para os que estão começando!'

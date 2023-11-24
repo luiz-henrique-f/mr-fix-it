@@ -1,15 +1,41 @@
 "use client"
 
 import * as React from 'react'
-import { Box, Card, CardContent, CardHeader, TextField, Unstable_Grid2 as Grid, MenuItem } from '@mui/material';
-import Button from '@/components/Button';
 import { mask, unMask } from 'remask'
 import { IMaskInput } from 'react-imask';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useSession } from 'next-auth/react';
 import { toast, ToastContainer } from "react-toastify";
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.min.css';
+
+import Button from '@/components/Button';
+
+import { Box, Card, CardContent, CardHeader, TextField, Unstable_Grid2 as Grid, MenuItem } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#aaa"
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#aaa"
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#aaa"
+          },
+          "& .MuiOutlinedInput-input": {
+            color: "#aaa"
+          },
+        }
+      }
+    }
+  }
+});
 
 type IBGEUFResponse = {
   id: number;
@@ -184,209 +210,328 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   }
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      // onSubmit={handleSubmit}
-      className='shadow-2xl dark:shadow-whiteBG/10 bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'
-    >
-      <Card className='shadow-none'>
-        <CardHeader
-          title="Seu perfil"
-          subheader="Mantenha suas informações atualizadas!"
-        />
-        <CardContent sx={{ pt: 0 }}>
-          <Box sx={{ m: -1.5 }}>
-            <Grid
-              container
-              spacing={3}
-            >
+    <ThemeProvider theme={theme}>
+
+    
+      <form
+        autoComplete="off"
+        noValidate
+        // onSubmit={handleSubmit}
+        className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'
+      >
+        <Card className='shadow-none bg-white dark:bg-darkBGLighter'>
+          <div className='p-4 flex flex-col justify-center items-start gap-1'>
+            <h1 className='text-2xl font-semibold text-black dark:text-white'>Seu perfil</h1>
+            <p className='text-lg text-gray-400 dark:text-gray-500'>Mantenha suas informações atualizadas!</p>
+          </div>
+          
+          <CardContent sx={{ pt: 0 }}>
+            <Box sx={{ m: -1.5 }}>
               <Grid
-                xs={12}
+                container
+                spacing={3}
               >
-
-              <TextField
-                {...register("nome", {
-                  required: {
-                    value: true,
-                    message: 'Nome é obrigatório',
-                  }
-                })}
-                id="name"
-                label="Nome completo"
-                fullWidth
-                defaultValue={name}
-              >
-              </TextField>
-
-              </Grid>
-
-              <Grid
-                xs={12}
-                md={4}
-              >
-                {/* <TextField
-                  fullWidth
-                  label="E-mail"
-                  name="email"
-                  required
-                  // onChange={handleChange}
-                  value={email}
-                /> */}
-
-
+                <Grid
+                  xs={12}
+                >
 
                 <TextField
-                  {...register("cpf_cnpj")}
-                  id="cpf"
-                  label="CPF/CNPJ"
-                  onChange={mudarMascara}
-                  defaultValue={cpf_cnpj}
-                  fullWidth>
+                  {...register("nome", {
+                    required: {
+                      value: true,
+                      message: 'Nome é obrigatório',
+                    }
+                  })}
+                  id="name"
+                  label="Nome completo"
+                  fullWidth
+                  defaultValue={name}
+                  sx={{
+                    input: {
+                      color: '#aaa',
+                    },
+                    label: {
+                      color: '#aaa',
+                    },
+                    select: {
+                      color: '#aaa',
+                    },
+                    svg: {
+                      color: '#aaa',
+                    },
+                  }}
+                >
                 </TextField>
 
-              </Grid>
+                </Grid>
+
+                <Grid
+                  xs={12}
+                  md={4}
+                >
+                  {/* <TextField
+                    fullWidth
+                    label="E-mail"
+                    name="email"
+                    required
+                    // onChange={handleChange}
+                    value={email}
+                  /> */}
+
+
+
+                  <TextField
+                    {...register("cpf_cnpj")}
+                    id="cpf"
+                    label="CPF/CNPJ"
+                    onChange={mudarMascara}
+                    defaultValue={cpf_cnpj}
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                  >
+                  </TextField>
+
+                </Grid>
 
 
 
 
-              <Grid
-                xs={12}
-                md={4}
-              >
+                <Grid
+                  xs={12}
+                  md={4}
+                >
 
 
+                  <TextField
+                    {...register("categoria")}
+                    id="categorie"
+                    select
+                    label="Categoria"
+                    value={selectedCategorie}
+                    // defaultValue=""
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                    onChange={handleSelectedCategorie}>
+                    {categories.map(categorie => (
+                      <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                        {categorie.descricao_categoria}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+                <Grid
+                  xs={12}
+                  md={4}
+                >
                 <TextField
-                  {...register("categoria")}
-                  id="categorie"
-                  select
-                  label="Categoria"
-                  value={selectedCategorie}
-                  // defaultValue=""
+                  {...register("celular", {
+                    required: {
+                      value: true,
+                      message: 'Campo celular é obrigatório',
+                    }
+                  })}
+                  id="celular"
+                  label="Celular"
+                  onChange={mudarMascaraCelular}
+                  value={valueCelular}
                   fullWidth
-                  onChange={handleSelectedCategorie}>
-                  {categories.map(categorie => (
-                    <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                      {categorie.descricao_categoria}
+                  sx={{
+                    input: {
+                      color: '#aaa',
+                    },
+                    label: {
+                      color: '#aaa',
+                    },
+                    select: {
+                      color: '#aaa',
+                    },
+                    svg: {
+                      color: '#aaa',
+                    },
+                  }}
+                >
+
+                </TextField>
+                </Grid>
+
+                <Grid
+                  xs={12}
+                  md={3}
+                >
+                  <TextField
+                    {...register("uf")}
+                    id="uf"
+                    select
+                    label="UF"
+                    name='uf'
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                    defaultValue={uf}
+                    onChange={handleSelectedUf}>
+                    {ufs.map(uf => (
+                      <MenuItem key={uf.id} value={uf.sigla}>
+                        {uf.nome}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+                <Grid
+                  xs={12}
+                  md={6}
+                >
+
+                  <TextField
+                    {...register("cidade")}
+                    id="city"
+                    select
+                    label="Cidade"
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                    defaultValue={city}
+                    onChange={handleSelectedCity}>
+                    {cities.map(city => (
+                      <MenuItem key={city.id} value={city.nome}>
+                        {city.nome}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+
+                <Grid
+                  xs={12}
+                  md={3}
+                >
+                  <TextField
+                    {...register("sexo")}
+                    id="sexo"
+                    select
+                    label="Sexo"
+                    value={selectedValueCheckbox}
+                    // defaultValue=""
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                    onChange={changeCheckbox}>
+                    <MenuItem key="M" value="M">
+                      Masculino
                     </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-
-              <Grid
-                xs={12}
-                md={4}
-              >
-              <TextField
-                {...register("celular", {
-                  required: {
-                    value: true,
-                    message: 'Campo celular é obrigatório',
-                  }
-                })}
-                id="celular"
-                label="Celular"
-                onChange={mudarMascaraCelular}
-                value={valueCelular}
-                fullWidth>
-
-              </TextField>
-              </Grid>
-
-              <Grid
-                xs={12}
-                md={3}
-              >
-                <TextField
-                  {...register("uf")}
-                  id="uf"
-                  select
-                  label="UF"
-                  name='uf'
-                  fullWidth
-                  defaultValue={uf}
-                  onChange={handleSelectedUf}>
-                  {ufs.map(uf => (
-                    <MenuItem key={uf.id} value={uf.sigla}>
-                      {uf.nome}
+                    <MenuItem key="F" value="F">
+                      Feminino
                     </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-
-              <Grid
-                xs={12}
-                md={6}
-              >
-
-                <TextField
-                  {...register("cidade")}
-                  id="city"
-                  select
-                  label="Cidade"
-                  fullWidth
-                  defaultValue={city}
-                  onChange={handleSelectedCity}>
-                  {cities.map(city => (
-                    <MenuItem key={city.id} value={city.nome}>
-                      {city.nome}
+                    <MenuItem key="NE" value="NE">
+                      Não Especificar
                     </MenuItem>
-                  ))}
-                </TextField>
+                  </TextField>
+                </Grid>
+
+                <Grid
+                  xs={12}
+                  md={12}
+                >
+                  <TextField
+                    {...register("observacao")}
+                    label="Sobre você"
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                    multiline
+                    rows={4}
+                    maxRows={8}
+                    defaultValue={observacao}>
+                  </TextField>
+                </Grid>
+
               </Grid>
+            </Box>
+          </CardContent>
+        </Card>
 
-
-              <Grid
-                xs={12}
-                md={3}
-              >
-                <TextField
-                  {...register("sexo")}
-                  id="sexo"
-                  select
-                  label="Sexo"
-                  value={selectedValueCheckbox}
-                  // defaultValue=""
-                  fullWidth
-                  onChange={changeCheckbox}>
-                  <MenuItem key="M" value="M">
-                    Masculino
-                  </MenuItem>
-                  <MenuItem key="F" value="F">
-                    Feminino
-                  </MenuItem>
-                  <MenuItem key="NE" value="NE">
-                    Não Especificar
-                  </MenuItem>
-                </TextField>
-              </Grid>
-
-              <Grid
-                xs={12}
-                md={12}
-              >
-                <TextField
-                  {...register("observacao")}
-                  label="Sobre você"
-                  fullWidth
-                  multiline
-                  rows={4}
-                  maxRows={8}
-                  defaultValue={observacao}>
-                </TextField>
-              </Grid>
-
-            </Grid>
-          </Box>
-        </CardContent>
-      </Card>
-
-      <div className='flex justify-end mt-2'>
-        <Button variant="primary" onClick={() => handleSubmit(onSubmit)()}>
-          Salvar
-        </Button>
-      </div>
-    </form>
+        <div className='flex justify-end mt-2'>
+          <Button variant="primary" onClick={() => handleSubmit(onSubmit)()}>
+            Salvar
+          </Button>
+        </div>
+      </form>
+    </ThemeProvider>
   );
 };
 

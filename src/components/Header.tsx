@@ -250,7 +250,7 @@ const Header = () => {
 
 
                         {menuIsOpen && (
-                            <div className="z-50 p-4 2xl:pr-10 absolute top-[56px] -left-[88px] 2xl:left-2 bg-white rounded-lg shadow-md flex flex-col justify-center items-end 2xl:items-start gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white after:absolute after:rotate-180 after:-top-2">
+                            <div className="z-50 p-4 2xl:pr-10 absolute top-[56px] -left-[88px] 2xl:left-2 bg-white rounded-lg shadow-md flex flex-col justify-center items-end 2xl:items-start gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2">
 
                                 {id_prestador != undefined && (
                                     <div className="flex flex-col items-start justify-center gap-4">
