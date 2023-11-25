@@ -34,7 +34,7 @@ module.exports = {
         dark: "#717171",
       },
       screens: {
-        sm: "445px",
+        sm: "470px",
         "2sm": "640px",
         "2md": "960px",
         "2xl": "1440px",
