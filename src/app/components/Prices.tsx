@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 
 import PlanCard from '../pagamentoPlano/components/PlanCard';
 import PricingItems from '../pagamentoPlano/components/PricingItems';
