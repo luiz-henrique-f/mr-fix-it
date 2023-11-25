@@ -21,7 +21,7 @@ const theme = createTheme({
             borderColor: "#aaa"
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#aaa"
+            borderColor: "#590BD8"
           },
           "& .MuiOutlinedInput-input": {
             color: "#aaa"
@@ -126,16 +126,28 @@ const InputSearch = () => {
           fullWidth
           sx={{
             input: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             label: {
-              color: '#aaa',
+                '&.Mui-focused': {
+                  color: '#590BD8'
+                },
+              color: '#fff',
             },
             select: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             svg: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
           }}
           onChange={handleSelectedCategorie}
@@ -155,16 +167,28 @@ const InputSearch = () => {
           fullWidth
           sx={{
             input: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             label: {
-              color: '#aaa',
+                '&.Mui-focused': {
+                  color: '#590BD8'
+                },
+              color: '#fff',
             },
             select: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             svg: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
           }}
           onChange={handleSelectedUf}
@@ -184,16 +208,28 @@ const InputSearch = () => {
           fullWidth
           sx={{
             input: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             label: {
-              color: '#aaa',
+                '&.Mui-focused': {
+                  color: '#590BD8'
+                },
+              color: '#fff',
             },
             select: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             svg: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
           }}
           onChange={handleSelectedCity}
@@ -213,16 +249,28 @@ const InputSearch = () => {
           fullWidth
           sx={{
             input: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             label: {
-              color: '#aaa',
+                '&.Mui-focused': {
+                  color: '#590BD8'
+                },
+              color: '#fff',
             },
             select: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
             svg: {
-              color: '#aaa',
+              '&.Mui-focused': {
+                color: '#590BD8'
+            },
+              color: '#fff',
             },
           }}
           onChange={handleSelectedNome} />
