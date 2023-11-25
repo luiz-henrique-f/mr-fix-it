@@ -13,6 +13,7 @@ import ProfessionalDescription from './components/ProfessionalDescription';
 
 import { AiFillStar } from 'react-icons/ai'
 import { FiLogIn } from 'react-icons/fi';
+import AddComent from './components/AddComent';
 
 const getProfessionalDetails = async (professionalid: string) => {
     const professional = await prisma.prestador.findFirst({
@@ -101,12 +102,8 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                                     Avaliações dos Usuários
                                 </h1>
 
-                                <Link href={`/professionalComment/${params.professionalid}`}>
-                                    <Button variant="outlined">
-                                        <FiLogIn />
-                                        Adicionar comentário
-                                    </Button>
-                                </Link>
+                                <AddComent professionalId={params.professionalid} />
+                                
                             </div>
 
                             {data.map((comments: Comentarios_Prestador) => (
