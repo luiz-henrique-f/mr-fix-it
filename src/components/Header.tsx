@@ -28,7 +28,7 @@ import { BsCheck2Square, BsGraphUp } from "react-icons/bs";
 
 interface CreateProfessionalForm {
     observacao: String;
-  }
+}
 
 interface ProfessionalProps {
     professional: Prestador;
@@ -55,24 +55,24 @@ const Header = () => {
     };
 
     const {
-    register,
-    handleSubmit,
+        register,
+        handleSubmit,
     } = useForm<CreateProfessionalForm>();
 
-      const onSubmit = async (data: CreateProfessionalForm) => {
+    const onSubmit = async (data: CreateProfessionalForm) => {
         const response = await fetch("http://localhost:3000/insertFeedback", {
-          method: "POST",
-          body: Buffer.from(
-            JSON.stringify({
-                nome: nome,
-              comentario: data.observacao
-            })
-          ),
+            method: "POST",
+            body: Buffer.from(
+                JSON.stringify({
+                    nome: nome,
+                    comentario: data.observacao
+                })
+            ),
         });
-    
+
         handleClose()
         toast.success("Avaliação enviada com sucesso. Muito obrigado <3", { position: "top-right" });
-      // router.push(`/professionals/${(dados?.user as any)?.id}`);
+        // router.push(`/professionals/${(dados?.user as any)?.id}`);
 
     };
 
@@ -173,39 +173,39 @@ const Header = () => {
             </div>  */}
 
             {/* onClick={handleLoginClick} */}
-                <Dialog open={open} onClose={handleClose}
+            <Dialog open={open} onClose={handleClose}
                 fullWidth
-                >
+            >
                 <DialogTitle>Avalie nosso site!</DialogTitle>
                 <DialogContent>
-                  <Box
-                    component="form"
-                    sx={{
-                      '& .MuiTextField-root': { marginTop: 1 },
-                    }}
-                  >
-                    <TextField
-                      {...register("observacao")}
-                      label="Escreva sua avaliação aqui..."
-                      fullWidth
-                      multiline
-                      rows={4}
-                      maxRows={8}>
-                    </TextField>
-                  </Box>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { marginTop: 1 },
+                        }}
+                    >
+                        <TextField
+                            {...register("observacao")}
+                            label="Escreva sua avaliação aqui..."
+                            fullWidth
+                            multiline
+                            rows={4}
+                            maxRows={8}>
+                        </TextField>
+                    </Box>
                 </DialogContent>
                 <DialogActions className='!flex !justify-between'>
-                  <Button variant="outlined"
-                    onClick={handleClose}>
-                    Cancelar
-                  </Button>
-        
-                  <Button variant="outlined"
-                    onClick={() => handleSubmit(onSubmit)()}>
-                    Atualizar
-                  </Button>
+                    <Button variant="outlined"
+                        onClick={handleClose}>
+                        Cancelar
+                    </Button>
+
+                    <Button variant="outlined"
+                        onClick={() => handleSubmit(onSubmit)()}>
+                        Atualizar
+                    </Button>
                 </DialogActions>
-              </Dialog>
+            </Dialog>
 
             {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
@@ -249,20 +249,23 @@ const Header = () => {
                         {/* <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" /> */}
 
 
-                        {menuIsOpen && (
-                            <div className="z-50 p-4 2xl:pr-10 absolute top-[56px] -left-[88px] 2xl:left-2 bg-white rounded-lg shadow-md flex flex-col justify-center items-end 2xl:items-start gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2">
+                        {/* {menuIsOpen && (
+                            <div className="z-50 absolute top-[56px] -left-[88px] 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-28 2xl:after:left-2">
 
-                                {id_prestador != undefined && (
-                                    <div className="flex flex-col items-start justify-center gap-4">
-                                        <Link href={`/dashboard/${id_prestador}`}>
-                                            <Button 
-                                                onClick={hidennMenu}
-                                                variant="dropbar">
-                                                
-                                                <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                <span className="text-lg">Dashboard</span>
-                                            </Button>
-                                        </Link>
+                                <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
+                                    {id_prestador != undefined && (
+                                        <div>
+                                            <li className="group">
+                                                <Link href={`/dashboard/${id_prestador}`}>
+                                                    <Button 
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
+                                                        
+                                                        <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Dashboard</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
 
                                         <Link href={`/professionals/${id_prestador}`}>
                                             <Button 
@@ -287,25 +290,13 @@ const Header = () => {
                                 )}
 
 
-                                <Button
-                                    variant="dropbar"
-                                    onClick={() => {
-                                        signOut({ redirect: false }).then(() => {
-                                            router.push("/"); // Redirect to the dashboard page after signing out
-                                        });
-                                    }}
-                                    className="relative -left-7 2xl:left-0">
-
-                                    <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                    <span className="text-lg">Logout</span>
-                                </Button>
                                 
                             </div>
-                        )}
+                        )} */}
 
                     </div>
-
                 </div>
+
             )}
         </div>
     )

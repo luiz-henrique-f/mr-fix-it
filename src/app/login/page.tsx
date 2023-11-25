@@ -95,7 +95,7 @@ const Login = () => {
 	}
 
 	return (
-		<div className="flex items-center justify-center flex-col bg-neutral-200 dark:bg-darkBG overflow-hidden">
+		<div className="flex items-center justify-center flex-col overflow-hidden">
 			<div className="rounded-3xl overflow-hidden w-full bg-white h-full shadow-lg shadow-gray-400">
 
 				<div className="absolute top-0 h-full left-0 w-full 2md:w-3/5 xl:w-6/12">
@@ -108,7 +108,7 @@ const Login = () => {
 						</Link>
 					</div>
 
-					<form className="h-full gap-1 flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-darkBG">
+					<form className="h-full gap-1 flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-darkBGLighter">
 						<h1 className="text-3xl 2sm:text-4xl pb-2 font-semibold text-primaryDarker dark:text-walterWhite" title='Laele'>Entre</h1>
 
 						{/* <div className="pb-5 my-5 mx-0 text-primaryDarker dark:text-walterWhite">
@@ -119,7 +119,7 @@ const Login = () => {
 							</button>
 						</div> */}
 
-						<span className="text-sm cursor-default p-2 text-gray-400 dark:text-primaryLighter">
+						<span className="text-sm cursor-default p-2 text-gray-400 dark:text-gray-500">
 							Conecte-se com seu e-mail e senha!
 						</span>
 						
@@ -127,14 +127,14 @@ const Login = () => {
 							{...register("email")}
 							type="text"
 							placeholder="E-mail"
-							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200/60"
+							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200/60 dark:bg-gray-200/20"
 						/>
 
 						<input
 							{...register("senha")}
 							type="password"
 							placeholder="Senha"
-							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200/60"
+							className="text-xs rounded-lg w-full 2sm:w-3/4 md:w-3/5 2md:w-4/5 xl:w-3/5 file:border-none outline-none p-4 my-4 mx-0 bg-gray-200/60 dark:bg-gray-200/20"
 						/>
 
 						<RegisterCredentialsUser />
