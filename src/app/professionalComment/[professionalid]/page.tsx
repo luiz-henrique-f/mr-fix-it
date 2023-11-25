@@ -12,6 +12,8 @@ import { useTheme, styled } from '@mui/material/styles'
 import { Rating, colors, useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 import Button from '@/components/Button';
 
 import { BsCheck2Square } from 'react-icons/bs';
@@ -30,7 +32,7 @@ interface CreateProfessionalForm {
   observacao: String;
 }
 
-interface
+// interface
 
 const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
   function TextMaskCustom(props, ref) {
@@ -81,7 +83,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
 
     const res = await response.json();
 
-    router.push(`/professionals/${params.professionalid}`);
+    router.push(`/professionals/${params.professionalid}/unauthenticated`);
 
   }
   const theme = useTheme();
@@ -91,158 +93,178 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
     setValueCelular(mask(unMask(event.target.value), ['(99) 99999-9999']))
   }
 
-  const PersonalizadoTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: theme.palette.mode === 'light' ? '#111111' : '#e5e7eb',
-    },
-    '& label': {
-      color: theme.palette.mode === 'light' ? '#555555' : '#e5e7eb',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: theme.palette.mode === 'light' ? '#555555' : '#e5e7eb',
-      },
-      '&:hover fieldset': {
-        backgroundColor: theme.palette.mode === 'light' ? '#B2BAC233' : '#B2BAC222',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: theme.palette.mode === 'light' ? '#111111' : '#e5e7eb',
-      },
-    },
+  const themefield = createTheme({
+    components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#aaa"
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#aaa"
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#590BD8"
+            },
+            "& .MuiOutlinedInput-input": {
+              color: "#aaa"
+            },
+          }
+        }
+      }
+    }
   });
 
   const [valueStar, setValueStar] = React.useState<number | null>(0);
 
   return (
-    <div className='flex justify-center items-center xl:gap-[10%] h-full'>
-      <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '96.8%' },
-          }}
-          noValidate
-          autoComplete="off">
+    <ThemeProvider theme={themefield}>
 
-          <TextField
-            {...register("nome", {
-              required: {
-                value: true,
-                message: 'Nome é obrigatório',
-              }
-            })}
-            id="name"
-            label="Nome completo"
-            fullWidth
-            error={!!errors?.nome}
-            helperText={errors?.nome?.message}
-          >
-          </TextField>
+      <div className='flex justify-center items-center xl:gap-[10%] h-full'>
+        <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '96.8%' },
+                input: {
+                    color: '#aaa',
+                },
+                label: {
+                    '&.Mui-focused': {
+                        color: '#590BD8'
+                    },
+                    color: '#aaa',
+                },
+                select: {
+                    color: '#aaa',
+                },
+                svg: {
+                    color: '#aaa',
+                },
+            }}
+            noValidate
+            autoComplete="off">
 
-          <TextField
-            {...register("celular", {
-              required: {
-                value: true,
-                message: 'Campo celular é obrigatório',
-              }
-            })}
-            id="celular"
-            label="Celular"
-            onChange={mudarMascaraCelular}
-            value={valueCelular}
-            fullWidth
-            error={!!errors?.celular}
-            helperText={errors?.celular?.message}>
-          </TextField>
-
-
-
-          <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
             <TextField
-              {...register("titulo_comentario", {
+              {...register("nome", {
                 required: {
                   value: true,
                   message: 'Nome é obrigatório',
                 }
               })}
               id="name"
-              label="Título Comentário"
+              label="Nome completo"
               fullWidth
               error={!!errors?.nome}
               helperText={errors?.nome?.message}
             >
             </TextField>
-          </div>
 
-          <div className='flex flex-col 2sm:flex-row 2sm:justify-center 2sm:gap-2'>
-            <Rating
-              name="simple-controlled"
-              value={valueStar}
-              onChange={(event, newValue) => {
-                setValueStar(newValue);
-                console.log(newValue)
-              }}
+            <TextField
+              {...register("celular", {
+                required: {
+                  value: true,
+                  message: 'Campo celular é obrigatório',
+                }
+              })}
+              id="celular"
+              label="Celular"
+              onChange={mudarMascaraCelular}
+              value={valueCelular}
+              fullWidth
+              error={!!errors?.celular}
+              helperText={errors?.celular?.message}>
+            </TextField>
 
-              icon={
-                <AiFillStar
-                  className='text-orange-400'
-                />
-              }
-              emptyIcon={
-                <AiFillStar
-                  className='text-grayLighter opacity-60 dark:opacity-30'
-                />
-              }>
-            </Rating>
-          </div>
 
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1 },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
+
+            <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
               <TextField
-                {...register("comentario", {
+                {...register("titulo_comentario", {
                   required: {
                     value: true,
-                    message: 'Campo sobre você é obrigatório',
+                    message: 'Nome é obrigatório',
                   }
                 })}
-                id="outlined-multiline-flexible"
-                label="Comentário"
+                id="name"
+                label="Título Comentário"
                 fullWidth
-
-                multiline
-                rows={4}
-                maxRows={8}>
+                error={!!errors?.nome}
+                helperText={errors?.nome?.message}
+              >
               </TextField>
             </div>
+
+            <div className='flex flex-col 2sm:flex-row 2sm:justify-center 2sm:gap-2'>
+              <Rating
+                name="simple-controlled"
+                value={valueStar}
+                onChange={(event, newValue) => {
+                  setValueStar(newValue);
+                  console.log(newValue)
+                }}
+
+                icon={
+                  <AiFillStar
+                    className='text-orange-400'
+                  />
+                }
+                emptyIcon={
+                  <AiFillStar
+                    className='text-grayLighter opacity-60 dark:opacity-30'
+                  />
+                }>
+              </Rating>
+            </div>
+
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1 },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  {...register("comentario", {
+                    required: {
+                      value: true,
+                      message: 'Campo sobre você é obrigatório',
+                    }
+                  })}
+                  id="outlined-multiline-flexible"
+                  label="Comentário"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  maxRows={8}>
+                </TextField>
+              </div>
+            </Box>
           </Box>
-        </Box>
-        <div className="flex flex-row-reverse">
-          <Button onClick={() => handleSubmit(onSubmit)()}>
-            <BsCheck2Square className='text-white' />
-            Salvar
-          </Button>
+          <div className="flex flex-row-reverse">
+            <Button onClick={() => handleSubmit(onSubmit)()}>
+              <BsCheck2Square className='text-white' />
+              Salvar
+            </Button>
+          </div>
+
         </div>
 
+        <div>
+          <Image
+            src="/Queue.png"
+            width={500}
+            height={500}
+            alt="Aside Image"
+            className="relative hidden xl:block"
+          />
+        </div>
       </div>
-
-      <div>
-        <Image
-          src="/Queue.png"
-          width={500}
-          height={500}
-          alt="Aside Image"
-          className="relative hidden xl:block"
-        />
-      </div>
-    </div>
-  )
+    </ThemeProvider>
+  );
 
 };
 

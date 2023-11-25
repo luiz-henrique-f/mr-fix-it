@@ -250,55 +250,65 @@ const Header = () => {
 
 
                         {menuIsOpen && (
-                            <div className="z-50 p-4 2xl:pr-10 absolute top-[56px] -left-[88px] 2xl:left-2 bg-white rounded-lg shadow-md flex flex-col justify-center items-end 2xl:items-start gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2">
+                            <div className="z-50 absolute top-[56px] -left-[88px] 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-28 2xl:after:left-2">
 
-                                {id_prestador != undefined && (
-                                    <div className="flex flex-col items-start justify-center gap-4">
-                                        <Link href={`/dashboard/${id_prestador}`}>
-                                            <Button 
-                                                onClick={hidennMenu}
-                                                variant="dropbar">
-                                                
-                                                <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                <span className="text-lg">Dashboard</span>
-                                            </Button>
-                                        </Link>
+                                <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
+                                    {id_prestador != undefined && (
+                                        <div>
+                                            <li className="group">
+                                                <Link href={`/dashboard/${id_prestador}`}>
+                                                    <Button 
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
+                                                        
+                                                        <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Dashboard</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
 
-                                        <Link href={`/professionals/${id_prestador}/${status}`}>
-                                            <Button 
-                                                onClick={hidennMenu}
-                                                variant="dropbar">
-                                                 
-                                                <CgProfile className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                <span className="text-lg">Meu Perfil</span>
-                                            </Button>
-                                        </Link>
-                                        
-                                        <Link onClick={handleClickOpen} href={""}>
-                                            <Button 
-                                                onClick={hidennMenu}
-                                                variant="dropbar">
-                                                
-                                                <AiFillStar className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                <span className="text-lg">Avaliar</span>
-                                            </Button>
-                                        </Link>
-                                    </div>
-                                )}
+                                            <li className="group">
+                                                <Link href={`/professionals/${id_prestador}/${status}`}>
+                                                    <Button 
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
+                                                        
+                                                        <CgProfile className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Meu Perfil</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
+
+                                            <li className="group">    
+                                                <Link onClick={handleClickOpen} href={""}>
+                                                    <Button 
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
+                                                        
+                                                        <AiFillStar className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Avaliar</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
+                                        </div>
+                                    )}
+                                    <li className="group w-full">
+                                        <Button
+                                            variant="dropbar"
+                                            onClick={() => {
+                                                signOut({ redirect: false }).then(() => {
+                                                    router.push("/"); // Redirect to the dashboard page after signing out
+                                                });
+                                            }}
+                                            className="">
+
+                                            <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                            <span className="text-lg">Logout</span>
+                                        </Button>
+                                    </li>
+                                </ul>
 
 
-                                <Button
-                                    variant="dropbar"
-                                    onClick={() => {
-                                        signOut({ redirect: false }).then(() => {
-                                            router.push("/"); // Redirect to the dashboard page after signing out
-                                        });
-                                    }}
-                                    className="relative -left-7 2xl:left-0">
-
-                                    <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                    <span className="text-lg">Logout</span>
-                                </Button>
                                 
                             </div>
                         )}

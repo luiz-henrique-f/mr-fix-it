@@ -1,10 +1,36 @@
 'use client'
 
-import SearchButton from "@/components/SearchButton";
-import { MenuItem, TextField } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
+
+import SearchButton from "@/components/SearchButton";
+
+import { MenuItem, TextField } from "@mui/material";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#aaa"
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#aaa"
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#aaa"
+          },
+          "& .MuiOutlinedInput-input": {
+            color: "#aaa"
+          },
+        }
+      }
+    }
+  }
+});
 
 type IBGEUFResponse = {
   id: number;
@@ -89,64 +115,123 @@ const InputSearch = () => {
   };
 
   return (
-    <div className="flex justify-evenly items-center mt-4 gap-4">
-      <TextField
-        id="categorie"
-        select
-        label="Categoria"
-        value={selectedCategorie}
-        fullWidth
-        onChange={handleSelectedCategorie}
-      >
-        {categories.map(categorie => (
-          <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-            {categorie.descricao_categoria}
-          </MenuItem>
-        ))}
-      </TextField>
+    <ThemeProvider theme={theme}>
+    
+      <div className="flex justify-evenly items-center mt-4 gap-4">
+        <TextField
+          id="categorie"
+          select
+          label="Categoria"
+          value={selectedCategorie}
+          fullWidth
+          sx={{
+            input: {
+              color: '#aaa',
+            },
+            label: {
+              color: '#aaa',
+            },
+            select: {
+              color: '#aaa',
+            },
+            svg: {
+              color: '#aaa',
+            },
+          }}
+          onChange={handleSelectedCategorie}
+        >
+          {categories.map(categorie => (
+            <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+              {categorie.descricao_categoria}
+            </MenuItem>
+          ))}
+        </TextField>
 
-      <TextField
-        id="uf"
-        select
-        label="UF"
-        name='uf'
-        fullWidth
-        onChange={handleSelectedUf}
-      >
-        {ufs.map(uf => (
-          <MenuItem key={uf.id} value={uf.sigla}>
-            {uf.nome}
-          </MenuItem>
-        ))}
+        <TextField
+          id="uf"
+          select
+          label="UF"
+          name='uf'
+          fullWidth
+          sx={{
+            input: {
+              color: '#aaa',
+            },
+            label: {
+              color: '#aaa',
+            },
+            select: {
+              color: '#aaa',
+            },
+            svg: {
+              color: '#aaa',
+            },
+          }}
+          onChange={handleSelectedUf}
+        >
+          {ufs.map(uf => (
+            <MenuItem key={uf.id} value={uf.sigla}>
+              {uf.nome}
+            </MenuItem>
+          ))}
 
-      </TextField>
+        </TextField>
 
-      <TextField
-        id="city"
-        select
-        label="Cidade"
-        fullWidth
-        onChange={handleSelectedCity}
-      >
+        <TextField
+          id="city"
+          select
+          label="Cidade"
+          fullWidth
+          sx={{
+            input: {
+              color: '#aaa',
+            },
+            label: {
+              color: '#aaa',
+            },
+            select: {
+              color: '#aaa',
+            },
+            svg: {
+              color: '#aaa',
+            },
+          }}
+          onChange={handleSelectedCity}
+        >
 
-        {cities.map(city => (
-          <MenuItem key={city.id} value={city.nome}>
-            {city.nome}
-          </MenuItem>
-        ))}
-      </TextField>
+          {cities.map(city => (
+            <MenuItem key={city.id} value={city.nome}>
+              {city.nome}
+            </MenuItem>
+          ))}
+        </TextField>
 
-      <TextField
-        id="name"
-        label="Pesquisar por nome"
-        value={selectedNome}
-        fullWidth
-        onChange={handleSelectedNome} />
+        <TextField
+          id="name"
+          label="Pesquisar por nome"
+          value={selectedNome}
+          fullWidth
+          sx={{
+            input: {
+              color: '#aaa',
+            },
+            label: {
+              color: '#aaa',
+            },
+            select: {
+              color: '#aaa',
+            },
+            svg: {
+              color: '#aaa',
+            },
+          }}
+          onChange={handleSelectedNome} />
 
-      <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}`}>
-        <SearchButton className='p-3' />
-      </Link>
-    </div>
+        <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}`}>
+          <SearchButton className='p-3' />
+        </Link>
+      </div>
+    </ThemeProvider>
   );
 }
 

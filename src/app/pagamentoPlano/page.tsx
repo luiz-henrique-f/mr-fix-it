@@ -75,6 +75,8 @@ const PagamentoPlano = () => {
           item1={<PricingItems name='Boost nas buscas.' />}
           item2={<PricingItems name='Acesso ao Dashboard.' />}
           item3={<PricingItems name='Personalização completa do perfil.' />}
+
+          link=''
         />
 
         <PlanCard
@@ -93,6 +95,8 @@ const PagamentoPlano = () => {
           item1={<PricingItems name='Boost nas buscas.' />}
           item2={<PricingItems name='Acesso ao Dashboard.' />}
           item3={''}
+
+          link=''
         />
       </div>
     </>

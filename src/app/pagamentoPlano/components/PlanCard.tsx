@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link';
 
 import Button from '@/components/Button'
 import PricingItems from './PricingItems'
@@ -15,9 +16,10 @@ interface ProfessionalInfoProps {
   item2: any;
   item3: any;
   className: string;
+  link: string;
 }
 
-const PlanCard = ({ valor, tipo_plano, texto, corFundo1, corFundo2, corTexto, corSubTexto, item1, item2, item3, className }: ProfessionalInfoProps) => {
+const PlanCard = ({ valor, tipo_plano, texto, corFundo1, corFundo2, corTexto, corSubTexto, item1, item2, item3, className, link }: ProfessionalInfoProps) => {
   return (
     <>
       <div className={className}>
@@ -39,11 +41,13 @@ const PlanCard = ({ valor, tipo_plano, texto, corFundo1, corFundo2, corTexto, co
               {item3}
             </div>
             
-            <Button
-              variant='primaryLight'
-              className='absolute bottom-0 w-full py-3 normal-case text-base'>
-              Escolher Plano
-            </Button>
+            <Link href={link}>
+              <Button
+                variant='primaryLight'
+                className='absolute bottom-0 w-full py-3 normal-case text-base'>
+                Escolher Plano
+              </Button>
+            </Link>
           </div>
 
         </div>
