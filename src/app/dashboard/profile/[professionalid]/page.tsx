@@ -7,6 +7,7 @@ import SideMenu from '../../[professionalid]/components/SideMenu';
 import AccountProfile from './components/AccountProfile';
 import AccountProfileDetails from './components/AccountProfileDetails';
 import TopDetails from '../../[professionalid]/components/TopDetails';
+import { Prestador } from '@prisma/client';
 
 const getProfessionalDetails = async (professionalid: string) => {
   const professional = await prisma.prestador.findFirst({
@@ -32,7 +33,11 @@ const getPhotoProfessional = async (professionalid: string) => {
   return photo;
 }
 
-const Profile = async ({ params }: { params: { professionalid: string } }) => {
+interface ProfileInfoProps {
+  prestador: Prestador 
+};
+
+const Profile = async ({ params }: { params: { professionalid: string, prestador: Prestador } }) => {
   const professional = await getProfessionalDetails(params.professionalid);
   const photo = await getPhotoProfessional(params.professionalid);
 
@@ -46,7 +51,7 @@ const Profile = async ({ params }: { params: { professionalid: string } }) => {
           
           <div className='flex flex-col w-full gap-4'>
             <div className='flex justify-end items-center mb-4'>
-              <TopDetails />
+              <TopDetails prestador={params.prestador} key={params.prestador.id} />
             </div>
           
             <div className='flex flex-col justify-start items-center gap-8'>

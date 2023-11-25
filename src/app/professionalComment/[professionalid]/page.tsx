@@ -30,6 +30,8 @@ interface CreateProfessionalForm {
   observacao: String;
 }
 
+interface
+
 const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
   function TextMaskCustom(props, ref) {
     const { onChange, ...other } = props;

@@ -67,11 +67,11 @@ model Feedback {
   comentario String
 }
 
-// model Feedback_Prestador {
-//   id         String @id @default(uuid())
-//   nome       String
-//   comentario String
-// }
+model Feedback_Prestador {
+  id         String @id @default(uuid())
+  nome       String
+  comentario String
+}
 
 model Account {
   id                String  @id @default(cuid())

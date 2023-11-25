@@ -5,12 +5,13 @@ import { prisma } from '@/lib/prisma';
 import Image from 'next/image';
 
 import ThemeSwitch from '@/components/ThemeSwitch';
+import { Prestador } from '@prisma/client';
 
-interface ProfileInfoProps {
-  url_foto: string;
-}
+interface TopInfoProps {
+  prestador: Prestador 
+};
 
-const TopDetails = () => {
+const TopDetails = ({ prestador }: TopInfoProps) => {
 
   // const professional = await getProfessionalDetails(params.professionalid);
   // const photo = await getPhotoProfessional(params.professionalid);
@@ -21,6 +22,7 @@ const TopDetails = () => {
         <ThemeSwitch />
       
         <Image
+          // src={prestador.url_foto}
           src={'/perfil.png'}
           width={36}
           height={36}
