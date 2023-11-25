@@ -25,9 +25,9 @@ const PricesPage = () => {
             <p className='text-xl tracking-tight'>Escolha o melhor plano para você!!</p>
           </div>
 
-          <div className='flex mt-12 drop-shadow-[0px_25px_30px_rgba(244,244,244,0.3)] dark:drop-shadow-[0px_25px_30px_rgba(200,200,200,0.2)]'>
+          <div className='flex flex-col lg:flex-row mt-12 drop-shadow-[0px_25px_30px_rgba(244,244,244,0.3)] dark:drop-shadow-[0px_25px_30px_rgba(200,200,200,0.2)]'>
             <PlanCard 
-              className=""
+              className="scale-[.85] 2sm:scale-900 lg:scale-100"
             
               tipo_plano=''
               valor='R$0'
@@ -47,7 +47,7 @@ const PricesPage = () => {
             />
 
             <PlanCard 
-              className="scale-110 my-1 z-50"
+              className="scale-95 2sm:scale-100 lg:scale-110 -my-32 2sm:-my-14 lg:my-0 z-50"
             
               tipo_plano='Mensalmente'
               valor='R$25'
@@ -67,7 +67,7 @@ const PricesPage = () => {
             />
 
             <PlanCard 
-              className=""
+              className="scale-[.85] 2sm:scale-90 lg:scale-100"
 
               tipo_plano='Anualmente'
               valor='R$200'

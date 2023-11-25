@@ -57,15 +57,15 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
             </Link>
           </div> */}
 
-          <div className="border-t-4 border-whiteBG dark:border-darkBG text-black dark:text-white p-4 text-xs 3xl:text-base font-semibold flex justify-around items-center gap-2">
-            <div className='flex flex-col 2x:flex-row gap-2 justify-center items-center'>
+          <div className="border-t-4 border-whiteBG dark:border-darkBG text-black dark:text-white p-4 text-xs 3xl:text-sm font-semibold flex justify-around items-center gap-2">
+            <div className='flex flex-col 2xl:flex-row gap-2 justify-center items-center'>
               <p>Categoria:</p>
               <p className="px-4 py-1 bg-primary dark:bg-primaryLighter rounded-md text-white">
                 {prestador.tipo_categoria}
               </p>
             </div>
 
-            <div className='flex flex-col 2x:flex-row gap-2 justify-center items-center'>
+            <div className='flex flex-col 2xl:flex-row gap-2 justify-center items-center'>
               <p>Profissão:</p>
               <p className="px-4 py-1 bg-primary dark:bg-primaryLighter rounded-md text-white">
                 gamer
