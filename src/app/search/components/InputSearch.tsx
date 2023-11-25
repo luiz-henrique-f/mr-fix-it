@@ -117,7 +117,7 @@ const InputSearch = () => {
   return (
     <ThemeProvider theme={theme}>
     
-      <div className="flex justify-evenly items-center mt-4 gap-4">
+      <div className="flex flex-col 2md:flex-row justify-evenly items-center mt-4 gap-4">
         <TextField
           id="categorie"
           select

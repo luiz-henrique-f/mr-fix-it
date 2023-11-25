@@ -7,7 +7,7 @@ const Profiles = async () => {
   });
   
   return (
-    <div className='mx-auto grid grid-cols-4 my-8 gap-8'>
+    <div className='flex flex-col 1sm:grid 1sm:grid-cols-2 2md:grid-cols-3 2xl:grid-cols-4 my-8 gap-8'>
       {prestadores.map((prestador) => (
         <ProfileCard prestador={prestador} key={prestador.id} />
       ))}

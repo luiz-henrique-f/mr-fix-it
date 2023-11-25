@@ -26,7 +26,7 @@ const theme = createTheme({
             borderColor: "#aaa"
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#aaa"
+            borderColor: "#590BD8"
           },
           "& .MuiOutlinedInput-input": {
             color: "#aaa"
@@ -231,6 +231,32 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
               <Grid
                 container
                 spacing={3}
+                sx={{
+                  input: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                  },
+                    color: '#aaa',
+                  },
+                  label: {
+                      '&.Mui-focused': {
+                        color: '#590BD8'
+                      },
+                    color: '#aaa',
+                  },
+                  select: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                  },
+                    color: '#aaa',
+                  },
+                  svg: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                  },
+                    color: '#aaa',
+                  },
+                }}
               >
                 <Grid
                   xs={12}
@@ -247,20 +273,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   label="Nome completo"
                   fullWidth
                   defaultValue={name}
-                  sx={{
-                    input: {
-                      color: '#aaa',
-                    },
-                    label: {
-                      color: '#aaa',
-                    },
-                    select: {
-                      color: '#aaa',
-                    },
-                    svg: {
-                      color: '#aaa',
-                    },
-                  }}
                 >
                 </TextField>
 
@@ -288,20 +300,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     onChange={mudarMascara}
                     defaultValue={cpf_cnpj}
                     fullWidth
-                    sx={{
-                      input: {
-                        color: '#aaa',
-                      },
-                      label: {
-                        color: '#aaa',
-                      },
-                      select: {
-                        color: '#aaa',
-                      },
-                      svg: {
-                        color: '#aaa',
-                      },
-                    }}
                   >
                   </TextField>
 
@@ -324,20 +322,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     value={selectedCategorie}
                     // defaultValue=""
                     fullWidth
-                    sx={{
-                      input: {
-                        color: '#aaa',
-                      },
-                      label: {
-                        color: '#aaa',
-                      },
-                      select: {
-                        color: '#aaa',
-                      },
-                      svg: {
-                        color: '#aaa',
-                      },
-                    }}
                     onChange={handleSelectedCategorie}>
                     {categories.map(categorie => (
                       <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
@@ -363,20 +347,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   onChange={mudarMascaraCelular}
                   value={valueCelular}
                   fullWidth
-                  sx={{
-                    input: {
-                      color: '#aaa',
-                    },
-                    label: {
-                      color: '#aaa',
-                    },
-                    select: {
-                      color: '#aaa',
-                    },
-                    svg: {
-                      color: '#aaa',
-                    },
-                  }}
                 >
 
                 </TextField>
@@ -393,20 +363,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     label="UF"
                     name='uf'
                     fullWidth
-                    sx={{
-                      input: {
-                        color: '#aaa',
-                      },
-                      label: {
-                        color: '#aaa',
-                      },
-                      select: {
-                        color: '#aaa',
-                      },
-                      svg: {
-                        color: '#aaa',
-                      },
-                    }}
                     defaultValue={uf}
                     onChange={handleSelectedUf}>
                     {ufs.map(uf => (
@@ -428,20 +384,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     select
                     label="Cidade"
                     fullWidth
-                    sx={{
-                      input: {
-                        color: '#aaa',
-                      },
-                      label: {
-                        color: '#aaa',
-                      },
-                      select: {
-                        color: '#aaa',
-                      },
-                      svg: {
-                        color: '#aaa',
-                      },
-                    }}
                     defaultValue={city}
                     onChange={handleSelectedCity}>
                     {cities.map(city => (
@@ -465,20 +407,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     value={selectedValueCheckbox}
                     // defaultValue=""
                     fullWidth
-                    sx={{
-                      input: {
-                        color: '#aaa',
-                      },
-                      label: {
-                        color: '#aaa',
-                      },
-                      select: {
-                        color: '#aaa',
-                      },
-                      svg: {
-                        color: '#aaa',
-                      },
-                    }}
                     onChange={changeCheckbox}>
                     <MenuItem key="M" value="M">
                       Masculino
@@ -500,20 +428,6 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     {...register("observacao")}
                     label="Sobre você"
                     fullWidth
-                    sx={{
-                      input: {
-                        color: '#aaa',
-                      },
-                      label: {
-                        color: '#aaa',
-                      },
-                      select: {
-                        color: '#aaa',
-                      },
-                      svg: {
-                        color: '#aaa',
-                      },
-                    }}
                     multiline
                     rows={4}
                     maxRows={8}

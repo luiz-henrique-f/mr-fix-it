@@ -14,7 +14,7 @@ export default function Home() {
       <div>
         <SearchSection />
         <PricesPage />
-        {/* <Feedbacks /> */}
+        <Feedbacks />
       </div>
     </>
   )
