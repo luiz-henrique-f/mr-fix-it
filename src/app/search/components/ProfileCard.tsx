@@ -46,7 +46,7 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
           </div>
 
           <div className="flex items-center justify-center gap-2 w-[80%] mx-auto mt-5 mb-10">
-          <Link href={`/professionals/${prestador.id}/unauthenticated`}>
+          <Link href={`/professionals/${prestador.id}`}>
             <Button variant='login'>
               Visitar
             </Button>

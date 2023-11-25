@@ -43,7 +43,6 @@ interface ProfessionalInfoProps {
     city: string;
     uf: string;
     telefone: string;
-    status: string;
     urlFoto: string;
 }
 
@@ -62,9 +61,9 @@ type IdPrestadorResponse = {
     id: string;
 };
 
-const ProfessionalInfo = ({ name, city, uf, telefone, status, urlFoto }: ProfessionalInfoProps) => {
+const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInfoProps) => {
 
-    const { data } = useSession();
+    const { data, status } = useSession();
     const dados = data;
 
     // const router = useRouter();

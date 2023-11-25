@@ -19,7 +19,7 @@ model Prestador {
   cidade         String
   uf             String
   observacao     String
-  url_foto       String   @default("")
+  url_foto       String   @default("https://avatars.dicebear.com/v2/female/f8a3f576694bbe6737b16d4b3de5aa09.svg")
   created_at     DateTime @default(now())
   tipo_categoria String
   id_user        String

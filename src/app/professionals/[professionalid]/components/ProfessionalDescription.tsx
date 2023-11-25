@@ -21,7 +21,6 @@ import { useSession } from 'next-auth/react';
 
 interface ProfessionalDescriptionProps {
   description: string
-  status: string
 }
 
 interface CreateProfessionalForm {
@@ -36,9 +35,9 @@ interface CreateProfessionalForm {
 }
 
 
-const ProfessionalDescription = ({ description, status }: ProfessionalDescriptionProps) => {
+const ProfessionalDescription = ({ description }: ProfessionalDescriptionProps) => {
 
-  const { data } = useSession();
+  const { data, status } = useSession();
   const dados = data;
 
   // const router = useRouter();

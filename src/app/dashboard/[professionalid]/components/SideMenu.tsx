@@ -67,7 +67,7 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
           </li>
 
           <li className='group'>
-            <Link href={`/`}>
+            <Link href={`/professionals/${id_prestador}`}>
               <Button variant='icon'>
                 <FaUser className='text-xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                 <span>Perfil</span>

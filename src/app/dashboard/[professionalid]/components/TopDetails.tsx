@@ -8,7 +8,7 @@ import ThemeSwitch from '@/components/ThemeSwitch';
 import { Prestador } from '@prisma/client';
 
 interface TopInfoProps {
-  prestador: Prestador 
+  prestador: string 
 };
 
 const TopDetails = ({ prestador }: TopInfoProps) => {

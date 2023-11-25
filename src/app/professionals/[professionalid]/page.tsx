@@ -51,7 +51,7 @@ const getPhotoProfessional = async (professionalid: string) => {
 };
 
 
-const ProfessionalDetail = async ({ params }: { params: { professionalid: string, status: string } }) => {
+const ProfessionalDetail = async ({ params }: { params: { professionalid: string} }) => {
     const professional = await getProfessionalDetails(params.professionalid);
     const data = await getCommentsDetails(params.professionalid);
     const photo = await getPhotoProfessional(params.professionalid);
@@ -79,23 +79,20 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                         city={professional?.cidade as any}
                         uf={professional?.uf as any}
                         telefone={professional?.celular as any}
-                        status={params.status}
                         urlFoto={photo?.url_foto as any}
                     />
 
                     <ProfessionalCategory
                         categoria={professional?.tipo_categoria as any}
-                        status={params.status}
                     />
                 </div>
 
                 <div className='w-full 2md:w-3/5 2md:mr-[10%] h-full flex flex-col gap-3'>
                     <ProfessionalDescription
                         description={professional?.observacao as any}
-                        status={params.status}
                     />
 
-                    {params.status == 'unauthenticated' && (
+                    {/* {params.status == 'unauthenticated' && ( */}
 
                         <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
                             <div className='flex justify-between'>
@@ -116,7 +113,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                                 <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota} />
                             ))}
                         </div>
-                    )}
+                    {/* )} */}
                 </div>
             </div>
         </div>

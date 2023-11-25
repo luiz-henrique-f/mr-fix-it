@@ -6,9 +6,9 @@ export async function PUT(request: Request) {
     
     const { id_prestador, url_foto} = req;
 
-    await prisma.foto_Prestador.updateMany({
+    await prisma.prestador.updateMany({
       where: {
-        id_prestador: id_prestador as any
+        id: id_prestador as any
       },
       data: {
         url_foto: url_foto,

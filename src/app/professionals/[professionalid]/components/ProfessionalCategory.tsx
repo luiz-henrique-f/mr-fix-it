@@ -20,7 +20,6 @@ import MenuItem from '@mui/material/MenuItem';
 
 interface ProfessionalCategoryProps {
     categoria: string;
-    status: string;
 }
 
 type categorieResponse = {
@@ -40,9 +39,9 @@ interface CreateProfessionalForm {
     observacao: String;
 }
 
-const ProfessionalCategory = ({ categoria, status }: ProfessionalCategoryProps) => {
+const ProfessionalCategory = ({ categoria }: ProfessionalCategoryProps) => {
 
-    const { data } = useSession();
+    const { data, status } = useSession();
     const dados = data;
 
     // const router = useRouter();

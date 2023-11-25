@@ -41,7 +41,7 @@ const Dashboard = ({ params }: { params: { professionalid: string } }) => {
 
                     <div className='flex flex-col w-full gap-4'>
                         <div className='flex justify-end items-center mb-4'>
-                            <TopDetails />
+                            <TopDetails prestador={params.professionalid} />
                         </div>
 
                         <div className='flex justify-between gap-4'>

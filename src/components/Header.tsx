@@ -264,7 +264,7 @@ const Header = () => {
                                             </Button>
                                         </Link>
 
-                                        <Link href={`/professionals/${id_prestador}/${status}`}>
+                                        <Link href={`/professionals/${id_prestador}`}>
                                             <Button 
                                                 onClick={hidennMenu}
                                                 variant="dropbar">
