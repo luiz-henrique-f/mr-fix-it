@@ -9,9 +9,9 @@ const PricesPage = () => {
     <>
       <div>
         <svg 
-          className='-mt-32'
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 1440 320">
+
           <path 
             fill="#312A4F" 
             fill-opacity="1" 
@@ -19,7 +19,7 @@ const PricesPage = () => {
           </path>
         </svg>
       
-        <div className='flex flex-col justify-center items-center h-screen bg-primaryDarker -mt-24'>
+        <div className='flex flex-col justify-center items-center h-screen bg-primaryDarker'>
         
           <div className='text-whiteBGDarker font-bold m-6 flex items-center justify-center gap-6 flex-col'>
             <h1 className='text-5xl uppercase tracking-widest'>Nossos Planos</h1>
