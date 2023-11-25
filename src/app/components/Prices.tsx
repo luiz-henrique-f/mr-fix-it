@@ -7,11 +7,11 @@ import PricingItems from '../pagamentoPlano/components/PricingItems';
 const PricesPage = () => {
   return (
     <>
-      <div>
+      <div className='h-full'>
         <svg 
-          className='-mt-32'
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 1440 320">
+
           <path 
             fill="#312A4F" 
             fill-opacity="1" 
@@ -19,7 +19,7 @@ const PricesPage = () => {
           </path>
         </svg>
       
-        <div className='flex flex-col justify-center items-center h-screen bg-primaryDarker -mt-24'>
+        <div className='flex flex-col justify-center items-center bg-primaryDarker'>
         
           <div className='text-whiteBGDarker font-bold m-6 flex items-center justify-center gap-6 flex-col'>
             <h1 className='text-5xl uppercase tracking-widest'>Nossos Planos</h1>
@@ -90,15 +90,16 @@ const PricesPage = () => {
         </div>
 
         <svg
-          className='-mt-16'
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 1440 320">
+            
           <path 
             fill="#312A4F" 
             fill-opacity="1" 
             d="M0,96L120,122.7C240,149,480,203,720,218.7C960,235,1200,213,1320,202.7L1440,192L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z">
           </path>
         </svg>
+
       </div>
     </>
   );
