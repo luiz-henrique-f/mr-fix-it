@@ -40,8 +40,8 @@ const PricesPage = () => {
               corTexto='text-black'
               corSubTexto='text-gray-400'
 
-              item1={<PricingItems name='Busque profissionais por categoria!' />}
-              item2={<PricingItems name='Veja as avaliações do Profissional' />}
+              item1={<PricingItems name='Busque profissionais por categoria!' color='text-primary' />}
+              item2={<PricingItems name='Veja as avaliações do Profissional' color='text-primary' />}
               item3={''}
 
               link=''
@@ -60,8 +60,8 @@ const PricesPage = () => {
               corTexto='text-white'
               corSubTexto='text-gray-200'
               
-              item1={<PricingItems name='Boost nas buscas.' />}
-              item2={<PricingItems name='Acesso ao Dashboard.' />}
+              item1={<PricingItems name='Boost nas buscas.' color='text-white' />}
+              item2={<PricingItems name='Acesso ao Dashboard.' color='text-white' />}
               item3={''}
 
               link=''
@@ -80,9 +80,9 @@ const PricesPage = () => {
               corTexto='text-black'
               corSubTexto='text-gray-400'
 
-              item1={<PricingItems name='Boost nas buscas.' />}
-              item2={<PricingItems name='Acesso ao Dashboard.' />}
-              item3={<PricingItems name='Personalização completa do perfil.' />}
+              item1={<PricingItems name='Boost nas buscas.' color='text-primary' />}
+              item2={<PricingItems name='Acesso ao Dashboard.' color='text-primary' />}
+              item3={<PricingItems name='Personalização completa do perfil.' color='text-primary' />}
 
               link=''
             />

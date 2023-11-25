@@ -2,13 +2,14 @@ import React from 'react';
 import { BsCheck2Circle } from 'react-icons/bs'
 
 interface PricingItemsProps {
-  name: string
+  name: string;
+  color: string;
 }
 
-const PricingItems = ({name}: PricingItemsProps) => {
+const PricingItems = ({name, color}: PricingItemsProps) => {
   return (
     <div className='flex justify-start items-center flex-row gap-2'>
-      <BsCheck2Circle className='text-primaryLighter text-xl' />
+      <BsCheck2Circle className={`${color} text-xl`} />
       {name}
     </div>
   )
