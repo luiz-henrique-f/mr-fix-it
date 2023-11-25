@@ -17,8 +17,23 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoP
     //   });
 
   const result = await prisma.$queryRaw`SELECT * 
-                                        FROM   "public"."Prestador"
-                                        WHERE  CASE WHEN ${uf} = 'undefined' THEN 1
+                                        FROM  "public"."Prestador",
+                                              (
+                                                SELECT
+                                                  "public"."Prestador"."id",
+                                                  ROUND(
+                                                    SUM("public"."Comentarios_Prestador"."nota") / COUNT("public"."Comentarios_Prestador"."nota")
+                                                  ) qtd
+                                                FROM
+                                                  "public"."Comentarios_Prestador",
+                                                  "public"."Prestador"
+                                                WHERE
+                                                  "public"."Prestador"."id" = "public"."Comentarios_Prestador"."id_prestador"
+                                                GROUP BY
+                                                  "public"."Prestador"."id"
+                                              ) tmp
+                                        WHERE   tmp.id = "public"."Prestador"."id"
+                                        AND    CASE WHEN ${uf} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."uf" = ${uf} THEN 1
                                                END = 1
                                         AND    CASE WHEN ${cidade} = 'undefined' THEN 1
@@ -29,9 +44,11 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoP
                                                END = 1
                                         AND    CASE WHEN ${nome} = 'undefined' THEN 1
                                                     WHEN UPPER("public"."Prestador"."nome") like UPPER('%'||${nome}||'%') THEN 1
-                                               END = 1`.finally(() => {
-    prisma.$disconnect();
-  })
+                                               END = 1
+                                        ORDER BY
+                                          tmp.qtd desc`.finally(() => {
+                                            prisma.$disconnect();
+                                          })
 
   return (
     <div className='mx-auto grid grid-cols-4 my-8 gap-8'>
