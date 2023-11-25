@@ -42,6 +42,9 @@ type NomePrestadorResponse = {
     nome: string;
 };
 
+type PlanoAtivoResponse = {
+    plano: string;
+};
 
 
 const Header = () => {
@@ -122,12 +125,20 @@ const Header = () => {
 
     const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
     const [nome, setNome] = React.useState<NomePrestadorResponse[]>([]);
+    const [planoAtivo, setPlanoAtivo] = React.useState<PlanoAtivoResponse[]>([]);
 
     React.useEffect(() => {
         axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
             .then((response) => {
                 setIdPrestador((response.data[0] as any)?.id)
                 setNome((response.data[0] as any)?.nome)
+            })
+    });
+
+    React.useEffect(() => {
+        axios.get(`http://localhost:3000/existePlanoAtivo/${(data?.user as any)?.id}`)
+            .then((response) => {
+                setPlanoAtivo((response.data[0] as any)?.id)
             })
     });
 
@@ -230,7 +241,7 @@ const Header = () => {
                     <div className="absolute right-6 top-28">
                         {id_prestador == undefined && (
                             <div className="relative flex justify-center items-center h-full w-full">
-                                <Link href='/createProfessional'>
+                                <Link href='/planoPagamento'>
                                     <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span>
                                     <Button variant="custom1">
                                         <BsCheck2Square className='text-white text-xl' />
@@ -238,6 +249,15 @@ const Header = () => {
                                     </Button>
                                 </Link>
                             </div>
+                        )}
+                        {planoAtivo == undefined && (
+                            <Link href='/createProfessional'>
+                                <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span>
+                                <Button variant="custom1">
+                                    <BsCheck2Square className='text-white text-xl' />
+                                    <span className="text-base">Adquirir plano</span>
+                                </Button>
+                            </Link>
                         )}
                     </div>
 
@@ -253,14 +273,14 @@ const Header = () => {
                             <div className="z-50 absolute top-[56px] -left-[88px] 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-28 2xl:after:left-2">
 
                                 <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
-                                    {id_prestador != undefined && (
+                                    {id_prestador != undefined && planoAtivo != undefined && (
                                         <div>
                                             <li className="group">
                                                 <Link href={`/dashboard/${id_prestador}`}>
-                                                    <Button 
+                                                    <Button
                                                         onClick={hidennMenu}
                                                         variant="dropbar">
-                                                        
+
                                                         <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
                                                         <span className="text-lg">Dashboard</span>
                                                     </Button>
@@ -269,22 +289,22 @@ const Header = () => {
 
                                             <li className="group">
                                                 <Link href={`/professionals/${id_prestador}`}>
-                                                    <Button 
+                                                    <Button
                                                         onClick={hidennMenu}
                                                         variant="dropbar">
-                                                        
+
                                                         <CgProfile className="text-xl text-center text-primary dark:text-primaryLighter" />
                                                         <span className="text-lg">Meu Perfil</span>
                                                     </Button>
                                                 </Link>
                                             </li>
 
-                                            <li className="group">    
+                                            <li className="group">
                                                 <Link onClick={handleClickOpen} href={""}>
-                                                    <Button 
+                                                    <Button
                                                         onClick={hidennMenu}
                                                         variant="dropbar">
-                                                        
+
                                                         <AiFillStar className="text-xl text-center text-primary dark:text-primaryLighter" />
                                                         <span className="text-lg">Avaliar</span>
                                                     </Button>
@@ -307,7 +327,7 @@ const Header = () => {
                                         </Button>
                                     </li>
                                 </ul>
-                                
+
                             </div>
                         )}
 
