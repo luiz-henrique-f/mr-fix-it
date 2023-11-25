@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function PUT(request: Request) {
     const req = await request.json();
     
-    const { nome, cpf_cnpj, categoria, celular, uf, cidade, sexo, observacao, id_user} = req;
+    const { nome, cpf_cnpj, categoria, celular, uf, cidade, desc_cidade, sexo, observacao, id_user} = req;
 
     console.log(id_user)
 
@@ -19,6 +19,7 @@ export async function PUT(request: Request) {
         celular: celular,
         uf: uf,
         cidade: cidade,
+        desc_cidade: desc_cidade,
         sexo: sexo,
         observacao: observacao,
       },

@@ -137,7 +137,8 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
           categoria: data.categoria,
           sexo: data.sexo,
           uf: data.uf,
-          cidade: data.cidade,
+          cidade: data.cidade.substring(0, 7),
+          desc_cidade: data.cidade.substring(8),
           observacao: data.observacao,
           id_user: (dados?.user as any)?.id
         })
@@ -444,7 +445,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     defaultValue={city}
                     onChange={handleSelectedCity}>
                     {cities.map(city => (
-                      <MenuItem key={city.id} value={city.nome}>
+                      <MenuItem key={city.id} value={city.id+city.nome}>
                         {city.nome}
                       </MenuItem>
                     ))}

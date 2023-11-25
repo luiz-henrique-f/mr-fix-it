@@ -57,6 +57,7 @@ interface CreateProfessionalForm {
   sexo: String;
   uf: String;
   cidade: String;
+  desc_cidade: String;
   observacao: String;
 }
 
@@ -88,10 +89,10 @@ const CreateProfessional = () => {
   const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
 
   React.useEffect(() => {
-      axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
-          .then((response) => {
-              setIdPrestador((response.data[0] as any)?.id)
-          })
+    axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
+      .then((response) => {
+        setIdPrestador((response.data[0] as any)?.id)
+      })
   });
 
   // const fetchProfessional = async () => {
@@ -131,7 +132,8 @@ const CreateProfessional = () => {
           categoria: data.categoria,
           sexo: data.sexo,
           uf: data.uf,
-          cidade: data.cidade,
+          cidade: data.cidade.substring(0, 7),
+          desc_cidade: data.cidade.substring(8),
           observacao: data.observacao,
           id_user: (dados?.user as any)?.id
         })
@@ -182,7 +184,7 @@ const CreateProfessional = () => {
   }, [selectedUf]);
 
   React.useEffect(() => {
-    axios.get('/categoria')
+    axios.get('/api/categoria')
       .then((response) => {
         setCategories(response.data)
       })
@@ -271,19 +273,19 @@ const CreateProfessional = () => {
             sx={{
               '& .MuiTextField-root': { m: 1, width: '96.8%' },
               input: {
-                  color: '#aaa',
+                color: '#aaa',
               },
               label: {
-                  '&.Mui-focused': {
-                      color: '#9055dd'
-                  },
-                  color: '#aaa',
+                '&.Mui-focused': {
+                  color: '#9055dd'
+                },
+                color: '#aaa',
               },
               select: {
-                  color: '#aaa',
+                color: '#aaa',
               },
               svg: {
-                  color: '#aaa',
+                color: '#aaa',
               },
             }}
             noValidate
@@ -389,7 +391,7 @@ const CreateProfessional = () => {
                 onChange={handleSelectedCity}>
 
                 {cities.map(city => (
-                  <MenuItem key={city.id} value={city.nome}>
+                  <MenuItem key={city.id} value={city.id+city.nome}>
                     {city.nome}
                   </MenuItem>
                 ))}

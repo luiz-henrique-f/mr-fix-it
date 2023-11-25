@@ -226,7 +226,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
                             onChange={handleSelectedCity}>
 
                             {cities.map(city => (
-                                <MenuItem key={city.id} value={city.nome}>
+                                <MenuItem key={city.id} value={city.id}>
                                     {city.nome}
                                 </MenuItem>
                             ))}

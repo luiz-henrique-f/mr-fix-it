@@ -9,7 +9,7 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
 interface ProfileInfoProps {
-  prestador: Prestador 
+  prestador: Prestador
 };
 
 const ProfileCard = ({ prestador }: ProfileInfoProps) => {
@@ -41,15 +41,15 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
 
           <div className='flex items-center justify-center gap-1 my-1 p-2 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
             <FaMapPin className='text-base' />
-            <p>{prestador.cidade},</p>
+            <p>{prestador.desc_cidade},</p>
             <p>{prestador.uf}</p>
           </div>
 
           <div className="flex items-center justify-center gap-2 w-[80%] mx-auto mt-5 mb-10">
-          <Link href={`/professionals/${prestador.id}`}>
-            <Button variant='login'>
-              Visitar
-            </Button>
+            <Link href={`/professionals/${prestador.id}`}>
+              <Button variant='login'>
+                Visitar
+              </Button>
             </Link>
           </div>
 

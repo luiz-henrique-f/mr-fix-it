@@ -236,7 +236,7 @@ const InputSearch = () => {
         >
 
           {cities.map(city => (
-            <MenuItem key={city.id} value={city.nome}>
+            <MenuItem key={city.id} value={city.id}>
               {city.nome}
             </MenuItem>
           ))}

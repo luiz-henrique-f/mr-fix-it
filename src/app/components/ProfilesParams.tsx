@@ -8,45 +8,38 @@ interface ProfessionalInfoProps {
   nome: string;
 }
 const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoProps) => {
-  // const prestadores = await prisma.prestador.findMany({
-  //     where: {
-  //       tipo_categoria: categoria,
-  //       uf: uf,
-  //       cidade: cidade
-  //     }
-  //   });
 
   const result = await prisma.$queryRaw`SELECT * 
-                                        FROM  "public"."Prestador",
-                                              (
-                                                SELECT
-                                                  "public"."Prestador"."id",
-                                                  ROUND(
-                                                    SUM("public"."Comentarios_Prestador"."nota") / COUNT("public"."Comentarios_Prestador"."nota")
-                                                  ) qtd
-                                                FROM
-                                                  "public"."Comentarios_Prestador",
-                                                  "public"."Prestador"
-                                                WHERE
-                                                  "public"."Prestador"."id" = "public"."Comentarios_Prestador"."id_prestador"
-                                                GROUP BY
-                                                  "public"."Prestador"."id"
-                                              ) tmp
-                                        WHERE   tmp.id = "public"."Prestador"."id"
-                                        AND    CASE WHEN ${uf} = 'undefined' THEN 1
+                                        FROM  "public"."Prestador"
+                                              -- (
+                                              --   SELECT
+                                              --     "public"."Prestador"."id",
+                                              --     ROUND(
+                                              --       SUM("public"."Comentarios_Prestador"."nota") / COUNT("public"."Comentarios_Prestador"."nota")
+                                              --     ) qtd
+                                              --   FROM
+                                              --     "public"."Comentarios_Prestador",
+                                              --     "public"."Prestador"
+                                              --   WHERE
+                                              --     "public"."Prestador"."id" = "public"."Comentarios_Prestador"."id_prestador"
+                                              --   GROUP BY
+                                              --     "public"."Prestador"."id"
+                                              -- ) tmp
+                                        WHERE   
+                                        -- tmp.id = "public"."Prestador"."id"
+                                        -- AND    
+                                        CASE WHEN ${uf} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."uf" = ${uf} THEN 1
                                                END = 1
                                         AND    CASE WHEN ${cidade} = 'undefined' THEN 1
-                                                    WHEN translate("public"."Prestador"."cidade", 'áéíóúàèìòùãõâêîôôäëïöüçÁÉÍÓÚÀÈÌÒÙÃÕÂÊÎÔÛÄËÏÖÜÇ', 'aeiouaeiouaoaeiooaeioucAEIOUAEIOUAOAEIOOAEIOUC') = translate(${cidade}, 'áéíóúàèìòùãõâêîôôäëïöüçÁÉÍÓÚÀÈÌÒÙÃÕÂÊÎÔÛÄËÏÖÜÇ', 'aeiouaeiouaoaeiooaeioucAEIOUAEIOUAOAEIOOAEIOUC') THEN 1
+                                                    WHEN "public"."Prestador"."cidade" = ${cidade} THEN 1
                                                END = 1
                                         AND    CASE WHEN ${categoria} = 'undefined' THEN 1
-                                                    WHEN translate("public"."Prestador"."tipo_categoria", 'áéíóúàèìòùãõâêîôôäëïöüçÁÉÍÓÚÀÈÌÒÙÃÕÂÊÎÔÛÄËÏÖÜÇ', 'aeiouaeiouaoaeiooaeioucAEIOUAEIOUAOAEIOOAEIOUC') = translate(${categoria}, 'áéíóúàèìòùãõâêîôôäëïöüçÁÉÍÓÚÀÈÌÒÙÃÕÂÊÎÔÛÄËÏÖÜÇ', 'aeiouaeiouaoaeiooaeioucAEIOUAEIOUAOAEIOOAEIOUC') THEN 1
+                                                    WHEN "public"."Prestador"."tipo_categoria" = ${categoria} THEN 1
                                                END = 1
                                         AND    CASE WHEN ${nome} = 'undefined' THEN 1
                                                     WHEN UPPER("public"."Prestador"."nome") like UPPER('%'||${nome}||'%') THEN 1
-                                               END = 1
-                                        ORDER BY
-                                          tmp.qtd desc`.finally(() => {
+                                               END = 1`.finally(() => {
     prisma.$disconnect();
   })
 

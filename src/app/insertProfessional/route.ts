@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 export async function POST(request: Request) {
     const req = await request.json();
     
-    const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade, observacao, id_user} = req;
+    const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade, desc_cidade, observacao, id_user} = req;
 
     const professionals = await prisma.prestador.findMany({
         where: {
@@ -54,6 +54,7 @@ export async function POST(request: Request) {
         sexo: sexo,
         uf: uf,
         cidade: cidade,
+        desc_cidade: desc_cidade,
         observacao: observacao,
         id_user: id_user,
       },
