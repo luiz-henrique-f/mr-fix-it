@@ -129,25 +129,25 @@ const InputSearch = () => {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             label: {
                 '&.Mui-focused': {
                   color: '#590BD8'
                 },
-              color: '#fff',
+              color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
           }}
           onChange={handleSelectedCategorie}
@@ -170,25 +170,25 @@ const InputSearch = () => {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             label: {
                 '&.Mui-focused': {
                   color: '#590BD8'
                 },
-              color: '#fff',
+              color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
           }}
           onChange={handleSelectedUf}
@@ -211,25 +211,25 @@ const InputSearch = () => {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             label: {
                 '&.Mui-focused': {
                   color: '#590BD8'
                 },
-              color: '#fff',
+              color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
           }}
           onChange={handleSelectedCity}
@@ -252,25 +252,25 @@ const InputSearch = () => {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             label: {
                 '&.Mui-focused': {
                   color: '#590BD8'
                 },
-              color: '#fff',
+              color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
             },
-              color: '#fff',
+              color: '#aaa',
             },
           }}
           onChange={handleSelectedNome} />
