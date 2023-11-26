@@ -139,6 +139,7 @@ const Header = () => {
     React.useEffect(() => {
         axios.get(`http://localhost:3000/existePlanoAtivo/${(data?.user as any)?.id}`)
             .then((response) => {
+                console.log(data)
                 setPlanoAtivo((response.data[0] as any)?.id)
             })
     });
@@ -252,7 +253,7 @@ const Header = () => {
                             </div>
                         )}
                         {planoAtivo == undefined && (
-                            <Link href='/createProfessional'>
+                            <Link href='/pagamentoPlano'>
                                 <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span>
                                 <Button variant="custom1">
                                     <BsCheck2Square className='text-white text-xl' />

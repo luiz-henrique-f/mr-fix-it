@@ -39,21 +39,11 @@ const PagamentoPlano = () => {
       ),
     });
 
-    // if (!res.ok) {
-    //   return toast.error("Ocorreu um erro ao realizar a reserva!", { position: "bottom-center" });
-    // }
-
-    // const response = await res.json();
-
-    // console.log({ response })
-
     const { sessionId } = await res.json();
 
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY as string);
 
     await stripe?.redirectToCheckout({ sessionId });
-
-    // toast.success("Reserva realizada com sucesso!", { position: "bottom-center" });
   };
 
   return (
