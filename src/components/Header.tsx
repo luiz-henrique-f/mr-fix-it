@@ -242,7 +242,7 @@ const Header = () => {
                     {/* <div className="absolute right-6 top-28">
                         {id_prestador == undefined && (
                             <div className="relative flex justify-center items-center h-full w-full">
-                                <Link href='/planoPagamento'>
+                                <Link href='/createProfessional'>
                                     <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span>
                                     <Button variant="custom1">
                                         <BsCheck2Square className='text-white text-xl' />
@@ -252,7 +252,7 @@ const Header = () => {
                             </div>
                         )}
                         {planoAtivo == undefined && (
-                            <Link href='/createProfessional'>
+                            <Link href='/pagamentoPlano'>
                                 <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span>
                                 <Button variant="custom1">
                                     <BsCheck2Square className='text-white text-xl' />
