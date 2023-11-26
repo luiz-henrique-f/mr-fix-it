@@ -33,6 +33,7 @@ interface CreateProfessionalForm {
 }
 
 const Login = () => {
+	const router = useRouter()
 	// código que pode ser usado futuramente para o credentials
 
 	const {
@@ -71,7 +72,18 @@ const Login = () => {
 
 		// if (!dados.user) return null;
 
-		await signIn('credentials', { username: data.email, password: data.senha, callbackUrl: '/' });
+		const signInData = await signIn('credentials', {
+			username: data.email,
+			password: data.senha,
+			redirect: false
+			// callbackUrl: '/' 
+		});
+
+		if (signInData?.error) {
+			console.log(signInData?.error)
+		} else {
+			router.push('/')
+		}
 	}
 
 	// const handleLoginClick = () => signIn("google", {
@@ -79,9 +91,9 @@ const Login = () => {
 	//   callbackUrl: "/",
 	// });
 
-	const redirecionar = () => {
-		return "/createProfessional"
-	}
+	// const redirecionar = () => {
+	// 	return "/createProfessional"
+	// }
 
 	//   const handleLoginClick = async () => {
 	//     const result = await signIn("google", {
@@ -90,9 +102,9 @@ const Login = () => {
 	//     })
 	//   }
 
-	const handleLoginClick = () => {
-		signIn('credentials', { username: 'luizh', password: '123456', callbackUrl: '/' })
-	}
+	// const handleLoginClick = () => {
+	// 	signIn('credentials', { username: 'luizh', password: '123456', callbackUrl: '/' })
+	// }
 
 	return (
 		<div className="flex items-center justify-center flex-col overflow-hidden">
@@ -108,7 +120,10 @@ const Login = () => {
 						</Link>
 					</div>
 
-					<form className="h-full gap-1 flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-darkBGLighter">
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="h-full gap-1 flex items-center justify-center flex-col py-0 px-10 bg-white dark:bg-darkBGLighter"
+					>
 						<h1 className="text-3xl 2sm:text-4xl pb-2 font-semibold text-primaryDarker dark:text-walterWhite" title='Laele'>Entre</h1>
 
 						{/* <div className="pb-5 my-5 mx-0 text-primaryDarker dark:text-walterWhite">
@@ -122,7 +137,7 @@ const Login = () => {
 						<span className="text-sm cursor-default p-2 text-gray-400 dark:text-gray-500">
 							Conecte-se com seu e-mail e senha!
 						</span>
-						
+
 						<input
 							{...register("email")}
 							type="text"
@@ -142,7 +157,8 @@ const Login = () => {
 
 						<Button
 							variant="login"
-							onClick={() => handleSubmit(onSubmit)()}
+							type='submit'
+						// onClick={() => handleSubmit(onSubmit)()}
 						>
 							Entrar
 						</Button>
