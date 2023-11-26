@@ -35,9 +35,9 @@ interface ProfessionalProps {
     professional: Prestador;
 }
 
-type IdPrestadorResponse = {
-    id: string;
-};
+// type IdPrestadorResponse = {
+//     id: string;
+// };
 
 type NomePrestadorResponse = {
     nome: string;
@@ -124,24 +124,24 @@ const Header = () => {
 
     const router = useRouter()
 
-    const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
     const [nome, setNome] = React.useState<NomePrestadorResponse[]>([]);
-    const [planoAtivo, setPlanoAtivo] = React.useState<PlanoAtivoResponse[]>([]);
+    // const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+    // const [planoAtivo, setPlanoAtivo] = React.useState<PlanoAtivoResponse[]>([]);
 
-    React.useEffect(() => {
-        axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
-            .then((response) => {
-                setIdPrestador((response.data[0] as any)?.id)
-                setNome((response.data[0] as any)?.nome)
-            })
-    });
+    // React.useEffect(() => {
+    //     axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
+    //         .then((response) => {
+    //             setIdPrestador((response.data[0] as any)?.id)
+    //             setNome((response.data[0] as any)?.nome)
+    //         })
+    // });
 
-    React.useEffect(() => {
-        axios.get(`http://localhost:3000/existePlanoAtivo/${(data?.user as any)?.id}`)
-            .then((response) => {
-                setPlanoAtivo((response.data[0] as any)?.id)
-            })
-    });
+    // React.useEffect(() => {
+    //     axios.get(`http://localhost:3000/existePlanoAtivo/${(data?.user as any)?.id}`)
+    //         .then((response) => {
+    //             setPlanoAtivo((response.data[0] as any)?.id)
+    //         })
+    // });
 
     return (
         <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-whiteBG/10 bg-whiteBG dark:bg-darkBG'>
@@ -239,7 +239,7 @@ const Header = () => {
             {status === "authenticated" && data.user && (
                 <div className="flex gap-5">
 
-                    <div className="absolute right-6 top-28">
+                    {/* <div className="absolute right-6 top-28">
                         {id_prestador == undefined && (
                             <div className="relative flex justify-center items-center h-full w-full">
                                 <Link href='/planoPagamento'>
@@ -260,7 +260,7 @@ const Header = () => {
                                 </Button>
                             </Link>
                         )}
-                    </div>
+                    </div> */}
 
                     <div className="flex items-center gap-3 border-grayLighter border border-solid py-3 px-6 rounded-lg relative">
                         <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
