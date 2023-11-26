@@ -20,23 +20,7 @@ const Dashboard = ({ params }: { params: { professionalid: string } }) => {
         <>
             <div className='absolute top-0 left-0 h-screen w-screen bg-gradient-to-b from-primaryDarker from-35% to-35% to-whiteBG dark:to-darkBG overflow-hidden'>
                 
-                {/* <Script
-                    strategy="lazyOnload"
-                    src={`https://www.googletagmanager.com/gtag/js?id=G-FWQ879X8DX`}
-                />
-
-                <Script id="gtm-script" strategy="lazyOnload">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-FWQ879X8DX', {
-                        page_path: window.location.pathname,
-                        });
-                    `}
-                </Script> */}
-
-                <div className='flex gap-4 m-6'>
+                <div className='flex gap-4 mr-6'>
                     <SideMenu id_prestador={params.professionalid}/>
 
                     <div className='flex flex-col w-full gap-4'>

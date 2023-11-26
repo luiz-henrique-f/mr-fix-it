@@ -7,6 +7,7 @@ import Image from 'next/image';
 import ThemeSwitch from '@/components/ThemeSwitch';
 import { Prestador } from '@prisma/client';
 
+import { AiOutlineMenu } from 'react-icons/ai';
 interface TopInfoProps {
   prestador: string 
 };
@@ -15,10 +16,19 @@ const TopDetails = ({ prestador }: TopInfoProps) => {
 
   // const professional = await getProfessionalDetails(params.professionalid);
   // const photo = await getPhotoProfessional(params.professionalid);
+
+  const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
+
+  const [menuIsOpen, setMenuIsOpen] = React.useState(false);
+  const hidennMenu = () => {
+    setMenuIsOpen(false)
+  };
   
   return (
     <>
-      <div className='flex justify-center items-center gap-4'>
+      <div className='flex justify-center items-center text-white gap-4 mt-6'>
+        <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
+
         <ThemeSwitch />
       
         <Image

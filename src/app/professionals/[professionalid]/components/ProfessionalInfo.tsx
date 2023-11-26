@@ -256,7 +256,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
                     src={urlFoto}
                     width={140}
                     height={140}
-                    className='rounded-[100%] h-36 w-36'
+                    className='rounded-full h-36 w-36'
                     style={{
                         objectFit: "cover",
                     }}

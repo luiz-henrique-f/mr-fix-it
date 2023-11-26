@@ -18,11 +18,11 @@ const PricesPage = () => {
           </path>
         </svg>
       
-        <div className='flex flex-col justify-center items-center bg-primaryDarker'>
+        <div className='flex flex-col justify-center items-center bg-primaryDarker -my-1'>
         
-          <div className='text-whiteBGDarker font-bold m-6 flex items-center justify-center gap-6 flex-col'>
-            <h1 className='text-5xl uppercase tracking-widest'>Nossos Planos</h1>
-            <p className='text-xl tracking-tight'>Escolha o melhor plano para você!!</p>
+          <div className='text-whiteBGDarker font-bold m-6 mb-0 lg:mb-6 flex items-center justify-center gap-6 flex-col'>
+            <h1 className='text-center text-5xl uppercase tracking-widest bg-gradient-to-r from-primaryLighter to-secondary bg-clip-text text-transparent'>Nossos Planos</h1>
+            <p className='text-base text-center lg:text-xl tracking-tight'>Escolha o melhor plano para você!!</p>
           </div>
 
           <div className='flex flex-col lg:flex-row mt-12 drop-shadow-[0px_25px_30px_rgba(244,244,244,0.3)] dark:drop-shadow-[0px_25px_30px_rgba(200,200,200,0.2)]'>
