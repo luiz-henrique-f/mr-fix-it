@@ -32,13 +32,13 @@ const GraphCard = (props: { itemName: string; itemName2: string; title: string; 
         {
           label: [itemName2],
           data: [3, 8, 12, 5, 2, 9, 4, 13, 6, 3, 1, 7],
-          backgroundColor: '#888833bb',
+          backgroundColor: '#d33',
           borderRadius: 8,
         }, 
         {
           label: [itemName],
           data: [19, 5, 8, 12, 9, 2, 16, 23, 13, 4, 5, 10],
-          backgroundColor: '#590BD8bb',
+          backgroundColor: '#2a6',
           borderRadius: 8,
         }, 
       ],

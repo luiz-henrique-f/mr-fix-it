@@ -2,15 +2,16 @@ import React from 'react';
 import BasicRating from './Raiting';
 
 interface ProfessionalRaitingUsersProps {
-  name: string
-  title: string
-  message: string
-  valueComment: number
+  name: string;
+  title: string;
+  message: string;
+  valueComment: number;
+  className: string;
 }
 
-const ProfessionalRaiting = ({name, title, message, valueComment}: ProfessionalRaitingUsersProps) => {
+const ProfessionalRaiting = ({name, title, message, valueComment, className}: ProfessionalRaitingUsersProps) => {
   return (
-    <div className='gap-2 border border-solid border-grayPrimary/20 shadow-xl p-5 rounded-md'>
+    <div className={`gap-2 border border-grayPrimary/20 shadow-xl p-5 rounded-md ${className}`}>
       <h2 className='text-base pl-1 font-medium text-grayPrimary dark:text-grayLighter italic'>{name}</h2>
       <BasicRating valueComment={valueComment}/>
 

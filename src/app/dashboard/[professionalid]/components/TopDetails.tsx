@@ -11,6 +11,8 @@ import { toast, ToastContainer } from "react-toastify";
 import { signIn, signOut, useSession } from "next-auth/react";
 import axios from 'axios';
 
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+
 import ThemeSwitch from '@/components/ThemeSwitch';
 import Button from '@/components/Button';
 
@@ -170,6 +172,48 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
           }}
           alt='Imagem Usuário'
         />
+
+        <Dialog 
+          open={open} 
+          onClose={handleClose}
+          fullWidth>
+
+          <DialogTitle>Avalie nosso site!</DialogTitle>
+          <DialogContent>
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { marginTop: 1 },
+              }}>
+
+              <TextField
+                {...register("observacao")}
+                label="Escreva sua avaliação aqui..."
+                fullWidth
+                multiline
+                rows={4}
+                maxRows={8}>
+              </TextField>
+            </Box>
+          </DialogContent>
+
+          <DialogActions className='!flex !justify-between'>
+            <Button 
+              variant="outlined"
+              onClick={handleClose}>
+
+              Cancelar
+            </Button>
+
+            <Button 
+              variant="outlined"
+              onClick={() => handleSubmit(onSubmit)()}>
+                
+              Atualizar
+            </Button>
+          </DialogActions>
+          
+        </Dialog>
         
       </div>
     </>

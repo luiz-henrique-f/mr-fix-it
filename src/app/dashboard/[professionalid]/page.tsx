@@ -58,7 +58,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                             <TopDetails url_foto={professional?.url_foto as any}/>
                         </div>
 
-                        <div className='flex justify-between gap-4'>
+                        <div className='flex justify-between gap-4  h-[80vh]'>
 
                             <div className='flex flex-col flex-[70%] gap-4'>
                                 <div className='flex flex-col md:flex-row gap-4'>
@@ -91,16 +91,23 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                 </div>
                                 
                                 <div>
-                                    <GraphCard itemName='2023' itemName2='2022' title='Grafico de tal coisa!' />
+                                    <GraphCard itemName='Positivas' itemName2='Negativas' title='FEEDBACK ANUAL DE AVALICAÇÕES' />
                                 </div>
 
                             </div>
 
-                            <div className="flex flex-[20%] bg-white dark:bg-darkBGLighter rounded-2xl h-[79vh] ">
+                            <div className="flex flex-[20%] bg-white dark:bg-darkBGLighter rounded-2xl mb-2">
                                 <div className="overflow-y-scroll w-full">
                                     
                                     {data.map((comments: Comentarios_Prestador) => (
-                                        <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota} />
+                                        <ProfessionalRaiting 
+                                            key={comments.id} 
+                                            name={comments.nome} 
+                                            title={comments.titulo_comentario} 
+                                            message={comments.comentario} 
+                                            valueComment={comments.nota}
+                                            className='shadow-transparent border-transparent rounded-none border-b-grayPrimary/20' 
+                                        />
                                     ))}
                                 </div>
                             </div>

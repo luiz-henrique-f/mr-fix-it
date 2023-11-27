@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { Comentarios_Prestador } from '@prisma/client';
 
 import Button from '@/components/Button';
+import AddComent from './components/AddComent';
 import ChangeButton from '@/components/ChangeButton';
 import ProfessionalInfo from './components/ProfessionalInfo';
 import ProfessionalRaiting from './components/ProfessionalRaiting';
@@ -13,7 +14,7 @@ import ProfessionalDescription from './components/ProfessionalDescription';
 
 import { AiFillStar } from 'react-icons/ai'
 import { FiLogIn } from 'react-icons/fi';
-import AddComent from './components/AddComent';
+
 
 const getProfessionalDetails = async (professionalid: string) => {
     const professional = await prisma.prestador.findFirst({
@@ -60,8 +61,8 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
     if (!professional) return null;
 
     return (
-        <div className='h-full'>
-            <div className="relative h-1/3 w-full mb-10 bg-gradient-to-br from-primary to-primaryDarker">
+        <div className='h-[110vh]'>
+            <div className="relative h-72 w-full mb-10 bg-gradient-to-br from-primary to-primaryDarker">
                 <Image
                     src="/capa-mrfixit.png"
                     fill
@@ -95,7 +96,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
 
                     {/* {params.status == 'unauthenticated' && ( */}
 
-                        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full p-8 gap-5">
+                        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg p-8 gap-5 h-96">
                             <div className='flex justify-between'>
                                 <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
                                     <AiFillStar className='text-orange-400' />
@@ -106,9 +107,19 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                                 
                             </div>
 
-                            {data.map((comments: Comentarios_Prestador) => (
-                                <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota} />
-                            ))}
+                            <div className="overflow-y-scroll flex flex-col gap-5">
+                                    
+                                {data.map((comments: Comentarios_Prestador) => (
+                                    <ProfessionalRaiting 
+                                        key={comments.id} 
+                                        name={comments.nome} 
+                                        title={comments.titulo_comentario} 
+                                        message={comments.comentario} 
+                                        valueComment={comments.nota}
+                                        className='' 
+                                    />
+                                ))}
+                            </div>
                         </div>
                     {/* )} */}
                 </div>
