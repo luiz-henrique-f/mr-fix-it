@@ -24,6 +24,8 @@ model Prestador {
   created_at     DateTime @default(now())
   tipo_categoria String
   id_user        String
+  cod_cbo        String   @default("ok")
+  desc_cbo       String   @default("ok")
 }
 
 model Planos {
@@ -72,6 +74,12 @@ model Feedback_Prestador {
   id         String @id @default(uuid())
   nome       String
   comentario String
+}
+
+model Cbo {
+  id       String @id @default(uuid())
+  cod_cbo  String
+  desc_cbo String
 }
 
 // model Account {
