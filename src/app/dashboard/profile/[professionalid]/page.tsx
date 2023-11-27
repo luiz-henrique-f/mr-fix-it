@@ -20,26 +20,12 @@ const getProfessionalDetails = async (professionalid: string) => {
 
   return professional;
 }
-
-const getPhotoProfessional = async (professionalid: string) => {
-  const photo = await prisma.foto_Prestador.findFirst({
-      where: {
-          id_prestador: professionalid,
-      },
-  }).finally(() => {
-      prisma.$disconnect();
-    });
-
-  return photo;
-}
-
 interface ProfileInfoProps {
   prestador: Prestador 
 };
 
 const Profile = async ({ params }: { params: { professionalid: string, prestador: Prestador } }) => {
   const professional = await getProfessionalDetails(params.professionalid);
-  const photo = await getPhotoProfessional(params.professionalid);
 
   if (!professional) return null;
 
@@ -53,7 +39,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
           
           <div className='flex flex-col w-full gap-4'>
             <div className='flex justify-end items-center mb-4'>
-              <TopDetails prestador={params.professionalid} />
+              <TopDetails/>
             </div>
           
             <div className='flex flex-col justify-start items-center gap-8'>
@@ -78,11 +64,11 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                         >
                           <AccountProfile 
                             name={professional?.nome as any} 
-                            city={professional?.cidade as any}
+                            city={professional?.desc_cidade as any}
                             telefone={professional?.celular as any} 
                             uf={professional?.uf as any}
                             id_prestador={professional?.id as any}
-                            url_foto={photo?.url_foto as any} 
+                            url_foto={professional?.url_foto as any} 
                           />
                         </Grid>
 

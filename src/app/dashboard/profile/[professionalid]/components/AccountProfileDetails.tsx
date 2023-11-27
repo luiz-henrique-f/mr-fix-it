@@ -138,7 +138,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
           sexo: data.sexo,
           uf: data.uf,
           cidade: data.cidade.substring(0, 7),
-          desc_cidade: data.cidade.substring(8),
+          desc_cidade: data.cidade.substring(7),
           observacao: data.observacao,
           id_user: (dados?.user as any)?.id
         })

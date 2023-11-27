@@ -77,10 +77,10 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                 <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[70%] 2sm:-mt-[25%] 2md:-mt-[20%] xl:-mt-[15%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
                     <ProfessionalInfo
                         name={professional?.nome as any}
-                        city={professional?.cidade as any}
+                        city={professional?.desc_cidade as any}
                         uf={professional?.uf as any}
                         telefone={professional?.celular as any}
-                        urlFoto={photo?.url_foto as any}
+                        urlFoto={professional?.url_foto as any}
                     />
 
                     <ProfessionalCategory
