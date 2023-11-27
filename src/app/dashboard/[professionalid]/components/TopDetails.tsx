@@ -33,7 +33,11 @@ type PlanoAtivoResponse = {
   plano: string;
 };
 
-const TopDetails = () => {
+interface ProfessionalInfoProps {
+  url_foto: string;
+};
+
+const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
 
   // const professional = await getProfessionalDetails(params.professionalid);
   // const photo = await getPhotoProfessional(params.professionalid);
@@ -157,7 +161,7 @@ const TopDetails = () => {
       
         <Image
           // src={prestador.url_foto}
-          src={'/perfil.png'}
+          src={url_foto}
           width={36}
           height={36}
           className='rounded-full h-9 w-h-9 mx-auto'

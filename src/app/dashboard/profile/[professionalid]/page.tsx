@@ -39,7 +39,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
           
           <div className='flex flex-col w-full gap-4'>
             <div className='flex justify-end items-center mb-4'>
-              <TopDetails/>
+              <TopDetails url_foto={professional?.url_foto as any}/>
             </div>
           
             <div className='flex flex-col justify-start items-center gap-8'>

@@ -38,18 +38,6 @@ const getCommentsDetails = async (professionalid: string) => {
 
     return professional;
 }
-
-const getPhotoProfessional = async (professionalid: string) => {
-    const photo = await prisma.foto_Prestador.findFirst({
-        where: {
-            id_prestador: professionalid,
-        },
-    }).finally(() => {
-        prisma.$disconnect();
-      });
-  
-    return photo;
-};
  
 const Dashboard = async ({ params }: { params: { professionalid: string } }) => {
 
@@ -67,7 +55,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
 
                     <div className='flex flex-col w-full gap-4'>
                         <div className='flex justify-end items-center mb-4'>
-                            <TopDetails />
+                            <TopDetails url_foto={professional?.url_foto as any}/>
                         </div>
 
                         <div className='flex justify-between gap-4'>
