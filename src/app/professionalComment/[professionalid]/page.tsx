@@ -83,7 +83,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
 
     const res = await response.json();
 
-    router.push(`/professionals/${params.professionalid}/unauthenticated`);
+    router.push(`/professionals/${params.professionalid}`);
 
   }
   const theme = useTheme();
@@ -127,21 +127,6 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
             component="form"
             sx={{
               '& .MuiTextField-root': { m: 1, width: '96.8%' },
-                input: {
-                    color: '#aaa',
-                },
-                label: {
-                    '&.Mui-focused': {
-                        color: '#590BD8'
-                    },
-                    color: '#aaa',
-                },
-                select: {
-                    color: '#aaa',
-                },
-                svg: {
-                    color: '#aaa',
-                },
             }}
             noValidate
             autoComplete="off">
@@ -156,6 +141,23 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
               id="name"
               label="Nome completo"
               fullWidth
+              sx={{
+                  input: {
+                    color: '#aaa',
+                  },
+                  label: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
+                    color: '#aaa',
+                  },
+                  select: {
+                    color: '#aaa',
+                  },
+                  svg: {
+                    color: '#aaa',
+                  },
+              }}
               error={!!errors?.nome}
               helperText={errors?.nome?.message}
             >
@@ -173,6 +175,23 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
               onChange={mudarMascaraCelular}
               value={valueCelular}
               fullWidth
+              sx={{
+                input: {
+                  color: '#aaa',
+                },
+                label: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                select: {
+                  color: '#aaa',
+                },
+                svg: {
+                  color: '#aaa',
+                },
+              }}
               error={!!errors?.celular}
               helperText={errors?.celular?.message}>
             </TextField>
@@ -190,6 +209,23 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
                 id="name"
                 label="Título Comentário"
                 fullWidth
+                sx={{
+                  input: {
+                    color: '#aaa',
+                  },
+                  label: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
+                    color: '#aaa',
+                  },
+                  select: {
+                    color: '#aaa',
+                  },
+                  svg: {
+                    color: '#aaa',
+                  },
+                }}
                 error={!!errors?.nome}
                 helperText={errors?.nome?.message}
               >
@@ -237,6 +273,23 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
                   id="outlined-multiline-flexible"
                   label="Comentário"
                   fullWidth
+                  sx={{
+                    input: {
+                      color: '#aaa',
+                    },
+                    label: {
+                      '&.Mui-focused': {
+                        color: '#590BD8'
+                      },
+                      color: '#aaa',
+                    },
+                    select: {
+                      color: '#aaa',
+                    },
+                    svg: {
+                      color: '#aaa',
+                    },
+                  }}
                   multiline
                   rows={4}
                   maxRows={8}>

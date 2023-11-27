@@ -20,7 +20,7 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
     <>
       <div className='h-screen flex justify-center items-start group/sidebar'>
 
-        <div className='h-full bg-white dark:bg-darkBGLighter text-base flex flex-col justify-between transition-all duration-[3s] ease-[ease-in-out] hover:transition-all hover:duration-[3s] hover:ease-[ease-in-out]'>
+        <div className='h-full bg-white dark:bg-darkBGLighter text-base flex flex-col justify-between'>
           <ul className='text-gray-500 dark:text-gray-300 font-bold w-[60px] group-hover/sidebar:w-full flex flex-col gap-4 p-2'>
             
             <Link

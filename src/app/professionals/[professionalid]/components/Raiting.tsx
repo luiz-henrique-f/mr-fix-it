@@ -17,6 +17,7 @@ const BasicRating = ({ valueComment }: ProfessionalCommentProps) => {
       <Rating
         name="simple-controlled"
         value={valueComment}
+        readOnly
 
         icon={
           <AiFillStar 

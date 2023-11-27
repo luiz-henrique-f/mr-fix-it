@@ -51,7 +51,7 @@ const SearchSection = () => {
 								</Link>
 							)}
 							{planoAtivo == undefined && id_prestador != undefined && (
-								<Link href='/planoPagamento'>
+								<Link href='/pagamentoPlano'>
 									{/* <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span> */}
 									<Button variant="primary">
 										<BsCheck2Square className='text-white text-xl' />
