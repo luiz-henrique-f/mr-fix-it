@@ -61,7 +61,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
     if (!professional) return null;
 
     return (
-        <div className='h-[110vh]'>
+        <div className='h-full bg-whiteBG dark:bg-darkBG'>
             <div className="relative h-72 w-full mb-10 bg-gradient-to-br from-primary to-primaryDarker">
                 <Image
                     src="/capa-mrfixit.png"
