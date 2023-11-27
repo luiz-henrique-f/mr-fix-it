@@ -18,6 +18,8 @@ import Button from '@/components/Button';
 
 import { AiFillStar, AiOutlineMenu } from 'react-icons/ai';
 import { ImCancelCircle } from "react-icons/im";
+import { LiaTimesSolid } from "react-icons/lia";
+import { BsCheck2Square } from 'react-icons/bs';
 
 interface CreateProfessionalForm {
   observacao: String;
@@ -202,6 +204,7 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
               variant="outlined"
               onClick={handleClose}>
 
+              <LiaTimesSolid />
               Cancelar
             </Button>
 
@@ -209,7 +212,8 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
               variant="outlined"
               onClick={() => handleSubmit(onSubmit)()}>
                 
-              Atualizar
+              <BsCheck2Square />
+              Enviar
             </Button>
           </DialogActions>
           

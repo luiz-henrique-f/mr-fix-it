@@ -249,7 +249,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
                 </DialogActions>
             </Dialog>
 
-            {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />}
+            {/* {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />} */}
 
             <div className='rounded-full p-[6px] border-2 border-primary dark:border-primaryLighter'>
                 <Image

@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import ProfileCard from "../search/components/ProfileCard";
+import Image from "next/image";
+import Script from "next/script";
 
 interface ProfessionalInfoProps {
   categoria: string;
@@ -48,15 +50,26 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoP
   // const json = await (result as any).json();
 
   return (
-    <div className='flex flex-col 1sm:grid 1sm:grid-cols-2 2md:grid-cols-3 2xl:grid-cols-4 my-8 gap-8'>
-      {(result as any).map((prestador: any) => (
-        <ProfileCard prestador={prestador} key={prestador.id} />
-      ))}
+    <>
+      <div className='flex flex-col 1sm:grid 1sm:grid-cols-2 2md:grid-cols-3 2xl:grid-cols-4 my-8 gap-8'>
+        {(result as any).map((prestador: any) => (
+          <ProfileCard prestador={prestador} key={prestador.id} />
+        ))}
+      </div>
 
       {result == 0 && (
-        <div>Não existe nenhum prestador para o filtro selecionado</div>
+        <div className="flex justify-center items-center flex-col">
+          <span className="text-xl text-grayPrimary dark:text-grayLighter">Não existe nenhum prestador para o filtro selecionado.</span>
+          <Image 
+            src={'/404 error with portals-pana.png'} 
+            alt="error gif"
+            width={800}
+            height={800}
+            className="my-2">
+          </Image>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 export default ProfilesParams;

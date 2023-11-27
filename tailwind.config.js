@@ -40,7 +40,7 @@ module.exports = {
         "2md": "960px",
         "2xl": "1440px",
         "3xl": "1536px",
-        "4xl": "1980px",
+        "4xl": "1880px",
       },
       boxShadow: {
         "custom-fade":

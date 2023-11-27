@@ -10,10 +10,11 @@ const SearchParams = async ({ params }: { params: { categoria: string, uf: strin
         <InputSearch />
 
         <ProfilesParams 
-        categoria={params.categoria}
-        cidade={params.cidade}
-        uf={params.uf}
-        nome={params.nome}/>
+          categoria={params.categoria}
+          cidade={params.cidade}
+          uf={params.uf}
+          nome={params.nome}
+        />
 
       </div>
     </>

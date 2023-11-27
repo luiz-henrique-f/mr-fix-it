@@ -25,6 +25,7 @@ import { CgProfile } from 'react-icons/cg';
 import { AiOutlineMenu, AiFillStar } from 'react-icons/ai';
 import { ImCancelCircle } from "react-icons/im";
 import { BsCheck2Square, BsGraphUp } from "react-icons/bs";
+import { LiaTimesSolid } from "react-icons/lia";
 
 interface CreateProfessionalForm {
     observacao: String;
@@ -208,12 +209,16 @@ const Header = () => {
                 <DialogActions className='!flex !justify-between'>
                     <Button variant="outlined"
                         onClick={handleClose}>
+
+                        <LiaTimesSolid />
                         Cancelar
                     </Button>
 
                     <Button variant="outlined"
                         onClick={() => handleSubmit(onSubmit)()}>
-                        Atualizar
+
+                        <BsCheck2Square />
+                        Enviar
                     </Button>
                 </DialogActions>
             </Dialog>

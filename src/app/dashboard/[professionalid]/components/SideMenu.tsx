@@ -52,6 +52,21 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
 
               </Link>
             </li>
+
+            <li className='group my-[0.5px] group-hover/sidebar:my-0'>
+              <Link href={`/professionals/${id_prestador}`}>
+                
+                <Button variant='icon' className='block group-hover/sidebar:hidden'>
+                  <FaUser className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                </Button>
+
+                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
+                  <FaUser className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
+                  <span>Seu Perfil</span>
+                </Button>
+
+              </Link>
+            </li>
             
             <MenuSpacer />
             
@@ -80,21 +95,6 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
                 <Button variant='icon' className='hidden group-hover/sidebar:flex'>
                   <IoInformationCircleOutline className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                   <span>Informações</span>
-                </Button>
-
-              </Link>
-            </li>
-
-            <li className='group my-[0.5px] group-hover/sidebar:my-0'>
-              <Link href={`/professionals/${id_prestador}`}>
-                
-                <Button variant='icon' className='block group-hover/sidebar:hidden'>
-                  <FaUser className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
-                </Button>
-
-                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
-                  <FaUser className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
-                  <span>Perfil</span>
                 </Button>
 
               </Link>

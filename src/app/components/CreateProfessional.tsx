@@ -1,16 +1,17 @@
 "use client"
 
+import * as React from 'react';
+import axios from 'axios';
+import { mask, unMask } from 'remask'
+import { toast } from 'react-toastify';
+import { IMaskInput } from 'react-imask';
+import { Controller, useForm } from "react-hook-form";
+
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material';
-import { LiaTimesSolid } from "react-icons/lia";
-// import Button from "@/components/Button";
-import Button from '@mui/material/Button';
-import { BsCheck2Square } from 'react-icons/bs';
-import { AiOutlineUser } from 'react-icons/ai';
-import { FcGoogle } from "react-icons/fc";
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Dialog, { DialogProps } from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -21,12 +22,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { IMaskInput } from 'react-imask';
-import * as React from 'react';
-import { mask, unMask } from 'remask'
-import { Controller, useForm } from "react-hook-form";
-import Input from '@/components/Input';
-import { toast } from 'react-toastify';
+
+import { LiaTimesSolid } from "react-icons/lia";
+import { BsCheck2Square } from 'react-icons/bs';
+import { AiOutlineUser } from 'react-icons/ai';
+import { FcGoogle } from "react-icons/fc";
 
 type IBGEUFResponse = {
   id: number;

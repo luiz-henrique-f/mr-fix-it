@@ -133,7 +133,7 @@ const ProfessionalDescription = ({ description }: ProfessionalDescriptionProps) 
         </DialogActions>
       </Dialog>
 
-      {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />}
+      {/* {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />} */}
 
       <h2 className='text-2xl mb-5 font-bold text-primaryDarker dark:text-white'>Sobre o Professional</h2>
       <p className='text-sm leading-5 text-justify text-primaryDarker dark:text-white mt-1 indent-3'>{description}</p>

@@ -3,7 +3,7 @@ import React from 'react';
 import PlanCard from '../pagamentoPlano/components/PlanCard';
 import PricingItems from '../pagamentoPlano/components/PricingItems';
 
-const PricesPage = () => {
+const PricesSection = () => {
   return (
     <>
       <div className='h-full'>
@@ -29,9 +29,9 @@ const PricesPage = () => {
             <PlanCard 
               className="scale-[.85] 2sm:scale-900 lg:scale-100"
             
-              tipo_plano=''
-              valor='R$0'
-              texto='Para clientes que somente querem pesquisar profissionais!'
+              tipo_plano='Mensal'
+              valor='R$25'
+              texto='Bom para os que estão começando!'
 
               corFundo1='from-white'
               corFundo2='to-gray-300'
@@ -39,9 +39,9 @@ const PricesPage = () => {
               corTexto='text-black'
               corSubTexto='text-gray-400'
 
-              item1={<PricingItems name='Busque profissionais por categoria!' color='text-primary' />}
-              item2={<PricingItems name='Veja as avaliações do Profissional' color='text-primary' />}
-              item3={''}
+              item1={<PricingItems name='Boost nas buscas.' color='text-primary' />}
+              item2={<PricingItems name='Acesso ao Dashboard.' color='text-primary' />}
+              item3={<PricingItems name='Personalização completa do perfil.' color='text-primary' />}
 
               link=''
             />
@@ -49,9 +49,9 @@ const PricesPage = () => {
             <PlanCard 
               className="scale-95 2sm:scale-100 lg:scale-110 -my-32 2sm:-my-14 lg:my-0 z-50"
             
-              tipo_plano='Mensalmente'
-              valor='R$25'
-              texto='Bom para os que estão começando!'
+              tipo_plano='Anual'
+              valor='R$200'
+              texto='Melhor opção para profissionais requisitados!'
               
               corFundo1='from-primaryLighter'
               corFundo2='to-primary'
@@ -61,7 +61,7 @@ const PricesPage = () => {
               
               item1={<PricingItems name='Boost nas buscas.' color='text-white' />}
               item2={<PricingItems name='Acesso ao Dashboard.' color='text-white' />}
-              item3={''}
+              item3={<PricingItems name='Personalização completa do perfil.' color='text-white' />}
 
               link=''
             />
@@ -69,9 +69,9 @@ const PricesPage = () => {
             <PlanCard 
               className="scale-[.85] 2sm:scale-90 lg:scale-100"
 
-              tipo_plano='Anualmente'
-              valor='R$200'
-              texto='Melhor opção para profissionais requisitados!'
+              tipo_plano='Semestral'
+              valor='R$1.000'
+              texto='Para aqueles que preferem esquecer o plano!'
               
               corFundo1='from-white'
               corFundo2='to-gray-300'
@@ -104,4 +104,4 @@ const PricesPage = () => {
   );
 };
 
-export default PricesPage;
+export default PricesSection;
