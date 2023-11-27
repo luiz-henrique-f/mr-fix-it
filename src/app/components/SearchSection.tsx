@@ -37,40 +37,42 @@ const SearchSection = () => {
 	});
 
 	return (
-		<div className="container flex justify-center items-center flex-col mx-auto p-5 h-[calc(100vh-85px)] 2sm:bg-search-background 2sm:dark:bg-search-background-dark bg-contain bg-center bg-no-repeat bg-transparent">
-				<div className="flex h-1/5">
-					{status === "authenticated" && data.user && (
-						<div className="flex w-full h-full items-start justify-center">
-							{id_prestador == undefined && (
-								<Link href='/createProfessional'>
-									{/* <span className="relative animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span> */}
-									<Button variant="primary">
-										<BsCheck2Square className='text-white text-xl' />
-										<span className="text-base">Completar cadastro</span>
-									</Button>
-								</Link>
-							)}
-							{planoAtivo == undefined && id_prestador != undefined && (
-								<Link href='/pagamentoPlano'>
-									{/* <span className="absolute left-11 top-2 animate-ping flex justify-center items-center h-3/4 w-3/5 rounded-md bg-primary opacity-60"></span> */}
-									<Button variant="primary">
-										<BsCheck2Square className='text-white text-xl' />
-										<span className="text-base">Adquirir plano</span>
-									</Button>
-								</Link>
-							)}
-						</div>
-					)}
-				</div>
-			<div className='-mt-[10%] h-1/2 items-center justify-center w-full'>
+		<div className="container flex flex-col mx-auto p-5 h-[calc(100vh-85px)] 2sm:bg-search-background 2sm:dark:bg-search-background-dark bg-contain bg-center bg-no-repeat bg-transparent">
+
+			<div className="flex flex-[5%] justify-center items-center">
+				{status === "authenticated" && data.user && (
+					
+					<div className='relative'>
+						{id_prestador == undefined && (
+							<Link href='/createProfessional'>
+								<span className="absolute top-1 left-9 animate-ping flex justify-center items-center h-12 w-36 rounded-md bg-primary opacity-60"></span>
+								<Button variant="custom1">
+									<BsCheck2Square className='text-white text-xl' />
+									<span className="text-base">Completar cadastro</span>
+								</Button>
+							</Link>
+						)}
+
+						{planoAtivo === undefined && id_prestador != undefined && (
+							<Link href='/pagamentoPlano'>
+								<span className="absolute top-1 left-9 animate-ping flex justify-center items-center h-12 w-36 rounded-md bg-primary opacity-60"></span>
+								<Button variant="custom1">
+									<span className="text-base">Escolha um Plano!</span>
+								</Button>
+							</Link>
+						)}
+					</div>
+
+				)}
+			</div>
+
+			<div className='flex flex-[90%] justify-center items-center flex-col w-full'>
 				
 				<h1 className='font-semibold text-3xl 2sm:text-4xl text-gray-800 dark:text-gray-300 text-center p-3'>A maneira mais fácil de encontrar um profissional <span className='text-primary dark:text-primaryLighter'>capacitado</span>!</h1>
 				<p className='text-gray-600 dark:text-gray-400 text-sm 2sm:text-xl text-center p-3 mb-6'>Conheça de forma gratuita os profissionais melhor avaliados!</p>
 
 				<Link href="/search">
-					<div className='flex items-center justify-center'>
-						<SpecialButton />
-					</div>
+					<SpecialButton />
 				</Link>
 			</div>
 		</div>

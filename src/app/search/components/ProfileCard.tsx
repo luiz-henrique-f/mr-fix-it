@@ -49,14 +49,6 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
             </div>
           </div>
 
-          {/* <div className="flex items-center justify-center gap-2 w-[80%] mx-auto mt-5 mb-10">
-            <Link href={`/professionals/${prestador.id}`}>
-              <Button variant='login'>
-                Visitar
-              </Button>
-            </Link>
-          </div> */}
-
           <div className="border-t-4 border-whiteBG dark:border-darkBG text-black dark:text-white p-4 text-xs 3xl:text-sm font-semibold flex justify-around items-center gap-2">
             <div className='flex flex-col 2xl:flex-row gap-2 justify-center items-center'>
               <p>Categoria:</p>

@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 
 import * as React from 'react';
 import Image from 'next/image'
@@ -15,46 +15,46 @@ import ProfessionalRaiting from '@/app/professionals/[professionalid]/components
 import { IoMdStar } from 'react-icons/io'
 import { FaHammer, FaThumbsUp, FaThumbsDown } from 'react-icons/fa6';
 
-// const getProfessionalDetails = async (professionalid: string) => {
-//     const professional = await prisma.prestador.findFirst({
-//         where: {
-//             id: professionalid,
-//         },
-//     }).finally(() => {
-//         prisma.$disconnect();
-//     });
+const getProfessionalDetails = async (professionalid: string) => {
+    const professional = await prisma.prestador.findFirst({
+        where: {
+            id: professionalid,
+        },
+    }).finally(() => {
+        prisma.$disconnect();
+    });
 
-//     return professional;
-// }
+    return professional;
+}
 
-// const getCommentsDetails = async (professionalid: string) => {
-//     const professional = await prisma.comentarios_Prestador.findMany({
-//         where: {
-//             id_prestador: professionalid,
-//         },
-//     }).finally(() => {
-//         prisma.$disconnect();
-//     });
+const getCommentsDetails = async (professionalid: string) => {
+    const professional = await prisma.comentarios_Prestador.findMany({
+        where: {
+            id_prestador: professionalid,
+        },
+    }).finally(() => {
+        prisma.$disconnect();
+    });
 
-//     return professional;
-// }
+    return professional;
+}
 
-// const getPhotoProfessional = async (professionalid: string) => {
-//     const photo = await prisma.foto_Prestador.findFirst({
-//         where: {
-//             id_prestador: professionalid,
-//         },
-//     }).finally(() => {
-//         prisma.$disconnect();
-//       });
+const getPhotoProfessional = async (professionalid: string) => {
+    const photo = await prisma.foto_Prestador.findFirst({
+        where: {
+            id_prestador: professionalid,
+        },
+    }).finally(() => {
+        prisma.$disconnect();
+      });
   
-//     return photo;
-// };
+    return photo;
+};
  
-const Dashboard = ({ params }: { params: { professionalid: string } }) => {
+const Dashboard = async ({ params }: { params: { professionalid: string } }) => {
 
-    // const professional = await getProfessionalDetails(params.professionalid);
-    // const data = await getCommentsDetails(params.professionalid);
+    const professional = await getProfessionalDetails(params.professionalid);
+    const data = await getCommentsDetails(params.professionalid);
 
     // if (!professional) return null;
     
@@ -67,7 +67,7 @@ const Dashboard = ({ params }: { params: { professionalid: string } }) => {
 
                     <div className='flex flex-col w-full gap-4'>
                         <div className='flex justify-end items-center mb-4'>
-                            <TopDetails prestador={params.professionalid} />
+                            <TopDetails />
                         </div>
 
                         <div className='flex justify-between gap-4'>
@@ -111,11 +111,9 @@ const Dashboard = ({ params }: { params: { professionalid: string } }) => {
                             <div className="flex flex-[20%] bg-white dark:bg-darkBGLighter rounded-2xl h-[79vh] ">
                                 <div className="overflow-y-scroll w-full">
                                     
-                                    {/* {data.map((comments: Comentarios_Prestador) => (
+                                    {data.map((comments: Comentarios_Prestador) => (
                                         <ProfessionalRaiting key={comments.id} name={comments.nome} title={comments.titulo_comentario} message={comments.comentario} valueComment={comments.nota} />
-                                    ))} */}
-                                    <ProfessionalRaiting name={"Comerto"} title={"Do balacobado"} message={"Palmeiras"} valueComment={4} />
-                                    <ProfessionalRaiting name={"Romerto"} title={"É um cachorro do karai"} message={"Pincher!"} valueComment={1} />
+                                    ))}
                                 </div>
                             </div>
 
