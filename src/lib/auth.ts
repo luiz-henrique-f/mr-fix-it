@@ -80,28 +80,41 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        return {
-          ...token,
-          username: user.username,
-        }
-      }
-      return token
+    session: ({ session, token }) => {
+      session.user.id = token.id;
+      return session
     },
-    async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          username: token.username,
-        },
+    jwt({ token, account, user }) {
+      if(account) {
+        token.accessToken = account.access_token;
+        token.id = user.id;
       }
-      // session.user.id = token.id;
-
-      // return session
-    },
+      return token;
+    }
   },
+  // callbacks: {
+  //   async jwt({ token, user }) {
+  //     if (user) {
+  //       return {
+  //         ...token,
+  //         username: user.username,
+  //       }
+  //     }
+  //     return token
+  //   },
+  //   async session({ session, token }) {
+  //     return {
+  //       ...session,
+  //       user: {
+  //         ...session.user,
+  //         username: token.username,
+
+  //       },
+  //     }
+
+  //     // return session
+  //   },
+  // },
   //   jwt({ token, account, user }) {
   //   if(account) {
   //     token.accessToken = account.access_token;
