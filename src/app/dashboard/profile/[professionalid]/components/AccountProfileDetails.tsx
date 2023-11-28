@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import Button from '@/components/Button';
 
-import { Box, Card, CardContent, CardHeader, TextField, Unstable_Grid2 as Grid, MenuItem } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, TextField, Unstable_Grid2 as Grid, MenuItem, Autocomplete } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -53,6 +53,11 @@ type categorieResponse = {
   descricao_categoria: string;
 };
 
+type cboResponse = {
+  id: string;
+  desc_cbo: string;
+};
+
 interface ProfessionalInfoProps {
   name: string;
   city: string;
@@ -61,6 +66,7 @@ interface ProfessionalInfoProps {
   cpf_cnpj: string;
   observacao: string;
   sexo: string;
+  cbo: string;
   categoria: string;
 };
 
@@ -78,6 +84,7 @@ interface CreateProfessionalForm {
   uf: String;
   cidade: String;
   observacao: String;
+  cbo: String;
 }
 
 const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
@@ -98,14 +105,16 @@ const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
   },
 );
 
-const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, sexo, observacao }: ProfessionalInfoProps) => {
+const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, sexo, observacao, cbo }: ProfessionalInfoProps) => {
 
 
   const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
   const [categories, setCategories] = React.useState<categorieResponse[]>([]);
+  const [cbos, setCbos] = React.useState<cboResponse[]>([]);
   const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
   const [selectedUf, setSelectedUf] = React.useState(uf);
   const [selectedCity, setSelectedCity] = React.useState(city);
+  const [selectedCbo, setSelectedCbo] = React.useState(cbo);
   const [selectedCategorie, setSelectedCategorie] = React.useState(categoria);
   const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState(sexo);
 
@@ -137,6 +146,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
           categoria: data.categoria,
           sexo: data.sexo,
           uf: data.uf,
+          cbo: data.cbo,
           cidade: data.cidade.substring(0, 7),
           desc_cidade: data.cidade.substring(7),
           observacao: data.observacao,
@@ -166,9 +176,16 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   }, [selectedUf]);
 
   React.useEffect(() => {
-    axios.get('/categoria')
+    axios.get('/api/categoria')
       .then((response) => {
         setCategories(response.data)
+      })
+  }, []);
+
+  React.useEffect(() => {
+    axios.get('/api/cbo')
+      .then((response) => {
+        setCbos(response.data)
       })
   }, []);
 
@@ -193,6 +210,13 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
     setSelectedCategorie(categorie);
   };
 
+  const handleSelectedCbo = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const cbo = e.target.value;
+    setSelectedCbo(cbo);
+  };
+
   const changeCheckbox = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -213,7 +237,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   return (
     <ThemeProvider theme={theme}>
 
-    
+
       <form
         autoComplete="off"
         noValidate
@@ -225,7 +249,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
             <h1 className='text-2xl font-semibold text-black dark:text-white'>Seu perfil</h1>
             <p className='text-lg text-gray-400 dark:text-gray-500'>Mantenha suas informações atualizadas!</p>
           </div>
-          
+
           <CardContent sx={{ pt: 0 }}>
             <Box sx={{ m: -1.5 }}>
               <Grid
@@ -235,25 +259,25 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   input: {
                     '&.Mui-focused': {
                       color: '#590BD8'
-                  },
+                    },
                     color: '#aaa',
                   },
                   label: {
-                      '&.Mui-focused': {
-                        color: '#590BD8'
-                      },
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
                     color: '#aaa',
                   },
                   select: {
                     '&.Mui-focused': {
                       color: '#590BD8'
-                  },
+                    },
                     color: '#aaa',
                   },
                   svg: {
                     '&.Mui-focused': {
                       color: '#590BD8'
-                  },
+                    },
                     color: '#aaa',
                   },
                 }}
@@ -262,25 +286,25 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   xs={12}
                 >
 
-                <TextField
-                  {...register("nome", {
-                    required: {
-                      value: true,
-                      message: 'Nome é obrigatório',
-                    }
-                  })}
-                  id="name"
-                  label="Nome completo"
-                  fullWidth
-                  defaultValue={name}
-                >
-                </TextField>
+                  <TextField
+                    {...register("nome", {
+                      required: {
+                        value: true,
+                        message: 'Nome é obrigatório',
+                      }
+                    })}
+                    id="name"
+                    label="Nome completo"
+                    fullWidth
+                    defaultValue={name}
+                  >
+                  </TextField>
 
                 </Grid>
 
                 <Grid
                   xs={12}
-                  md={4}
+                  md={6}
                 >
                   {/* <TextField
                     fullWidth
@@ -305,51 +329,25 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
 
                 </Grid>
 
-
-
-
                 <Grid
                   xs={12}
-                  md={4}
+                  md={6}
                 >
-
-
                   <TextField
-                    {...register("categoria")}
-                    id="categorie"
-                    select
-                    label="Categoria"
-                    value={selectedCategorie}
-                    // defaultValue=""
+                    {...register("celular", {
+                      required: {
+                        value: true,
+                        message: 'Campo celular é obrigatório',
+                      }
+                    })}
+                    id="celular"
+                    label="Celular"
+                    onChange={mudarMascaraCelular}
+                    value={valueCelular}
                     fullWidth
-                    onChange={handleSelectedCategorie}>
-                    {categories.map(categorie => (
-                      <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                        {categorie.descricao_categoria}
-                      </MenuItem>
-                    ))}
+                  >
+
                   </TextField>
-                </Grid>
-
-                <Grid
-                  xs={12}
-                  md={4}
-                >
-                <TextField
-                  {...register("celular", {
-                    required: {
-                      value: true,
-                      message: 'Campo celular é obrigatório',
-                    }
-                  })}
-                  id="celular"
-                  label="Celular"
-                  onChange={mudarMascaraCelular}
-                  value={valueCelular}
-                  fullWidth
-                >
-
-                </TextField>
                 </Grid>
 
                 <Grid
@@ -387,7 +385,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     defaultValue={city}
                     onChange={handleSelectedCity}>
                     {cities.map(city => (
-                      <MenuItem key={city.id} value={city.id+city.nome}>
+                      <MenuItem key={city.id} value={city.id + city.nome}>
                         {city.nome}
                       </MenuItem>
                     ))}
@@ -418,6 +416,46 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                       Não Especificar
                     </MenuItem>
                   </TextField>
+                </Grid>
+
+                
+                <Grid
+                  xs={12}
+                  md={6}
+                >
+
+
+                  <TextField
+                    {...register("categoria")}
+                    id="categorie"
+                    select
+                    label="Categoria"
+                    value={selectedCategorie}
+                    // defaultValue=""
+                    fullWidth
+                    onChange={handleSelectedCategorie}>
+                    {categories.map(categorie => (
+                      <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                        {categorie.descricao_categoria}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+
+                <Grid
+                  xs={12}
+                  md={6}
+                >
+                  <Autocomplete
+                    id="free-solo-demo"
+                    freeSolo
+                    options={cbos.map((option) => option.desc_cbo)}
+                    renderInput={(params) => <TextField
+                      {...register("cbo")}
+                      value={selectedCbo}
+                      onChange={handleSelectedCbo}{...params} label="Ocupação" />}
+                  />
                 </Grid>
 
                 <Grid

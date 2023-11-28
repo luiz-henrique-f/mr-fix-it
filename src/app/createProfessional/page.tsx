@@ -13,7 +13,7 @@ import { mask, unMask } from 'remask';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
-import { colors, useMediaQuery } from '@mui/material';
+import { Autocomplete, colors, useMediaQuery } from '@mui/material';
 import { useTheme, styled } from '@mui/material/styles';
 import DialogActions from '@mui/material/DialogActions';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -40,6 +40,11 @@ type categorieResponse = {
   descricao_categoria: string;
 };
 
+type cboResponse = {
+  id: string;
+  desc_cbo: string;
+};
+
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
@@ -54,6 +59,7 @@ interface CreateProfessionalForm {
   cpf_cnpj: String;
   celular: String;
   categoria: String;
+  cbo: String;
   sexo: String;
   uf: String;
   cidade: String;
@@ -122,6 +128,7 @@ const CreateProfessional = () => {
   } = useForm<CreateProfessionalForm>();
 
   const onSubmit = async (data: CreateProfessionalForm) => {
+    console.log(data)
     const response = await fetch("http://localhost:3000/insertProfessional", {
       method: "POST",
       body: Buffer.from(
@@ -132,6 +139,7 @@ const CreateProfessional = () => {
           categoria: data.categoria,
           sexo: data.sexo,
           uf: data.uf,
+          cbo: data.cbo,
           cidade: data.cidade.substring(0, 7),
           desc_cidade: data.cidade.substring(7),
           observacao: data.observacao,
@@ -159,11 +167,13 @@ const CreateProfessional = () => {
 
   const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
   const [categories, setCategories] = React.useState<categorieResponse[]>([]);
+  const [cbos, setCbos] = React.useState<cboResponse[]>([]);
   const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
   const [selectedUf, setSelectedUf] = React.useState("0");
   const [selectedCity, setSelectedCity] = React.useState("0");
   const [selectedCategorie, setSelectedCategorie] = React.useState("0");
-  const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("F");
+  const [selectedCbo, setSelectedCbo] = React.useState("0");
+  const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("M");
 
   // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelectedValueCheckbox(event.target.value);
@@ -190,6 +200,13 @@ const CreateProfessional = () => {
       })
   }, []);
 
+  React.useEffect(() => {
+    axios.get('/api/cbo')
+      .then((response) => {
+        setCbos(response.data)
+      })
+  }, []);
+
   const handleSelectedUf = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -209,6 +226,13 @@ const CreateProfessional = () => {
   ) => {
     const categorie = e.target.value;
     setSelectedCategorie(categorie);
+  };
+
+  const handleSelectedCbo = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const cbo = e.target.value;
+    setSelectedCbo(cbo);
   };
 
   const changeCheckbox = (
@@ -391,7 +415,7 @@ const CreateProfessional = () => {
                 onChange={handleSelectedCity}>
 
                 {cities.map(city => (
-                  <MenuItem key={city.id} value={city.id+city.nome}>
+                  <MenuItem key={city.id} value={city.id + city.nome}>
                     {city.nome}
                   </MenuItem>
                 ))}
@@ -420,6 +444,44 @@ const CreateProfessional = () => {
                 </MenuItem>
               ))}
             </TextField>
+
+            <Autocomplete
+              id="free-solo-demo"
+              freeSolo
+              options={cbos.map((option) => option.desc_cbo)}
+              renderInput={(params) => <TextField 
+                {...register("cbo", {
+                  required: {
+                    value: true,
+                    message: 'Campo ocupação é obrigatório',
+                  }
+                })}
+                value={selectedCbo}
+                onChange={handleSelectedCbo}{...params} label="Ocupação" />}
+            />
+
+            {/* <TextField
+              {...register("cbo", {
+                required: {
+                  value: true,
+                  message: 'Campo ocupação é obrigatório',
+                }
+              })}
+              id="categorie"
+              select
+              label="Ocupação"
+              value={selectedCbo}
+              // defaultValue=""
+              fullWidth
+              error={!!errors?.categoria}
+              helperText={errors?.categoria?.message}
+              onChange={handleSelectedCbo}>
+              {cbos.map(cbo => (
+                <MenuItem key={cbo.id} value={cbo.id}>
+                  {cbo.desc_cbo}
+                </MenuItem>
+              ))}
+            </TextField> */}
 
             <Box
               component="form"
