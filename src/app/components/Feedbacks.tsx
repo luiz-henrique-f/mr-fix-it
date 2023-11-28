@@ -14,7 +14,8 @@ const Feedbacks = async () => {
         <span className="text-base font-medium">Ops! Algo deu errado... </span>
       )}
 
-      <div className="flex w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center gap-8">
+
         {feedback_.map((feedback) => (
           <FeedbackCard feedback={feedback} key={feedback.id} />
         ))}

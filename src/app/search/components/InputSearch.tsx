@@ -152,7 +152,7 @@ const InputSearch = () => {
   return (
     <ThemeProvider theme={theme}>
 
-      <div className="flex flex-col 2md:flex-row justify-evenly items-center mt-4 gap-4">
+      <div className="flex flex-col 2md:flex-row justify-evenly items-center gap-4 bg-whiteBG dark:bg-darkBG p-4 mt-4 rounded-xl shadow-2xl dark:shadow-whiteBG/10">
         <TextField
           id="categorie"
           label="Categoria"
@@ -196,8 +196,40 @@ const InputSearch = () => {
 
         <Autocomplete
           options={cboOptions}
-          renderInput={(params) => <TextField {...params} label="Ocupação" />}
+          renderInput={
+            (params) => <TextField 
+                          {...params} 
+                          label="Ocupação"
+                          sx={{
+                            input: {
+                              '&.Mui-focused': {
+                                color: '#590BD8'
+                              },
+                              color: '#aaa',
+                            },
+                            label: {
+                              '&.Mui-focused': {
+                                color: '#590BD8'
+                              },
+                              color: '#aaa',
+                            },
+                            select: {
+                              '&.Mui-focused': {
+                                color: '#590BD8'
+                              },
+                              color: '#aaa',
+                            },
+                            svg: {
+                              '&.Mui-focused': {
+                                color: '#590BD8'
+                              },
+                              color: '#aaa',
+                            },
+                          }} 
+                        />
+            }
           value={skill}
+          fullWidth
           onChange={(event : any, newValue: Skill | null) => setSkill(newValue)}
         />
 

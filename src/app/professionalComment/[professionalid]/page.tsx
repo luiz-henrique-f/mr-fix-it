@@ -232,7 +232,8 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
               </TextField>
             </div>
 
-            <div className='flex flex-col 2sm:flex-row 2sm:justify-center 2sm:gap-2'>
+            <div className='flex border border-[#aaa] p-6 mx-2 rounded'>
+              <h1 className='text-[#aaa] -ml-2 pr-4'>Qualidade do serviço:</h1>
               <Rating
                 name="simple-controlled"
                 value={valueStar}
