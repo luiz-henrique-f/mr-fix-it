@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export default function middleware(request: NextRequest) {
-  const token = request.cookies.get('next-auth.csrf-token')?.value
+  const token = request.cookies.get('next-auth.session-token')?.value
   const signInURL = new URL('/login', request.url)
 
   if (!token) {
@@ -15,5 +15,5 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   //rotas que serao privadas
-  matcher: ['/pagamentoPlano'],
+  matcher: ['/pagamentoPlano', '/createProfessional', '/dashboard/:path*'],
 }
