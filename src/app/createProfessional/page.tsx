@@ -41,8 +41,13 @@ type categorieResponse = {
 };
 
 type cboResponse = {
-  id: string;
+  cod_cbo: string;
   desc_cbo: string;
+};
+
+type Skill = {
+  id: string;
+  label: string;
 };
 
 interface CustomProps {
@@ -59,7 +64,6 @@ interface CreateProfessionalForm {
   cpf_cnpj: String;
   celular: String;
   categoria: String;
-  cbo: String;
   sexo: String;
   uf: String;
   cidade: String;
@@ -128,7 +132,7 @@ const CreateProfessional = () => {
   } = useForm<CreateProfessionalForm>();
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-    console.log(data)
+
     const response = await fetch("http://localhost:3000/insertProfessional", {
       method: "POST",
       body: Buffer.from(
@@ -139,7 +143,8 @@ const CreateProfessional = () => {
           categoria: data.categoria,
           sexo: data.sexo,
           uf: data.uf,
-          cbo: data.cbo,
+          cod_cbo: skill?.id,
+          desc_cbo: skill?.label,
           cidade: data.cidade.substring(0, 7),
           desc_cidade: data.cidade.substring(7),
           observacao: data.observacao,
@@ -174,6 +179,8 @@ const CreateProfessional = () => {
   const [selectedCategorie, setSelectedCategorie] = React.useState("0");
   const [selectedCbo, setSelectedCbo] = React.useState("0");
   const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("M");
+
+  const [skill, setSkill] = React.useState<Skill | null>(null)
 
   // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelectedValueCheckbox(event.target.value);
@@ -263,6 +270,11 @@ const CreateProfessional = () => {
   const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
   }
+
+  const cboOptions = cbos.map((cbo) => ({
+    id: cbo.cod_cbo,
+    label: cbo.desc_cbo
+  }))
 
   const themestyle = createTheme({
     components: {
@@ -446,18 +458,10 @@ const CreateProfessional = () => {
             </TextField>
 
             <Autocomplete
-              id="free-solo-demo"
-              freeSolo
-              options={cbos.map((option) => option.desc_cbo)}
-              renderInput={(params) => <TextField 
-                {...register("cbo", {
-                  required: {
-                    value: true,
-                    message: 'Campo ocupação é obrigatório',
-                  }
-                })}
-                value={selectedCbo}
-                onChange={handleSelectedCbo}{...params} label="Ocupação" />}
+              options={cboOptions}
+              renderInput={(params) => <TextField {...params} label="Ocupação" />}
+              value={skill}
+              onChange={(event: any, newValue: Skill | null) => setSkill(newValue)}
             />
 
             {/* <TextField

@@ -2,7 +2,10 @@ import { prisma } from "@/lib/prisma";
 import FeedbackCard from "./FeedbackCard";
 
 const Feedbacks = async () => {
-  const feedback_ = await prisma.feedback.findMany({})
+  const feedback_ = await prisma.feedback.findMany({}).finally(() => {
+    prisma.$disconnect();
+})
+
   return (
     <div className='flex flex-col justify-center items-center h-full mb-7'>
       <h1 className='font-bold m-6 xl:text-3xl md:text-xl sm:text-base uppercase'>Veja a opinião dos nossos fornecedores</h1>

@@ -13,7 +13,9 @@ export async function PUT(request: Request) {
       data: {
         tipo_categoria: tipo_categoria,
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

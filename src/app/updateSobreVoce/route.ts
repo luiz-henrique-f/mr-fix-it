@@ -13,7 +13,9 @@ export async function PUT(request: Request) {
       data: {
         observacao: observacao,
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

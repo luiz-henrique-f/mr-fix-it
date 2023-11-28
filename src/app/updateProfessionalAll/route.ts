@@ -24,7 +24,9 @@ export async function PUT(request: Request) {
         sexo: sexo,
         observacao: observacao,
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

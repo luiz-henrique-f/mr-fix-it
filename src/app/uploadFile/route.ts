@@ -12,7 +12,9 @@ export async function POST(request: Request) {
       id_prestador: id_prestador,
       url_foto: url,
     },
-  });
+  }).finally(() => {
+    prisma.$disconnect();
+});
 
   return new NextResponse(
       JSON.stringify({

@@ -17,7 +17,9 @@ export async function POST(request: Request) {
         comentario: comentario,
         nota: nota,
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

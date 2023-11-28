@@ -22,6 +22,8 @@ const professional = await prisma.prestador.findMany({
     select:{
         id: true
     }
+}).finally(() => {
+  prisma.$disconnect();
 });
 
   return new NextResponse(JSON.stringify(professional), { status: 200 });

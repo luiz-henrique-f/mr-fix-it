@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 export async function GET() {
 //   const cbos = await prisma.cbo.findMany({});
 
-  const cbos = await prisma.$queryRaw`SELECT *
+  const cbos = await prisma.$queryRaw`SELECT "public"."Cbo"."cod_cbo"
+                                           , "public"."Cbo"."desc_cbo"
                                       FROM   "public"."Cbo"
                                       limit 10`.finally(() => {
                                       prisma.$disconnect()});

@@ -27,6 +27,8 @@ const professional = await prisma.prestador.findMany({
         cidade: true,
         uf: true,
     }
+}).finally(() => {
+  prisma.$disconnect();
 });
 
   return new NextResponse(JSON.stringify(professional), { status: 200 });

@@ -8,8 +8,9 @@ interface ProfessionalInfoProps {
   cidade: string;
   uf: string;
   nome: string;
+  cbo: string;
 }
-const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoProps) => {
+const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: ProfessionalInfoProps) => {
 
   const result = await prisma.$queryRaw`SELECT * 
                                         FROM  "public"."Prestador"
@@ -41,6 +42,9 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome }: ProfessionalInfoP
                                                END = 1
                                         AND    CASE WHEN ${nome} = 'undefined' THEN 1
                                                     WHEN UPPER("public"."Prestador"."nome") like UPPER('%'||${nome}||'%') THEN 1
+                                               END = 1
+                                        AND    CASE WHEN ${cbo} = 'undefined' THEN 1
+                                                    WHEN "public"."Prestador"."cod_cbo" = ${cbo} THEN 1
                                                END = 1`.finally(() => {
     prisma.$disconnect();
   })

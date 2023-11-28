@@ -2,7 +2,7 @@ import ProfilesParams from '@/app/components/ProfilesParams';
 import InputSearch from '@/app/search/components/InputSearch';
 import React from 'react';
 
-const SearchParams = async ({ params }: { params: { categoria: string, uf: string, cidade: string, nome: string } }) => {
+const SearchParams = async ({ params }: { params: { categoria: string, uf: string, cidade: string, nome: string, cbo: string } }) => {
 
   return (
     <>
@@ -14,6 +14,7 @@ const SearchParams = async ({ params }: { params: { categoria: string, uf: strin
           cidade={params.cidade}
           uf={params.uf}
           nome={params.nome}
+          cbo={params.cbo}
         />
 
       </div>

@@ -454,6 +454,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     renderInput={(params) => <TextField
                       {...register("cbo")}
                       value={selectedCbo}
+                      defaultValue={cbo}
                       onChange={handleSelectedCbo}{...params} label="Ocupação" />}
                   />
                 </Grid>

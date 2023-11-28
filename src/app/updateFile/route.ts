@@ -13,7 +13,9 @@ export async function PUT(request: Request) {
       data: {
         url_foto: url_foto,
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

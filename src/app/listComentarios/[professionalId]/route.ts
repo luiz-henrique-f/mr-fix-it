@@ -15,6 +15,8 @@ const professional = await prisma.comentarios_Prestador.findMany({
         comentario: true,
         nota: true,
     }
+}).finally(() => {
+  prisma.$disconnect();
 });
 
   return new NextResponse(JSON.stringify(professional), { status: 200 });

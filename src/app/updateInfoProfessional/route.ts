@@ -15,7 +15,9 @@ export async function PUT(request: Request) {
         uf: uf,
         cidade: cidade
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

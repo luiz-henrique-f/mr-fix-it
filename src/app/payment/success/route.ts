@@ -23,6 +23,8 @@ export async function POST(request: Request) {
                 data_fim: session.metadata.endDate,
                 tipo_plano: session.metadata.planoType,
             },
+        }).finally(() => {
+            prisma.$disconnect();
         });
     }
 

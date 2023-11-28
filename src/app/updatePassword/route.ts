@@ -16,7 +16,9 @@ export async function PUT(request: Request) {
       data: {
         password: hashedPassword,
       },
-    });
+    }).finally(() => {
+      prisma.$disconnect();
+  });
 
     return new NextResponse(
         JSON.stringify({

@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
         const req = await request.json();
 
-        const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade, desc_cidade, observacao, id_user, cbo } = req;
+        const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade, desc_cidade, observacao, id_user, cod_cbo, desc_cbo } = req;
 
         const professionals = await prisma.prestador.findMany({
             where: {
@@ -16,6 +16,8 @@ export async function POST(request: Request) {
             select: {
                 id: true
             }
+        }).finally(() => {
+            prisma.$disconnect();
         })
 
         const professionalUser = await prisma.prestador.findMany({
@@ -25,6 +27,8 @@ export async function POST(request: Request) {
             select: {
                 id: true
             }
+        }).finally(() => {
+            prisma.$disconnect();
         })
 
         // if (professionals.length > 0) {
@@ -58,9 +62,12 @@ export async function POST(request: Request) {
                 cidade: cidade,
                 desc_cidade: desc_cidade,
                 observacao: observacao,
-                cod_cbo: cbo,
+                cod_cbo: cod_cbo,
+                desc_cbo: desc_cbo,
                 id_user: id_user,
             },
+        }).finally(() => {
+            prisma.$disconnect();
         });
 
         return new NextResponse(

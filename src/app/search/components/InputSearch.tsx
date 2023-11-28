@@ -6,7 +6,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import SearchButton from "@/components/SearchButton";
 
-import { MenuItem, TextField } from "@mui/material";
+import { Autocomplete, MenuItem, TextField } from "@mui/material";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -52,6 +52,16 @@ type categorieResponse = {
   descricao_categoria: string;
 };
 
+type cboResponse = {
+  cod_cbo: string;
+  desc_cbo: string;
+};
+
+type Skill = {
+  id: string;
+  label: string;
+};
+
 const InputSearch = () => {
 
 
@@ -59,11 +69,15 @@ const InputSearch = () => {
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
   const [categories, setCategories] = useState<categorieResponse[]>([]);
   const [cities, setCities] = useState<IBGECITYResponse[]>([]);
+  const [cbos, setCbos] = useState<cboResponse[]>([]);
   const [nome, setNomes] = useState<NomeResponse[]>([]);
   const [selectedNome, setSelectedNome] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCbo, setSelectedCbo] = useState("");
   const [selectedUf, setSelectedUf] = useState("");
   const [selectedCategorie, setSelectedCategorie] = useState("");
+
+  const [skill, setSkill] = useState<Skill | null>(null)
 
   useEffect(() => {
     axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
@@ -84,6 +98,13 @@ const InputSearch = () => {
       .then((response) => {
         setCategories(response.data)
       });
+  }, []);
+
+  useEffect(() => {
+    axios.get('/api/cbo')
+      .then((response) => {
+        setCbos(response.data)
+      })
   }, []);
 
   const handleSelectedUf = (
@@ -107,6 +128,13 @@ const InputSearch = () => {
     setSelectedCategorie(categorie);
   };
 
+  const handleSelectedCbo = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const cbo = e.target.value;
+    setSelectedCbo(cbo);
+  };
+
   const handleSelectedNome = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -114,39 +142,46 @@ const InputSearch = () => {
     setSelectedNome(nome);
   };
 
+  const cboOptions = cbos.map((cbo) => ({
+    id: cbo.cod_cbo,
+    label: cbo.desc_cbo
+  }))
+
+  console.log({ skill })
+
   return (
     <ThemeProvider theme={theme}>
-    
+
       <div className="flex flex-col 2md:flex-row justify-evenly items-center mt-4 gap-4">
         <TextField
           id="categorie"
-          select
           label="Categoria"
+          select
           value={selectedCategorie}
           fullWidth
           sx={{
             input: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             label: {
-                '&.Mui-focused': {
-                  color: '#590BD8'
-                },
+              '&.Mui-focused': {
+                color: '#590BD8'
+              },
               color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
           }}
@@ -159,6 +194,13 @@ const InputSearch = () => {
           ))}
         </TextField>
 
+        <Autocomplete
+          options={cboOptions}
+          renderInput={(params) => <TextField {...params} label="Ocupação" />}
+          value={skill}
+          onChange={(event : any, newValue: Skill | null) => setSkill(newValue)}
+        />
+
         <TextField
           id="uf"
           select
@@ -169,25 +211,25 @@ const InputSearch = () => {
             input: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             label: {
-                '&.Mui-focused': {
-                  color: '#590BD8'
-                },
+              '&.Mui-focused': {
+                color: '#590BD8'
+              },
               color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
           }}
@@ -210,25 +252,25 @@ const InputSearch = () => {
             input: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             label: {
-                '&.Mui-focused': {
-                  color: '#590BD8'
-                },
+              '&.Mui-focused': {
+                color: '#590BD8'
+              },
               color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
           }}
@@ -251,31 +293,31 @@ const InputSearch = () => {
             input: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             label: {
-                '&.Mui-focused': {
-                  color: '#590BD8'
-                },
+              '&.Mui-focused': {
+                color: '#590BD8'
+              },
               color: '#aaa',
             },
             select: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
             svg: {
               '&.Mui-focused': {
                 color: '#590BD8'
-            },
+              },
               color: '#aaa',
             },
           }}
           onChange={handleSelectedNome} />
 
-        <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}`}>
+        <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}/${skill?.id != '' ? skill?.id : 'undefined'}`}>
           <SearchButton className='p-3' />
         </Link>
       </div>

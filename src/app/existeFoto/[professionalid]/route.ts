@@ -20,6 +20,8 @@ const professional = await prisma.foto_Prestador.findMany({
     select:{
         id: true
     }
+}).finally(() => {
+  prisma.$disconnect();
 });
 
   return new NextResponse(JSON.stringify(professional), { status: 200 });
