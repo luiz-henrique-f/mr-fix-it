@@ -58,9 +58,9 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                             <TopDetails url_foto={professional?.url_foto as any}/>
                         </div>
 
-                        <div className='flex justify-between flex-col 3xl:flex-row gap-4 h-[80vh] mr-4 4xl:mr-0'>
+                        <div className='flex justify-between flex-col 3xl:flex-row gap-4 h-[80vh] mr-4 4xl:mr-0 mb-4 4xl:mb-0'>
 
-                            <div className='flex flex-col flex-[70%] 3xl:w-4/5 gap-4'>
+                            <div className='flex flex-col flex-[70%] 3xl:w-4/5 gap-8'>
                                 <div className='grid grid-flow-row 2md:grid-flow-col 2md:grid-col-3 gap-4'>
                                     <TopCards
                                         name='Novos Comentários'
@@ -96,8 +96,8 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
 
                             </div>
 
-                            <div className="flex flex-[20%] 3xl:w-1/5 bg-white dark:bg-darkBGLighter rounded-2xl mb-2">
-                                <div className="overflow-y-scroll w-full">
+                            <div className="flex flex-[20%] 3xl:w-1/5 bg-white dark:bg-darkBGLighter rounded-2xl">
+                                <div className="overflow-y-scroll w-full h-[78vh]">
                                     
                                     {data.map((comments: Comentarios_Prestador) => (
                                         <ProfessionalRaiting 
