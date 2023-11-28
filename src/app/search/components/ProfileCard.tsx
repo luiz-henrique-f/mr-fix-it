@@ -60,7 +60,7 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
             <div className='flex flex-col 2xl:flex-row gap-2 justify-center items-center'>
               <p>Profissão:</p>
               <p className="px-4 py-1 bg-primary dark:bg-primaryLighter rounded-md text-white">
-                gamer
+                {prestador.desc_cbo}
               </p>
             </div>
           </div>
