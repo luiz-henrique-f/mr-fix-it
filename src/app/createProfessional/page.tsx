@@ -41,13 +41,8 @@ type categorieResponse = {
 };
 
 type cboResponse = {
-  cod_cbo: string;
-  desc_cbo: string;
-};
-
-type Skill = {
   id: string;
-  label: string;
+  desc_cbo: string;
 };
 
 interface CustomProps {
@@ -58,12 +53,16 @@ interface CustomProps {
 type IdPrestadorResponse = {
   id: string;
 };
+type Response = {
+  planoType: string;
+};
 
 interface CreateProfessionalForm {
   nome: String;
   cpf_cnpj: String;
   celular: String;
   categoria: String;
+  cbo: String;
   sexo: String;
   uf: String;
   cidade: String;
@@ -97,6 +96,7 @@ const CreateProfessional = () => {
   const router = useRouter();
 
   const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+  const [plano, setPlano] = React.useState<Response[]>([]);
 
   React.useEffect(() => {
     axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
@@ -132,7 +132,7 @@ const CreateProfessional = () => {
   } = useForm<CreateProfessionalForm>();
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-
+    console.log(data)
     const response = await fetch("http://localhost:3000/insertProfessional", {
       method: "POST",
       body: Buffer.from(
@@ -143,8 +143,7 @@ const CreateProfessional = () => {
           categoria: data.categoria,
           sexo: data.sexo,
           uf: data.uf,
-          cod_cbo: skill?.id,
-          desc_cbo: skill?.label,
+          cbo: data.cbo,
           cidade: data.cidade.substring(0, 7),
           desc_cidade: data.cidade.substring(7),
           observacao: data.observacao,
@@ -179,8 +178,6 @@ const CreateProfessional = () => {
   const [selectedCategorie, setSelectedCategorie] = React.useState("0");
   const [selectedCbo, setSelectedCbo] = React.useState("0");
   const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("M");
-
-  const [skill, setSkill] = React.useState<Skill | null>(null)
 
   // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelectedValueCheckbox(event.target.value);
@@ -271,11 +268,6 @@ const CreateProfessional = () => {
     setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
   }
 
-  const cboOptions = cbos.map((cbo) => ({
-    id: cbo.cod_cbo,
-    label: cbo.desc_cbo
-  }))
-
   const themestyle = createTheme({
     components: {
       MuiOutlinedInput: {
@@ -302,169 +294,179 @@ const CreateProfessional = () => {
   return (
     <ThemeProvider theme={themestyle}>
 
-      <div className='flex justify-center items-center xl:gap-[10%] h-full'>
-        <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '96.8%' },
-              input: {
-                color: '#aaa',
-              },
-              label: {
-                '&.Mui-focused': {
-                  color: '#9055dd'
+      {!id_prestador && (
+
+        <div className='flex justify-center items-center xl:gap-[10%] h-full'>
+          <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '96.8%' },
+                input: {
+                  color: '#aaa',
                 },
-                color: '#aaa',
-              },
-              select: {
-                color: '#aaa',
-              },
-              svg: {
-                color: '#aaa',
-              },
-            }}
-            noValidate
-            autoComplete="off">
+                label: {
+                  '&.Mui-focused': {
+                    color: '#9055dd'
+                  },
+                  color: '#aaa',
+                },
+                select: {
+                  color: '#aaa',
+                },
+                svg: {
+                  color: '#aaa',
+                },
+              }}
+              noValidate
+              autoComplete="off">
 
-            <TextField
-              {...register("nome", {
-                required: {
-                  value: true,
-                  message: 'Nome é obrigatório',
-                }
-              })}
-              id="name"
-              label="Nome completo"
-              fullWidth
-              error={!!errors?.nome}
-              helperText={errors?.nome?.message}
-            >
-            </TextField>
-
-            <TextField
-              {...register("cpf_cnpj", {
-                required: {
-                  value: true,
-                  message: 'Campo CPF/CNPJ é obrigatório',
-                }
-              })}
-              id="cpf"
-              label="CPF/CNPJ"
-              onChange={mudarMascara}
-              value={value}
-              fullWidth
-              error={!!errors?.cpf_cnpj}
-              helperText={errors?.cpf_cnpj?.message}>
-            </TextField>
-
-            <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
               <TextField
-                {...register("celular", {
+                {...register("nome", {
                   required: {
                     value: true,
-                    message: 'Campo celular é obrigatório',
+                    message: 'Nome é obrigatório',
                   }
                 })}
-                id="celular"
-                label="Celular"
-                onChange={mudarMascaraCelular}
-                value={valueCelular}
+                id="name"
+                label="Nome completo"
                 fullWidth
-                error={!!errors?.celular}
-                helperText={errors?.celular?.message}>
+                error={!!errors?.nome}
+                helperText={errors?.nome?.message}
+              >
               </TextField>
 
               <TextField
-                {...register("sexo", {
+                {...register("cpf_cnpj", {
                   required: {
                     value: true,
-                    message: 'Campo sexo é obrigatório',
+                    message: 'Campo CPF/CNPJ é obrigatório',
                   }
                 })}
-                id="sexo"
+                id="cpf"
+                label="CPF/CNPJ"
+                onChange={mudarMascara}
+                value={value}
+                fullWidth
+                error={!!errors?.cpf_cnpj}
+                helperText={errors?.cpf_cnpj?.message}>
+              </TextField>
+
+              <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
+                <TextField
+                  {...register("celular", {
+                    required: {
+                      value: true,
+                      message: 'Campo celular é obrigatório',
+                    }
+                  })}
+                  id="celular"
+                  label="Celular"
+                  onChange={mudarMascaraCelular}
+                  value={valueCelular}
+                  fullWidth
+                  error={!!errors?.celular}
+                  helperText={errors?.celular?.message}>
+                </TextField>
+
+                <TextField
+                  {...register("sexo", {
+                    required: {
+                      value: true,
+                      message: 'Campo sexo é obrigatório',
+                    }
+                  })}
+                  id="sexo"
+                  select
+                  label="Sexo"
+                  value={selectedValueCheckbox}
+                  // defaultValue=""
+                  fullWidth
+                  onChange={changeCheckbox}>
+                  <MenuItem key="M" value="M">
+                    Masculino
+                  </MenuItem>
+                  <MenuItem key="F" value="F">
+                    Feminino
+                  </MenuItem>
+                  <MenuItem key="NE" value="NE">
+                    Não Especificar
+                  </MenuItem>
+                </TextField>
+              </div>
+
+              <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
+                <TextField
+                  {...register("uf")}
+                  id="uf"
+                  select
+                  label="UF"
+                  name='uf'
+                  fullWidth
+                  onChange={handleSelectedUf}>
+
+                  {ufs.map(uf => (
+                    <MenuItem key={uf.id} value={uf.sigla}>
+                      {uf.nome}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
+                  {...register("cidade")}
+                  id="city"
+                  select
+                  label="Cidade"
+                  fullWidth
+                  onChange={handleSelectedCity}>
+
+                  {cities.map(city => (
+                    <MenuItem key={city.id} value={city.id + city.nome}>
+                      {city.nome}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+
+              <TextField
+                {...register("categoria", {
+                  required: {
+                    value: true,
+                    message: 'Campo categoria é obrigatório',
+                  }
+                })}
+                id="categorie"
                 select
-                label="Sexo"
-                value={selectedValueCheckbox}
+                label="Categoria"
+                value={selectedCategorie}
                 // defaultValue=""
                 fullWidth
-                onChange={changeCheckbox}>
-                <MenuItem key="M" value="M">
-                  Masculino
-                </MenuItem>
-                <MenuItem key="F" value="F">
-                  Feminino
-                </MenuItem>
-                <MenuItem key="NE" value="NE">
-                  Não Especificar
-                </MenuItem>
-              </TextField>
-            </div>
-
-            <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
-              <TextField
-                {...register("uf")}
-                id="uf"
-                select
-                label="UF"
-                name='uf'
-                fullWidth
-                onChange={handleSelectedUf}>
-
-                {ufs.map(uf => (
-                  <MenuItem key={uf.id} value={uf.sigla}>
-                    {uf.nome}
+                error={!!errors?.categoria}
+                helperText={errors?.categoria?.message}
+                onChange={handleSelectedCategorie}>
+                {categories.map(categorie => (
+                  <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                    {categorie.descricao_categoria}
                   </MenuItem>
                 ))}
               </TextField>
 
-              <TextField
-                {...register("cidade")}
-                id="city"
-                select
-                label="Cidade"
-                fullWidth
-                onChange={handleSelectedCity}>
+              <Autocomplete
+                id="free-solo-demo"
+                freeSolo
+                options={cbos.map((option) => option.desc_cbo)}
+                renderInput={(params) => <TextField
+                  {...register("cbo", {
+                    required: {
+                      value: true,
+                      message: 'Campo ocupação é obrigatório',
+                    }
+                  })}
+                  value={selectedCbo}
+                  onChange={handleSelectedCbo}{...params} label="Ocupação" />}
+              />
 
-                {cities.map(city => (
-                  <MenuItem key={city.id} value={city.id + city.nome}>
-                    {city.nome}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </div>
-
-            <TextField
-              {...register("categoria", {
-                required: {
-                  value: true,
-                  message: 'Campo categoria é obrigatório',
-                }
-              })}
-              id="categorie"
-              select
-              label="Categoria"
-              value={selectedCategorie}
-              // defaultValue=""
-              fullWidth
-              error={!!errors?.categoria}
-              helperText={errors?.categoria?.message}
-              onChange={handleSelectedCategorie}>
-              {categories.map(categorie => (
-                <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
-                  {categorie.descricao_categoria}
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <Autocomplete
-              options={cboOptions}
-              renderInput={(params) => <TextField {...params} label="Ocupação" />}
-              value={skill}
-              onChange={(event: any, newValue: Skill | null) => setSkill(newValue)}
-            />
-
-            {/* <TextField
+              {/* <TextField
               {...register("cbo", {
                 required: {
                   value: true,
@@ -487,38 +489,38 @@ const CreateProfessional = () => {
               ))}
             </TextField> */}
 
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': { m: 1 },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
-                <TextField
-                  {...register("observacao", {
-                    required: {
-                      value: true,
-                      message: 'Campo sobre você é obrigatório',
-                    }
-                  })}
-                  id="outlined-multiline-flexible"
-                  label="Sobre você"
-                  fullWidth
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 1 },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <div>
+                  <TextField
+                    {...register("observacao", {
+                      required: {
+                        value: true,
+                        message: 'Campo sobre você é obrigatório',
+                      }
+                    })}
+                    id="outlined-multiline-flexible"
+                    label="Sobre você"
+                    fullWidth
 
-                  multiline
-                  rows={4}
-                  maxRows={8}>
-                </TextField>
-              </div>
+                    multiline
+                    rows={4}
+                    maxRows={8}>
+                  </TextField>
+                </div>
+              </Box>
             </Box>
-          </Box>
 
-          {/* <Button onClick={() => handleSubmit(onSubmit)()}>
+            {/* <Button onClick={() => handleSubmit(onSubmit)()}>
                   Finalizar Cadastro
               </Button> */}
-          {/* <DialogActions className='!flex !justify-between'>
+            {/* <DialogActions className='!flex !justify-between'>
               <Button 
                 onClick={handleClose}
                 className='bg-white dark:bg-darkBGLighter'>
@@ -529,26 +531,47 @@ const CreateProfessional = () => {
                   Cancelar
                 </button>
               </Button> */}
-          <div className="flex flex-row-reverse">
-            <Button onClick={() => handleSubmit(onSubmit)()}>
-              <BsCheck2Square className='text-white' />
-              Ir para pagamento
-            </Button>
+            <div className="flex flex-row-reverse">
+              <Button onClick={() => handleSubmit(onSubmit)()}>
+                <BsCheck2Square className='text-white' />
+                Ir para pagamento
+              </Button>
+            </div>
+
+            {/* </DialogActions> */}
+
           </div>
 
-          {/* </DialogActions> */}
-
+          <div>
+            <Image
+              src="/Queue.png"
+              width={500}
+              height={500}
+              alt="Aside Image"
+              className="relative hidden xl:block"
+            />
+          </div>
         </div>
+      )}
 
-        <div>
-          <Image
-            src="/Queue.png"
-            width={500}
-            height={500}
-            alt="Aside Image"
-            className="relative hidden xl:block"
-          />
+      {!plano && (
+        <div className="flex flex-col justify-center items-center h-full gap-2">
+          <h1 className='text-lg md:text-2xl lg:text-4xl font-semibold'>Você já possui cadastro de profissional!</h1>
+          <span className="text-base md:text-xl lg:text-2xl font-normal">
+            continue para o pagamento
+          </span>
+          <Button onClick={() => handleSubmit(onSubmit)()}>
+            <BsCheck2Square className='text-white' />
+            Ir para pagamento
+          </Button>
         </div>
+      )}
+
+      <div className="flex flex-col justify-center items-center h-full gap-2">
+        <h1 className='text-lg md:text-2xl lg:text-4xl font-semibold'>Calma lá!</h1>
+        <span className="text-base md:text-xl lg:text-2xl font-normal">
+          você ja concluiu essas etapas!
+        </span>
       </div>
     </ThemeProvider>
   )
