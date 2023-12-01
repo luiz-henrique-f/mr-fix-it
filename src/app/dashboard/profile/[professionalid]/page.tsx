@@ -79,7 +79,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                         >
                           <AccountProfileDetails 
                             name={professional?.nome as any} 
-                            city={professional?.desc_cidade as any} 
+                            city={professional?.cidade as any} 
                             uf={professional?.uf as any}
                             telefone={professional?.celular as any}
                             cpf_cnpj={professional?.cpf_cnpj as any} 

@@ -372,7 +372,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     defaultValue={city}
                     onChange={handleSelectedCity}>
                     {cities.map(city => (
-                      <MenuItem key={city.id} value={city.id + city.nome}>
+                      <MenuItem key={city.id} value={city.id}>
                         {city.nome}
                       </MenuItem>
                     ))}
