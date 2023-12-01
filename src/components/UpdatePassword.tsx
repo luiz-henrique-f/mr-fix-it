@@ -99,16 +99,16 @@ const UpdatePassword = () => {
             styleOverrides: {
               root: {
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#fff"
+                  borderColor: "#aaa"
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#fff"
+                  borderColor: "#aaa"
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#590BD8"
                 },
                 "& .MuiOutlinedInput-input": {
-                  color: "#fff"
+                  color: "#aaa"
                 },
               }
             }
@@ -118,36 +118,33 @@ const UpdatePassword = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="relative flex flex-col rounded-lg overflow-hidden">
-                <Dialog 
-                    open={open} 
-                    onClose={handleClose}
-                    fullWidth={fullWidth}
-                    maxWidth={maxWidth}>
+            <Dialog 
+                open={open} 
+                onClose={handleClose}
+                fullWidth={fullWidth}
+                maxWidth={maxWidth}
+                className="backdrop-blur-md">
 
-                    <DialogTitle
-                        className='bg-neutral-500 text-white'
-                    >
-                        Alterar senha
-                    </DialogTitle>
+                <div className="bg-white dark:bg-darkBGLighter">
+
+                    <DialogTitle className='text-black dark:text-white'>Alterar senha</DialogTitle>
                     
                     <DialogContent
                         sx={{
-                            bgcolor: 'rgb(115 115 115)',
                             input: {
-                                color: '#fff',
+                                color: '#aaa',
                             },
                             label: {
                                 '&.Mui-focused': {
                                     color: '#590BD8'
                                 },
-                                color: '#fff',
+                                color: '#aaa',
                             },
                             select: {
-                                color: '#fff',
+                                color: '#aaa',
                             },
                             svg: {
-                                color: '#fff',
+                                color: '#aaa',
                             },
                         }}>
                         <Box
@@ -157,7 +154,7 @@ const UpdatePassword = () => {
                             }}
                             noValidate
                             autoComplete="off"
-                            className='bg-neutral-500 text-white'>
+                            className='flex flex-col gap-4'>
 
 
                             <TextField
@@ -179,9 +176,9 @@ const UpdatePassword = () => {
                             />
                         </Box>
                     </DialogContent>
-                    <DialogActions className='!flex !justify-between bg-neutral-500 text-white'>
+                    <DialogActions className='!flex !justify-between mx-4'>
 
-                        <Button variant="primary"
+                        <Button variant="outlined"
                             onClick={handleClose}>
                             <ImCancelCircle />
                             Cancelar
@@ -193,7 +190,8 @@ const UpdatePassword = () => {
                             Alterar
                         </Button>
                     </DialogActions>
-                </Dialog>
+                </div >
+            </Dialog>
 
                 <span onClick={handleClickOpen} className="hover:text-primary dark:hover:text-primaryLighter cursor-pointer p-0">
                     Esqueci minha senha
@@ -201,7 +199,6 @@ const UpdatePassword = () => {
 
 
 
-            </div >
         </ThemeProvider>
     )
 }

@@ -12,6 +12,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import axios from 'axios';
 
 import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import ThemeSwitch from '@/components/ThemeSwitch';
 import Button from '@/components/Button';
@@ -115,6 +116,29 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
         setPlanoAtivo((response.data[0] as any)?.id)
       })
   });
+
+  const themestyle = createTheme({
+    components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#aaa"
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#aaa"
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#9055dd"
+            },
+            "& .MuiOutlinedInput-input": {
+              color: "#aaa"
+            },
+          }
+        }
+      }
+    }
+  });
   
   return (
     <>
@@ -123,7 +147,7 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
         <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
         
         {menuIsOpen && (
-          <div className="z-50 absolute top-[66px] right-[34px] bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-28 2xl:after:left-2">
+          <div className="z-50 absolute top-[66px] right-28 2xl:right-11 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-20 2xl:after:left-2">
 
             <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
               {id_prestador != undefined && planoAtivo != undefined && (
@@ -175,50 +199,71 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
           alt='Imagem Usuário'
         />
 
-        <Dialog 
-          open={open} 
-          onClose={handleClose}
-          fullWidth>
+        <ThemeProvider theme={themestyle}>
+          <Dialog 
+            open={open} 
+            onClose={handleClose}
+            fullWidth
+            className='backdrop-blur-md'>
 
-          <DialogTitle>Avalie nosso site!</DialogTitle>
-          <DialogContent>
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': { marginTop: 1 },
-              }}>
+            <div className="bg-white dark:bg-darkBGLighter">
+              <DialogTitle className="text-black dark:text-white">
+                Avalie nosso site!
+              </DialogTitle>
+              
+              <DialogContent>
+                <Box
+                  component="form"
+                  sx={{
+                    '& .MuiTextField-root': { marginTop: 1 },
+                  }}>
 
-              <TextField
-                {...register("observacao")}
-                label="Escreva sua avaliação aqui..."
-                fullWidth
-                multiline
-                rows={4}
-                maxRows={8}>
-              </TextField>
-            </Box>
-          </DialogContent>
+                  <TextField
+                    {...register("observacao")}
+                    label="Escreva sua avaliação aqui..."
+                    fullWidth
+                    sx={{
+                      label: {
+                        '&.Mui-focused': {
+                          color: '#9055dd'
+                        },
+                        color: '#aaa',
+                      },
+                      select: {
+                        '&.Mui-focused': {
+                          color: '#9055dd'
+                        },
+                        color: '#aaa',
+                      },
+                  }}
+                    multiline
+                    rows={4}
+                    maxRows={8}>
+                  </TextField>
+                </Box>
+              </DialogContent>
 
-          <DialogActions className='!flex !justify-between'>
-            <Button 
-              variant="outlined"
-              onClick={handleClose}>
+              <DialogActions className='!flex !justify-between'>
+                <Button 
+                  variant="outlined"
+                  onClick={handleClose}>
 
-              <LiaTimesSolid />
-              Cancelar
-            </Button>
+                  <LiaTimesSolid />
+                  Cancelar
+                </Button>
 
-            <Button 
-              variant="outlined"
-              onClick={() => handleSubmit(onSubmit)()}>
-                
-              <BsCheck2Square />
-              Enviar
-            </Button>
-          </DialogActions>
-          
-        </Dialog>
-        
+                <Button 
+                  variant="outlined"
+                  onClick={() => handleSubmit(onSubmit)()}>
+                    
+                  <BsCheck2Square />
+                  Enviar
+                </Button>
+              </DialogActions>
+              
+            </div>
+          </Dialog>
+        </ThemeProvider>
       </div>
     </>
   );

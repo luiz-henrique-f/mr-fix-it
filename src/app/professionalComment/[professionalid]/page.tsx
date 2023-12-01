@@ -119,160 +119,62 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
   const [valueStar, setValueStar] = React.useState<number | null>(0);
 
   return (
-    <ThemeProvider theme={themefield}>
-
-      <div className='flex justify-center items-center xl:gap-[10%] h-full'>
-        <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '96.8%' },
-            }}
-            noValidate
-            autoComplete="off">
-
-            <TextField
-              {...register("nome", {
-                required: {
-                  value: true,
-                  message: 'Nome é obrigatório',
-                }
-              })}
-              id="name"
-              label="Nome completo"
-              fullWidth
-              sx={{
-                  input: {
-                    color: '#aaa',
-                  },
-                  label: {
-                    '&.Mui-focused': {
-                      color: '#590BD8'
-                    },
-                    color: '#aaa',
-                  },
-                  select: {
-                    color: '#aaa',
-                  },
-                  svg: {
-                    color: '#aaa',
-                  },
-              }}
-              error={!!errors?.nome}
-              helperText={errors?.nome?.message}
-            >
-            </TextField>
-
-            <TextField
-              {...register("celular", {
-                required: {
-                  value: true,
-                  message: 'Campo celular é obrigatório',
-                }
-              })}
-              id="celular"
-              label="Celular"
-              onChange={mudarMascaraCelular}
-              value={valueCelular}
-              fullWidth
-              sx={{
-                input: {
-                  color: '#aaa',
-                },
-                label: {
-                  '&.Mui-focused': {
-                    color: '#590BD8'
-                  },
-                  color: '#aaa',
-                },
-                select: {
-                  color: '#aaa',
-                },
-                svg: {
-                  color: '#aaa',
-                },
-              }}
-              error={!!errors?.celular}
-              helperText={errors?.celular?.message}>
-            </TextField>
-
-
-
-            <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
-              <TextField
-                {...register("titulo_comentario", {
-                  required: {
-                    value: true,
-                    message: 'Nome é obrigatório',
-                  }
-                })}
-                id="name"
-                label="Título Comentário"
-                fullWidth
+    <>
+      <ThemeProvider theme={themefield}>
+        <div className='absolute top-0 left-0 flex flex-row-reverse justify-around h-screen w-screen overflow-hidden bg-whiteBG dark:bg-darkBG'>
+          <div className='flex justify-center items-center w-full h-full bg-whiteBG dark:bg-darkBG'>
+            <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-75 2sm:scale-100'>
+              <Box
+                component="form"
                 sx={{
-                  input: {
-                    color: '#aaa',
-                  },
-                  label: {
-                    '&.Mui-focused': {
-                      color: '#590BD8'
-                    },
-                    color: '#aaa',
-                  },
-                  select: {
-                    color: '#aaa',
-                  },
-                  svg: {
-                    color: '#aaa',
-                  },
+                  '& .MuiTextField-root': { m: 1, width: '96.8%' },
                 }}
-                error={!!errors?.nome}
-                helperText={errors?.nome?.message}
-              >
-              </TextField>
-            </div>
+                noValidate
+                autoComplete="off">
 
-            <div className='flex border border-[#aaa] p-6 mx-2 rounded'>
-              <h1 className='text-[#aaa] -ml-2 pr-4'>Qualidade do serviço:</h1>
-              <Rating
-                name="simple-controlled"
-                value={valueStar}
-                onChange={(event, newValue) => {
-                  setValueStar(newValue);
-                  console.log(newValue)
-                }}
-
-                icon={
-                  <AiFillStar
-                    className='text-orange-400'
-                  />
-                }
-                emptyIcon={
-                  <AiFillStar
-                    className='text-grayLighter opacity-60 dark:opacity-30'
-                  />
-                }>
-              </Rating>
-            </div>
-
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': { m: 1 },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
                 <TextField
-                  {...register("comentario", {
+                  {...register("nome", {
                     required: {
                       value: true,
-                      message: 'Campo sobre você é obrigatório',
+                      message: 'Nome é obrigatório',
                     }
                   })}
-                  id="outlined-multiline-flexible"
-                  label="Comentário"
+                  id="name"
+                  label="Nome completo"
+                  fullWidth
+                  sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        '&.Mui-focused': {
+                          color: '#590BD8'
+                        },
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                  }}
+                  error={!!errors?.nome}
+                  helperText={errors?.nome?.message}
+                >
+                </TextField>
+
+                <TextField
+                  {...register("celular", {
+                    required: {
+                      value: true,
+                      message: 'Campo celular é obrigatório',
+                    }
+                  })}
+                  id="celular"
+                  label="Celular"
+                  onChange={mudarMascaraCelular}
+                  value={valueCelular}
                   fullWidth
                   sx={{
                     input: {
@@ -291,35 +193,137 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
                       color: '#aaa',
                     },
                   }}
-                  multiline
-                  rows={4}
-                  maxRows={8}>
+                  error={!!errors?.celular}
+                  helperText={errors?.celular?.message}>
                 </TextField>
+
+
+
+                <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
+                  <TextField
+                    {...register("titulo_comentario", {
+                      required: {
+                        value: true,
+                        message: 'Nome é obrigatório',
+                      }
+                    })}
+                    id="name"
+                    label="Título Comentário"
+                    fullWidth
+                    sx={{
+                      input: {
+                        color: '#aaa',
+                      },
+                      label: {
+                        '&.Mui-focused': {
+                          color: '#590BD8'
+                        },
+                        color: '#aaa',
+                      },
+                      select: {
+                        color: '#aaa',
+                      },
+                      svg: {
+                        color: '#aaa',
+                      },
+                    }}
+                    error={!!errors?.nome}
+                    helperText={errors?.nome?.message}
+                  >
+                  </TextField>
+                </div>
+
+                <div className='flex border border-[#aaa] p-6 ml-2 sm:mx-2 rounded'>
+                  <h1 className='text-[#aaa] -ml-2 pr-4'>Qualidade do serviço:</h1>
+                  <Rating
+                    name="simple-controlled"
+                    value={valueStar}
+                    onChange={(event, newValue) => {
+                      setValueStar(newValue);
+                      console.log(newValue)
+                    }}
+
+                    icon={
+                      <AiFillStar
+                        className='text-orange-400'
+                      />
+                    }
+                    emptyIcon={
+                      <AiFillStar
+                        className='text-grayLighter opacity-60 dark:opacity-30'
+                      />
+                    }>
+                  </Rating>
+                </div>
+
+                <Box
+                  component="form"
+                  sx={{
+                    '& .MuiTextField-root': { m: 1 },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div>
+                    <TextField
+                      {...register("comentario", {
+                        required: {
+                          value: true,
+                          message: 'Campo sobre você é obrigatório',
+                        }
+                      })}
+                      id="outlined-multiline-flexible"
+                      label="Comentário"
+                      fullWidth
+                      sx={{
+                        input: {
+                          color: '#aaa',
+                        },
+                        label: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        select: {
+                          color: '#aaa',
+                        },
+                        svg: {
+                          color: '#aaa',
+                        },
+                      }}
+                      multiline
+                      rows={4}
+                      maxRows={8}>
+                    </TextField>
+                  </div>
+                </Box>
+              </Box>
+
+              <div className="flex flex-row-reverse">
+                <Button onClick={() => handleSubmit(onSubmit)()}>
+                  <BsCheck2Square className='text-white' />
+                  Enviar
+                </Button>
               </div>
-            </Box>
-          </Box>
-          <div className="flex flex-row-reverse">
-            <Button onClick={() => handleSubmit(onSubmit)()}>
-              <BsCheck2Square className='text-white' />
-              Salvar
-            </Button>
+              
+            </div>
           </div>
 
+          <div className='lg:flex justify-center items-center w-full h-full bg-gradient-to-br from-primaryDarker to-primary hidden'>
+            <Image
+              src="/Queue.png"
+              width={500}
+              height={500}
+              alt="Aside Image"
+              className="relative hidden lg:flex"
+            />
+          </div>
         </div>
-
-        <div>
-          <Image
-            src="/Queue.png"
-            width={500}
-            height={500}
-            alt="Aside Image"
-            className="relative hidden xl:block"
-          />
-        </div>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </>
   );
 
 };
 
-export default ProfessionalComment
+export default ProfessionalComment;

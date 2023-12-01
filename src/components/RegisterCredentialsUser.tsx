@@ -100,16 +100,16 @@ const RegisterCredentialsUser = () => {
             styleOverrides: {
               root: {
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#fff"
+                  borderColor: "#aaa"
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#fff"
+                  borderColor: "#aaa"
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#590BD8"
                 },
                 "& .MuiOutlinedInput-input": {
-                  color: "#fff"
+                  color: "#aaa"
                 },
               }
             }
@@ -119,33 +119,32 @@ const RegisterCredentialsUser = () => {
     
     return (
         <ThemeProvider theme={theme}>
-
-            <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg w-full gap-5 p-3">
-                <Dialog 
-                    open={open} 
-                    onClose={handleClose}
-                    fullWidth={fullWidth}
-                    maxWidth={maxWidth}
-                >
-                    <DialogTitle className='bg-neutral-500 text-white'>Criar conta</DialogTitle>
+            <Dialog 
+                open={open} 
+                onClose={handleClose}
+                fullWidth={fullWidth}
+                maxWidth={maxWidth}
+                className="backdrop-blur-md"
+            >
+                <div className='bg-white dark:bg-darkBGLighter'>
+                    <DialogTitle className='text-black dark:text-white'>Criar conta</DialogTitle>
 
                     <DialogContent
                         sx={{
-                            bgcolor: 'rgb(115 115 115)',
                             input: {
-                                color: '#fff',
+                                color: '#aaa',
                             },
                             label: {
                                 '&.Mui-focused': {
                                     color: '#590BD8'
                                 },
-                                color: '#fff',
+                                color: '#aaa',
                             },
                             select: {
-                                color: '#fff',
+                                color: '#aaa',
                             },
                             svg: {
-                                color: '#fff',
+                                color: '#aaa',
                             },
                         }}>
 
@@ -156,6 +155,7 @@ const RegisterCredentialsUser = () => {
                             }}
                             noValidate
                             autoComplete="off"
+                            className='flex flex-col gap-2'
                         >
 
 
@@ -188,9 +188,10 @@ const RegisterCredentialsUser = () => {
 
                         </Box>
                     </DialogContent>
-                    <DialogActions className='!flex !justify-between bg-neutral-500 text-white'>
+                    
+                    <DialogActions className='!flex !justify-between mx-4'>
 
-                        <Button variant="primary"
+                        <Button variant="outlined"
                             onClick={handleClose}>
                             <ImCancelCircle />
                             Cancelar
@@ -202,21 +203,18 @@ const RegisterCredentialsUser = () => {
                             Criar
                         </Button>
                     </DialogActions>
-                </Dialog>
-
-                <div className="flex flex-col justify-center items-center sm:flex-row gap-2 text-sm no-underline text-gray-400 dark:text-gray-500 mx-0 my-1">
-                    <UpdatePassword />
-
-                    <span className='invisible sm:visible'>|</span>
-                    <div className='flex items-center flex-col bg-gray-200 dark:bg-neutral-700 sm:dark:bg-darkBGLighter dark:text-white sm:dark:text-gray-500 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
-                        <p className='flex-nowrap'>Não tem uma conta?</p>
-                        <span onClick={handleClickOpen}><p className='hover:text-primary dark:hover:text-primaryLighter cursor-pointer'>Cadastre-se</p></span>
-                    </div>
                 </div>
+            </Dialog>
 
+            <div className="flex flex-col justify-center items-center sm:flex-row gap-2 text-sm no-underline text-gray-400 dark:text-gray-500 mx-0 my-1">
+                <UpdatePassword />
 
-
-            </div >
+                <span className='invisible sm:visible'>|</span>
+                <div className='flex items-center flex-col bg-gray-200 dark:bg-neutral-700 sm:dark:bg-darkBGLighter dark:text-white sm:dark:text-gray-500 rounded-md p-3 sm:bg-transparent sm:border-none sm:flex-row sm:p-0 sm:gap-2'>
+                    <p className='flex-nowrap'>Não tem uma conta?</p>
+                    <span onClick={handleClickOpen}><p className='hover:text-primary dark:hover:text-primaryLighter cursor-pointer'>Cadastre-se</p></span>
+                </div>
+            </div>
         </ThemeProvider>
     );
 };

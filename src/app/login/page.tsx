@@ -174,7 +174,7 @@ const Login = () => {
 						</h1>
 
 						<p className="text-base leading-5 mx-0 my-5 text-white">
-							Fique por dentro dos pedidos de seus serviços
+							Fique por dentro dos pedidos de seus serviços.
 						</p>
 
 						<Image

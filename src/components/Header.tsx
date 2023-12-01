@@ -19,6 +19,7 @@ import Button from "./Button";
 import ThemeSwitch from "./ThemeSwitch";
 
 import { Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { FiLogIn } from "react-icons/fi";
 import { CgProfile } from 'react-icons/cg';
@@ -143,6 +144,29 @@ const Header = () => {
             })
     });
 
+    const themestyle = createTheme({
+        components: {
+          MuiOutlinedInput: {
+            styleOverrides: {
+              root: {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#aaa"
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#aaa"
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#9055dd"
+                },
+                "& .MuiOutlinedInput-input": {
+                  color: "#aaa"
+                },
+              }
+            }
+          }
+        }
+      });
+
     return (
         <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-whiteBG/10 bg-whiteBG dark:bg-darkBG'>
             <div className="flex items-center justify-start h-full w-full">
@@ -185,43 +209,69 @@ const Header = () => {
             </div>  */}
 
             {/* onClick={handleLoginClick} */}
-            <Dialog open={open} onClose={handleClose}
-                fullWidth
-            >
-                <DialogTitle>Avalie nosso site!</DialogTitle>
-                <DialogContent>
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { marginTop: 1 },
-                        }}
-                    >
-                        <TextField
-                            {...register("observacao")}
-                            label="Escreva sua avaliação aqui..."
-                            fullWidth
-                            multiline
-                            rows={4}
-                            maxRows={8}>
-                        </TextField>
-                    </Box>
-                </DialogContent>
-                <DialogActions className='!flex !justify-between'>
-                    <Button variant="outlined"
-                        onClick={handleClose}>
+            <ThemeProvider theme={themestyle}>
+                <Dialog 
+                    open={open} 
+                    onClose={handleClose}
+                    fullWidth
+                    className="backdrop-blur-md">
+                        
+                    <div className="bg-white dark:bg-darkBGLighter">
+                        <DialogTitle className="text-black dark:text-white">
+                            Avalie nosso site!
+                        </DialogTitle>
 
-                        <LiaTimesSolid />
-                        Cancelar
-                    </Button>
+                        <DialogContent>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& .MuiTextField-root': { marginTop: 1 },
+                                }}
+                            >
+                                <TextField
+                                    {...register("observacao")}
+                                    label="Escreva sua avaliação aqui..."
+                                    fullWidth
+                                    multiline
+                                    sx={{
+                                        label: {
+                                            '&.Mui-focused': {
+                                                color: '#9055dd'
+                                            },
+                                            color: '#aaa',
+                                        },
+                                        select: {
+                                            '&.Mui-focused': {
+                                                color: '#9055dd'
+                                            },
+                                            color: '#aaa',
+                                        },
+                                    }}
+                                    rows={4}
+                                    maxRows={8}>
+                                </TextField>
+                            </Box>
+                        </DialogContent>
 
-                    <Button variant="outlined"
-                        onClick={() => handleSubmit(onSubmit)()}>
+                        <DialogActions className='!flex !justify-between'>
+                            <Button variant="outlined"
+                                onClick={handleClose}>
 
-                        <BsCheck2Square />
-                        Enviar
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                                <LiaTimesSolid />
+                                Cancelar
+                            </Button>
+
+                            <Button variant="outlined"
+                                onClick={() => handleSubmit(onSubmit)()}>
+
+                                <BsCheck2Square />
+                                Enviar
+                            </Button>
+                        </DialogActions>
+
+                    </div>
+                </Dialog>
+            </ThemeProvider>
 
             {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
@@ -251,7 +301,7 @@ const Header = () => {
                         {/* <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" /> */}
 
                         {menuIsOpen && (
-                            <div className="z-50 absolute top-[56px] -left-[88px] 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-28 2xl:after:left-2">
+                            <div className="z-50 absolute top-[56px] -left-14 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-20 2xl:after:left-2">
 
                             <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
                                 {id_prestador != undefined && planoAtivo != undefined && (

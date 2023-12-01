@@ -68,7 +68,7 @@ const PagamentoPlano = () => {
             item3={<PricingItems name='Personalização completa do perfil.' color='text-primary' />}
           >
             <Button
-              variant='primaryLight'
+              variant='primary'
               className='absolute bottom-0 w-full py-3 normal-case text-base'
               onClick={() => handleBuyClick(5, 'Plano Mensal', 1, 'M')}
             >
@@ -109,7 +109,7 @@ const PagamentoPlano = () => {
             className="scale-[.85] 2sm:scale-90 lg:scale-100"
 
             tipo_plano='Semestral'
-            valor='R$1.000'
+            valor='R$110'
             texto='Para aqueles que preferem esquecer o plano!'
 
             corFundo1='from-white'
@@ -123,7 +123,7 @@ const PagamentoPlano = () => {
             item3={<PricingItems name='Personalização completa do perfil.' color='text-primary' />}
           >
             <Button
-              variant='primaryLight'
+              variant='primary'
               className='absolute bottom-0 w-full py-3 normal-case text-base'
               onClick={() => handleBuyClick(5, 'Plano Semestral', 6, 'S')}
             >

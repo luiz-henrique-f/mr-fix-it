@@ -60,8 +60,8 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                         <Grid
                           xs={12}
                           md={6}
-                          lg={4}
-                        >
+                          lg={4}>
+                            
                           <AccountProfile 
                             name={professional?.nome as any} 
                             city={professional?.desc_cidade as any}

@@ -15,5 +15,5 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   //rotas que serao privadas
-  matcher: ['/pagamentoPlano', '/createProfessional', '/dashboard/:path*', '/professionals/:path*'],
+  matcher: ['/pagamentoPlano', '/createProfessional', '/dashboard/:path*'],
 }

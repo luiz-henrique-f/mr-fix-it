@@ -26,7 +26,7 @@ const theme = createTheme({
             borderColor: "#aaa"
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#590BD8"
+            borderColor: "#9055dd"
           },
           "& .MuiOutlinedInput-input": {
             color: "#aaa"
@@ -258,25 +258,25 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                 sx={{
                   input: {
                     '&.Mui-focused': {
-                      color: '#590BD8'
+                      color: '#9055dd'
                     },
                     color: '#aaa',
                   },
                   label: {
                     '&.Mui-focused': {
-                      color: '#590BD8'
+                      color: '#9055dd'
                     },
                     color: '#aaa',
                   },
                   select: {
                     '&.Mui-focused': {
-                      color: '#590BD8'
+                      color: '#9055dd'
                     },
                     color: '#aaa',
                   },
                   svg: {
                     '&.Mui-focused': {
-                      color: '#590BD8'
+                      color: '#9055dd'
                     },
                     color: '#aaa',
                   },
@@ -304,18 +304,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
 
                 <Grid
                   xs={12}
-                  md={6}
-                >
-                  {/* <TextField
-                    fullWidth
-                    label="E-mail"
-                    name="email"
-                    required
-                    // onChange={handleChange}
-                    value={email}
-                  /> */}
-
-
+                  md={6}>
 
                   <TextField
                     {...register("cpf_cnpj")}
@@ -323,10 +312,8 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     label="CPF/CNPJ"
                     onChange={mudarMascara}
                     defaultValue={cpf_cnpj}
-                    fullWidth
-                  >
+                    fullWidth>
                   </TextField>
-
                 </Grid>
 
                 <Grid

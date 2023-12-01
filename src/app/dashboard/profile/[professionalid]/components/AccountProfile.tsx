@@ -1,5 +1,5 @@
 'use client'
-import * as React from 'react'
+import * as React from 'react';
 import { Avatar, Box, Card, CardContent, Divider, Typography } from '@mui/material';
 import Button from '@/components/Button';
 import { useEdgeStore } from '@/lib/edgestore';
@@ -39,116 +39,122 @@ const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: Pr
   };
 
   return (
-    <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'>
-      <CardContent>
+    <>
+      <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'>
+        <CardContent>
 
-        <div>
-          <input className='hidden' id='fileInput' type="file" ref={myRef} onChange={(e) => {
-            setFile(e.target.files?.[0]);
-          }} />
+          <div>
+            <input className='hidden' id='fileInput' type="file" ref={myRef} onChange={(e) => {
+              setFile(e.target.files?.[0]);
+            }} />
 
-          {/* <button onClick={async () => {
-            console.log(file)
-            if (file) {
-              const res = await edgestore.myPublicImages.upload({ file })
+            {/* <button onClick={async () => {
+              console.log(file)
+              if (file) {
+                const res = await edgestore.myPublicImages.upload({ file })
 
-              const response = await fetch("http://localhost:3000/uploadFile", {
-                method: "POST",
-                body: Buffer.from(
-                  JSON.stringify({
-                    url: res.thumbnailUrl,
-                  })
-                ),
-              });
+                const response = await fetch("http://localhost:3000/uploadFile", {
+                  method: "POST",
+                  body: Buffer.from(
+                    JSON.stringify({
+                      url: res.thumbnailUrl,
+                    })
+                  ),
+                });
 
-              setUrls({
-                url: res.url,
-                thumbnailUrl: res.thumbnailUrl,
-              })
-            }
-          }}>
-            Upload
-          </button>
+                setUrls({
+                  url: res.url,
+                  thumbnailUrl: res.thumbnailUrl,
+                })
+              }
+            }}>
+              Upload
+            </button>
 
-          {urls?.url && <Link href={urls.url} target='_blank'>URL</Link>}
-          {urls?.thumbnailUrl && <Link href={urls.thumbnailUrl} target='_blank'>Thuuu</Link>} */}
-        </div>
+            {urls?.url && <Link href={urls.url} target='_blank'>URL</Link>}
+            {urls?.thumbnailUrl && <Link href={urls.thumbnailUrl} target='_blank'>Thuuu</Link>} */}
+          </div>
 
 
-        <Box
-          sx={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-        >
-          <Avatar
-            src={url_foto}
+          <Box
             sx={{
-              height: 80,
-              mb: 2,
-              width: 80
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
             }}
-          />
-          <Typography
-            gutterBottom
-            variant="h5">
-            {name}
-          </Typography>
+          >
+            <Avatar
+              src={url_foto}
+              sx={{
+                height: 100,
+                width: 100,
+                mb: 2,
+              }}
+            />
+            <Typography
+              gutterBottom
+              variant="h5">
+              {name}
+            </Typography>
 
-          <Typography
-            variant="body2">
-            {city}, {uf}
-          </Typography>
+            <Typography
+              variant="body2">
+              {city}, {uf}
+            </Typography>
 
-          <Typography
-            variant="body2">
-            {telefone}
-          </Typography>
-        </Box>
+            <Typography
+              variant="body2">
+              {telefone}
+            </Typography>
+          </Box>
 
-      </CardContent>
+        </CardContent>
 
-      <Divider />
+        <Divider />
 
-      <Button variant="primary" className='w-full mt-4 py-3' onClick={() => clickElement(myRef)}>
-        Atualizar foto
-      </Button>
+        <Button 
+          variant="primary" 
+          className='w-full mt-4 py-3' 
+          onClick={() => clickElement(myRef)}>
 
-      {file &&
-        <Button variant="primary"
-          className='w-full mt-4 py-3'
-          onClick={async () => {
-            console.log(file)
-            if (file) {
-              const res = await edgestore.myPublicImages.upload({ file })
+          Atualizar foto
+        </Button>
 
-              const responseFetch = await fetch(`/existeFoto/${id_prestador}`);
+        {file &&
+          <Button variant="primary"
+            className='w-full mt-4 py-3'
+            onClick={async () => {
+              console.log(file)
+              if (file) {
+                const res = await edgestore.myPublicImages.upload({ file })
 
-              const json = await responseFetch.json();
+                const responseFetch = await fetch(`/existeFoto/${id_prestador}`);
 
-              const responsePut = await fetch("http://localhost:3000/updateFile", {
-                method: "PUT",
-                body: Buffer.from(
-                  JSON.stringify({
-                    id_prestador: id_prestador,
-                    url_foto: res.thumbnailUrl,
-                  })
-                ),
-              });
+                const json = await responseFetch.json();
 
-              setUrls({
-                url: res.url,
-                thumbnailUrl: res.thumbnailUrl,
-              })
-            }
+                const responsePut = await fetch("http://localhost:3000/updateFile", {
+                  method: "PUT",
+                  body: Buffer.from(
+                    JSON.stringify({
+                      id_prestador: id_prestador,
+                      url_foto: res.thumbnailUrl,
+                    })
+                  ),
+                });
 
-            toast.success("Foto alterada com sucesso!", { position: "top-right" });
-          }}>
-          Salvar nova foto
-        </Button>}
+                setUrls({
+                  url: res.url,
+                  thumbnailUrl: res.thumbnailUrl,
+                })
+              }
 
-    </Card>
+              toast.success("Foto alterada com sucesso!", { position: "top-right" });
+            }}>
+            Salvar nova foto
+          </Button>}
+
+      </Card>
+    </>
   );
 };
 

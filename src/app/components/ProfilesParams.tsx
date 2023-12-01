@@ -64,13 +64,13 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
       {result == 0 && (
         <div className="flex justify-center items-center flex-col">
           <span className="text-xl text-grayPrimary dark:text-grayLighter">Não existe nenhum prestador para o filtro selecionado.</span>
-          <Image 
+          {/* <Image 
             src={'/404 error with portals-pana.png'} 
             alt="error gif"
             width={800}
             height={800}
             className="my-2">
-          </Image>
+          </Image> */}
         </div>
       )}
     </>

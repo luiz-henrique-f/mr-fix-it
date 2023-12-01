@@ -72,7 +72,7 @@ const PricesSection = () => {
               className="scale-[.85] 2sm:scale-90 lg:scale-100"
 
               tipo_plano='Semestral'
-              valor='R$1.000'
+              valor='R$110'
               texto='Para aqueles que preferem esquecer o plano!'
 
               corFundo1='from-white'
@@ -93,7 +93,7 @@ const PricesSection = () => {
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320">
+          viewBox="0 0 1440 225">
 
           <path
             fill="#312A4F"

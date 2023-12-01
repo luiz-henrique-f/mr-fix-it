@@ -16,6 +16,7 @@ module.exports = {
         primary: "#590BD8",
         primaryLighter: "#9055dd",
         primaryDarker: "#312A4F",
+
         secondary: "#ff426f",
         secondaryLighter: "#f79eb3",
         secondaryDarker: "#9c1535",
@@ -26,8 +27,9 @@ module.exports = {
         walterWhite: "#F5F5F5",
 
         darkBG: "#0f0f0f",
-        whiteBG: "#e5e5e5",
         darkBGLighter: "#202020",
+
+        whiteBG: "#e5e5e5",
         whiteBGDarker: "#c3c3c3",
       },
       textColor: {
@@ -41,10 +43,6 @@ module.exports = {
         "2xl": "1440px",
         "3xl": "1536px",
         "4xl": "1880px",
-      },
-      boxShadow: {
-        "custom-fade":
-          "rgba(24, 18, 62, 0.4) 0rem -0.3125rem, rgba(24, 18, 62, 0.3) 0rem -0.625rem, rgba(24, 18, 62, 0.2) 0rem -0.9375rem, rgba(24, 18, 62, 0.1) 0rem -1.25rem, rgba(24, 18, 62, 0.05) 0rem -1.5625rem;",
       },
     },
   },
