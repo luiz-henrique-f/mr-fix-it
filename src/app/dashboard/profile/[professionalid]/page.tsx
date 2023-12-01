@@ -85,7 +85,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                             cpf_cnpj={professional?.cpf_cnpj as any} 
                             observacao={professional?.observacao as any} 
                             sexo={professional?.sexo as any}
-                            categoria={professional?.tipo_categoria as any}
+                            categoria={professional?.cod_tipo_categoria as any}
                             cbo={professional?.desc_cbo as any}
                           />
                         </Grid>

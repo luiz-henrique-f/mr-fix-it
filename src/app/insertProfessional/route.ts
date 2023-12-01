@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
         const req = await request.json();
 
-        const { nome, cpf_cnpj, celular, categoria, sexo, uf, cidade, desc_cidade, observacao, id_user, cod_cbo, desc_cbo } = req;
+        const { nome, cpf_cnpj, celular, cod_categoria, categoria, sexo, uf, cidade, desc_cidade, observacao, id_user, cod_cbo, desc_cbo } = req;
 
         const professionals = await prisma.prestador.findMany({
             where: {
@@ -56,6 +56,7 @@ export async function POST(request: Request) {
                 nome: nome,
                 cpf_cnpj: cpf_cnpj,
                 celular: celular,
+                cod_tipo_categoria: cod_categoria,
                 tipo_categoria: categoria,
                 sexo: sexo,
                 uf: uf,

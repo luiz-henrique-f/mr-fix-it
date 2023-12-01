@@ -45,6 +45,11 @@ type Skill = {
   label: string;
 };
 
+type SkillCategorie = {
+  id: string;
+  label: string;
+};
+
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
@@ -140,7 +145,8 @@ const CreateProfessional = () => {
           nome: data.nome,
           cpf_cnpj: data.cpf_cnpj,
           celular: data.celular,
-          categoria: data.categoria,
+          cod_categoria: skillCategorie?.id,
+          categoria: skillCategorie?.label,
           sexo: data.sexo,
           uf: data.uf,
           cod_cbo: skill?.id,
@@ -181,6 +187,7 @@ const CreateProfessional = () => {
   const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState("M");
 
   const [skill, setSkill] = React.useState<Skill | null>(null)
+  const [skillCategorie, setSkillCategorie] = React.useState<SkillCategorie | null>(null)
 
   // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelectedValueCheckbox(event.target.value);
@@ -299,10 +306,15 @@ const CreateProfessional = () => {
     label: cbo.desc_cbo
   }))
 
+  const categoriesOptions = categories.map((categories) => ({
+    id: categories.id,
+    label: categories.descricao_categoria
+  }))
+
   return (
     <ThemeProvider theme={themestyle}>
 
-      {!id_prestador && (
+      {/* {!id_prestador && ( */}
 
         <div className='flex justify-center items-center xl:gap-[10%] h-full'>
           <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
@@ -460,6 +472,45 @@ const CreateProfessional = () => {
               </TextField>
 
               <Autocomplete
+                options={categoriesOptions}
+                renderInput={
+                  (params) => <TextField
+                    {...params}
+                    label="Categoria"
+                    sx={{
+                      input: {
+                        '&.Mui-focused': {
+                          color: '#590BD8'
+                        },
+                        color: '#aaa',
+                      },
+                      label: {
+                        '&.Mui-focused': {
+                          color: '#590BD8'
+                        },
+                        color: '#aaa',
+                      },
+                      select: {
+                        '&.Mui-focused': {
+                          color: '#590BD8'
+                        },
+                        color: '#aaa',
+                      },
+                      svg: {
+                        '&.Mui-focused': {
+                          color: '#590BD8'
+                        },
+                        color: '#aaa',
+                      },
+                    }}
+                  />
+                }
+                value={skillCategorie}
+                fullWidth
+                onChange={(event: any, newValue: SkillCategorie | null) => setSkillCategorie(newValue)}
+              />
+
+              <Autocomplete
                 options={cboOptions}
                 renderInput={
                   (params) => <TextField
@@ -584,7 +635,7 @@ const CreateProfessional = () => {
             />
           </div>
         </div>
-      )}
+      {/*  )} */}
 
       {!plano && (
         <div className="flex flex-col justify-center items-center h-full gap-2">
