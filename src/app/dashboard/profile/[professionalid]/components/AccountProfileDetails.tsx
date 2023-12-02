@@ -44,7 +44,7 @@ type IBGEUFResponse = {
 };
 
 type IBGECITYResponse = {
-  id: number;
+  id: string;
   nome: string;
 };
 
@@ -54,8 +54,23 @@ type categorieResponse = {
 };
 
 type cboResponse = {
-  id: string;
+  cod_cbo: string;
   desc_cbo: string;
+};
+
+type Skill = {
+  id: string;
+  label: string;
+};
+
+type SkillCategorie = {
+  id: string;
+  label: string;
+};
+
+type SkillCity = {
+  id: string;
+  label: string;
 };
 
 interface ProfessionalInfoProps {
@@ -113,14 +128,20 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   const [cbos, setCbos] = React.useState<cboResponse[]>([]);
   const [cities, setCities] = React.useState<IBGECITYResponse[]>([]);
   const [selectedUf, setSelectedUf] = React.useState(uf);
-  const [selectedCity, setSelectedCity] = React.useState(city);
+  const [selectedCity, setSelectedCity] = React.useState("");
   const [selectedCbo, setSelectedCbo] = React.useState(cbo);
   const [selectedCategorie, setSelectedCategorie] = React.useState(categoria);
   const [selectedValueCheckbox, setSelectedValueCheckbox] = React.useState(sexo);
 
+  const [skill, setSkill] = React.useState<Skill | null>(cbo as any)
+  const [skillCategorie, setSkillCategorie] = React.useState<SkillCategorie | null>(categoria as any)
+  const [skillCity, setSkillCity] = React.useState<SkillCity | null>(city as any)
+
   // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelectedValueCheckbox(event.target.value);
   // };
+
+  console.log(skillCity?.id)
 
   const { data } = useSession();
   const dados = data;
@@ -135,7 +156,8 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   } = useForm<CreateProfessionalForm>();
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-    console.log(data)
+    console.log(skillCity?.id)
+    // return;
     const response = await fetch("http://localhost:3000/updateProfessionalAll", {
       method: "PUT",
       body: Buffer.from(
@@ -143,12 +165,14 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
           nome: data.nome,
           cpf_cnpj: data.cpf_cnpj,
           celular: data.celular,
-          categoria: data.categoria,
+          cod_tipo_categoria: skillCategorie?.id,
+          categoria: skillCategorie?.label,
           sexo: data.sexo,
           uf: data.uf,
-          cbo: data.cbo,
-          cidade: data.cidade.substring(0, 7),
-          desc_cidade: data.cidade.substring(7),
+          cbo: skill?.id,
+          desc_cbo: skill?.label,
+          cod_cidade: skillCity?.id.toString(),
+          desc_cidade: skillCity?.label,
           observacao: data.observacao,
           id_user: (dados?.user as any)?.id
         })
@@ -233,6 +257,21 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   const mudarMascara = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(mask(unMask(event.target.value), ['999.999.999-99', '99.99.999/9999-99']))
   }
+
+  const cboOptions = cbos.map((cbo) => ({
+    id: cbo.cod_cbo,
+    label: cbo.desc_cbo
+  }))
+
+  const categoriesOptions = categories.map((categories) => ({
+    id: categories.id,
+    label: categories.descricao_categoria
+  }))
+
+  const ctiesOptions = cities.map((city) => ({
+    id: city.id,
+    label: city.nome
+  }))
 
   return (
     <ThemeProvider theme={theme}>
@@ -363,7 +402,46 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   md={6}
                 >
 
-                  <TextField
+                <Autocomplete
+                  options={ctiesOptions}
+                  renderInput={
+                    (params) => <TextField
+                      {...params}
+                      label="Cidade"
+                      sx={{
+                        input: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        label: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        select: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        svg: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                      }}
+                    />
+                  }
+                  value={skillCity}
+                  fullWidth
+                  onChange={(event: any, newValue: SkillCity | null) => setSkillCity(newValue)}
+                />
+
+                  {/* <TextField
                     {...register("cidade")}
                     id="city"
                     select
@@ -372,11 +450,11 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     defaultValue={city}
                     onChange={handleSelectedCity}>
                     {cities.map(city => (
-                      <MenuItem key={city.id} value={city.id}>
+                      <MenuItem key={city.id} value={city.id+city.nome}>
                         {city.nome}
                       </MenuItem>
                     ))}
-                  </TextField>
+                  </TextField> */}
                 </Grid>
 
 
@@ -405,14 +483,53 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   </TextField>
                 </Grid>
 
-                
+
                 <Grid
                   xs={12}
                   md={6}
                 >
 
+                  <Autocomplete
+                    options={categoriesOptions}
+                    renderInput={
+                      (params) => <TextField
+                        {...params}
+                        label="Categoria"
+                        sx={{
+                          input: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                          label: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                          select: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                          svg: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                        }}
+                      />
+                    }
+                    value={skillCategorie}
+                    fullWidth
+                    onChange={(event: any, newValue: SkillCategorie | null) => setSkillCategorie(newValue)}
+                  />
 
-                  <TextField
+
+                  {/* <TextField
                     {...register("categoria")}
                     id="categorie"
                     select
@@ -422,11 +539,11 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     fullWidth
                     onChange={handleSelectedCategorie}>
                     {categories.map(categorie => (
-                      <MenuItem key={categorie.id} value={categorie.descricao_categoria}>
+                      <MenuItem key={categorie.id} value={categorie.id}>
                         {categorie.descricao_categoria}
                       </MenuItem>
                     ))}
-                  </TextField>
+                  </TextField> */}
                 </Grid>
 
 
@@ -434,7 +551,48 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   xs={12}
                   md={6}
                 >
+
+
                   <Autocomplete
+                    options={cboOptions}
+                    renderInput={
+                      (params) => <TextField
+                        {...params}
+                        defaultValue={cbo}
+                        label="Ocupação"
+                        sx={{
+                          input: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                          label: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                          select: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                          svg: {
+                            '&.Mui-focused': {
+                              color: '#590BD8'
+                            },
+                            color: '#aaa',
+                          },
+                        }}
+                      />
+                    }
+                    value={skill}
+                    fullWidth
+                    onChange={(event: any, newValue: Skill | null) => setSkill(newValue)}
+                  />
+                  {/* <Autocomplete
                     id="free-solo-demo"
                     freeSolo
                     options={cbos.map((option) => option.desc_cbo)}
@@ -443,7 +601,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                       value={selectedCbo}
                       defaultValue={cbo}
                       onChange={handleSelectedCbo}{...params} label="Ocupação" />}
-                  />
+                  /> */}
                 </Grid>
 
                 <Grid
