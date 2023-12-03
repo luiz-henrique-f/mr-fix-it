@@ -56,7 +56,7 @@ const ProfessionalCategory = ({ categoria }: ProfessionalCategoryProps) => {
     } = useForm<CreateProfessionalForm>();
 
     const onSubmit = async (data: CreateProfessionalForm) => {
-        const response = await fetch("http://localhost:3000/updateCategoria", {
+        const response = await fetch("/updateCategoria", {
             method: "PUT",
             body: Buffer.from(
                 JSON.stringify({

@@ -55,7 +55,7 @@ const RegisterCredentialsUser = () => {
     } = useForm<CreateProfessionalForm>();
 
     const onSubmit = async (data: CreateProfessionalForm) => {
-        const response = await fetch("http://localhost:3000/register", {
+        const response = await fetch("/register", {
             method: "POST",
             body: Buffer.from(
                 JSON.stringify({

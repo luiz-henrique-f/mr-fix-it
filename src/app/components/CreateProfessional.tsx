@@ -88,7 +88,7 @@ const CreateProfessional = () => {
   } = useForm<CreateProfessionalForm>();
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-    const response = await fetch("http://localhost:3000/insertProfessional", {
+    const response = await fetch("/insertProfessional", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({

@@ -109,7 +109,7 @@ const CreateProfessional = () => {
   const [plano, setPlano] = React.useState<Response[]>([]);
 
   React.useEffect(() => {
-    axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
+    axios.get(`/professionalUser/${(dados?.user as any)?.id}`)
       .then((response) => {
         setIdPrestador((response.data[0] as any)?.id)
       })
@@ -145,7 +145,7 @@ const CreateProfessional = () => {
 
   const onSubmit = async (data: CreateProfessionalForm) => {
     console.log(data)
-    const response = await fetch("http://localhost:3000/insertProfessional", {
+    const response = await fetch("/insertProfessional", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({

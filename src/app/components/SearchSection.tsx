@@ -22,7 +22,7 @@ const SearchSection = () => {
 	const [planoAtivo, setPlanoAtivo] = useState<Response[]>([]);
 
 	useEffect(() => {
-		axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
+		axios.get(`/professionalUser/${(data?.user as any)?.id}`)
 			.then((response) => {
 				setIdPrestador((response.data[0] as any)?.id)
 				setNome((response.data[0] as any)?.nome)
@@ -30,7 +30,7 @@ const SearchSection = () => {
 	});
 
 	useEffect(() => {
-		axios.get(`http://localhost:3000/existePlanoAtivo/${(data?.user as any)?.id}`)
+		axios.get(`/existePlanoAtivo/${(data?.user as any)?.id}`)
 			.then((response) => {
 				setPlanoAtivo((response.data[0] as any)?.id)
 			})

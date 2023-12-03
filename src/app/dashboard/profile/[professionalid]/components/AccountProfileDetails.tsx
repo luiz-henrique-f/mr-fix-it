@@ -158,7 +158,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
   const onSubmit = async (data: CreateProfessionalForm) => {
     console.log(skillCity?.id)
     // return;
-    const response = await fetch("http://localhost:3000/updateProfessionalAll", {
+    const response = await fetch("/updateProfessionalAll", {
       method: "PUT",
       body: Buffer.from(
         JSON.stringify({

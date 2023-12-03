@@ -63,7 +63,7 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
   } = useForm<CreateProfessionalForm>();
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-    const response = await fetch("http://localhost:3000/insertFeedback", {
+    const response = await fetch("/insertFeedback", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
@@ -102,7 +102,7 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
   const [planoAtivo, setPlanoAtivo] = React.useState<PlanoAtivoResponse[]>([]);
 
   React.useEffect(() => {
-    axios.get(`http://localhost:3000/professionalUser/${(data?.user as any)?.id}`)
+    axios.get(`/professionalUser/${(data?.user as any)?.id}`)
       .then((response) => {
         setIdPrestador((response.data[0] as any)?.id)
         setNome((response.data[0] as any)?.nome)
@@ -110,7 +110,7 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
   });
 
   React.useEffect(() => {
-    axios.get(`http://localhost:3000/existePlanoAtivo/${(data?.user as any)?.id}`)
+    axios.get(`/existePlanoAtivo/${(data?.user as any)?.id}`)
       .then((response) => {
         console.log(data)
         setPlanoAtivo((response.data[0] as any)?.id)

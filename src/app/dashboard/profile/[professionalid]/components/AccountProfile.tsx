@@ -132,7 +132,7 @@ const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: Pr
 
                 const json = await responseFetch.json();
 
-                const responsePut = await fetch("http://localhost:3000/updateFile", {
+                const responsePut = await fetch("/updateFile", {
                   method: "PUT",
                   body: Buffer.from(
                     JSON.stringify({

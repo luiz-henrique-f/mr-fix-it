@@ -78,7 +78,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
     } = useForm<CreateProfessionalForm>();
 
     const onSubmit = async (data: CreateProfessionalForm) => {
-        const response = await fetch("http://localhost:3000/updateInfoProfessional", {
+        const response = await fetch("/updateInfoProfessional", {
             method: "PUT",
             body: Buffer.from(
                 JSON.stringify({
@@ -163,14 +163,14 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
     const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
 
     React.useEffect(() => {
-        axios.get(`http://localhost:3000/professionalUser/${(dados?.user as any)?.id}`)
+        axios.get(`/professionalUser/${(dados?.user as any)?.id}`)
             .then((response) => {
                 setIdPrestador((response.data[0] as any)?.id)
             })
     });
 
     const linkAvaliacao = () => {
-        navigator.clipboard.writeText(`http://localhost:3000/professionalComment/${id_prestador}`)
+        navigator.clipboard.writeText(`/professionalComment/${id_prestador}`)
         toast.success("Link copiado com sucesso!", { position: "top-right" });
     }
 

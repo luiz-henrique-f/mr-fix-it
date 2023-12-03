@@ -55,7 +55,7 @@ const UpdatePassword = () => {
     } = useForm<CreateProfessionalForm>();
 
     const onSubmit = async (data: CreateProfessionalForm) => {
-        const response = await fetch("http://localhost:3000/updatePassword", {
+        const response = await fetch("/updatePassword", {
             method: "PUT",
             body: Buffer.from(
                 JSON.stringify({

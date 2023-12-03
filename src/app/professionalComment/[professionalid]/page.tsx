@@ -67,7 +67,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
 
   const onSubmit = async (data: CreateProfessionalForm) => {
     console.log(valueStar)
-    const response = await fetch("http://localhost:3000/insertComentario", {
+    const response = await fetch("/insertComentario", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
