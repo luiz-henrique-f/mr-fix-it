@@ -39,7 +39,7 @@ type IBGEUFResponse = {
 };
 
 type IBGECITYResponse = {
-  id: number;
+  id: string;
   nome: string;
 };
 
@@ -62,6 +62,16 @@ type Skill = {
   label: string;
 };
 
+type SkillCategorie = {
+  id: string;
+  label: string;
+};
+
+type SkillCity = {
+  id: string;
+  label: string;
+};
+
 const InputSearch = () => {
 
 
@@ -78,6 +88,8 @@ const InputSearch = () => {
   const [selectedCategorie, setSelectedCategorie] = useState("");
 
   const [skill, setSkill] = useState<Skill | null>(null)
+  const [skillCategorie, setSkillCategorie] = useState<SkillCategorie | null>(null)
+  const [skillCity, setSkillCity] = useState<SkillCity | null>(null)
 
   useEffect(() => {
     axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
@@ -147,13 +159,60 @@ const InputSearch = () => {
     label: cbo.desc_cbo
   }))
 
-  console.log({ skill })
+  const categoriesOptions = categories.map((categories) => ({
+    id: categories.id,
+    label: categories.descricao_categoria
+  }))
+
+  const ctiesOptions = cities.map((city) => ({
+    id: city.id,
+    label: city.nome
+  }))
 
   return (
     <ThemeProvider theme={theme}>
 
       <div className="flex flex-col 2md:flex-row justify-evenly items-center gap-4 bg-whiteBG dark:bg-darkBG p-4 mt-4 rounded-xl shadow-2xl dark:shadow-whiteBG/10">
-        <TextField
+
+        <Autocomplete
+          options={categoriesOptions}
+          renderInput={
+            (params) => <TextField
+              {...params}
+              label="Categoria"
+              sx={{
+                input: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                label: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                select: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                svg: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+              }}
+            />
+          }
+          value={skillCategorie}
+          fullWidth
+          onChange={(event: any, newValue: SkillCategorie | null) => setSkillCategorie(newValue)}
+        />
+        {/* <TextField
           id="categorie"
           label="Categoria"
           select
@@ -192,45 +251,45 @@ const InputSearch = () => {
               {categorie.descricao_categoria}
             </MenuItem>
           ))}
-        </TextField>
+        </TextField> */}
 
         <Autocomplete
           options={cboOptions}
           renderInput={
-            (params) => <TextField 
-                          {...params} 
-                          label="Ocupação"
-                          sx={{
-                            input: {
-                              '&.Mui-focused': {
-                                color: '#590BD8'
-                              },
-                              color: '#aaa',
-                            },
-                            label: {
-                              '&.Mui-focused': {
-                                color: '#590BD8'
-                              },
-                              color: '#aaa',
-                            },
-                            select: {
-                              '&.Mui-focused': {
-                                color: '#590BD8'
-                              },
-                              color: '#aaa',
-                            },
-                            svg: {
-                              '&.Mui-focused': {
-                                color: '#590BD8'
-                              },
-                              color: '#aaa',
-                            },
-                          }} 
-                        />
-            }
+            (params) => <TextField
+              {...params}
+              label="Ocupação"
+              sx={{
+                input: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                label: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                select: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                svg: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+              }}
+            />
+          }
           value={skill}
           fullWidth
-          onChange={(event : any, newValue: Skill | null) => setSkill(newValue)}
+          onChange={(event: any, newValue: Skill | null) => setSkill(newValue)}
         />
 
         <TextField
@@ -275,7 +334,46 @@ const InputSearch = () => {
 
         </TextField>
 
-        <TextField
+        <Autocomplete
+          options={ctiesOptions}
+          renderInput={
+            (params) => <TextField
+              {...params}
+              label="Cidade"
+              sx={{
+                input: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                label: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                select: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+                svg: {
+                  '&.Mui-focused': {
+                    color: '#590BD8'
+                  },
+                  color: '#aaa',
+                },
+              }}
+            />
+          }
+          value={skillCity}
+          fullWidth
+          onChange={(event: any, newValue: SkillCity | null) => setSkillCity(newValue)}
+        />
+
+        {/* <TextField
           id="city"
           select
           label="Cidade"
@@ -314,7 +412,7 @@ const InputSearch = () => {
               {city.nome}
             </MenuItem>
           ))}
-        </TextField>
+        </TextField> */}
 
         <TextField
           id="name"
@@ -349,7 +447,7 @@ const InputSearch = () => {
           }}
           onChange={handleSelectedNome} />
 
-        <Link href={`/searchParams/${selectedCategorie != '' ? selectedCategorie : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${selectedCity != '' ? selectedCity : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}/${skill?.id != '' ? skill?.id : 'undefined'}`}>
+        <Link href={`/searchParams/${skillCategorie?.id != '' ? skillCategorie?.id : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${skillCity?.id != '' ? skillCity?.id : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}/${skill?.id != '' ? skill?.id : 'undefined'}`}>
           <SearchButton className='p-3' />
         </Link>
       </div>

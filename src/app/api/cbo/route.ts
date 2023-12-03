@@ -6,8 +6,7 @@ export async function GET() {
 
   const cbos = await prisma.$queryRaw`SELECT "public"."Cbo"."cod_cbo"
                                            , "public"."Cbo"."desc_cbo"
-                                      FROM   "public"."Cbo"
-                                      limit 10`.finally(() => {
+                                      FROM   "public"."Cbo"`.finally(() => {
                                       prisma.$disconnect()});
 
   return new NextResponse(JSON.stringify(cbos), { status: 200 });
