@@ -235,7 +235,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
 
                 <div className='flex border border-[#aaa] p-6 ml-2 sm:mx-2 rounded'>
                   <h1 className='text-[#aaa] -ml-2 pr-4'>Qualidade do serviço:</h1>
-                  <Rating
+                  {/* <Rating
                     name="simple-controlled"
                     value={valueStar}
                     onChange={(event, newValue) => {
@@ -253,7 +253,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
                         className='text-grayLighter opacity-60 dark:opacity-30'
                       />
                     }>
-                  </Rating>
+                  </Rating> */}
                 </div>
 
                 <Box
