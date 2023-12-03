@@ -26,7 +26,7 @@ type IBGEUFResponse = {
 };
 
 type IBGECITYResponse = {
-  id: number;
+  id: string;
   nome: string;
 };
 
@@ -60,6 +60,11 @@ type IdPrestadorResponse = {
 };
 type Response = {
   planoType: string;
+};
+
+type SkillCity = {
+  id: string;
+  label: string;
 };
 
 interface CreateProfessionalForm {
@@ -136,6 +141,8 @@ const CreateProfessional = () => {
     setError,
   } = useForm<CreateProfessionalForm>();
 
+  console.log(id_prestador)
+
   const onSubmit = async (data: CreateProfessionalForm) => {
     console.log(data)
     const response = await fetch("http://localhost:3000/insertProfessional", {
@@ -151,8 +158,8 @@ const CreateProfessional = () => {
           uf: data.uf,
           cod_cbo: skill?.id,
           desc_cbo: skill?.label,
-          cidade: data.cidade.substring(0, 7),
-          desc_cidade: data.cidade.substring(7),
+          cidade: skillCity?.id.toString(),
+          desc_cidade: skillCity?.label,
           observacao: data.observacao,
           id_user: (dados?.user as any)?.id
         })
@@ -188,6 +195,7 @@ const CreateProfessional = () => {
 
   const [skill, setSkill] = React.useState<Skill | null>(null)
   const [skillCategorie, setSkillCategorie] = React.useState<SkillCategorie | null>(null)
+  const [skillCity, setSkillCity] = React.useState<SkillCity | null>(null)
 
   // const changeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSelectedValueCheckbox(event.target.value);
@@ -311,10 +319,15 @@ const CreateProfessional = () => {
     label: categories.descricao_categoria
   }))
 
+  const ctiesOptions = cities.map((city) => ({
+    id: city.id,
+    label: city.nome
+  }))
+
   return (
     <ThemeProvider theme={themestyle}>
 
-      {/* {!id_prestador && ( */}
+      {id_prestador == undefined && (
 
         <div className='flex justify-center items-center xl:gap-[10%] h-full'>
           <div className='flex flex-col justify-center items-center bg-whiteBGDarker/10 p-4 rounded-md border border-solid border-grayLighter/40 scale-90 2sm:scale-100'>
@@ -432,23 +445,62 @@ const CreateProfessional = () => {
                   ))}
                 </TextField>
 
-                <TextField
-                  {...register("cidade")}
-                  id="city"
-                  select
-                  label="Cidade"
+                <Autocomplete
+                  options={ctiesOptions}
+                  renderInput={
+                    (params) => <TextField
+                      {...params}
+                      label="Cidade"
+                      sx={{
+                        input: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        label: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        select: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                        svg: {
+                          '&.Mui-focused': {
+                            color: '#590BD8'
+                          },
+                          color: '#aaa',
+                        },
+                      }}
+                    />
+                  }
+                  value={skillCity}
                   fullWidth
-                  onChange={handleSelectedCity}>
+                  onChange={(event: any, newValue: SkillCity | null) => setSkillCity(newValue)}
+                />
 
-                  {cities.map(city => (
-                    <MenuItem key={city.id} value={city.id + city.nome}>
-                      {city.nome}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                {/* <TextField
+                {...register("cidade")}
+                id="city"
+                select
+                label="Cidade"
+                fullWidth
+                onChange={handleSelectedCity}>
+
+                {cities.map(city => (
+                  <MenuItem key={city.id} value={city.id + city.nome}>
+                    {city.nome}
+                  </MenuItem>
+                ))}
+              </TextField> */}
               </div>
 
-              <TextField
+              {/* <TextField
                 {...register("categoria", {
                   required: {
                     value: true,
@@ -469,7 +521,7 @@ const CreateProfessional = () => {
                     {categorie.descricao_categoria}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextField> */}
 
               <Autocomplete
                 options={categoriesOptions}
@@ -635,9 +687,9 @@ const CreateProfessional = () => {
             />
           </div>
         </div>
-      {/*  )} */}
+      )}
 
-      {!plano && (
+      {/* {!plano && (
         <div className="flex flex-col justify-center items-center h-full gap-2">
           <h1 className='text-lg md:text-2xl lg:text-4xl font-semibold'>Você já possui cadastro de profissional!</h1>
           <span className="text-base md:text-xl lg:text-2xl font-normal">
@@ -648,14 +700,17 @@ const CreateProfessional = () => {
             Ir para pagamento
           </Button>
         </div>
-      )}
+      )} */}
 
-      <div className="flex flex-col justify-center items-center h-full gap-2">
-        <h1 className='text-lg md:text-2xl lg:text-4xl font-semibold'>Calma lá!</h1>
-        <span className="text-base md:text-xl lg:text-2xl font-normal">
-          você ja concluiu essas etapas!
-        </span>
-      </div>
+      {id_prestador != undefined && (
+
+        <div className="flex flex-col justify-center items-center h-full gap-2">
+          <h1 className='text-lg md:text-2xl lg:text-4xl font-semibold'>Calma lá!</h1>
+          <span className="text-base md:text-xl lg:text-2xl font-normal">
+            você ja concluiu essas etapas!
+          </span>
+        </div>
+      )}
     </ThemeProvider>
   );
 
