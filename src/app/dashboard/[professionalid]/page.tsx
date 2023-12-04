@@ -91,7 +91,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                 </div>
                                 
                                 <div>
-                                    <GraphCard itemName='Positivas' itemName2='Negativas' title='FEEDBACK ANUAL DE AVALICAÇÕES' />
+                                    <GraphCard />
                                 </div>
 
                             </div>
