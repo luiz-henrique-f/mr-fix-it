@@ -82,6 +82,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                         uf={professional?.uf as any}
                         telefone={professional?.celular as any}
                         urlFoto={professional?.url_foto as any}
+                        id={professional?.id as any}
                     />
 
                     <ProfessionalCategory

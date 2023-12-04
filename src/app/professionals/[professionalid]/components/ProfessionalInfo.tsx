@@ -39,6 +39,7 @@ type IBGECITYResponse = {
     nome: string;
 };
 interface ProfessionalInfoProps {
+    id: string;
     name: string;
     city: string;
     uf: string;
@@ -58,10 +59,10 @@ interface CreateProfessionalForm {
 }
 
 type IdPrestadorResponse = {
-    id: string;
+    id_prestador: string;
 };
 
-const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInfoProps) => {
+const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto }: ProfessionalInfoProps) => {
 
     const { data, status } = useSession();
     const dados = data;
@@ -286,7 +287,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
                 <p className='uppercase font-semibold text-sm text-grayPrimary dark:text-grayLighter'>Membro desde: Outubro, 2023</p>
             </div>
 
-            {status == 'authenticated' &&
+            {status == 'authenticated' && (id_prestador as any) == (id as any) &&
                 (<div className='flex flex-col items-center mb-4'>
                     <Button variant="outlined"
                         onClick={() => linkAvaliacao()}
