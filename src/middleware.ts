@@ -13,7 +13,7 @@ export default function middleware(request: NextRequest) {
   }
 }
 
-export const config = {
-  //rotas que serao privadas
-  matcher: ['/pagamentoPlano', '/createProfessional'],
-}
+// export const config = {
+//   //rotas que serao privadas
+//   matcher: ['/pagamentoPlano', '/createProfessional'],
+// }
