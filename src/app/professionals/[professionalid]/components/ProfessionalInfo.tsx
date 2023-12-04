@@ -170,7 +170,7 @@ const ProfessionalInfo = ({ name, city, uf, telefone, urlFoto }: ProfessionalInf
     });
 
     const linkAvaliacao = () => {
-        navigator.clipboard.writeText(`/professionalComment/${id_prestador}`)
+        navigator.clipboard.writeText(`https://mr-fix-it-six.vercel.app/professionalComment/${id_prestador}`)
         toast.success("Link copiado com sucesso!", { position: "top-right" });
     }
 
