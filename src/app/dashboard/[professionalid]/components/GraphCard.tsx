@@ -19,16 +19,14 @@ const GraphCard = (props: { itemName: string; itemName2: string; title: string; 
   const { itemName, itemName2, title } = props;
   
   
-  const [chartData, setChartData] = useState({
-    datasets: [],
-  });
+  const [chartData, setChartData] = useState({});
 
   const [chartOptions, setChartOptions] = useState({});
 
   // useEffect(() => {
   //   setChartData({
   //     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-  //     datasets: [
+  //     datasets: [{
   //       {
   //         label: [itemName2],
   //         data: [3, 8, 12, 5, 2, 9, 4, 13, 6, 3, 1, 7],
@@ -41,7 +39,7 @@ const GraphCard = (props: { itemName: string; itemName2: string; title: string; 
   //         backgroundColor: '#2a6',
   //         borderRadius: 8,
   //       }, 
-  //     ],
+  //     }],
   //   });
 
   //   setChartOptions({
@@ -62,13 +60,13 @@ const GraphCard = (props: { itemName: string; itemName2: string; title: string; 
   //     },
   //     maintainAspectRatio: false,
   //     responsive: true
-  // });
+  //   });
   // }, []);
   
   return (
     <>
       <div className='h-[60vh] p-4 rounded-2xl bg-white dark:bg-darkBGLighter text-black dark:text-white'>
-        <Bar data={chartData} options={chartOptions} />
+        {/* <Bar data={chartData} options={chartOptions} /> */}
       </div> 
     </>
   );
