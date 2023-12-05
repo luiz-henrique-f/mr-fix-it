@@ -311,7 +311,7 @@ const ProfessionalComment = ({ params }: { params: { professionalid: string } })
 
           <div className='lg:flex justify-center items-center w-full h-full bg-gradient-to-br from-primaryDarker to-primary hidden'>
             <Image
-              src="/Queue.png"
+              src="/Customer Survey-amico.png"
               width={500}
               height={500}
               alt="Aside Image"

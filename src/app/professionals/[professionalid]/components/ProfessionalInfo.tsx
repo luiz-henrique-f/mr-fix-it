@@ -265,38 +265,41 @@ const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto }: Professiona
                 />
             </div>
 
-            <div className='flex flex-col items-center mb-2'>
+            <div className='flex flex-col items-center mb-8'>
                 <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>{name}</h1>
 
-                <div className='flex items-center gap-1 my-1 mt-8 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
+                <div className='flex items-center gap-1 my-1 mt-6 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
                     <FaMapPin className='text-base' />
                     <p>{city},</p>
                     <p>{uf}</p>
                 </div>
 
                 <div className='gap-1 my-1'>
-                    <Link href={`https://wa.me/55${telefone.replace(/[^\w\s]/gi, '').replace(' ', '')}`} target='_blank'><p className='flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-600'>
-                        <BsWhatsapp className='text-center text-sm text-green-600' />
-                        +55 {telefone}
-                    </p>
+                    <Link href={`https://wa.me/55${telefone.replace(/[^\w\s]/gi, '').replace(' ', '')}`} target='_blank'>
+                        <p className='flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-600'>
+                            <BsWhatsapp className='text-center text-sm text-green-600' />
+                            +55 {telefone}
+                        </p>
                     </Link>
                 </div>
+
             </div>
 
-            <div className='absolute flex justify-center pt-2 bottom-3 border-t-2 border-solid border-whiteBG dark:border-darkBG w-full'>
-                <p className='uppercase font-semibold text-sm text-grayPrimary dark:text-grayLighter'>Membro desde: Outubro, 2023</p>
-            </div>
-
-            {status == 'authenticated' && (id_prestador as any) == (id as any) &&
-                (<div className='flex flex-col items-center mb-4'>
+            {status == 'authenticated' && (id_prestador as any) == (id as any) && (
+                <div className='flex flex-col items-center mb-6 -mt-8'>
                     <Button variant="outlined"
                         onClick={() => linkAvaliacao()}
                     >
-                        <FiLogIn />
                         Link para Avaliação
                     </Button>
                 </div>
-                )}
+            )}
+
+            <div className='absolute flex justify-center pt-2 bottom-3 border-t-2 border-solid border-whiteBG dark:border-darkBG w-full'>
+                <p className='uppercase font-semibold text-sm text-grayPrimary dark:text-grayLighter'>
+                    Membro desde: Outubro, 2023
+                </p>
+            </div>
 
         </div>
     )
