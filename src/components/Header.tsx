@@ -27,6 +27,7 @@ import { AiOutlineMenu, AiFillStar } from 'react-icons/ai';
 import { ImCancelCircle } from "react-icons/im";
 import { BsCheck2Square, BsGraphUp } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 interface CreateProfessionalForm {
     observacao: String;
@@ -343,6 +344,19 @@ const Header = () => {
                                         </li>
                                     </div>
                                 )}
+                                
+
+                                <li className="group w-full">
+                                    <Link href={`/adminPage`}>
+                                        <Button
+                                            variant="dropbar"
+                                            className="">
+
+                                            <MdOutlineAdminPanelSettings className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                            <span className="text-lg">Admin</span>
+                                        </Button>
+                                    </Link>
+                                </li>
 
                                 <li className="group w-full">
                                     <Button

@@ -5,7 +5,7 @@ import PricesSection from "./components/PricesSection";
 import QuickSearch from "./components/QuickSearch";
 import SearchSection from "./components/SearchSection";
 import RecommendProfessionals from "./components/RecommendProfessionals";
-import Feedbacks from "./components/Feedbacks";
+import FeedbackSection from "./components/FeedbackSection";
 
 export default function Home() {
 
@@ -14,7 +14,7 @@ export default function Home() {
       <div>
         <SearchSection />
         <PricesSection />
-        {/* <Feedbacks /> */}
+        <FeedbackSection />
       </div>
     </>
   )

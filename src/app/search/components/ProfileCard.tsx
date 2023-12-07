@@ -50,16 +50,16 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
           </div>
 
           <div className="border-t-4 border-whiteBG dark:border-darkBG text-black dark:text-white p-4 text-xs 3xl:text-sm font-semibold flex justify-around items-center gap-2">
-            <div className='flex flex-col 2xl:flex-row gap-2 justify-center items-center'>
-              <p>Categoria:</p>
-              <p className="px-4 py-1 bg-primary dark:bg-primaryLighter rounded-md text-white">
+            <div className='flex flex-[40%] overflow-hidden flex-col'>
+              <p className='flex justify-center items-center pb-1 font-mono -tracking-wider'>Categoria</p>
+              <p className="px-2 p-1 bg-primary dark:bg-primaryLighter rounded-md text-white truncate text-center">
                 {prestador.tipo_categoria}
               </p>
             </div>
 
-            <div className='flex flex-col 2xl:flex-row gap-2 justify-center items-center'>
-              <p>Profissão:</p>
-              <p className="px-4 py-1 bg-primary dark:bg-primaryLighter rounded-md text-white">
+            <div className='flex flex-[40%] overflow-hidden flex-col'>
+              <p className='flex justify-center items-center pb-1 font-mono -tracking-wider'>Profissão</p>
+              <p className="px-2 p-1 bg-primary dark:bg-primaryLighter rounded-md text-white truncate text-center">
                 {prestador.desc_cbo}
               </p>
             </div>

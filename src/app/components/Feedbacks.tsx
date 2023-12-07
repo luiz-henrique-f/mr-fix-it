@@ -1,9 +1,7 @@
-// "use client"
-
-import { prisma } from "@/lib/prisma";
+'use client'
 
 import { register } from 'swiper/element/bundle';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import FeedbackCard from "./FeedbackCard";
@@ -14,42 +12,45 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-const Feedbacks = async () => {
-  const feedback_ = await prisma.feedback.findMany({}).finally(() => {
-    prisma.$disconnect();
-})
+const Feedbacks = ({feedback_}:any) => {
 
+  // console.log(feedback_)
+  
   return (
     <>
-      <div className='flex flex-col justify-center items-center gap-8 h-[80dvh] mb-7 bg-whiteBG dark:bg-darkBG'>
-        <h1 
-          className='font-bold m-6 xl:text-3xl md:text-xl sm:text-base uppercase bg-gradient-to-r from-secondary to-primaryLighter bg-clip-text text-transparent'>
-            
-          Veja a opinião dos nossos fornecedores
-        </h1>
+      {!feedback_ && (
+        <span className="text-base font-medium">Ops! Algo deu errado... </span>
+      )}
 
-        {!feedback_ && (
-          <span className="text-base font-medium">Ops! Algo deu errado... </span>
-        )}
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+        slidesPerView={1}
+        loop={true}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          900:{
+            slidesPerView:2,
+          },
+          1300: {
+            slidesPerView: 3,
+          }
+        }}
+        className='w-[95vw] 2md:w-[99vw] 3xl:w-[85vw]'>
 
-        {/* <div className="flex w-full items-center justify-center gap-8"> */}
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          slidesPerView={3}
-          navigation
-          pagination={{ clickable: true }}
-        >
-          {feedback_.map((feedback) => (
-            <SwiperSlide>
+        {feedback_.map((feedback:any) => (
+          <SwiperSlide key={feedback.id}>
+            <div className='flex justify-center items-center my-24'>
+              <FeedbackCard feedback={feedback} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-              <FeedbackCard feedback={feedback} key={feedback.id} />
-          
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {/* </div> */}
-
-      </div>
     </>
   );
 }

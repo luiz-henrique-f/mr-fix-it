@@ -9,6 +9,7 @@ import { AiFillSetting, AiFillHome } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
 import { FaUser } from "react-icons/fa";
 import { IoInformationCircleOutline } from "react-icons/io5";
+import { MdAdminPanelSettings } from "react-icons/md";
 
 interface ProfessionalInfoProps {
   id_prestador: string;
@@ -41,11 +42,11 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
               <Link 
                 href={'/'}>
 
-                <Button variant='icon'className='block group-hover/sidebar:hidden'>
+                <Button variant='sidebar'className='block group-hover/sidebar:hidden'>
                   <AiFillHome className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                 </Button>
 
-                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
+                <Button variant='sidebar' className='hidden group-hover/sidebar:flex'>
                   <AiFillHome className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                   <span>Página Inicial</span>
                 </Button>
@@ -56,11 +57,11 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
             <li className='group my-[0.5px] group-hover/sidebar:my-0'>
               <Link href={`/professionals/${id_prestador}`}>
                 
-                <Button variant='icon' className='block group-hover/sidebar:hidden'>
+                <Button variant='sidebar' className='block group-hover/sidebar:hidden'>
                   <FaUser className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                 </Button>
 
-                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
+                <Button variant='sidebar' className='hidden group-hover/sidebar:flex'>
                   <FaUser className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                   <span>Seu Perfil</span>
                 </Button>
@@ -73,11 +74,11 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
             <li className='group my-[0.5px] group-hover/sidebar:my-0'>
               <Link href={`/dashboard/${id_prestador}`}>
                   
-                <Button variant='icon' className='block group-hover/sidebar:hidden'>
+                <Button variant='sidebar' className='block group-hover/sidebar:hidden'>
                   <BsGraphUp className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                 </Button>
 
-                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
+                <Button variant='sidebar' className='hidden group-hover/sidebar:flex'>
                   <BsGraphUp className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                   <span>Dashboard</span>
                 </Button>
@@ -85,14 +86,15 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
               </Link>
             </li>
             
+            
             <li className='group my-[0.5px] group-hover/sidebar:my-0'>
               <Link href={`/dashboard/profile/${id_prestador}`}>
                 
-                <Button variant='icon' className='block group-hover/sidebar:hidden'>
+                <Button variant='sidebar' className='block group-hover/sidebar:hidden'>
                   <IoInformationCircleOutline className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                 </Button>
 
-                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
+                <Button variant='sidebar' className='hidden group-hover/sidebar:flex'>
                   <IoInformationCircleOutline className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                   <span>Informações</span>
                 </Button>
@@ -110,11 +112,11 @@ const SideMenu = ({ id_prestador }: ProfessionalInfoProps) => {
             <li className='group my-[0.5px] group-hover/sidebar:my-0'>
               <Link href={`/dashboard/settings/${id_prestador}`}>
 
-                <Button variant='icon' className='block group-hover/sidebar:hidden'>
+                <Button variant='sidebar' className='block group-hover/sidebar:hidden'>
                   <AiFillSetting className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                 </Button>
 
-                <Button variant='icon' className='hidden group-hover/sidebar:flex'>
+                <Button variant='sidebar' className='hidden group-hover/sidebar:flex'>
                   <AiFillSetting className='text-2xl group-hover:text-primary dark:group-hover:text-primaryLighter' />
                   <span>Configurações</span>
                 </Button>

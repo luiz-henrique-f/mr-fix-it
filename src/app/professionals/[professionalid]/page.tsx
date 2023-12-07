@@ -75,7 +75,7 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
             </div>
 
             <div className='container relative p-4 mx-auto 2md:flex 2md:gap-10'>
-                <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[70%] 2sm:-mt-[25%] 2md:-mt-[20%] xl:-mt-[15%] pb-3 2md:pb-0 h-full flex flex-col gap-6'>
+                <div className='w-full 2md:w-[30%] 2md:ml-[10%] -mt-[70%] 2sm:-mt-[25%] 2md:-mt-[20%] xl:-mt-[15%] pb-3 2md:pb-0 h-full flex flex-col gap-3 2md:gap-8'>
                     <ProfessionalInfo
                         name={professional?.nome as any}
                         city={professional?.desc_cidade as any}
@@ -86,7 +86,13 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                     />
 
                     <ProfessionalCategory
-                        categoria={professional?.tipo_categoria as any}
+                        title='Categoria'
+                        input={professional?.tipo_categoria as any}
+                        />
+
+                    <ProfessionalCategory
+                        title='Profissão'
+                        input={professional?.desc_cbo as any}
                     />
                 </div>
 
