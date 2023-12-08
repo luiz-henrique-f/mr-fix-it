@@ -71,7 +71,7 @@ const SearchSection = () => {
 				<h1 className='font-semibold text-3xl 2sm:text-4xl text-gray-800 dark:text-gray-300 text-center p-3'>A maneira mais fácil de encontrar um profissional <span className='text-primary dark:text-primaryLighter'>capacitado</span>!</h1>
 				<p className='text-gray-600 dark:text-gray-400 text-sm 2sm:text-xl text-center p-3 mb-6'>Conheça de forma gratuita os profissionais melhor avaliados!</p>
 
-				<Link href="/search">
+				<Link href="/searchParams/undefined/undefined/undefined/undefined/undefined">
 					<SpecialButton />
 				</Link>
 			</div>
