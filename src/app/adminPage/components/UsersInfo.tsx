@@ -22,7 +22,7 @@ const UsersInfo = async ({ nome,  url_foto, desc_cidade, data_fim, status}: Prof
       <div className='p-1 flex items-center justify-between'>
 
         <div className='flex flex-[10%] items-center justify-start pl-4'>
-          <Button variant='icon' className='flex items-center justify-start'>
+          <Button variant='icon' className='flex items-center justify-start' title='Enviar Mensagem de cobrança'>
             <AiOutlineMenu />
           </Button>
         </div>

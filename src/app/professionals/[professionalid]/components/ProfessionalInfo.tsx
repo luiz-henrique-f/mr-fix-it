@@ -27,6 +27,7 @@ import Button from '@/components/Button';
 import { BsWhatsapp } from 'react-icons/bs'
 import { FaMapPin } from 'react-icons/fa'
 import { FiLogIn } from 'react-icons/fi';
+import { MdMarkEmailRead } from "react-icons/md";
 
 type IBGEUFResponse = {
     id: number;
@@ -45,6 +46,7 @@ interface ProfessionalInfoProps {
     uf: string;
     telefone: string;
     urlFoto: string;
+    email: string;
 }
 
 interface CreateProfessionalForm {
@@ -62,7 +64,7 @@ type IdPrestadorResponse = {
     id_prestador: string;
 };
 
-const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto }: ProfessionalInfoProps) => {
+const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto, email }: ProfessionalInfoProps) => {
 
     const { data, status } = useSession();
     const dados = data;
@@ -281,6 +283,13 @@ const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto }: Professiona
                             +55 {telefone}
                         </p>
                     </Link>
+                </div>
+
+                <div className='gap-1 my-1'>
+                    <p className='flex items-center gap-2 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
+                        <MdMarkEmailRead className='text-center text-sm text-grayPrimary dark:text-grayLighter' />
+                        {email}
+                    </p>
                 </div>
 
             </div>
