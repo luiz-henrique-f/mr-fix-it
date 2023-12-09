@@ -12,23 +12,8 @@ interface ProfessionalInfoProps {
 }
 const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: ProfessionalInfoProps) => {
 
-  const result = await prisma.$queryRaw`SELECT * 
-                                        FROM  "public"."Prestador",
-                                              "public"."users"
-                                              -- (
-                                              --   SELECT
-                                              --     "public"."Prestador"."id",
-                                              --     ROUND(
-                                              --       SUM("public"."Comentarios_Prestador"."nota") / COUNT("public"."Comentarios_Prestador"."nota")
-                                              --     ) qtd
-                                              --   FROM
-                                              --     "public"."Comentarios_Prestador",
-                                              --     "public"."Prestador"
-                                              --   WHERE
-                                              --     "public"."Prestador"."id" = "public"."Comentarios_Prestador"."id_prestador"
-                                              --   GROUP BY
-                                              --     "public"."Prestador"."id"
-                                              -- ) tmp
+  const result = await prisma.$queryRaw`SELECT *
+                                        FROM  "public"."Prestador"
                                         WHERE  CASE WHEN ${uf} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."uf" = ${uf} THEN 1
                                                END = 1
@@ -44,8 +29,9 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
                                         AND    CASE WHEN ${cbo} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."cod_cbo" = ${cbo} THEN 1
                                                END = 1
-                                        AND    "public"."users"."admin"        = 'N'   
-                                        AND    "public"."Prestador"."id_user" = "public"."users"."id"`.finally(() => {
+                                        AND    EXISTS( SELECT 1 FROM "public"."users"
+                                                       WHERE  "public"."users"."admin" = 'N'
+                                                       AND    "public"."users"."id"    = "public"."Prestador"."id_user")`.finally(() => {
     prisma.$disconnect();
   })
 

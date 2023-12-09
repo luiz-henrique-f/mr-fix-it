@@ -1,17 +1,22 @@
 import React from 'react';
-import { Prestador } from '@prisma/client';
 import Image from 'next/image';
 
 import MenuSpacer from '../../dashboard/[professionalid]/components/MenuSpacer';
 import Button from '@/components/Button';
 
 import { AiOutlineMenu } from 'react-icons/ai';
+import { prisma } from '@/lib/prisma';
 
 interface ProfileInfoProps {
-  prestador: Prestador
+  nome: string,
+  url_foto: string,
+  desc_cidade: string,
+  data_fim: string,
+  status: string,
 };
 
-const UsersInfo = ({ prestador }: ProfileInfoProps) => {
+const UsersInfo = async ({ nome,  url_foto, desc_cidade, data_fim, status}: ProfileInfoProps) => {
+
   return (
     <>
       <div className='p-1 flex items-center justify-between'>
@@ -21,10 +26,10 @@ const UsersInfo = ({ prestador }: ProfileInfoProps) => {
             <AiOutlineMenu />
           </Button>
         </div>
-        
+
         <div className='flex flex-[35%] gap-3 items-center justify-start'>
           <Image
-            src={prestador.url_foto}
+            src={url_foto}
             width={36}
             height={36}
             className='rounded-full h-9 w-h-9'
@@ -36,27 +41,27 @@ const UsersInfo = ({ prestador }: ProfileInfoProps) => {
 
           <div className='flex flex-col items-start justify-center'>
             <p className="text-lg font-semibold text-black dark:text-white">
-              {prestador.nome}
+              {nome}
             </p>
 
             <span className='text-sm italic text-gray-500'>
-              {prestador.desc_cidade}
+              {desc_cidade}
             </span>
           </div>
         </div>
 
         <div className='flex flex-[35%] items-center justify-center'>
-            <p>nada</p>
+          <p>{data_fim}</p>
         </div>
 
         <div className='flex flex-[20%] items-center justify-center'>
-            <p>nada</p>
+          <p>{status}</p>
         </div>
 
       </div>
 
       <MenuSpacer />
-      
+
     </>
   );
 };
