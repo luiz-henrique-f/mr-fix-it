@@ -121,6 +121,7 @@ model User {
   password      String
   emailVerified DateTime? @default(now())
   image         String?
+  admin         String    @default("N")
   // accounts      Account[]
   // sessions      Session[]
 

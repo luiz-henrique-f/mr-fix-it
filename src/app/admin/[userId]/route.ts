@@ -14,18 +14,12 @@ export async function GET(request: Request, { params: { userId } }: { params: { 
     };
 }
 
-const professional = await prisma.prestador.findMany({
+const professional = await prisma.user.findUnique({
     where: {
-        id_user: userId,
+        id: userId,
     },
     select:{
-        id: true,
-        nome: true,
-        celular: true,
-        tipo_categoria: true,
-        observacao: true,
-        cidade: true,
-        uf: true,
+        admin: true,
     }
 }).finally(() => {
   prisma.$disconnect();
