@@ -26,23 +26,25 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
             TOP
           </span>
 
-          <div className='mb-8'>
-            <Image
-              src={prestador.url_foto}
-              width={140}
-              height={140}
-              className='rounded-full h-36 w-36 mx-auto my-10 p-0'
-              style={{
-                objectFit: "cover",
-              }}
-              alt='Imagem Usuário'
-            />
+          <div className='flex flex-col items-center justify-center mb-8'>
+            <div className='rounded-full p-[6px] border-2 border-primary dark:border-primaryLighter mt-10 mb-4'>
+              <Image
+                src={prestador.url_foto}
+                width={140}
+                height={140}
+                className='rounded-full h-36 w-36'
+                style={{
+                  objectFit: "cover",
+                }}
+                alt='Imagem Usuário'
+              />
+            </div>
 
-            <h1 className="text-xl font-bold text-center text-black dark:text-white">
+            <h1 className="text-xl font-bold text-black dark:text-white">
               {prestador.nome}
             </h1>
 
-            <div className='flex items-center justify-center gap-1 my-1 p-2 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
+            <div className='flex gap-1 my-1 p-2 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
               <FaMapPin className='text-base' />
               <p>{prestador.desc_cidade},</p>
               <p>{prestador.uf}</p>
