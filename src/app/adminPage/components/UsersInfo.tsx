@@ -11,11 +11,12 @@ interface ProfileInfoProps {
   nome: string,
   url_foto: string,
   desc_cidade: string,
+  uf: string,
   data_fim: string,
   status: string,
 };
 
-const UsersInfo = async ({ nome,  url_foto, desc_cidade, data_fim, status}: ProfileInfoProps) => {
+const UsersInfo = async ({ nome,  url_foto, desc_cidade, uf, data_fim, status}: ProfileInfoProps) => {
 
   return (
     <>
@@ -45,7 +46,7 @@ const UsersInfo = async ({ nome,  url_foto, desc_cidade, data_fim, status}: Prof
             </p>
 
             <span className='text-sm italic text-gray-500'>
-              {desc_cidade}
+              {desc_cidade}, {uf}
             </span>
           </div>
         </div>
@@ -54,9 +55,17 @@ const UsersInfo = async ({ nome,  url_foto, desc_cidade, data_fim, status}: Prof
           <p>{data_fim}</p>
         </div>
 
-        <div className='flex flex-[20%] items-center justify-center'>
-          <p>{status}</p>
-        </div>
+        {status === 'Inativo' && (
+          <div className='flex flex-[20%] items-center justify-center'>
+            <p className='p-1 px-2 uppercase font-mono font-semibold bg-gradient-to-br from-red-400 to-red-700 text-white rounded-xl'>{status}</p>
+          </div>
+        )}
+
+        {status === 'Ativo' && (
+          <div className='flex flex-[20%] items-center justify-center'>
+            <p className='p-1 px-4 uppercase font-mono font-semibold bg-gradient-to-br from-green-400 to-green-700 text-white rounded-xl'>{status}</p>
+          </div>
+        )}
 
       </div>
 

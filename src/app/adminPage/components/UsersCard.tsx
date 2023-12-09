@@ -9,6 +9,7 @@ const UsersCard = async () => {
   const prestadores = await prisma.$queryRaw`SELECT "public"."Prestador"."nome"
                                                   , "public"."Prestador"."url_foto"
                                                   , "public"."Prestador"."desc_cidade"
+                                                  , "public"."Prestador"."uf"
                                                   , (SELECT "public"."Prestador_Ativo"."data_fim"
                                                      FROM   "public"."Prestador_Ativo"
                                                      WHERE  "public"."Prestador_Ativo"."id_user" = "public"."Prestador"."id_user"
@@ -29,7 +30,7 @@ const UsersCard = async () => {
   return (
     <>
       <div className='flex flex-col gap-2 m-2'>
-        <div className='p-1 px-3 flex items-center justify-between text-lg uppercase font-semibold font-mono text-gray-400'>
+        <div className='sticky top-0 p-1 px-3 flex items-center justify-between text-lg uppercase font-semibold font-mono text-gray-400 bg-whiteBG dark:bg-darkBG'>
 
           <div className='flex flex-[10%] items-center justify-start'>
             <p>Ações</p>
@@ -52,11 +53,13 @@ const UsersCard = async () => {
         <div className='flex flex-col gap-2 overflow-y-scroll'>
           {(prestadores as any).map((prestador: any) => (
             <UsersInfo 
-            nome={prestador.nome}
-            url_foto={prestador.url_foto}
-            status={prestador.status}
-            desc_cidade={prestador.desc_cidade}
-            data_fim={prestador.data_fim}/>
+              nome={prestador.nome}
+              url_foto={prestador.url_foto}
+              status={prestador.status}
+              desc_cidade={prestador.desc_cidade}
+              uf={prestador.uf}
+              data_fim={prestador.data_fim}
+            />
           ))}
         </div>
       </div>
