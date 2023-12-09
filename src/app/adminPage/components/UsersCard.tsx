@@ -23,6 +23,9 @@ const UsersCard = async () => {
                                                                       LIMIT  1) THEN 'Ativo' 
                                                          ELSE 'Inativo' 
                                                     END "status"
+                                                  , (SELECT "public"."users"."username"
+                                                     FROM   "public"."users"
+                                                     WHERE  "public"."users"."id" = "public"."Prestador"."id_user") email
                                              FROM   "public"."Prestador"`.finally(() => {
     prisma.$disconnect();
   })
@@ -59,6 +62,7 @@ const UsersCard = async () => {
               desc_cidade={prestador.desc_cidade}
               uf={prestador.uf}
               data_fim={prestador.data_fim}
+              email={prestador.email}
             />
           ))}
         </div>

@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import Image from 'next/image';
 
@@ -6,6 +8,8 @@ import Button from '@/components/Button';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { prisma } from '@/lib/prisma';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 interface ProfileInfoProps {
   nome: string,
@@ -14,16 +18,38 @@ interface ProfileInfoProps {
   uf: string,
   data_fim: string,
   status: string,
+  email: string,
 };
 
-const UsersInfo = async ({ nome,  url_foto, desc_cidade, uf, data_fim, status}: ProfileInfoProps) => {
+const UsersInfo = ({ nome, url_foto, desc_cidade, uf, data_fim, status, email }: ProfileInfoProps) => {
+
+  const onSubmit = async () => {
+
+    const response = await fetch("/sendMail", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          email: email,
+          nome: nome,
+          data_fim: data_fim
+        })
+      ),
+    }
+    )
+
+    toast.success("Email enviado com sucesso!", { position: "top-right" });
+  };
 
   return (
     <>
       <div className='p-1 flex items-center justify-between'>
 
         <div className='flex flex-[10%] items-center justify-start pl-4'>
-          <Button variant='icon' className='flex items-center justify-start' title='Enviar Mensagem de cobrança'>
+          <Button
+            variant='icon'
+            className='flex items-center justify-start'
+            title='Enviar Mensagem de cobrança'
+            onClick={onSubmit}>
             <AiOutlineMenu />
           </Button>
         </div>
