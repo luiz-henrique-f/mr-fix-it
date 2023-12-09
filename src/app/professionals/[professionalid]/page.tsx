@@ -50,13 +50,12 @@ const getEmail = async (userId: string) => {
         }
     }).finally(() => {
         prisma.$disconnect();
-      });
-  
+    });
+
     return photo;
 };
 
-
-const ProfessionalDetail = async ({ params }: { params: { professionalid: string} }) => {
+const ProfessionalDetail = async ({ params }: { params: { professionalid: string } }) => {
     const professional = await getProfessionalDetails(params.professionalid);
     const data = await getCommentsDetails(params.professionalid);
     const email = await getEmail(professional?.id_user as any);
@@ -87,12 +86,13 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                         urlFoto={professional?.url_foto as any}
                         id={professional?.id as any}
                         email={email?.username as any}
+                        criacao={professional?.created_at.toString() as any}
                     />
 
                     <ProfessionalCategory
                         title='Categoria'
                         input={professional?.tipo_categoria as any}
-                        />
+                    />
 
                     <ProfessionalCategory
                         title='Profissão'
@@ -107,31 +107,31 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
 
                     {/* {params.status == 'unauthenticated' && ( */}
 
-                        <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg p-8 gap-5 h-96">
-                            <div className='flex justify-between'>
-                                <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
-                                    <AiFillStar className='text-orange-400' />
-                                    Avaliações dos Usuários
-                                </h1>
+                    <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg p-8 gap-5 h-96">
+                        <div className='flex justify-between'>
+                            <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
+                                <AiFillStar className='text-orange-400' />
+                                Avaliações dos Usuários
+                            </h1>
 
-                                <AddComent professionalId={params.professionalid} />
-                                
-                            </div>
+                            <AddComent professionalId={params.professionalid} />
 
-                            <div className="overflow-y-scroll flex flex-col gap-5">
-                                    
-                                {data.map((comments: Comentarios_Prestador) => (
-                                    <ProfessionalRaiting 
-                                        key={comments.id} 
-                                        name={comments.nome} 
-                                        title={comments.titulo_comentario} 
-                                        message={comments.comentario} 
-                                        valueComment={comments.nota}
-                                        className='' 
-                                    />
-                                ))}
-                            </div>
                         </div>
+
+                        <div className="overflow-y-scroll flex flex-col gap-5">
+
+                            {data.map((comments: Comentarios_Prestador) => (
+                                <ProfessionalRaiting
+                                    key={comments.id}
+                                    name={comments.nome}
+                                    title={comments.titulo_comentario}
+                                    message={comments.comentario}
+                                    valueComment={comments.nota}
+                                    className=''
+                                />
+                            ))}
+                        </div>
+                    </div>
                     {/* )} */}
                 </div>
             </div>

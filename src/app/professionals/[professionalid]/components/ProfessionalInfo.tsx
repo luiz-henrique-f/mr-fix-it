@@ -47,6 +47,7 @@ interface ProfessionalInfoProps {
     telefone: string;
     urlFoto: string;
     email: string;
+    criacao: string;
 }
 
 interface CreateProfessionalForm {
@@ -64,7 +65,7 @@ type IdPrestadorResponse = {
     id_prestador: string;
 };
 
-const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto, email }: ProfessionalInfoProps) => {
+const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto, email, criacao }: ProfessionalInfoProps) => {
 
     const { data, status } = useSession();
     const dados = data;
@@ -306,7 +307,7 @@ const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto, email }: Prof
 
             <div className='absolute flex justify-center pt-2 bottom-3 border-t-2 border-solid border-whiteBG dark:border-darkBG w-full'>
                 <p className='uppercase font-semibold text-sm text-grayPrimary dark:text-grayLighter'>
-                    Membro desde: Outubro, 2023
+                    Membro desde: {criacao.substring(4, 15)}
                 </p>
             </div>
 
