@@ -5,12 +5,13 @@ export async function PUT(request: Request) {
     const req = await request.json();
     
     const { nome, cpf_cnpj, cod_tipo_categoria, categoria, celular, uf, cod_cidade, desc_cidade, sexo, observacao, id_user, cbo, desc_cbo} = req;
+    // const { nome, cpf_cnpj, id_user, celular, uf, sexo, observacao} = req;
 
     console.log(id_user)
 
-    await prisma.prestador.updateMany({
+    await prisma.prestador.update({
       where: {
-        id_user: id_user as any
+        id: id_user as any
       },
       data: {
         nome: nome,
@@ -26,9 +27,7 @@ export async function PUT(request: Request) {
         sexo: sexo,
         observacao: observacao,
       },
-    }).finally(() => {
-      prisma.$disconnect();
-  });
+    });
 
     return new NextResponse(
         JSON.stringify({

@@ -78,6 +78,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                           lg={8}
                         >
                           <AccountProfileDetails 
+                            id={professional?.id as any}
                             name={professional?.nome as any} 
                             city={professional?.desc_cidade as any} 
                             uf={professional?.uf as any}

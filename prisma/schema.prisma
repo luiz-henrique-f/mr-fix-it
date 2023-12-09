@@ -20,7 +20,7 @@ model Prestador {
   desc_cidade        String   @default("Urânia")
   uf                 String
   observacao         String
-  url_foto           String   @default("https://avatars.dicebear.com/v2/female/f8a3f576694bbe6737b16d4b3de5aa09.svg")
+  url_foto           String   @default("https://files.edgestore.dev/mtrfpdbrv5037z9d/myPublicImages/_public/706a083f-94d5-4525-94c9-0d935626e6bb-thumb.png")
   created_at         DateTime @default(now())
   cod_tipo_categoria String   @default("")
   tipo_categoria     String
@@ -121,6 +121,7 @@ model User {
   password      String
   emailVerified DateTime? @default(now())
   image         String?
+  admin         String    @default("N")
   // accounts      Account[]
   // sessions      Session[]
 

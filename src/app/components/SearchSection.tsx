@@ -14,12 +14,17 @@ type Response = {
 	plano: string;
 };
 
+type AdminResponse = {
+    admin: string;
+};
+
 const SearchSection = () => {
 	const { status, data } = useSession();
 
 	const [nome, setNome] = useState<Response[]>([]);
 	const [id_prestador, setIdPrestador] = useState<Response[]>([]);
 	const [planoAtivo, setPlanoAtivo] = useState<Response[]>([]);
+    const [admin, setAdmin] = useState<AdminResponse[]>([]);
 
 	useEffect(() => {
 		axios.get(`/professionalUser/${(data?.user as any)?.id}`)
@@ -36,6 +41,13 @@ const SearchSection = () => {
 			})
 	});
 
+    useEffect(() => {
+        axios.get(`/admin/${(data?.user as any)?.id}`)
+            .then((response) => {
+                setAdmin((response.data as any)?.admin)
+            })
+    });
+
 	return (
 		<div className="container flex flex-col mx-auto p-5 h-[calc(100vh-85px)] 2sm:bg-search-background 2sm:dark:bg-search-background-dark bg-contain bg-center bg-no-repeat bg-transparent">
 
@@ -43,7 +55,7 @@ const SearchSection = () => {
 				{status === "authenticated" && data.user && (
 					
 					<div className='relative'>
-						{id_prestador == undefined && (
+						{id_prestador == undefined && (admin as any) == ("N" as string) && (
 							<Link href='/createProfessional'>
 								<span className="absolute top-1 left-9 animate-ping flex justify-center items-center h-12 w-36 rounded-md bg-primary opacity-60"></span>
 								<Button variant="custom1">
@@ -53,7 +65,7 @@ const SearchSection = () => {
 							</Link>
 						)}
 
-						{planoAtivo === undefined && id_prestador != undefined && (
+						{planoAtivo === undefined && id_prestador != undefined && (admin as any) == ("N" as string) && (
 							<Link href='/pagamentoPlano'>
 								<span className="absolute top-1 left-9 animate-ping flex justify-center items-center h-12 w-36 rounded-md bg-primary opacity-60"></span>
 								<Button variant="custom1">
@@ -71,7 +83,7 @@ const SearchSection = () => {
 				<h1 className='font-semibold text-3xl 2sm:text-4xl text-gray-800 dark:text-gray-300 text-center p-3'>A maneira mais fácil de encontrar um profissional <span className='text-primary dark:text-primaryLighter'>capacitado</span>!</h1>
 				<p className='text-gray-600 dark:text-gray-400 text-sm 2sm:text-xl text-center p-3 mb-6'>Conheça de forma gratuita os profissionais melhor avaliados!</p>
 
-				<Link href="/search">
+				<Link href="/searchParams/undefined/undefined/undefined/undefined/undefined">
 					<SpecialButton />
 				</Link>
 			</div>

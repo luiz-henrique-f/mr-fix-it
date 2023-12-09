@@ -26,7 +26,7 @@ const PricesSection = () => {
             <p className='text-base text-center lg:text-xl tracking-tight'>Escolha o melhor plano para você!!</p>
           </div>
 
-          <div className='flex flex-col lg:flex-row mt-12 drop-shadow-[0px_25px_30px_rgba(244,244,244,0.3)] dark:drop-shadow-[0px_25px_30px_rgba(200,200,200,0.2)]'>
+          <div className='flex flex-col lg:flex-row mt-12 drop-shadow-[0px_100px_90px_rgba(255,255,255,0.3)] dark:drop-shadow-[0px_100px_90px_rgba(200,200,200,0.2)]'>
 
             <PlanCard
               className="scale-[.85] 2sm:scale-900 lg:scale-100"

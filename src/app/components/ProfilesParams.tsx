@@ -13,7 +13,8 @@ interface ProfessionalInfoProps {
 const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: ProfessionalInfoProps) => {
 
   const result = await prisma.$queryRaw`SELECT * 
-                                        FROM  "public"."Prestador"
+                                        FROM  "public"."Prestador",
+                                              "public"."users"
                                               -- (
                                               --   SELECT
                                               --     "public"."Prestador"."id",
@@ -28,10 +29,7 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
                                               --   GROUP BY
                                               --     "public"."Prestador"."id"
                                               -- ) tmp
-                                        WHERE   
-                                        -- tmp.id = "public"."Prestador"."id"
-                                        -- AND    
-                                        CASE WHEN ${uf} = 'undefined' THEN 1
+                                        WHERE  CASE WHEN ${uf} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."uf" = ${uf} THEN 1
                                                END = 1
                                         AND    CASE WHEN ${cidade} = 'undefined' THEN 1
@@ -45,7 +43,9 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
                                                END = 1
                                         AND    CASE WHEN ${cbo} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."cod_cbo" = ${cbo} THEN 1
-                                               END = 1`.finally(() => {
+                                               END = 1
+                                        AND    "public"."users"."admin"        = 'N'   
+                                        AND    "public"."Prestador"."id_user" = "public"."users"."id"`.finally(() => {
     prisma.$disconnect();
   })
 

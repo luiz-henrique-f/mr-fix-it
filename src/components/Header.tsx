@@ -49,6 +49,10 @@ type PlanoAtivoResponse = {
     plano: string;
 };
 
+type AdminResponse = {
+    admin: string;
+};
+
 
 const Header = () => {
     const [open, setOpen] = React.useState(false);
@@ -129,6 +133,7 @@ const Header = () => {
     const [nome, setNome] = React.useState<NomePrestadorResponse[]>([]);
     const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
     const [planoAtivo, setPlanoAtivo] = React.useState<PlanoAtivoResponse[]>([]);
+    const [admin, setAdmin] = React.useState<AdminResponse[]>([]);
 
     React.useEffect(() => {
         axios.get(`/professionalUser/${(data?.user as any)?.id}`)
@@ -145,28 +150,37 @@ const Header = () => {
             })
     });
 
+    React.useEffect(() => {
+        axios.get(`/admin/${(data?.user as any)?.id}`)
+            .then((response) => {
+                setAdmin((response.data as any)?.admin)
+            })
+    });
+
+    // console.log({admin})
+
     const themestyle = createTheme({
         components: {
-          MuiOutlinedInput: {
-            styleOverrides: {
-              root: {
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#aaa"
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#aaa"
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#9055dd"
-                },
-                "& .MuiOutlinedInput-input": {
-                  color: "#aaa"
-                },
-              }
+            MuiOutlinedInput: {
+                styleOverrides: {
+                    root: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "#aaa"
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "#aaa"
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "#9055dd"
+                        },
+                        "& .MuiOutlinedInput-input": {
+                            color: "#aaa"
+                        },
+                    }
+                }
             }
-          }
         }
-      });
+    });
 
     return (
         <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-whiteBG/10 bg-whiteBG dark:bg-darkBG'>
@@ -211,12 +225,12 @@ const Header = () => {
 
             {/* onClick={handleLoginClick} */}
             <ThemeProvider theme={themestyle}>
-                <Dialog 
-                    open={open} 
+                <Dialog
+                    open={open}
                     onClose={handleClose}
                     fullWidth
                     className="backdrop-blur-md">
-                        
+
                     <div className="bg-white dark:bg-darkBGLighter">
                         <DialogTitle className="text-black dark:text-white">
                             Avalie nosso site!
@@ -304,79 +318,82 @@ const Header = () => {
                         {menuIsOpen && (
                             <div className="z-50 absolute top-[56px] -left-14 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-20 2xl:after:left-2">
 
-                            <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
-                                {id_prestador != undefined && planoAtivo != undefined && (
-                                    <div>
-                                        <li className="group">
-                                            <Link href={`/dashboard/${id_prestador}`}>
-                                                <Button
-                                                    onClick={hidennMenu}
-                                                    variant="dropbar">
+                                <ul className="flex flex-col items-end 2xl:items-start justify-end p-2">
+                                    {id_prestador != undefined && planoAtivo != undefined && (admin as any) == ("N" as string) && (
+                                        <div>
+                                            <li className="group">
+                                                <Link href={`/dashboard/${id_prestador}`}>
+                                                    <Button
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
 
-                                                    <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                    <span className="text-lg">Dashboard</span>
+                                                        <BsGraphUp className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Dashboard</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
+
+                                            <li className="group">
+                                                <Link href={`/professionals/${id_prestador}`}>
+                                                    <Button
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
+
+                                                        <CgProfile className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Meu Perfil</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
+
+                                            <li className="group">
+                                                <Link onClick={handleClickOpen} href={""}>
+                                                    <Button
+                                                        onClick={hidennMenu}
+                                                        variant="dropbar">
+
+                                                        <AiFillStar className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                        <span className="text-lg">Avaliar</span>
+                                                    </Button>
+                                                </Link>
+                                            </li>
+                                        </div>
+                                    )}
+
+
+
+                                    {(admin as any) == ("S" as string) && (
+                                        <li className="group w-full">
+                                            <Link href={`/adminPage`}>
+                                                <Button
+                                                    variant="dropbar"
+                                                    className="">
+
+                                                    <MdOutlineAdminPanelSettings className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                                    <span className="text-lg">Admin</span>
                                                 </Button>
                                             </Link>
                                         </li>
+                                    )}
 
-                                        <li className="group">
-                                            <Link href={`/professionals/${id_prestador}`}>
-                                                <Button
-                                                    onClick={hidennMenu}
-                                                    variant="dropbar">
-
-                                                    <CgProfile className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                    <span className="text-lg">Meu Perfil</span>
-                                                </Button>
-                                            </Link>
-                                        </li>
-
-                                        <li className="group">
-                                            <Link onClick={handleClickOpen} href={""}>
-                                                <Button
-                                                    onClick={hidennMenu}
-                                                    variant="dropbar">
-
-                                                    <AiFillStar className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                                    <span className="text-lg">Avaliar</span>
-                                                </Button>
-                                            </Link>
-                                        </li>
-                                    </div>
-                                )}
-                                
-
-                                <li className="group w-full">
-                                    <Link href={`/adminPage`}>
+                                    <li className="group w-full">
                                         <Button
                                             variant="dropbar"
+                                            onClick={() => {
+                                                signOut({ redirect: false }).then(() => {
+                                                    router.push("/"); // Redirect to the dashboard page after signing out
+                                                });
+                                            }}
                                             className="">
 
-                                            <MdOutlineAdminPanelSettings className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                            <span className="text-lg">Admin</span>
+                                            <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
+                                            <span className="text-lg">Logout</span>
                                         </Button>
-                                    </Link>
-                                </li>
-
-                                <li className="group w-full">
-                                    <Button
-                                        variant="dropbar"
-                                        onClick={() => {
-                                            signOut({ redirect: false }).then(() => {
-                                                router.push("/"); // Redirect to the dashboard page after signing out
-                                            });
-                                        }}
-                                        className="">
-
-                                        <ImCancelCircle className="text-xl text-center text-primary dark:text-primaryLighter" />
-                                        <span className="text-lg">Logout</span>
-                                    </Button>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
 
                             </div>
                         )}
-                        
+
 
                     </div>
 

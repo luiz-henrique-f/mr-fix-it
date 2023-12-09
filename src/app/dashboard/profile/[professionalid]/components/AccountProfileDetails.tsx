@@ -74,6 +74,7 @@ type SkillCity = {
 };
 
 interface ProfessionalInfoProps {
+  id: string;
   name: string;
   city: string;
   uf: string;
@@ -97,9 +98,9 @@ interface CreateProfessionalForm {
   categoria: String;
   sexo: String;
   uf: String;
-  cidade: String;
+  // cidade: String;
   observacao: String;
-  cbo: String;
+  // cbo: String;
 }
 
 const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
@@ -120,7 +121,7 @@ const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
   },
 );
 
-const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, sexo, observacao, cbo }: ProfessionalInfoProps) => {
+const AccountProfileDetails = ({ id, name, city, uf, telefone, cpf_cnpj, categoria, sexo, observacao, cbo }: ProfessionalInfoProps) => {
 
 
   const [ufs, setUfs] = React.useState<IBGEUFResponse[]>([]);
@@ -155,8 +156,10 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
     setError,
   } = useForm<CreateProfessionalForm>();
 
+  // const { nome, cpf_cnpj, cod_tipo_categoria, categoria, celular, uf, cod_cidade, desc_cidade, sexo, observacao, id_user, cbo, desc_cbo} 
+
   const onSubmit = async (data: CreateProfessionalForm) => {
-    console.log(skillCity?.id)
+    console.log({skill})
     // return;
     const response = await fetch("/updateProfessionalAll", {
       method: "PUT",
@@ -174,12 +177,14 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
           cod_cidade: skillCity?.id.toString(),
           desc_cidade: skillCity?.label,
           observacao: data.observacao,
-          id_user: (dados?.user as any)?.id
+          id_user: id
         })
       ),
     });
 
     const res = await response.json();
+
+    console.log({ res })
 
     toast.success("Dados alterados com sucesso!", { position: "top-right" });
 
@@ -350,7 +355,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                     id="cpf"
                     label="CPF/CNPJ"
                     onChange={mudarMascara}
-                    defaultValue={cpf_cnpj}
+                    value={value}
                     fullWidth>
                   </TextField>
                 </Grid>
@@ -360,12 +365,7 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   md={6}
                 >
                   <TextField
-                    {...register("celular", {
-                      required: {
-                        value: true,
-                        message: 'Campo celular é obrigatório',
-                      }
-                    })}
+                    {...register("celular")}
                     id="celular"
                     label="Celular"
                     onChange={mudarMascaraCelular}
@@ -532,9 +532,8 @@ const AccountProfileDetails = ({ name, city, uf, telefone, cpf_cnpj, categoria, 
                   {/* <TextField
                     {...register("categoria")}
                     id="categorie"
-                    select
                     label="Categoria"
-                    value={selectedCategorie}
+                    value={skillCategorie?.id}
                     // defaultValue=""
                     fullWidth
                     onChange={handleSelectedCategorie}>
