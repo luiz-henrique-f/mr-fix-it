@@ -14,6 +14,8 @@ import ProfessionalRaiting from '@/app/professionals/[professionalid]/components
 
 import { IoMdStar } from 'react-icons/io'
 import { FaHammer, FaThumbsUp, FaThumbsDown } from 'react-icons/fa6';
+import CommentList from './components/ComentList';
+import Button from '@/components/Button';
 
 const getProfessionalDetails = async (professionalid: string) => {
     const professional = await prisma.prestador.findFirst({
@@ -27,35 +29,22 @@ const getProfessionalDetails = async (professionalid: string) => {
     return professional;
 }
 
-const getCommentsDetails = async (professionalid: string) => {
-    const professional = await prisma.comentarios_Prestador.findMany({
-        where: {
-            id_prestador: professionalid,
-        },
-    }).finally(() => {
-        prisma.$disconnect();
-    });
 
-    return professional;
-}
- 
 const Dashboard = async ({ params }: { params: { professionalid: string } }) => {
 
     const professional = await getProfessionalDetails(params.professionalid);
-    const data = await getCommentsDetails(params.professionalid);
+    const comentarios = await prisma.comentarios_Prestador.findMany({})
 
-    // if (!professional) return null;
-    
     return (
         <>
             <div className='absolute top-0 left-0 h-screen w-screen bg-gradient-to-b from-primaryDarker from-35% to-35% to-whiteBG dark:to-darkBG'>
-                
+
                 <div className='flex h-full gap-4 mr-6'>
-                    <SideMenu id_prestador={params.professionalid}/>
+                    <SideMenu id_prestador={params.professionalid} />
 
                     <div className='flex flex-col w-full gap-4 overflow-y-scroll'>
                         <div className='flex justify-end items-center mb-4'>
-                            <TopDetails url_foto={professional?.url_foto as any}/>
+                            <TopDetails url_foto={professional?.url_foto as any} />
                         </div>
 
                         <div className='flex justify-between flex-col 3xl:flex-row gap-4 h-[80vh] mr-4 4xl:mr-0 mb-4 4xl:mb-0'>
@@ -69,7 +58,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                         difference={16}
                                         icon={<IoMdStar />}
                                         color={'#a28'}
-                                        />
+                                    />
 
                                     <TopCards
                                         name='Avaliações Positivas'
@@ -78,7 +67,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                         difference={36}
                                         icon={<FaThumbsUp />}
                                         color={'#2a6'}
-                                        />
+                                    />
 
                                     <TopCards
                                         name='Avaliações Negativas'
@@ -87,29 +76,25 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                         difference={24}
                                         icon={<FaThumbsDown />}
                                         color={'#d33'}
-                                        />
+                                    />
                                 </div>
-                                
+
                                 <div>
                                     <GraphCard />
                                 </div>
 
                             </div>
 
-                            <div className="flex flex-[20%] 3xl:w-1/5 bg-white dark:bg-darkBGLighter rounded-2xl">
-                                <div className="overflow-y-scroll w-full h-[78vh]">
-                                    
-                                    {data.map((comments: Comentarios_Prestador) => (
-                                        <ProfessionalRaiting 
-                                            key={comments.id} 
-                                            name={comments.nome} 
-                                            title={comments.titulo_comentario} 
-                                            message={comments.comentario} 
-                                            valueComment={comments.nota}
-                                            className='shadow-transparent border-transparent rounded-none border-b-grayPrimary/20' 
-                                        />
-                                    ))}
-                                </div>
+                            <div className="flex flex-[20%] flex-col 3xl:w-1/5 w-full h-full bg-white dark:bg-darkBGLighter rounded-2xl">
+                                {comentarios.length >= 0 && (
+                                    <div className="mt-16 flex w-full flex-col items-center justify-center gap-3">
+                                        <span className="text-xl font-semibold">
+                                            Você ainda não possui avaliações
+                                        </span>
+                                    </div>
+                                )}
+                                <CommentList params={params} />
+
                             </div>
 
                         </div>
@@ -117,7 +102,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                 </div>
 
                 {/* <GoogleAnalytics measurementId='G-FWQ879X8DX'/> */}
-          </div>
+            </div >
         </>
     )
 
