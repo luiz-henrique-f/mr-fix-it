@@ -172,7 +172,7 @@ const InputSearch = () => {
   return (
     <ThemeProvider theme={theme}>
 
-      <div className="flex flex-col 2md:flex-row justify-evenly items-center gap-4 bg-whiteBG dark:bg-darkBG p-4 mt-4 rounded-xl shadow-2xl dark:shadow-whiteBG/10">
+      <div className="flex flex-col 2md:flex-row justify-evenly items-center gap-4 bg-white dark:bg-darkBGLighter p-4 mt-4 rounded-xl">
 
         <Autocomplete
           options={categoriesOptions}
