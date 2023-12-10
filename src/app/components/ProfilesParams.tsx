@@ -36,7 +36,10 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
                                                         WHERE  current_date BETWEEN TO_DATE("public"."Prestador_Ativo"."data_inicio", 'DD/MM/YYYY') AND TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY')
                                                         AND    "public"."Prestador_Ativo"."id_user" = "public"."Prestador"."id_user"
                                                         ORDER  BY TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY') desc
-                                                        LIMIT  1)`.finally(() => {
+                                                        LIMIT  1)
+                                        ORDER  BY (COALESCE((SELECT ROUND(SUM("public"."Comentarios_Prestador"."nota") / COUNT("public"."Comentarios_Prestador"."nota"))
+                                                             FROM   "public"."Comentarios_Prestador"
+                                                             WHERE  "public"."Comentarios_Prestador"."id_prestador" = "public"."Prestador"."id"), 0)) desc`.finally(() => {
     prisma.$disconnect();
   })
 

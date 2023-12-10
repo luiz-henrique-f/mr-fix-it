@@ -35,6 +35,11 @@ model Planos {
   tipo  String
 }
 
+model Parametros {
+  id                    String @id @default(uuid())
+  aviso_dias_vencimento Int
+}
+
 model Prestador_Ativo {
   id          String @id @default(uuid())
   id_user     String

@@ -28,6 +28,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { BsCheck2Square, BsGraphUp } from "react-icons/bs";
 import { LiaTimesSolid } from "react-icons/lia";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import EmailAutomatic from "@/app/components/EmailAutomatic";
 
 interface CreateProfessionalForm {
     observacao: String;
@@ -156,7 +157,6 @@ const Header = () => {
                 setAdmin((response.data as any)?.admin)
             })
     });
-
     // console.log({admin})
 
     const themestyle = createTheme({
