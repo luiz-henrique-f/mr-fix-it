@@ -40,7 +40,7 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
               />
             </div>
 
-            <h1 className="text-xl font-bold text-black dark:text-white">
+            <h1 className="text-xl text-center truncate font-bold text-black dark:text-white">
               {prestador.nome}
             </h1>
 
