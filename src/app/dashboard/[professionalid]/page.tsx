@@ -93,15 +93,15 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
 
                             <div className="flex flex-[20%] flex-col 3xl:w-1/5 w-full h-full min-h-[50vh] max-h-[88vh] overflow-y-scroll bg-white dark:bg-darkBGLighter rounded-2xl">
 
-                                <div className="flex items-center justify-center">
-                                    {(comentarios.length as any) != '0' ? 
-                                        <CommentList params={params} /> 
-                                        :
+                                {(comentarios.length as any) != '0' ? 
+                                    <CommentList params={params} /> 
+                                    :
+                                    <div className="flex items-center justify-center">
                                         <span className="text-xl font-semibold font-mono mt-56 3xl:mt-96 text-center">
                                             Você ainda não possui avaliações!
                                         </span>
-                                    }
-                                </div>
+                                    </div>
+                                }
 
                             </div>
 

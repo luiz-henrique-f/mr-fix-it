@@ -126,15 +126,15 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
 
                         <div className="overflow-y-scroll flex flex-col gap-5">
 
-                            <div className='flex justify-center items-center'>
-                                {(comentarios.length as any) != '0' ? 
-                                    <CommentList params={params} /> 
-                                    :
+                            {(comentarios.length as any) != '0' ? 
+                                <CommentList params={params} /> 
+                                :
+                                <div className='flex justify-center items-center'>
                                     <span className="text-xl font-semibold font-mono mt-20 text-center">
                                         Este profissional ainda não possui avaliações!
                                     </span>
-                                }
-                            </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
