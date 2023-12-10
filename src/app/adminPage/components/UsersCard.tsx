@@ -26,9 +26,14 @@ const UsersCard = async () => {
                                                   , (SELECT "public"."users"."username"
                                                      FROM   "public"."users"
                                                      WHERE  "public"."users"."id" = "public"."Prestador"."id_user") email
-                                             FROM   "public"."Prestador"`.finally(() => {
-    prisma.$disconnect();
-  })
+                                             FROM   "public"."Prestador"
+                                             ORDER  BY (SELECT TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY')
+                                                        FROM   "public"."Prestador_Ativo"
+                                                        WHERE  "public"."Prestador_Ativo"."id_user" = "public"."Prestador"."id_user"
+                                                        ORDER  BY TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY') desc
+                                                        LIMIT  1) asc`.finally(() => {
+                                                            prisma.$disconnect();
+                                                          })
 
   return (
     <>
