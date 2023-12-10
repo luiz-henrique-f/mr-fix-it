@@ -23,6 +23,6 @@ export async function POST(request: Request) {
         to: email, // list of receivers
         subject: `Olá, ${nome}`, // Subject line
         text: `O seu plano vence no dia ${data_fim}, atualize seu plano. Equipe Mr. Fix It`, // plain text body
-        html: `<p>O seu plano vence no dia ${data_fim}, atualize-o e continue em nossa plataforma</p><p><b>Equipe Mr. Fix It.</b><p>`, // html body
+        html: `<p>O seu plano vence no dia ${data_fim}, atualize-o e continue em nossa plataforma.</p><p><b>Equipe Mr. Fix It.</b><p>`, // html body
     });
 }
