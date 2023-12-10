@@ -13,13 +13,13 @@ const UsersCard = async () => {
                                                   , (SELECT "public"."Prestador_Ativo"."data_fim"
                                                      FROM   "public"."Prestador_Ativo"
                                                      WHERE  "public"."Prestador_Ativo"."id_user" = "public"."Prestador"."id_user"
-                                                     ORDER  BY "public"."Prestador_Ativo"."data_fim" desc
+                                                     ORDER  BY TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY') desc
                                                      LIMIT  1) "data_fim"
                                                   , CASE WHEN EXISTS (SELECT 1
                                                                       FROM   "public"."Prestador_Ativo"
                                                                       WHERE  current_date BETWEEN TO_DATE("public"."Prestador_Ativo"."data_inicio", 'DD/MM/YYYY') AND TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY')
                                                                       AND    "public"."Prestador_Ativo"."id_user" = "public"."Prestador"."id_user"
-                                                                      ORDER  BY "public"."Prestador_Ativo"."data_fim" desc
+                                                                      ORDER  BY TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY') desc
                                                                       LIMIT  1) THEN 'Ativo' 
                                                          ELSE 'Inativo' 
                                                     END "status"

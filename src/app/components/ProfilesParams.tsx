@@ -35,7 +35,7 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
                                         AND    EXISTS ( SELECT 1 FROM "public"."Prestador_Ativo"
                                                         WHERE  current_date BETWEEN TO_DATE("public"."Prestador_Ativo"."data_inicio", 'DD/MM/YYYY') AND TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY')
                                                         AND    "public"."Prestador_Ativo"."id_user" = "public"."Prestador"."id_user"
-                                                        ORDER  BY "public"."Prestador_Ativo"."data_fim" desc
+                                                        ORDER  BY TO_DATE("public"."Prestador_Ativo"."data_fim", 'DD/MM/YYYY') desc
                                                         LIMIT  1)`.finally(() => {
     prisma.$disconnect();
   })
