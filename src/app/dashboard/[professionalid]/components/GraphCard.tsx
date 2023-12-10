@@ -52,7 +52,7 @@ const GraphCard = () => {
   
   return (
     <>
-      <div className='h-[60vh] p-4 rounded-2xl bg-white dark:bg-darkBGLighter text-black dark:text-white'>
+      <div className='h-[60vh] 3xl:h-[68vh] p-4 rounded-2xl bg-white dark:bg-darkBGLighter text-black dark:text-white'>
         <Bar options={options} data={data} />
       </div> 
     </>

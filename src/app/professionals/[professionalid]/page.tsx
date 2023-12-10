@@ -14,6 +14,7 @@ import ProfessionalDescription from './components/ProfessionalDescription';
 
 import { AiFillStar } from 'react-icons/ai'
 import { FiLogIn } from 'react-icons/fi';
+import CommentList from '@/app/dashboard/[professionalid]/components/ComentList';
 
 
 const getProfessionalDetails = async (professionalid: string) => {
@@ -62,6 +63,13 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
 
     if (!professional) return null;
 
+    const comentarios = await prisma.comentarios_Prestador.findMany({
+        where: {
+            id_prestador: params.professionalid,
+        },
+    })
+
+
     return (
         <div className='h-full bg-whiteBG dark:bg-darkBG'>
             <div className="relative h-72 w-full mb-10 bg-gradient-to-br from-primary to-primaryDarker">
@@ -105,8 +113,6 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
                         description={professional?.observacao as any}
                     />
 
-                    {/* {params.status == 'unauthenticated' && ( */}
-
                     <div className="relative flex flex-col bg-white dark:bg-darkBGLighter rounded-lg p-8 gap-5 h-96">
                         <div className='flex justify-between'>
                             <h1 className='text-2xl font-bold flex justify-normal items-center gap-2 text-primaryDarker dark:text-white mb-3'>
@@ -120,19 +126,17 @@ const ProfessionalDetail = async ({ params }: { params: { professionalid: string
 
                         <div className="overflow-y-scroll flex flex-col gap-5">
 
-                            {data.map((comments: Comentarios_Prestador) => (
-                                <ProfessionalRaiting
-                                    key={comments.id}
-                                    name={comments.nome}
-                                    title={comments.titulo_comentario}
-                                    message={comments.comentario}
-                                    valueComment={comments.nota}
-                                    className=''
-                                />
-                            ))}
+                            <div className='flex justify-center items-center'>
+                                {(comentarios.length as any) != '0' ? 
+                                    <CommentList params={params} /> 
+                                    :
+                                    <span className="text-xl font-semibold font-mono mt-20 text-center">
+                                        Este profissional ainda não possui avaliações!
+                                    </span>
+                                }
+                            </div>
                         </div>
                     </div>
-                    {/* )} */}
                 </div>
             </div>
         </div>

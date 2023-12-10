@@ -33,7 +33,13 @@ const getProfessionalDetails = async (professionalid: string) => {
 const Dashboard = async ({ params }: { params: { professionalid: string } }) => {
 
     const professional = await getProfessionalDetails(params.professionalid);
-    const comentarios = await prisma.comentarios_Prestador.findMany({})
+    const comentarios = await prisma.comentarios_Prestador.findMany({
+        where: {
+            id_prestador: params.professionalid,
+        },
+    })
+
+    // console.log(comentarios)
 
     return (
         <>
@@ -42,14 +48,14 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                 <div className='flex h-full gap-4 mr-6'>
                     <SideMenu id_prestador={params.professionalid} />
 
-                    <div className='flex flex-col w-full gap-4 overflow-y-scroll'>
+                    <div className='flex flex-col w-full gap-4 overflow-y-scroll mb-4'>
                         <div className='flex justify-end items-center mb-4'>
                             <TopDetails url_foto={professional?.url_foto as any} />
                         </div>
 
-                        <div className='flex justify-between flex-col 3xl:flex-row gap-4 h-[80vh] mr-4 4xl:mr-0 mb-4 4xl:mb-0'>
+                        <div className='flex justify-between flex-col 3xl:flex-row gap-4 h-full mr-4 4xl:mr-0'>
 
-                            <div className='flex flex-col flex-[70%] 3xl:w-4/5 gap-8'>
+                            <div className='flex flex-col gap-6 justify-between flex-[70%] 3xl:w-4/5'>
                                 <div className='grid grid-flow-row 2md:grid-flow-col 2md:grid-col-3 gap-4'>
                                     <TopCards
                                         name='Novos Comentários'
@@ -85,15 +91,17 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
 
                             </div>
 
-                            <div className="flex flex-[20%] flex-col 3xl:w-1/5 w-full h-full bg-white dark:bg-darkBGLighter rounded-2xl">
-                                {comentarios.length >= 0 && (
-                                    <div className="mt-16 flex w-full flex-col items-center justify-center gap-3">
-                                        <span className="text-xl font-semibold">
-                                            Você ainda não possui avaliações
+                            <div className="flex flex-[20%] flex-col 3xl:w-1/5 w-full h-full min-h-[50vh] max-h-[88vh] overflow-y-scroll bg-white dark:bg-darkBGLighter rounded-2xl">
+
+                                <div className="flex items-center justify-center">
+                                    {(comentarios.length as any) != '0' ? 
+                                        <CommentList params={params} /> 
+                                        :
+                                        <span className="text-xl font-semibold font-mono mt-56 3xl:mt-96 text-center">
+                                            Você ainda não possui avaliações!
                                         </span>
-                                    </div>
-                                )}
-                                <CommentList params={params} />
+                                    }
+                                </div>
 
                             </div>
 
