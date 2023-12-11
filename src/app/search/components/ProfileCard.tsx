@@ -9,10 +9,11 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
 interface ProfileInfoProps {
-  prestador: Prestador
+  prestador: Prestador,
+  nota: number
 };
 
-const ProfileCard = ({ prestador }: ProfileInfoProps) => {
+const ProfileCard = ({ prestador, nota }: ProfileInfoProps) => {
 
   return (
     <>
@@ -23,7 +24,7 @@ const ProfileCard = ({ prestador }: ProfileInfoProps) => {
         <div className="relative bg-white dark:bg-darkBGLighter rounded-2xl shadow-lg mx-2 mb-4 overflow-hidden">
 
           <span className="absolute text-black bg-yellow-400 rounded-[4px] top-6 left-6 px-2 py-1 text-sm font-bold roll-in-blurred-right">
-            TOP
+            {nota}
           </span>
 
           <div className='flex flex-col items-center justify-center mb-8'>

@@ -12,7 +12,10 @@ interface ProfessionalInfoProps {
 }
 const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: ProfessionalInfoProps) => {
 
-  const result = await prisma.$queryRaw`SELECT *
+  const result = await prisma.$queryRaw`SELECT "public"."Prestador".*
+                                             , COALESCE((SELECT ROUND(SUM("public"."Comentarios_Prestador"."nota") / COUNT("public"."Comentarios_Prestador"."nota"))
+                                                         FROM   "public"."Comentarios_Prestador"
+                                                         WHERE  "public"."Comentarios_Prestador"."id_prestador" = "public"."Prestador"."id"), 0) "nota_media"
                                         FROM  "public"."Prestador"
                                         WHERE  CASE WHEN ${uf} = 'undefined' THEN 1
                                                     WHEN "public"."Prestador"."uf" = ${uf} THEN 1
@@ -51,7 +54,7 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
     <>
       <div className='flex flex-col 1sm:grid 1sm:grid-cols-2 2md:grid-cols-3 2xl:grid-cols-4 my-8 gap-8'>
         {(result as any).map((prestador: any) => (
-          <ProfileCard prestador={prestador} key={prestador.id} />
+          <ProfileCard prestador={prestador} key={prestador.id} nota={prestador.nota_media}/>
         ))}
       </div>
 
