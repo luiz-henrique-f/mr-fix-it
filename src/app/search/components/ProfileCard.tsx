@@ -7,6 +7,7 @@ import { FaMapPin } from 'react-icons/fa'
 import { Prestador } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import { BsStarFill } from 'react-icons/bs';
 
 interface ProfileInfoProps {
   prestador: Prestador,
@@ -17,15 +18,23 @@ const ProfileCard = ({ prestador, nota }: ProfileInfoProps) => {
 
   return (
     <>
-      <Link 
+      <Link
         href={`/professionals/${prestador.id}`}
         className='hover:scale-[1.03] transition-all duration-[0.3s] ease-[ease-in-out] hover:transition-all hover:duration-[0.3s] hover:ease-[ease-in-out]'>
 
         <div className="relative bg-white dark:bg-darkBGLighter rounded-2xl shadow-lg mx-2 mb-4 overflow-hidden">
 
-          <span className="absolute text-black bg-yellow-400 rounded-[4px] top-6 left-6 px-2 py-1 text-sm font-bold roll-in-blurred-right">
-            {nota}
-          </span>
+          {!nota ? (
+            <span className="absolute invisible flex items-center w-12 justify-around text-black bg-yellow-400 rounded-[4px] top-6 left-6 px-2 py-1 text-sm font-bold roll-in-blurred-right">
+              {nota}
+              <BsStarFill />
+            </span>
+          ) :
+            (<span className="absolute flex items-center w-12 justify-around text-black bg-yellow-400 rounded-[4px] top-6 left-6 px-2 py-1 text-sm font-bold roll-in-blurred-right">
+              {nota}
+              <BsStarFill />
+            </span>)
+          }
 
           <div className='flex flex-col items-center justify-center mb-8'>
             <div className='rounded-full p-[6px] border-2 border-primary dark:border-primaryLighter mt-10 mb-4'>
