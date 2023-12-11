@@ -175,7 +175,7 @@ const AccountProfileDetails = ({ id, name, city, uf, telefone, cpf_cnpj, categor
           uf: data.uf,
           cbo: skill?.id,
           desc_cbo: skill?.label,
-          cod_cidade: skillCity?.id.toString(),
+          cod_cidade: skillCity?.id ? skillCity?.id.toString() : skillCity?.id,
           desc_cidade: skillCity?.label,
           observacao: data.observacao,
           id_user: id
