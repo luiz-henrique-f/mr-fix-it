@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { getServerSession } from "next-auth";
+import {useEffect, useRef, useState} from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Prestador } from "@prisma/client";
 import axios from 'axios';
@@ -87,9 +88,21 @@ const Header = () => {
 
     };
 
-    const [menuIsOpen, setMenuIsOpen] = React.useState(false)
+    const [menuIsOpen, setMenuIsOpen] = React.useState(false);
     const { status, data } = useSession();
     const dados = data;
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const handleDropdownFocus = (state: boolean) => {
+        setMenuIsOpen(!state);
+    };
+    const handleClickOutsideDropdown = (e:any) => {
+        if( menuIsOpen && !dropdownRef.current?.contains(e.target as Node)) {
+            setMenuIsOpen(false)
+        };
+    };
+
+    window.addEventListener("click", handleClickOutsideDropdown)
 
     const handleLoginClick = () => signIn();
     const handleLogoutClick = () => {
@@ -202,9 +215,9 @@ const Header = () => {
             {status === "authenticated" && data.user && (
                 <div className="flex gap-5">
 
-                    <div className="flex items-center justify-center gap-3 border-grayLighter border rounded-lg py-3 px-5 relative">
+                    <div ref={dropdownRef} className="flex items-center justify-center gap-3 border-grayLighter border rounded-lg py-3 px-5 relative">
                         <div>
-                            <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
+                            <AiOutlineMenu onClick={(e) => handleDropdownFocus(open)} className="cursor-pointer text-xl" />
                         </div>
 
                         <ThemeSwitch />

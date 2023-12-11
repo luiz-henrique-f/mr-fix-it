@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
@@ -83,6 +83,18 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
   const { status, data } = useSession();
   const dados = data;
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const handleDropdownFocus = (state: boolean) => {
+    setMenuIsOpen(!state);
+  };
+  const handleClickOutsideDropdown = (e:any) => {
+    if( menuIsOpen && !dropdownRef.current?.contains(e.target as Node)) {
+      setMenuIsOpen(false)
+    };
+  };
+
+  window.addEventListener("click", handleClickOutsideDropdown)
+
   const handleLoginClick = () => signIn();
   const handleLogoutClick = () => {
     setMenuIsOpen(false)
@@ -142,9 +154,9 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
   
   return (
     <>
-      <div className='flex justify-center items-center text-white gap-4 mt-6'>
+      <div ref={dropdownRef} className='flex justify-center items-center text-white gap-4 mt-6'>
 
-        <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
+        <AiOutlineMenu onClick={(e) => handleDropdownFocus(open)} className="cursor-pointer text-xl" />
         
         {menuIsOpen && (
           <div className="z-50 absolute top-[66px] right-28 2xl:right-11 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-20 2xl:after:left-2">
