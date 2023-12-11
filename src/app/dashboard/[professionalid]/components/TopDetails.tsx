@@ -93,7 +93,10 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
     };
   };
 
-  window.addEventListener("click", handleClickOutsideDropdown)
+  if(typeof window !== 'undefined')
+  {
+    window.addEventListener("click", handleClickOutsideDropdown)
+  }
 
   const handleLoginClick = () => signIn();
   const handleLogoutClick = () => {

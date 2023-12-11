@@ -282,7 +282,11 @@ const AccountProfileDetails = ({ id, name, city, uf, telefone, cpf_cnpj, categor
   return (
     <ThemeProvider theme={theme}>
 
-      <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'>
+      <div className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4 lg:w-[30vw]'>
+        <div className='p-4 flex flex-col justify-center items-start gap-1'>
+          <h1 className='text-2xl font-semibold text-black dark:text-white'>Seu perfil</h1>
+          <p className='text-lg text-gray-400 dark:text-gray-500'>Mantenha suas informações atualizadas!</p>
+        </div>
 
         <Box
           component="form"
@@ -547,14 +551,16 @@ const AccountProfileDetails = ({ id, name, city, uf, telefone, cpf_cnpj, categor
             </div>
           </Box>
         </Box>
-      </Card>
 
-
-      <div className='flex justify-end mt-2'>
-        <Button variant="primary" onClick={() => handleSubmit(onSubmit)()}>
-          Salvar
-        </Button>
+        <div className='flex justify-center items-center mt-2'>
+          <Button variant="primary" className='w-full mx-2' onClick={() => handleSubmit(onSubmit)()}>
+            Salvar
+          </Button>
+        </div>
+        
       </div>
+
+
     </ThemeProvider>
   );
 };

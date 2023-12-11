@@ -102,7 +102,10 @@ const Header = () => {
         };
     };
 
-    // window.addEventListener("click", handleClickOutsideDropdown)
+    if(typeof window !== 'undefined')
+    {
+        window.addEventListener("click", handleClickOutsideDropdown)
+    }
 
     const handleLoginClick = () => signIn();
     const handleLogoutClick = () => {

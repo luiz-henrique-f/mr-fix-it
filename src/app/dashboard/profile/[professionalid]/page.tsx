@@ -42,12 +42,11 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
               <TopDetails url_foto={professional?.url_foto as any} />
             </div>
 
-            <div className='flex flex-col justify-start items-center gap-8'>
+            <div className='flex flex-col justify-start items-center gap-8 lg:-ml-28'>
               <Box
                 component="main"
                 sx={{
                   flexGrow: 1,
-                  py: 8
                 }}
               >
                 <Container maxWidth="lg">
@@ -60,7 +59,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                         <Grid
                           xs={12}
                           md={6}
-                          lg={4}>
+                          lg={5}>
 
                           <AccountProfile
                             name={professional?.nome as any}
@@ -75,7 +74,7 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                         <Grid
                           xs={12}
                           md={6}
-                          lg={8}
+                          lg={7}
                         >
 
                           <AccountProfileDetails
