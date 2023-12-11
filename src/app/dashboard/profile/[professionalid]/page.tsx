@@ -11,17 +11,17 @@ import TopDetails from '../../[professionalid]/components/TopDetails';
 
 const getProfessionalDetails = async (professionalid: string) => {
   const professional = await prisma.prestador.findFirst({
-      where: {
-          id: professionalid,
-      },
+    where: {
+      id: professionalid,
+    },
   }).finally(() => {
-      prisma.$disconnect();
-    });
+    prisma.$disconnect();
+  });
 
   return professional;
 }
 interface ProfileInfoProps {
-  prestador: Prestador 
+  prestador: Prestador
 };
 
 const Profile = async ({ params }: { params: { professionalid: string, prestador: Prestador } }) => {
@@ -36,12 +36,12 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
         <div className='flex h-full gap-4 mr-6'>
           <SideMenu id_prestador={professional?.id as any} />
 
-          
+
           <div className='flex flex-col w-full gap-4 overflow-y-scroll'>
             <div className='flex justify-end items-center mb-4'>
               <TopDetails url_foto={professional?.url_foto as any} />
             </div>
-          
+
             <div className='flex flex-col justify-start items-center gap-8'>
               <Box
                 component="main"
@@ -61,14 +61,14 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                           xs={12}
                           md={6}
                           lg={4}>
-                            
-                          <AccountProfile 
-                            name={professional?.nome as any} 
+
+                          <AccountProfile
+                            name={professional?.nome as any}
                             city={professional?.desc_cidade as any}
-                            telefone={professional?.celular as any} 
+                            telefone={professional?.celular as any}
                             uf={professional?.uf as any}
                             id_prestador={professional?.id as any}
-                            url_foto={professional?.url_foto as any} 
+                            url_foto={professional?.url_foto as any}
                           />
                         </Grid>
 
@@ -77,14 +77,15 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                           md={6}
                           lg={8}
                         >
-                          <AccountProfileDetails 
+
+                          <AccountProfileDetails
                             id={professional?.id as any}
-                            name={professional?.nome as any} 
-                            city={professional?.desc_cidade as any} 
+                            name={professional?.nome as any}
+                            city={professional?.desc_cidade as any}
                             uf={professional?.uf as any}
                             telefone={professional?.celular as any}
-                            cpf_cnpj={professional?.cpf_cnpj as any} 
-                            observacao={professional?.observacao as any} 
+                            cpf_cnpj={professional?.cpf_cnpj as any}
+                            observacao={professional?.observacao as any}
                             sexo={professional?.sexo as any}
                             categoria={professional?.tipo_categoria as any}
                             cbo={professional?.desc_cbo as any}
@@ -94,14 +95,14 @@ const Profile = async ({ params }: { params: { professionalid: string, prestador
                       </Grid>
 
                     </div>
-                    
+
                   </Stack>
                 </Container>
               </Box>
             </div>
           </div>
         </div>
-        
+
       </div>
     </>
   );

@@ -160,7 +160,7 @@ const AccountProfileDetails = ({ id, name, city, uf, telefone, cpf_cnpj, categor
   // const { nome, cpf_cnpj, cod_tipo_categoria, categoria, celular, uf, cod_cidade, desc_cidade, sexo, observacao, id_user, cbo, desc_cbo} 
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-    console.log({skill})
+    console.log({ skill })
     // return;
     const response = await fetch("/updateProfessionalAll", {
       method: "PUT",
@@ -282,276 +282,279 @@ const AccountProfileDetails = ({ id, name, city, uf, telefone, cpf_cnpj, categor
   return (
     <ThemeProvider theme={theme}>
 
+      <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-lg p-4'>
 
-<Box
-                component="form"
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '96.8%' },
+            input: {
+              color: '#aaa',
+            },
+            label: {
+              '&.Mui-focused': {
+                color: '#9055dd'
+              },
+              color: '#aaa',
+            },
+            select: {
+              color: '#aaa',
+            },
+            svg: {
+              color: '#aaa',
+            },
+          }}
+          noValidate
+          autoComplete="off">
+
+          <TextField
+            {...register("nome", {
+              required: {
+                value: true,
+                message: 'Nome é obrigatório',
+              }
+            })}
+            id="name"
+            label="Nome completo"
+            defaultValue={name}
+            fullWidth
+            error={!!errors?.nome}
+            helperText={errors?.nome?.message}
+          >
+          </TextField>
+
+          <TextField
+            {...register("cpf_cnpj", {
+              required: {
+                value: true,
+                message: 'Campo CPF/CNPJ é obrigatório',
+              }
+            })}
+            id="cpf"
+            label="CPF/CNPJ"
+            onChange={mudarMascara}
+            value={value}
+            fullWidth
+            error={!!errors?.cpf_cnpj}
+            helperText={errors?.cpf_cnpj?.message}>
+          </TextField>
+
+          <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
+            <TextField
+              {...register("celular", {
+                required: {
+                  value: true,
+                  message: 'Campo celular é obrigatório',
+                }
+              })}
+              id="celular"
+              label="Celular"
+              onChange={mudarMascaraCelular}
+              value={valueCelular}
+              fullWidth
+              error={!!errors?.celular}
+              helperText={errors?.celular?.message}>
+            </TextField>
+
+            <TextField
+              {...register("sexo", {
+                required: {
+                  value: true,
+                  message: 'Campo sexo é obrigatório',
+                }
+              })}
+              id="sexo"
+              select
+              label="Sexo"
+              value={selectedValueCheckbox}
+              // defaultValue=""
+              fullWidth
+              onChange={changeCheckbox}>
+              <MenuItem key="M" value="M">
+                Masculino
+              </MenuItem>
+              <MenuItem key="F" value="F">
+                Feminino
+              </MenuItem>
+              <MenuItem key="NE" value="NE">
+                Não Especificar
+              </MenuItem>
+            </TextField>
+          </div>
+
+          <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2 2sm:mr-2'>
+            <TextField
+              {...register("uf")}
+              id="uf"
+              select
+              label="UF"
+              name='uf'
+              fullWidth
+              defaultValue={uf}
+              onChange={handleSelectedUf}>
+
+              {ufs.map(uf => (
+                <MenuItem key={uf.id} value={uf.sigla}>
+                  {uf.nome}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <Autocomplete
+              options={ctiesOptions}
+              renderInput={
+                (params) => <TextField
+                  {...params}
+                  label="Cidade"
+                  sx={{
+                    input: {
+                      '&.Mui-focused': {
+                        color: '#590BD8'
+                      },
+                      color: '#aaa',
+                    },
+                    label: {
+                      '&.Mui-focused': {
+                        color: '#590BD8'
+                      },
+                      color: '#aaa',
+                    },
+                    select: {
+                      '&.Mui-focused': {
+                        color: '#590BD8'
+                      },
+                      color: '#aaa',
+                    },
+                    svg: {
+                      '&.Mui-focused': {
+                        color: '#590BD8'
+                      },
+                      color: '#aaa',
+                    },
+                  }}
+                />
+              }
+              value={skillCity}
+              fullWidth
+              onChange={(event: any, newValue: SkillCity | null) => setSkillCity(newValue)}
+            />
+
+          </div>
+
+          <Autocomplete
+            options={categoriesOptions}
+            renderInput={
+              (params) => <TextField
+                {...params}
+                label="Categoria"
                 sx={{
-                  '& .MuiTextField-root': { m: 1, width: '96.8%' },
                   input: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
                     color: '#aaa',
                   },
                   label: {
                     '&.Mui-focused': {
-                      color: '#9055dd'
+                      color: '#590BD8'
                     },
                     color: '#aaa',
                   },
                   select: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
                     color: '#aaa',
                   },
                   svg: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
                     color: '#aaa',
                   },
                 }}
-                noValidate
-                autoComplete="off">
+              />
+            }
+            value={skillCategorie}
+            fullWidth
+            onChange={(event: any, newValue: SkillCategorie | null) => setSkillCategorie(newValue)}
+          />
 
-                <TextField
-                  {...register("nome", {
-                    required: {
-                      value: true,
-                      message: 'Nome é obrigatório',
-                    }
-                  })}
-                  id="name"
-                  label="Nome completo"
-                  defaultValue={name}
-                  fullWidth
-                  error={!!errors?.nome}
-                  helperText={errors?.nome?.message}
-                >
-                </TextField>
+          <Autocomplete
+            options={cboOptions}
+            renderInput={
+              (params) => <TextField
+                {...params}
+                label="Ocupação"
+                sx={{
+                  input: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
+                    color: '#aaa',
+                  },
+                  label: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
+                    color: '#aaa',
+                  },
+                  select: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
+                    color: '#aaa',
+                  },
+                  svg: {
+                    '&.Mui-focused': {
+                      color: '#590BD8'
+                    },
+                    color: '#aaa',
+                  },
+                }}
+              />
+            }
+            value={skill}
+            fullWidth
+            onChange={(event: any, newValue: Skill | null) => setSkill(newValue)}
+          />
 
-                <TextField
-                  {...register("cpf_cnpj", {
-                    required: {
-                      value: true,
-                      message: 'Campo CPF/CNPJ é obrigatório',
-                    }
-                  })}
-                  id="cpf"
-                  label="CPF/CNPJ"
-                  onChange={mudarMascara}
-                  value={value}
-                  fullWidth
-                  error={!!errors?.cpf_cnpj}
-                  helperText={errors?.cpf_cnpj?.message}>
-                </TextField>
-
-                <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2'>
-                  <TextField
-                    {...register("celular", {
-                      required: {
-                        value: true,
-                        message: 'Campo celular é obrigatório',
-                      }
-                    })}
-                    id="celular"
-                    label="Celular"
-                    onChange={mudarMascaraCelular}
-                    value={valueCelular}
-                    fullWidth
-                    error={!!errors?.celular}
-                    helperText={errors?.celular?.message}>
-                  </TextField>
-
-                  <TextField
-                    {...register("sexo", {
-                      required: {
-                        value: true,
-                        message: 'Campo sexo é obrigatório',
-                      }
-                    })}
-                    id="sexo"
-                    select
-                    label="Sexo"
-                    value={selectedValueCheckbox}
-                    // defaultValue=""
-                    fullWidth
-                    onChange={changeCheckbox}>
-                    <MenuItem key="M" value="M">
-                      Masculino
-                    </MenuItem>
-                    <MenuItem key="F" value="F">
-                      Feminino
-                    </MenuItem>
-                    <MenuItem key="NE" value="NE">
-                      Não Especificar
-                    </MenuItem>
-                  </TextField>
-                </div>
-
-                <div className='flex flex-col 2sm:flex-row 2sm:justify-between 2sm:gap-2 2sm:mr-2'>
-                  <TextField
-                    {...register("uf")}
-                    id="uf"
-                    select
-                    label="UF"
-                    name='uf'
-                    fullWidth
-                    defaultValue={uf}
-                    onChange={handleSelectedUf}>
-
-                    {ufs.map(uf => (
-                      <MenuItem key={uf.id} value={uf.sigla}>
-                        {uf.nome}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-
-                  <Autocomplete
-                    options={ctiesOptions}
-                    renderInput={
-                      (params) => <TextField
-                        {...params}
-                        label="Cidade"
-                        sx={{
-                          input: {
-                            '&.Mui-focused': {
-                              color: '#590BD8'
-                            },
-                            color: '#aaa',
-                          },
-                          label: {
-                            '&.Mui-focused': {
-                              color: '#590BD8'
-                            },
-                            color: '#aaa',
-                          },
-                          select: {
-                            '&.Mui-focused': {
-                              color: '#590BD8'
-                            },
-                            color: '#aaa',
-                          },
-                          svg: {
-                            '&.Mui-focused': {
-                              color: '#590BD8'
-                            },
-                            color: '#aaa',
-                          },
-                        }}
-                      />
-                    }
-                    value={skillCity}
-                    fullWidth
-                    onChange={(event: any, newValue: SkillCity | null) => setSkillCity(newValue)}
-                  />
-
-                </div>
-
-                <Autocomplete
-                  options={categoriesOptions}
-                  renderInput={
-                    (params) => <TextField
-                      {...params}
-                      label="Categoria"
-                      sx={{
-                        input: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                        label: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                        select: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                        svg: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                      }}
-                    />
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1 },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                {...register("observacao", {
+                  required: {
+                    value: true,
+                    message: 'Campo sobre você é obrigatório',
                   }
-                  value={skillCategorie}
-                  fullWidth
-                  onChange={(event: any, newValue: SkillCategorie | null) => setSkillCategorie(newValue)}
-                />
+                })}
+                id="outlined-multiline-flexible"
+                label="Sobre você"
+                defaultValue={observacao}
+                fullWidth
 
-                <Autocomplete
-                  options={cboOptions}
-                  renderInput={
-                    (params) => <TextField
-                      {...params}
-                      label="Ocupação"
-                      sx={{
-                        input: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                        label: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                        select: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                        svg: {
-                          '&.Mui-focused': {
-                            color: '#590BD8'
-                          },
-                          color: '#aaa',
-                        },
-                      }}
-                    />
-                  }
-                  value={skill}
-                  fullWidth
-                  onChange={(event: any, newValue: Skill | null) => setSkill(newValue)}
-                />
+                multiline
+                rows={4}
+                maxRows={8}>
+              </TextField>
+            </div>
+          </Box>
+        </Box>
+      </Card>
 
-                <Box
-                  component="form"
-                  sx={{
-                    '& .MuiTextField-root': { m: 1 },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <div>
-                    <TextField
-                      {...register("observacao", {
-                        required: {
-                          value: true,
-                          message: 'Campo sobre você é obrigatório',
-                        }
-                      })}
-                      id="outlined-multiline-flexible"
-                      label="Sobre você"
-                      defaultValue={observacao}
-                      fullWidth
 
-                      multiline
-                      rows={4}
-                      maxRows={8}>
-                    </TextField>
-                  </div>
-                </Box>
-              </Box>
-
-        <div className='flex justify-end mt-2'>
-          <Button variant="primary" onClick={() => handleSubmit(onSubmit)()}>
-            Salvar
-          </Button>
-        </div>
+      <div className='flex justify-end mt-2'>
+        <Button variant="primary" onClick={() => handleSubmit(onSubmit)()}>
+          Salvar
+        </Button>
+      </div>
     </ThemeProvider>
   );
 };
