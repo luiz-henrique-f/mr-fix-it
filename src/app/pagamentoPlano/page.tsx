@@ -27,8 +27,8 @@ const PagamentoPlano = () => {
     const date = new Date()
 
     let day = date.getDate()
-    let month = typePlan != 'A' ? date.getMonth() + numberMonths : date.getMonth()
-    let year = typePlan == 'A' && numberMonths == 12 ? date.getFullYear() + 1 : date.getFullYear()
+    let month = typePlan != 'A' ? date.getMonth() + numberMonths > 12 ? date.getMonth() + numberMonths - 12 : date.getMonth() + numberMonths : date.getMonth()
+    let year = typePlan == 'A' && numberMonths == 12 ? date.getFullYear() + 1 : date.getMonth() + numberMonths > 12 ? date.getFullYear() + 1 : date.getFullYear()
 
     return `${day}/${month}/${year}`;
   }
