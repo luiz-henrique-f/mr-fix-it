@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
-import { Prestador } from '@prisma/client';
-import moment from 'moment';
 
 import Button from '@/components/Button';
 import SettingsPass from './components/SettingsPass';
