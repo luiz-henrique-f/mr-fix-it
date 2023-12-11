@@ -81,6 +81,7 @@ const Login = () => {
 
 		if (signInData?.error) {
 			console.log(signInData?.error)
+			toast.error('email ou senha incorretos!')
 		} else {
 			router.push('/')
 		}
