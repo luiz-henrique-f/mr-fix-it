@@ -26,6 +26,7 @@ const professional = await prisma.prestador.findMany({
         observacao: true,
         cidade: true,
         uf: true,
+        url_foto: true
     }
 }).finally(() => {
   prisma.$disconnect();

@@ -34,8 +34,8 @@ interface CreateProfessionalForm {
     observacao: String;
 }
 
-interface ProfessionalProps {
-    professional: Prestador;
+type Url_fotoResponse = {
+    url_foto: string;
 }
 
 type IdPrestadorResponse = {
@@ -87,24 +87,6 @@ const Header = () => {
 
     };
 
-    const { systemTheme, theme, setTheme } = useTheme();
-    const currentTheme = theme === 'system' ? systemTheme : theme;
-    // const theme = document.documentElement.classList.contains("dark") ? 'dark' : 'light';
-    // const currentTheme = document.documentElement.classList.contains("dark") ? 'dark' : 'light';
-
-    function light() {
-        // localStorage.theme = 'light'
-        setTheme('light')
-        document.documentElement.classList.remove('dark')
-        // console.log(localStorage.theme);
-    }
-
-    function dark() {
-        setTheme("dark")
-        document.documentElement.classList.add('dark')
-        // console.log(localStorage.theme);
-    }
-
     const [menuIsOpen, setMenuIsOpen] = React.useState(false)
     const { status, data } = useSession();
     const dados = data;
@@ -133,6 +115,7 @@ const Header = () => {
 
     const [nome, setNome] = React.useState<NomePrestadorResponse[]>([]);
     const [id_prestador, setIdPrestador] = React.useState<IdPrestadorResponse[]>([]);
+    const [url_foto, setUrl_foto] = React.useState<Url_fotoResponse[]>([]);
     const [planoAtivo, setPlanoAtivo] = React.useState<PlanoAtivoResponse[]>([]);
     const [admin, setAdmin] = React.useState<AdminResponse[]>([]);
 
@@ -141,6 +124,7 @@ const Header = () => {
             .then((response) => {
                 setIdPrestador((response.data[0] as any)?.id)
                 setNome((response.data[0] as any)?.nome)
+                setUrl_foto((response.data[0] as any)?.url_foto)
             })
     });
 
@@ -157,7 +141,6 @@ const Header = () => {
                 setAdmin((response.data as any)?.admin)
             })
     });
-    // console.log({admin})
 
     const themestyle = createTheme({
         components: {
@@ -183,7 +166,7 @@ const Header = () => {
     });
 
     return (
-        <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-2xl dark:shadow-whiteBG/10 bg-whiteBG dark:bg-darkBG'>
+        <div className='px-[5%] py-0 h-[85px] mx-auto flex justify-between items-center shadow-lg dark:shadow-neutral-900 bg-whiteBG dark:bg-darkBG'>
             <div className="flex items-center justify-start h-full w-full">
                 <Link href="/" className="inline-flex items-center justify-between">
 
@@ -202,92 +185,6 @@ const Header = () => {
                 </Link>
             </div>
 
-            {/* {theme == 'light' ? <div className="bg-white">gfdsgdf</div> : <div className="bg-amber-300">fsgfdgsd</div>} */}
-
-            {/* <div className="flex items-center justify-end gap-5">
-                {status === "unauthenticated" && (
-                    <button
-                        className="flex items-center justify-center py-1 px-3 gap-2 text-lg bg-transparent font-semibold border-[0.125rem] border-solid border-gray-400 rounded-md hover:text-white hover:border-transparent hover:bg-gray-400/40 transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]"
-                        onClick={handleLoginClick}>
-                        <FiLogIn />
-                        Entre
-                    </button>
-                )}
-
-                {status === "unauthenticated" && (
-                    <Link
-                        href="/login"
-                        className="flex items-center justify-center py-1 px-3 gap-2 w-32 text-lg bg-primary font-semibold border-[0.125rem] border-solid border-primary rounded-md text-white hover:border-transparent hover:bg-primaryDarker transition-all duration-[0.2s] ease-[ease-in-out] hover:transition-all hover:duration-[0.2s] hover:ease-[ease-in-out]">
-                        Cadastre-se
-                    </Link>
-                )}
-            </div>  */}
-
-            {/* onClick={handleLoginClick} */}
-            <ThemeProvider theme={themestyle}>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    fullWidth
-                    className="backdrop-blur-md">
-
-                    <div className="bg-white dark:bg-darkBGLighter">
-                        <DialogTitle className="text-black dark:text-white">
-                            Avalie nosso site!
-                        </DialogTitle>
-
-                        <DialogContent>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { marginTop: 1 },
-                                }}
-                            >
-                                <TextField
-                                    {...register("observacao")}
-                                    label="Escreva sua avaliação aqui..."
-                                    fullWidth
-                                    multiline
-                                    sx={{
-                                        label: {
-                                            '&.Mui-focused': {
-                                                color: '#9055dd'
-                                            },
-                                            color: '#aaa',
-                                        },
-                                        select: {
-                                            '&.Mui-focused': {
-                                                color: '#9055dd'
-                                            },
-                                            color: '#aaa',
-                                        },
-                                    }}
-                                    rows={4}
-                                    maxRows={8}>
-                                </TextField>
-                            </Box>
-                        </DialogContent>
-
-                        <DialogActions className='!flex !justify-between'>
-                            <Button variant="outlined"
-                                onClick={handleClose}>
-
-                                <LiaTimesSolid />
-                                Cancelar
-                            </Button>
-
-                            <Button variant="outlined"
-                                onClick={() => handleSubmit(onSubmit)()}>
-
-                                <BsCheck2Square />
-                                Enviar
-                            </Button>
-                        </DialogActions>
-
-                    </div>
-                </Dialog>
-            </ThemeProvider>
-
             {status === "unauthenticated" && (
                 <div className="flex items-center gap-3 relative">
 
@@ -302,18 +199,28 @@ const Header = () => {
                 </div>
             )}
 
-
-
-
             {status === "authenticated" && data.user && (
                 <div className="flex gap-5">
 
-                    <div className="flex items-center gap-3 border-grayLighter border border-solid py-3 px-6 rounded-lg relative">
-                        <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
+                    <div className="flex items-center justify-center gap-3 border-grayLighter border rounded-lg py-3 px-8 relative">
+                        <div>
+                            <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
+                        </div>
 
                         <ThemeSwitch />
 
-                        {/* <Image height={35} width={35} src={data?.user?.image!} alt={data?.user?.name!} className="rounded-full shadow-md" /> */}
+                        <div className="h-10 w-10" >
+                            <Image 
+                                src={url_foto as any}
+                                height={40} 
+                                width={40} 
+                                className="rounded-full h-10 w-10" 
+                                style={{
+                                    objectFit: "cover",
+                                }}
+                                alt='Imagem Usuário'
+                            />
+                        </div>
 
                         {menuIsOpen && (
                             <div className="z-50 absolute top-[56px] -left-14 2xl:left-4 bg-white rounded-lg shadow-md gap-4 dark:bg-darkBGLighter after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-transparent after:border-t-white dark:after:border-t-darkBGLighter after:absolute after:rotate-180 after:-top-2 after:left-20 2xl:after:left-2">
@@ -399,6 +306,71 @@ const Header = () => {
 
                 </div>
             )}
+
+            <ThemeProvider theme={themestyle}>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    fullWidth
+                    className="backdrop-blur-md">
+
+                    <div className="bg-white dark:bg-darkBGLighter">
+                        <DialogTitle className="text-black dark:text-white">
+                            Avalie nosso site!
+                        </DialogTitle>
+
+                        <DialogContent>
+                            <Box
+                                component="form"
+                                sx={{
+                                    '& .MuiTextField-root': { marginTop: 1 },
+                                }}
+                            >
+                                <TextField
+                                    {...register("observacao")}
+                                    label="Escreva sua avaliação aqui..."
+                                    fullWidth
+                                    multiline
+                                    sx={{
+                                        label: {
+                                            '&.Mui-focused': {
+                                                color: '#9055dd'
+                                            },
+                                            color: '#aaa',
+                                        },
+                                        select: {
+                                            '&.Mui-focused': {
+                                                color: '#9055dd'
+                                            },
+                                            color: '#aaa',
+                                        },
+                                    }}
+                                    rows={4}
+                                    maxRows={8}>
+                                </TextField>
+                            </Box>
+                        </DialogContent>
+
+                        <DialogActions className='!flex !justify-between'>
+                            <Button variant="outlined"
+                                onClick={handleClose}>
+
+                                <LiaTimesSolid />
+                                Cancelar
+                            </Button>
+
+                            <Button variant="outlined"
+                                onClick={() => handleSubmit(onSubmit)()}>
+
+                                <BsCheck2Square />
+                                Enviar
+                            </Button>
+                        </DialogActions>
+
+                    </div>
+                </Dialog>
+            </ThemeProvider>
+            
         </div>
     )
 }

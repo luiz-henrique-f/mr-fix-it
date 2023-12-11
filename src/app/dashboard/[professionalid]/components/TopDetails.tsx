@@ -188,7 +188,6 @@ const TopDetails = ({ url_foto }: ProfessionalInfoProps) => {
         <ThemeSwitch />
       
         <Image
-          // src={prestador.url_foto}
           src={url_foto}
           width={36}
           height={36}
