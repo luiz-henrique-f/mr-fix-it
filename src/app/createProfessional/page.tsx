@@ -144,7 +144,6 @@ const CreateProfessional = () => {
   console.log(id_prestador)
 
   const onSubmit = async (data: CreateProfessionalForm) => {
-    console.log(data)
     const response = await fetch("/insertProfessional", {
       method: "POST",
       body: Buffer.from(
