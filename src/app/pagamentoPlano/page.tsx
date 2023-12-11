@@ -13,12 +13,22 @@ const PagamentoPlano = () => {
 
   const { data } = useSession();
 
-  const getDates = (typeRet: String, numberMonths: number) => {
+  const getDateNow = () => {
     const date = new Date()
 
     let day = date.getDate()
-    let month = typeRet == 'endDate' && numberMonths == 1 ? date.getMonth() + numberMonths : date.getMonth()
-    let year = typeRet == 'endDate' && numberMonths == 12 ? date.getFullYear() + 1 : date.getFullYear()
+    let month = date.getMonth()
+    let year = date.getFullYear()
+
+    return `${day}/${month}/${year}`;
+  }
+
+  const getDates = (typePlan: String, numberMonths: number) => {
+    const date = new Date()
+
+    let day = date.getDate()
+    let month = typePlan != 'A' ? date.getMonth() + numberMonths : date.getMonth()
+    let year = typePlan == 'A' && numberMonths == 12 ? date.getFullYear() + 1 : date.getFullYear()
 
     return `${day}/${month}/${year}`;
   }
@@ -32,8 +42,8 @@ const PagamentoPlano = () => {
           price: price,
           userId: (data?.user as any)?.id,
           name: name,
-          startDate: getDates('startDate', 0),
-          endDate: getDates('endDate', months),
+          startDate: getDateNow(),
+          endDate: getDates(planoType, months),
           planoType: planoType
         })
       ),
@@ -70,7 +80,7 @@ const PagamentoPlano = () => {
             <Button
               variant='primary'
               className='absolute bottom-0 w-full py-3 normal-case text-base'
-              onClick={() => handleBuyClick(5, 'Plano Mensal', 1, 'M')}
+              onClick={() => handleBuyClick(25, 'Plano Mensal', 1, 'M')}
             >
               Escolher Plano
             </Button>
@@ -97,7 +107,7 @@ const PagamentoPlano = () => {
             <Button
               variant='primaryLight'
               className='absolute bottom-0 w-full py-3 normal-case text-base'
-              onClick={() => handleBuyClick(5, 'Plano Anual', 12, 'A')}
+              onClick={() => handleBuyClick(200, 'Plano Anual', 12, 'A')}
             >
               Escolher Plano
             </Button>
@@ -125,7 +135,7 @@ const PagamentoPlano = () => {
             <Button
               variant='primary'
               className='absolute bottom-0 w-full py-3 normal-case text-base'
-              onClick={() => handleBuyClick(5, 'Plano Semestral', 6, 'S')}
+              onClick={() => handleBuyClick(110, 'Plano Semestral', 6, 'S')}
             >
               Escolher Plano
             </Button>
