@@ -447,7 +447,7 @@ const InputSearch = () => {
           }}
           onChange={handleSelectedNome} />
 
-        <Link href={`/searchParams/${skillCategorie?.id != '' ? skillCategorie?.id : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${skillCity?.id != '' ? skillCity?.id : 'undefined'}/${selectedNome != '' ? selectedNome : 'undefined'}/${skill?.id != '' ? skill?.id : 'undefined'}`}>
+        <Link href={`/searchParams/${skillCategorie?.id != '' ? skillCategorie?.id : 'undefined'}/${selectedUf != '' ? selectedUf : 'undefined'}/${skillCity?.id != '' ? skillCity?.id : 'undefined'}/${selectedNome != '' ? selectedNome.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a').replace(new RegExp('[ÉÈÊ]','gi'), 'e').replace(new RegExp('[ÍÌÎ]','gi'), 'i').replace(new RegExp('[ÓÒÔÕ]','gi'), 'o').replace(new RegExp('[ÚÙÛ]','gi'), 'u').replace(new RegExp('[Ç]','gi'), 'c') : 'undefined'}/${skill?.id != '' ? skill?.id : 'undefined'}`}>
           <SearchButton className='p-3' />
         </Link>
       </div>
