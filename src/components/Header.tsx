@@ -202,7 +202,7 @@ const Header = () => {
             {status === "authenticated" && data.user && (
                 <div className="flex gap-5">
 
-                    <div className="flex items-center justify-center gap-3 border-grayLighter border rounded-lg py-3 px-8 relative">
+                    <div className="flex items-center justify-center gap-3 border-grayLighter border rounded-lg py-3 px-5 relative">
                         <div>
                             <AiOutlineMenu onClick={handleMenuClick} className="cursor-pointer text-xl" />
                         </div>
@@ -211,7 +211,7 @@ const Header = () => {
 
                         <div className="h-10 w-10" >
                             <Image 
-                                src={url_foto as any}
+                                src={url_foto as any != undefined ? url_foto as any : 'https://files.edgestore.dev/mtrfpdbrv5037z9d/myPublicImages/_public/706a083f-94d5-4525-94c9-0d935626e6bb-thumb.png' }
                                 height={40} 
                                 width={40} 
                                 className="rounded-full h-10 w-10" 
