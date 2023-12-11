@@ -95,7 +95,7 @@ const SettingsPass = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Card className='shadow-none bg-transparent'>
+        <Card className='shadow-none bg-transparent scale-[.62] sm:scale-100'>
 
           <div className='p-4 flex flex-col justify-center items-start gap-1'>
             <h1 className='text-2xl font-semibold text-black dark:text-white'>Senha</h1>
@@ -149,7 +149,7 @@ const SettingsPass = () => {
             </Stack>
           </CardContent>
 
-          <CardActions sx={{ justifyContent: 'flex-end' }}>
+          <CardActions sx={{ justifyContent: 'center' }}>
             <Button variant="primary"
               onClick={() => handleSubmit(onSubmit)()}>
               Atualizar

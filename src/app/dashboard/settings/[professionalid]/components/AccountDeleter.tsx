@@ -50,18 +50,11 @@ const AccountDeleter = () => {
           </p>
         </div>
 
-        <div className="flex justify-evenly items-center w-full">
-          <Button variant='outlined'>
-            <ImCancelCircle />
-            Cancelar
-          </Button>
-
-          <Button variant='primary'
-          onClick={() => onSubmit()}>
-            <FaRegCheckCircle />
-            Concluir
-          </Button>
-        </div>
+        <Button variant='primary'
+        onClick={() => onSubmit()}>
+          {/* <FaRegCheckCircle /> */}
+          Excluir
+        </Button>
 
       </div>
     </>
