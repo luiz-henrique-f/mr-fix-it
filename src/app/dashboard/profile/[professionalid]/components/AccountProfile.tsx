@@ -6,6 +6,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 import Link from 'next/link';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
+import { useRouter } from 'next/navigation';
 
 interface ProfessionalInfoProps {
   name: string;
@@ -17,6 +18,8 @@ interface ProfessionalInfoProps {
 };
 
 const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: ProfessionalInfoProps) => {
+
+  const router = useRouter()
 
   const [file, setFile] = React.useState<File>();
   const [urls, setUrls] = React.useState<{
@@ -150,7 +153,7 @@ const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: Pr
                   thumbnailUrl: res.thumbnailUrl,
                 })
               }
-
+              window.location.reload()
               toast.success("Foto alterada com sucesso!", { position: "top-right" });
             }}>
             Salvar nova foto
