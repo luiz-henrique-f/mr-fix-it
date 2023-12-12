@@ -5,7 +5,7 @@ const TopCards = (props: { name: string; difference: number; positive?: false | 
   const { name, difference, positive = false, value, icon, color } = props;
 
   return (
-    <Card className='bg-white dark:bg-darkBGLighter text-black dark:text-white rounded-2xl'>
+    <Card sx={{borderRadius: '16px'}} className='bg-white dark:bg-darkBGLighter text-black dark:text-white'>
       <CardContent>
         <Stack
           alignItems="flex-start"
