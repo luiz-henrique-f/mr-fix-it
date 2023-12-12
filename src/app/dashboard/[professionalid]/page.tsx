@@ -148,8 +148,6 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                         </div>
                     </div>
                 </div>
-
-                {/* <GoogleAnalytics measurementId='G-FWQ879X8DX'/> */}
             </div >
         </>
     )

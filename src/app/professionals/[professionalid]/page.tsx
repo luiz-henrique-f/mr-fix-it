@@ -11,10 +11,10 @@ import ProfessionalInfo from './components/ProfessionalInfo';
 import ProfessionalRaiting from './components/ProfessionalRaiting';
 import ProfessionalCategory from './components/ProfessionalCategory';
 import ProfessionalDescription from './components/ProfessionalDescription';
+import CommentList from '@/app/dashboard/[professionalid]/components/ComentList';
 
 import { AiFillStar } from 'react-icons/ai'
 import { FiLogIn } from 'react-icons/fi';
-import CommentList from '@/app/dashboard/[professionalid]/components/ComentList';
 
 
 const getProfessionalDetails = async (professionalid: string) => {

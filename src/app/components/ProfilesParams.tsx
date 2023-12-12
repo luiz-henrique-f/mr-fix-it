@@ -52,7 +52,7 @@ const ProfilesParams = async ({ categoria, cidade, uf, nome, cbo }: Professional
 
   return (
     <>
-      <div className='flex flex-col 1sm:grid 1sm:grid-cols-2 2md:grid-cols-3 2xl:grid-cols-4 my-8 gap-8'>
+      <div className='flex flex-col 1sm:grid 1sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 my-8 gap-8'>
         {(result as any).map((prestador: any) => (
           <ProfileCard prestador={prestador} key={prestador.id} nota={prestador.nota_media}/>
         ))}
