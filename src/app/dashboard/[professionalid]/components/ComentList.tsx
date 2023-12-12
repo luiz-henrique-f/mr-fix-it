@@ -18,7 +18,7 @@ const CommentList = async ({ params }: { params: { professionalid: string } }) =
   const data = await getCommentsDetails(params.professionalid);
   return (
     // <div className="overflow-y-scroll w-full h-[78vh]">
-    <div className="">
+    <div className=" flex flex-col-reverse">
       {data.map((comments: Comentarios_Prestador) => (
         <ProfessionalRaiting
           key={comments.id}
