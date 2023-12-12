@@ -33,13 +33,53 @@ const getProfessionalDetails = async (professionalid: string) => {
 const Dashboard = async ({ params }: { params: { professionalid: string } }) => {
 
     const professional = await getProfessionalDetails(params.professionalid);
+    
     const comentarios = await prisma.comentarios_Prestador.findMany({
         where: {
             id_prestador: params.professionalid,
         },
     })
+    
+    const comentarios_positives = await prisma.comentarios_Prestador.findMany({
+        where: {
+            id_prestador: params.professionalid,
+        AND:{
+            nota: {gte: 4},
+        }
+        },
+    })
+    
+    const comentarios_negatives = await prisma.comentarios_Prestador.findMany({
+        where: {
+            id_prestador: params.professionalid,
+        AND:{
+            nota: {lte: 3},
+        }
+        },
+    })
 
-    // console.log(comentarios)
+    const resultNewComments = await prisma.$queryRaw`SELECT "public"."Comentarios_Prestador"."nome"
+                                          FROM   "public"."Comentarios_Prestador"
+                                          WHERE  TO_CHAR("public"."Comentarios_Prestador"."data", 'MM') = TO_CHAR(current_date, 'MM')
+                                          AND    "public"."Comentarios_Prestador"."id_prestador" = ${params.professionalid}`.finally(() => {
+        prisma.$disconnect();
+    });
+
+    const resultNewCommentsPositives = await prisma.$queryRaw`SELECT "public"."Comentarios_Prestador"."nome"
+                                             FROM   "public"."Comentarios_Prestador"
+                                             WHERE  TO_CHAR("public"."Comentarios_Prestador"."data", 'MM') = TO_CHAR(current_date, 'MM')
+                                             AND    "public"."Comentarios_Prestador"."nota"        >= 4
+                                             AND    "public"."Comentarios_Prestador"."id_prestador" = ${params.professionalid}`.finally(() => {
+        prisma.$disconnect();
+    });
+
+    const resultNewCommentsNegatives = await prisma.$queryRaw`SELECT "public"."Comentarios_Prestador"."nome"
+                                             FROM   "public"."Comentarios_Prestador"
+                                             WHERE  TO_CHAR("public"."Comentarios_Prestador"."data", 'MM') = TO_CHAR(current_date, 'MM')
+                                             AND    "public"."Comentarios_Prestador"."nota"       <= 3
+                                             AND    "public"."Comentarios_Prestador"."id_prestador" = ${params.professionalid}`.finally(() => {
+        prisma.$disconnect();
+    });
 
     return (
         <>
@@ -59,27 +99,27 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                 <div className='grid grid-flow-row 2md:grid-flow-col 2md:grid-col-3 gap-4'>
                                     <TopCards
                                         name='Novos Comentários'
-                                        value={12}
-                                        positive={false}
-                                        difference={16}
+                                        value={(resultNewComments as any).length}
+                                        positive
+                                        difference={Math.round(((resultNewComments as any).length as any) * 100 / comentarios.length)}
                                         icon={<IoMdStar />}
                                         color={'#a28'}
                                     />
 
                                     <TopCards
                                         name='Avaliações Positivas'
-                                        value={15}
-                                        positive={false}
-                                        difference={36}
+                                        value={(resultNewCommentsPositives as any).length}
+                                        positive
+                                        difference={Math.round(((resultNewCommentsPositives as any).length as any) * 100 / comentarios_positives.length)}
                                         icon={<FaThumbsUp />}
                                         color={'#2a6'}
                                     />
 
                                     <TopCards
                                         name='Avaliações Negativas'
-                                        value={6}
+                                        value={(resultNewCommentsNegatives as any).length}
                                         positive
-                                        difference={24}
+                                        difference={Math.round(((resultNewCommentsNegatives as any).length as any) * 100 / comentarios_negatives.length)}
                                         icon={<FaThumbsDown />}
                                         color={'#d33'}
                                     />
@@ -93,8 +133,8 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
 
                             <div className="flex flex-[20%] flex-col 3xl:w-1/5 w-full h-full min-h-[50vh] max-h-[88vh] overflow-y-scroll bg-white dark:bg-darkBGLighter rounded-2xl">
 
-                                {(comentarios.length as any) != '0' ? 
-                                    <CommentList params={params} /> 
+                                {(comentarios.length as any) != '0' ?
+                                    <CommentList params={params} />
                                     :
                                     <div className="flex items-center justify-center">
                                         <span className="text-xl font-semibold font-mono mt-56 3xl:mt-96 text-center">
