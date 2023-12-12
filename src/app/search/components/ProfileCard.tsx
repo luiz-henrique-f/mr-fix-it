@@ -34,7 +34,7 @@ const ProfileCard = async ({ prestador, nota }: ProfileInfoProps) => {
           {nota ? (
             <div className='relative top-6 mx-3 flex justify-between items-center'>
               <div className='flex w-40 items-center justify-between'>
-                <span className="flex items-center w-12 justify-around text-black dark:text-white bg-yellow-300 rounded-[4px] px-2 py-1 text-sm font-bold roll-in-blurred-right">
+                <span className="flex items-center w-12 justify-around text-black dark:text-darkBGLighter bg-yellow-300 rounded-[4px] px-2 py-1 text-sm font-bold roll-in-blurred-right">
                   {nota}
                   <BsStarFill />
                 </span>
@@ -47,7 +47,7 @@ const ProfileCard = async ({ prestador, nota }: ProfileInfoProps) => {
               <span className='text-grayPrimary/70 group'>
                 <IoInformationCircleOutline className='text-xl' />
                 <p className='hidden group-hover:block absolute w-64 -top-5 right-7 p-2 text-sm italic font-medium text-justify indent-2 rounded-md bg-gray-200 after:border-l-[16px] after:border-r-[16px] after:border-b-[16px] after:border-transparent after:border-b-gray-200 after:absolute after:rotate-90 after:top-6 after:-right-5'>
-                  Profissionais com médias maiores ou iguais a três, tem suas notas expostas no canto superior de seus cards!
+                  Profissionais tem suas médias expostas no canto superior de seus cards!
                 </p>
               </span>
             </div>
