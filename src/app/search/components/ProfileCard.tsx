@@ -52,10 +52,12 @@ const ProfileCard = async ({ prestador, nota }: ProfileInfoProps) => {
               </span>
             </div>
           ) : (
-            <span className="absolute invisible">
-              {nota}
-              <BsStarFill />
-            </span>
+            <div className='relative invisible top-6 mx-3 flex justify-between items-center'>
+              <span className="flex items-center w-12 justify-around text-black bg-yellow-300 rounded-[4px] px-2 py-1 text-sm font-bold roll-in-blurred-right">
+                {nota}
+                <BsStarFill />
+              </span>
+            </div>
           )}
 
           <div className='flex flex-col items-center justify-center mb-8'>

@@ -6,7 +6,9 @@ import Image from 'next/image';
 import MenuSpacer from '../../dashboard/[professionalid]/components/MenuSpacer';
 import Button from '@/components/Button';
 
-import { AiOutlineMenu } from 'react-icons/ai';
+import { RiMailSendLine } from "react-icons/ri";
+
+
 import { prisma } from '@/lib/prisma';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -50,7 +52,7 @@ const UsersInfo = ({ nome, url_foto, desc_cidade, uf, data_fim, status, email }:
             className='flex items-center justify-start'
             title='Enviar Mensagem de cobrança'
             onClick={onSubmit}>
-            <AiOutlineMenu />
+            <RiMailSendLine />
           </Button>
         </div>
 
