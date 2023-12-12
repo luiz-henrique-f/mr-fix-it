@@ -93,17 +93,20 @@ const AccountProfile = ({ name, city, uf, telefone, id_prestador, url_foto }: Pr
             />
             <Typography
               gutterBottom
-              variant="h5">
+              variant="h5"
+              className='text-center'>
               {name}
             </Typography>
 
             <Typography
-              variant="body2">
+              variant="body2"
+              className='text-center'>
               {city}, {uf}
             </Typography>
 
             <Typography
-              variant="body2">
+              variant="body2"
+              className='text-center'>
               {telefone}
             </Typography>
           </Box>
