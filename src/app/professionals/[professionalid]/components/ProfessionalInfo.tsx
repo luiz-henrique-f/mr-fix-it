@@ -28,6 +28,7 @@ import { BsWhatsapp } from 'react-icons/bs'
 import { FaMapPin } from 'react-icons/fa'
 import { FiLogIn } from 'react-icons/fi';
 import { MdMarkEmailRead } from "react-icons/md";
+import { IoIosArrowBack } from "react-icons/io";
 
 type IBGEUFResponse = {
     id: number;
@@ -255,7 +256,15 @@ const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto, email, criaca
 
             {/* {status == 'authenticated' && <ChangeButton className='absolute top-3 right-3' onClick={handleClickOpen} />} */}
 
-            <div className='rounded-full p-[6px] border-2 border-primary dark:border-primaryLighter'>
+            <div className="absolute top-6 left-4">
+                <Link
+                    href="/searchParams/undefined/undefined/undefined/undefined/undefined"
+                    className="text-base flex items-center justify-center gap-2 font-bold hover:text-primary text-primaryDarker dark:text-walterWhite">
+                    <IoIosArrowBack /> Voltar
+                </Link>
+            </div>
+
+            <div className='rounded-full p-[6px] mt-8 border-2 border-primary dark:border-primaryLighter'>
                 <Image
                     src={urlFoto}
                     width={140}
@@ -269,15 +278,15 @@ const ProfessionalInfo = ({ id, name, city, uf, telefone, urlFoto, email, criaca
             </div>
 
             <div className='flex flex-col items-center mb-8'>
-                <h1 className='font-bold text-2xl text-primaryDarker dark:text-white'>{name}</h1>
+                <h1 className='font-bold text-2xl text-primaryDarker dark:text-white text-center'>{name}</h1>
 
-                <div className='flex items-center gap-1 my-1 mt-6 text-sm font-semibold text-grayPrimary dark:text-grayLighter'>
+                <div className='flex items-center gap-1 my-1 mt-6 text-sm font-semibold text-grayPrimary dark:text-grayLighter text-center'>
                     <FaMapPin className='text-base' />
                     <p>{city},</p>
                     <p>{uf}</p>
                 </div>
 
-                <div className='gap-1 my-1'>
+                <div className='gap-1 my-1 text-center'>
                     <Link href={`https://wa.me/55${telefone.replace(/[^\w\s]/gi, '').replace(' ', '')}`} target='_blank'>
                         <p className='flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-600'>
                             <BsWhatsapp className='text-center text-sm text-green-600' />

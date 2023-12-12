@@ -44,9 +44,11 @@ const ProfileCard = async ({ prestador, nota }: ProfileInfoProps) => {
                 </span>
               </div>
 
-              <span className='text-grayPrimary/70 group relative'>
+              <span className='text-grayPrimary/70 group'>
                 <IoInformationCircleOutline className='text-xl' />
-                <p className='hidden group-hover:block absolute w-64 -top-5 right-7 p-2 text-sm italic font-medium text-justify indent-2 rounded-md bg-gray-200 after:border-l-[16px] after:border-r-[16px] after:border-b-[16px] after:border-transparent after:border-b-gray-200 after:absolute after:rotate-90 after:top-6 after:-right-5'>Profissionais com médias maiores ou iguais a três, tem suas notas expostas no canto superior de seus cards!</p>
+                <p className='hidden group-hover:block absolute w-64 -top-5 right-7 p-2 text-sm italic font-medium text-justify indent-2 rounded-md bg-gray-200 after:border-l-[16px] after:border-r-[16px] after:border-b-[16px] after:border-transparent after:border-b-gray-200 after:absolute after:rotate-90 after:top-6 after:-right-5'>
+                  Profissionais com médias maiores ou iguais a três, tem suas notas expostas no canto superior de seus cards!
+                </p>
               </span>
             </div>
           ) : (
