@@ -2,10 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Button from '@/components/Button';
 
 import { FaMapPin } from 'react-icons/fa'
-import { Comentarios_Prestador, Prestador } from '@prisma/client';
+import { Prestador } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 
 import { BsStarFill } from 'react-icons/bs';
@@ -13,7 +12,6 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 
 
 interface ProfileInfoProps {
-  comentarios: Comentarios_Prestador
   prestador: Prestador
   nota: number
 };
