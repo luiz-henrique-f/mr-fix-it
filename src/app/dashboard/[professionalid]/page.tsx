@@ -103,7 +103,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                         positive
                                         difference={Math.round(((resultNewComments as any).length as any) * 100 / comentarios.length)}
                                         icon={<IoMdStar />}
-                                        color={'#a28'}
+                                        color={'#8C55D9'}
                                     />
 
                                     <TopCards
@@ -112,7 +112,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                         positive
                                         difference={Math.round(((resultNewCommentsPositives as any).length as any) * 100 / comentarios_positives.length)}
                                         icon={<FaThumbsUp />}
-                                        color={'#2a6'}
+                                        color={'#4BC567'}
                                     />
 
                                     <TopCards
@@ -121,7 +121,7 @@ const Dashboard = async ({ params }: { params: { professionalid: string } }) => 
                                         positive
                                         difference={Math.round(((resultNewCommentsNegatives as any).length as any) * 100 / comentarios_negatives.length)}
                                         icon={<FaThumbsDown />}
-                                        color={'#d33'}
+                                        color={'#D95559'}
                                     />
                                 </div>
 

@@ -38,13 +38,13 @@ const GraphCard = () => {
       {
         label: 'Negativas',
         data: [3, 8, 12, 5, 2, 9, 4, 13, 6, 3, 1, 1],
-        backgroundColor: '#d33',
+        backgroundColor: '#D95559',
           borderRadius: 8,
       },
       {
         label: 'Positivas',
         data: [19, 5, 8, 12, 9, 2, 16, 23, 13, 4, 5, 11],
-        backgroundColor: '#2a6',
+        backgroundColor: '#4BC567',
           borderRadius: 8,
       },
     ],
