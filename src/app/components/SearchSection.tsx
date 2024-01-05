@@ -87,6 +87,7 @@ const SearchSection = () => {
 					<SpecialButton />
 				</Link>
 			</div>
+			
 		</div>
 	)
 }
