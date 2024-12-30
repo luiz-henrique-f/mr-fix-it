@@ -15,6 +15,7 @@ export default function Home() {
         <SearchSection />
         <PricesSection />
         <FeedbackSection />
+        <h1>oi</h1>
       </div>
     </>
   )
